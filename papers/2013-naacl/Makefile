@@ -5,7 +5,7 @@ czeru.pdf:
 	pdflatex czeru
 
 cleanup:
-	rm czeru.aux czeru.log
+	rm -f czeru.aux czeru.log
 
 clean: cleanup
-	rm czeru.pdf
+	rm -f czeru.pdf

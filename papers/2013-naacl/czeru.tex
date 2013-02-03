@@ -31,67 +31,57 @@ rich and poor languages}
 \maketitle
 \begin{abstract}
 In this paper we address the problem of unknown words in Statistical
-Machine Translation(SMT) with the respect to the morphological complexity of
-the languages. We trained the Statistical Machine Translation system Moses
-for English-to-Russian - translating from the morphologically poor to the
-morphologically rich language and Czech-to-Russian - the translation
+Machine Translation (SMT) with respect to the morphological complexity of languages. 
+We trained the Statistical Machine Translation system Moses
+for Russian-to-English - translating from the morphologically rich to the
+morphologically poor language - and Russian-to-Czech - the translation
 between two morphologically rich related languages. After the analysis of
-out-of-vocabulary word types we show the ways to improve the translation
-of words not seen in the training data, exploiting morphological analyzers
-and stemming techniques.
+out-of-vocabulary word types, we show the ways to reduce the rate of out-of-vocabulary words (OOV), exploiting morphological analyzers
+and stemming techniques, and discuss the relation of OOV and other metrics.
 \end{abstract}
 
 \section{Introduction}
-The most frequent SMT errors that impede understanding a text 
-are untranslated words (unknown words, out-of-vocabulary - OOV words). Some other mistakes - like
-wrong morphological form of a word or syntax errors - makes a text inconvinient to read, but one
-can still get a sense out of it, whereas the unknown words in other language gives us no information at all.
-So it is crucial to give at least some translation, even in a wrong word form. % so that the chances to understand the text increase 
-In order to decrease the OOV rate we should introspect into the main reasons of why this happens. 
-The reason is that the word has not been seen in the training data, it may be completely out-of-domain
-or the word was not found in the training data, though it can occur in some other morphemic form.
-The latter presents a challenge especially when translating to/from morphologically rich language
-\footnote{We use the term morphologically rich/poor in this context only comparatively, as 
-even more morphologically 'poor' languages than English exist}.
-where the number of unique word forms is very large. %in comparison to that of morphol
-Many researchers have been improving the OOV rate both disregarding the morphological type
-of the languages involved or either taking into account morphological properties of languages. 
-%There are several techniques generally applied to our problem. 
-%The first one is domain adaptation.
-%The large percentage of the unknown words come from a domain different than training data
-%so the ways to handle out-of-domain words were suggested in 
+The most frequent SMT errors lowering the translation quality
+are untranslated words, called out-of-vocabulary words (or OOV) in this paper. Other errors (wrong morphological form of a word, syntax errors) make the translated text inconvenient to read, but still somehow understandable. But the unknown words are just kept as-is in the target language, thus giving the reader no information at all. Therefore, it is crucial to return at least some translation, even in a wrong word form.
+
+Why can a word be OOV? In SMT, the word is kept untranslated if its form has not been seen in the training data. It might be the case of a completely out-of-domain word, but it might also be the case of another morphemic form of a word, already present in the training data. 
+
+The latter presents a challenge for morphologically richer languages, such as the whole family of Slavic languages, where one word can have tens of morphemic forms.
+
+Researchers have been improving the OOV rate, both disregarding and taking morphological richness of languages into account.
+
 Some authors \cite{habash}, \cite{turchi}, \cite{bojartamchyna} address the problem of how to reduce the OOV 
 rate suggesting
-various techniques, as, for example, introducing morphological information or inroducing additional dictionary
+various techniques, as, for example, introducing morphological information or additional dictionary
 resources. 
-Exploiting the surface form of a word - like division into morphemes, stemming - brought
+
+Exploiting the surface form of a word - division into morphemes, stemming - brought
 positive results in terms of increasing the percentage of translated words 
-especially when building a translation  model from/to morphologically rich languages \cite{popovic},
+especially when building a translation  model from and to morphologically rich languages \cite{popovic},
 \cite{oflazer}, \cite{gispert}.  
 %Very similar goals were 
 %As our training and test data are of the same domain (news) the 
 %http://cl.naist.jp/~kevinduh/papers/duh10analysis.pdf
 Our approach mainly follows the line of research described above - making use of 
-morphological resources and exploiting simple stemming technique.
+morphological resources and exploiting simple stemming techniques.
 
-The paper also discusses the question if relatedness of the languages influence
-the translation quality. Some decades ago when the statistical models were not so 
-wide-spread and the rule-based systems were developed instead, it was stated that the 
-Machine Translation between the related languages has been much more easy and the
-translation quality has been higher. %This proved to be true for example for MT 
-%between Czech and Slovak, but for more distant languages it was much worse.
-As for Czech and Russian, the languages share the very similar morphological and syntactic
-structure (like declension types, word order) and the surface form of morphemes.These properties 
-might be useful for the rule-based machine translation. This similarity
-however plays no role in the SMT, and even %the morphological complexity of 
-the SMT between related Czech and Russian demonstrates lower quality output than 
-those between typologically different English and either of the languages.
+This paper also discusses the question of relation between language similarity and translation quality.
+
+In the past, when the statistical models were not prevalent in machine translation and the main trend were rule-based systems, it was assumed that translation between related, but morphologically rich languages will be easier than between less related, but morphologically poorer one; for example, it was assumed that the translation between Czech and Russian will be easier, than between Czech and English.
+
+Czech and Russian are both Slavic languages. They share a very similar morphological and syntactic
+structure (declension types, word order) and the surface form of morphemes. These properties 
+might have been useful for the rule-based machine translation. 
+
+However, as we found out, this similarity surprisingly
+ plays no role in the SMT, and, as we will show further,
+the translation between Czech and Russian demonstrates lower quality output than 
+between English and any of the two languages.
 
 \section{Statistical Machine Translation setup}
-Statistical Machine Translation nowadays has become one
-of the easiest and cheapest paradigms of the MT systems. Researchers can now use
-various toolkits to experiment with different language pairs. We experiment
-with Moses , an open-source implementation of phrase-based statistical translation system.
+Statistical Machine Translation nowadays has become one of the easiest and cheapest paradigms of the MT systems. 
+%Researchers can now usevarious toolkits to experiment with different language pairs.
+From the various available tools, we chose to experiment with Moses, an open-source implementation of phrase-based statistical translation system.
 
 \subsection{Moses}
 The Moses toolkit \cite{moses} is a complex system which includes many components
@@ -106,16 +96,21 @@ given development set of sentences.
 %combining phrase and language model into a log-linear model to be mentioned.
 %They are tuned by Minimum error rate training (MERT) algorithm which is driven
 %by BLEU feedback scored on held-out sentences.
-To establish a baseline, we trained translation models for direct translation
+
+To establish a baseline for further experiments, we trained translation models for direct translation
 from Russian to Czech
-(ru$\rightarrow$cs simple) and English to Czech (en$\rightarrow$cs simple), %TODO -1 udelame radsi en-ru, kde bude OOV jasne videt.
+(\emph{ru$\rightarrow$cs simple}) and Russian to English (\emph{ru$\rightarrow$en simple}), %TODO -1 udelame radsi en-ru, kde bude OOV jasne videt.
 optimizing them on the development set.
-in our second experiment we have trained a factored model.
-While the first one is based on pure data from a parallel corpus, the second one
-uses morphology to improve the out-of-vocabulary rate.
-%in order to avoid a problem caused by data sparseness. 
-Factored translation is an extention of the basic translation model,
-where each word form from the parallel corpus is enriched with a lemma and a tag.
+
+In our second experiment, we used the so-called factored models. Factored translation is an extension of the basic translation model, where on both the source and the target side there doesn't have to be just form, but we can enrich the forms with some more information. We will touch on the specific factors later.
+
+
+%In our second experiment we have trained a factored model.
+%While the first one is based on pure data from a parallel corpus, the second one
+%uses morphology to improve the out-of-vocabulary rate.
+%%in order to avoid a problem caused by data sparseness. 
+%Factored translation is an extention of the basic translation model,
+%where each word form from the parallel corpus is enriched with a lemma and a tag.
 
 \subsection{Data}
 Phrase-based SMT systems need huge amount of parallel data in order to
@@ -127,6 +122,8 @@ Syndicate\footnote{http://www.project-syndicate.org/} page.
 The data are divided into three sets: training set(train),
 development set(dev) and test set.
 The statistics of the data are summarized in the Table \ref{tab:corpus}.
+
+As we can see, the number of sentences is slightly different; it is because the sentences are not always aligned one-to-one, but are often ????\footnote{TODO: najít přesně!!!}
 \begin{table}
 
 \begin{center}
