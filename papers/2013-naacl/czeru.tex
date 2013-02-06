@@ -9,6 +9,8 @@
 \setlength\titlebox{6.5cm}    % Expanding the titlebox
 \usepackage[utf8]{inputenc}
 \usepackage{float}
+\usepackage{graphicx}
+%\usepackage{hyperref}
 
 \title{Unknown words in Statistical Machine Translation between morphologically
 rich and poor languages}
@@ -79,10 +81,11 @@ the translation between Czech and Russian demonstrates lower quality output than
 between English and any of the two languages.
 
 \section{Characterstics of Slavic languages}
-Slavic languages are mostly inflecting languages characterizing by free word order and rich
+Slavic languages are mostly inflecting languages characterized by free word order and rich
 inflectional paradigms. %(two facts depending on each other ). 
-The table \ref{tab:slon} shows the exposion of word forms in Slavic languages on
-the example of a noun phrase.
+The Table \ref{tab:slon} shows the exposion of word forms in Slavic languages on
+We can argue that this 
+the example of a noun phrase. (Russian has been transliterated.)
 %Czech and Russian are very similar in 
 
 \begin{table}
@@ -90,13 +93,13 @@ the example of a noun phrase.
 \begin{tabular}{|l|l|l|}
 \hline
 English & Czech & Russian \\ \hline
-\textit{jolly elephant} & veselý & veselyj slon \\
- & veselé slona & veselogo slona \\
- & veselé slonu & veselomu slonu \\
- & veselé slona & veselogo slona \\ 
- & veselé slonu & veselom slone\\
- & veselýonem& veselym slonom\\
- & veselýe &\\
+\textit{jolly elephant} & veselý slon & veselyj slon \\
+ & veselého slona & veselogo slona \\
+ & veselému slonu & veselomu slonu \\
+ %& veselé slona & veselogo slona \\ 
+ & veselému slonu & veselom slone\\
+ & veselým slonem& veselym slonom\\
+ & veselý slone & ????DODĚLEJ\\
 \hline
 \end{tabular}
 \end{center}
@@ -113,35 +116,44 @@ high out-of-vocabulary rate and mistakes in morphological forms are typical.
 %presented a research on a MT where one language of the translation pair was morphologically rich.
 %We will focus our attention on languages
 
-As demonstrated in the previous section, Slavic languages are very morphologically rich. This creates a problem of data sparseness that increase the number of out-of-vocabulary words(forms).
+As demonstrated in the previous section, Slavic languages are very morphologically rich. This creates a problem of data sparseness that increase the number of out-of-vocabulary words.
 
 \subsection{Calculating OOV rate}
 In some cases, it's hard to specifically count the OOV rate.
 
-However, we specifically chose language pair, when one language is written in cyrillic, while the other is written in latin alphabet. This allows us to count OOV rate in a very efficient way, since cyrillic characters in non-cyrillic text almost surely mean untranslated cyrillic word and vice versa.
+However, we specifically chose those language pairs, when one language is written in cyrillic, while the other is written in latin alphabet. This allows us to count OOV rate in a very efficient way, since cyrillic characters in non-cyrillic text almost surely mean untranslated cyrillic word and vice versa.
+
+(We can sometimes argue that latin alphabet in Russian text is understandable as, for exampley a named entity; even though it is most time just an OOV word, we are taking the oposite way in our experiment, as there is almost zero chance of cyrillic letters appearing in the Czech or English data.)
 
 \subsection{Relation between BLEU and OOV rates}
 We must always be reminded that decreasing OOV rate is not a goal in itself; we want to decrease it only to increase the translation quality.
 
-For a trivial example - if we translate all words of the source language to one specific word in target language, we would have low OOV rate but also low BLEU score.
+For a trivial example - if we translate all words of the source language to one specific word in target language, we would have low OOV rate but also low translation quality.
 
 For this, we have to measure both the OOV rate and the translation quality, in our case by counting BLEU score.
 
 
 \section{Decreasing the OOV rate with factors}
-The basic idea for decreasing OOV rate was: we want to eliminate the cases, where we don't see a given word in training data in the source language, because it was there in a different form.
+The basic idea for our experiments was: we want to eliminate the cases, where we don't see a given word in training data in the source language, because it was there in a different form.
 
-Therefore, we should take all the morphological forms of the given word on the source side and transform them to the same word (how exactly is described further), but we let the words on the target side be.
+Therefore, we took all the morphological forms of the given word on the source side and transform them to the same wordform (how exactly is described further), but we let the words on the target side be as-is.
 
 Because of that, we don't have to do any word generation (which is a positive), but on the other hand, the machine translation will never return a word, which don't appear on the target side in the training data (which is negative). We decided for this factored model because the generation models for Czech are not that well developed.
 
-We then did two different experiments - first, we used just phrase tables created as described above, and then we used them only as a so-called backoff model (as defined in ???).
+We then did two different experiments - first, we used just phrase tables created as described above, and then we used them only as a so-called backoff model \footnote{see the Moses documentation - \texttt{http://www.statmt.org/moses/?n=Moses.A\-dva\-nced\-Fea\-tu\-res\#ntoc18}}.
 
-For better results, we also added tags to the target side and used them to build a language model.We describe this further.
+For more grammatical sentences, we also added tags to the target side and used them to build a language model.
 
-We used two ways of transformation of the various forms of the same word to the same form - the lemmatization and stemming. We will describe them in the following subsections.
+We used two ways of transformation of the various forms of the same word to the same wordform - the lemmatization and stemming. We will describe them in the following subsections.
 
-The whole factored set-up can be seen in the picture ???.
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth]{graf_moses}
+\caption{Factored set-up (various versions)}
+\label{graf:mss}
+\end{figure}
+
+The whole factored set-up can be seen in the Figure~\ref{graf:mss}.
 
 \subsection{Lemmatization, tagging}
 
@@ -151,11 +163,11 @@ The whole factored set-up can be seen in the picture ???.
 
 %Ja si nejsem jisty, jestli to, co delal Turchi je totez, co delame my.
 
-We are exploiting the morphological features in two ways. First, we use lemmatization of source language for making OOV rates smaller. Also, we use tagging of the target languages for better language models.
+We are exploiting the morphological features in two ways. First, we use lemmatization of source language (in this case, Russian) for making OOV rates smaller. Also, we use tagging of the target languages for better language models.
 
 For Czech and English, we used Morče - morphological perceptron-based tagger, developed at Charles' University in Prague. For Russian, we used TreeTagger - modular tagger, developed at University of Stuttgart, with the Russian parameter file developed by Serge Sharoff.
 
-Because the Russian is always the source language in this case, the tagset is not relevant. For Czech, Morče uses the tagset, described in ???. For English, Morče uses ????.
+Because the Russian is always the source language in this case, the tagset is not relevant. For Czech, Morče uses Czech positional tagset\footnote{See \texttt{http://ufal.mff.cuni.cz/pdt/\-Mor\-pho\-logy\-\_\-and\-\_\-Tag\-ging\-/\-Doc/hmptagqr.html}}. For English, Morče uses tagset derived from Penn Treebank.
 
 \subsection{"Brute force" stemming}
 In general, stemming is deriving a stem (root) for a word form in languages, where it makes sense.
@@ -223,31 +235,23 @@ given development set of sentences.
 %by BLEU feedback scored on held-out sentences.
 
 
-Factors have been described in the section ???.
+Factors have been described in the section above.
 
 \subsection{Data}
-Phrase-based SMT systems need huge amount of parallel data in order to
-extract dictionaries of phrases and their translations, so called phrase tables.
-In our work we exploited data from a parallel Czech-English-Russian
-corpus called UMC (UFAL Multilingual Corpus) with automatic pairwise sentence
-alignment. The texts were downloaded from from the Project
-Syndicate\footnote{http://www.project-syndicate.org/} page. 
-The data are divided into three sets: training set(train),
-development set(dev) and test set.
-The statistics of the data are summarized in the Table \ref{tab:corpus}.
-
-As we can see, the number of sentences is slightly different; it is because the sentences are not always aligned one-to-one, but are often ????\footnote{TODO: najít přesně!!!}
+%Phrase-based SMT systems need huge amount of parallel data in order to
+%extract dictionaries of phrases and their translations, so called phrase tables.
 \begin{table}
 
 \begin{center}
 \begin{tabular}{lcr}
   &  Languages & Sentences \\
 \hline
-Language Model & cs & 92,233 \\
-Translation Model & ru $\rightarrow$ cs &  93395\\
-Translation Model & en $\rightarrow$ cs &  92775\\ \hline %TODO ru-en
-Dev     & cs, en, ru          &    765 \\
-Test     & cs, en, ru          &  2000 \\
+%Language Model & cs & 92,233 \\
+%Language Model & en & 92,233 \\
+Train & ru $\rightarrow$ cs &  93395\\
+Train & ru $\rightarrow$ en &  92775\\ \hline %TODO ru-en
+Dev & cs, en, ru          &    765 \\
+Test  & cs, en, ru          &  2000 \\
 \hline
 \end{tabular}
 \end{center}
@@ -255,234 +259,162 @@ Test     & cs, en, ru          &  2000 \\
 \label{tab:corpus}
 \end{table}
 
+In our experiment we exploited data from a parallel Czech-English-Russian
+corpus called UMC (UFAL Multilingual Corpus) with automatic pairwise sentence
+alignment. The texts were downloaded from from the Project
+Syndicate\footnote{http://www.project-syndicate.org/} page. 
+The data are divided into three sets: training set (train),
+development set (dev) for MERT and test set for testing BLEU and OOV rates.
+The statistics of the data are summarized in the Table \ref{tab:corpus}.
 
+As we can see, the number of sentences is slightly different for different language pairs; it is because the sentences are not always aligned one-to-one, but often one-to-many, many-to-many or zero-to-many. We decided to take all of the sentences, where the alignment is non-zero on one end. 
 
-\subsection{Statistics of OOV words for simple models} 
+\section{Results}
+%TURESULTS
 
-Following is the table that demonstrates the correlation of bleu score and 
-the oov rate for different type of languages. 
-The oov rate was calculated 
-rather in a primitive way - we inspected the translation output for alien characters. The words that contained
-cyrillic alphabet letters were considered to be 'unknown' within the Czech or English text.
-And otherwise, the latin characters in the Russian output text signalized in the majority of cases 
-the out-of-vocabulary word. \footnote{These numbers are not very precise - words in latin within Russian text
-can be just terms or proper names(like linux, Java, USA etc.) that can be tolerable in Russian text }
+We use the following convention in this section: the baseline result is just called "baseline". Baseline doesn't use any tagging, stemming or lemmatizing; it is "only" run with the basic Moses setting.
 
- 
-\begin{table*}
-\begin{center}
-\begin{tabular}{c c c}
-\hline
-translation pair& bleu & OOV \\
-\hline
-%cs $\rightarrow$ ru & 12\% & 7\% \\%s.translate.8df
-ru $\rightarrow$ cs & 11\% & 6\% \\%\hline
-ru $\rightarrow$  en & 15\% & 8\% \\ %TODO ru-en
-%ru $\rightarrow$  en YAN & 22 & 1\%  \\
-%en-ru YANDEX-data & 16 & 2.7\% \\
-\hline
-\end{tabular}
-\end{center}
-\caption{BLEU score for simple model - baseline.}
-\label{tab:umc_yan}
-\end{table*}
+The versions with only stem or lemma on the source side are marked with "1-" at the beginning and the versions with both form and lemma on the source side are marked with "2-" (as in "1 phrase table" or "2 phrase tables").
 
-As we can see from the table, the morphological properties of languages seems to
-affect the bleu score and the oov rate differently - in a rather predictable way though.
-In the translation into English the oov rate was minimal. 
-Bleu score is bound to the OOV rate, the more is the bleu  score, the less unknown words occur 
-in the translated text.
-We also tried to see if language type has some impact on the OOV rate, and it did not.
-The only factor that mattered was the type of data - domain, size and quality. When 
-trained on the corpus UMC with news thematics(100,000 sentences) the OOV rate was rather high.
+The various version are then named according to the technique of decreasing OOV - that is, "-stem3" with stem, "-lemma" with lemmatization.
 
-\section{Using morphological analyzers to improve the translation of unknown words}
+So, for example, "2-lemma" means the version with lemmatization and two phrase tables.
 
-One of the ways to improve the out-of-vocabulary rate is using additional morphological
-information, the method that was successfully implemented for example by \cite{turchi},
-bringing a decrease of a OOV words without introducing more parallel data.
- First we opted for taggers that are available  on-line. Those taggers
-(Morce for Czech, TreeTagger for Russian and English) assigned each word form with
-a lemma and a tag. As our main task on the current stage was only to check
-how much words will be translated properly, we are more interested in increasing
-the OOV rate than a BLEU score. The latter is not supposed to be that 
-good for the evaluating translation into morphologically rich languages that often have
-free word order. Still, it will serves the purpose of comparison the translation 
-quality into the same language (we have chosen Czech as a target) under the same conditions(training data).
-
-In order to train a factored model we tagged and lemmatized the UMC corpus with
-the help of TreeTagger %\cite{Treetagger} 
-for English and Russian and Morce
-morphological tagger for Czech. %\urlmorce
-Each word form is assigned by a lemma and a morphological tag as described below:
+\subsection{Russian to Czech}
 
 \begin{figure}
-Cz: \textit{Informace$|$informace$|$NNFP1-{}-{}-{}-{}-{}-{}-A-{}-{}- o$|$o-1$|$RR6-{}-{}-{}-{}-{}-{}- 
-pástáké$|$pástákýIS6-{}-{}-{}-{}-1A-{}-{}- jaderné$|$jadernýIS61A-{}-{}-{}-{}-{}- 
-programu$|$program-1$|$NNIS6-{}-{}-{}-{}-{}-{}-A-{}-{}-}\\
-%{prostì$prostì$Dg-{}-{}-{}-{}-{}-{}-1A-{}-{}-{}- jsem$|$býB-S-{}-{}-1P-AA-{}-{}- brala$|$brá|$VpQW-{}-{}-XR-AA-{}-{}-}\\
-%{\bf Ru:} \textit{??????????$|$??????????$|$Ncfsnn ?$|$?$|$Sp-l ???????$|$???????$|$Afpfslf ?????????$|$?????????$|$Ncfsln ?????????$|$????????$|$Ncms
-%gn}\\
-En: \textit{The$|$the$|$DT visionaries$|$visionary$|$NNS would$|$would$|$MD have$|$have$|$VH gotten$|$get$|$VVN nowhere$|$nowhere$|$RB}
-\caption{Facored corpus, tagsets from TreeTagger(En) and Morce(Cs)}
-\label{fig:fact}
+\centering
+\includegraphics[width=0.5\textwidth]{plot_csru}
+\caption{Russian to Czech results}
+\label{graf:csru}
 \end{figure}
 
-Our second experiment using the factored data is of a more complex structure.
-The word alignment is made on lemmas so that various forms of the same word
-were aligned, in the contrast to the simple model. We built two phrase tables:
-first one contained the mapping lemma $\rightarrow$ form + tag, the second one 
-form $\rightarrow$ form +tag. Then we constructed the language model for forms
-and tags. The results of the experiment in terms of BLEU score and OOV rate are 
-summarized 
-
-
-\section{Stemming}
-Stemming - exploiting a stem(root) of a word is a primitive thus efficient technique to support OOV words guessing.
-Especially for the agglutinative languages stemming can bring some fruit because
-each morphemic category is related one-to-one to its surface form%(is it really so??)
-Czech and Russian are flective languages, so they combine the morphemes by fusion/flexion,
-not just putting it one after another. So for instance, if a substantive in Czech has categories
- number, gender and case, the morphemes presenting those categories will be represented only
-by one morpheme-ending. 
-As we tried to use the maximum of baseline data, we decided to derive stems from the words
-without using any additional morphological information like the list of word endlings that are to be eliminated.
-The technique is primitive - it presents taking the first n characters of a word and then selecting the optimal
-length of a stem that bring the better improvement of a Bleu score and OOV rate.
-The example of a stemmed text:\\
-En: \textit{the$|$the gaza$|$gaza cease$|$cease -$|$- fire$|$fire should$|$shoul be$|$be allowed$|$allow to$|$to facilitate$|$facil 
-reconciliation$|$recon between$|$betwe fatah$|$fatah and$|$and hamas$|$hamas}
-%We first tested it for Russian-to-Czech translation.
-The setup of this experiment is the same as the previous - factored, where stems are used instead of lemmas,
-the results are shown in Table \ref{tab:stem}.
-
 \begin{table}
+
 \begin{center}
-\begin{tabular} {c c c}
+\begin{tabular}{|r|l|l|}
+  \hline
+  \textbf{Type} & \textbf{OOV} & \textbf{BLEU} \\
 \hline
-stem length&BLEU&OOV\\
-\hline
-6 & 12.04&1.8\%\\
-\bf{5} & \bf{12.22} &1.1\%\\
-4 & 11.04& 0.6\%\\
-3 & 11.99& 0.1\%\\
+baseline & 6.65 &  10.71 ($\pm$ 0.56) \\ \hline
+1-lemma & 3.03  & 10.42($\pm$ 0.57) \\ \hline
+1-stem3 & 0.16 & 8.56($\pm$ 0.53) \\ \hline
+1-stem4 & 0.67 & 9.58($\pm$ 0.50)\\ \hline
+1-stem5 & 1.21 & 10.11($\pm$ 0.57) \\ \hline
+1-stem6 & 1.91 & 11.18($\pm$ 0.55)\\ \hline
+2-lemma & 2.92 & 12.35($\pm$ 0.58) \\ \hline
+2-stem3 & 0.17 & 12.26($\pm$ 0.64) \\ \hline
+2-stem4 & 0.67 & 12.12($\pm$ 0.58) \\ \hline
+2-stem5 & 1.22 & 12.23($\pm$ 0.59) \\ \hline
+2-stem6 & 1.88 & 12.64($\pm$ 0.60) \\ 
+
 \hline
 \end{tabular}
-\caption{BLEU score for models on stems with different length.}
-\label{tab:stem}
 \end{center}
+\caption{Results for Russian-to-Czech}
+\label{tab:rescs}
 \end{table}
 
-The alignment on stems that are 3 characters long brought the lowest OOV rate,
-but we can not trust enough the unknown words that were guessed with this step.
-The optimal number of characters selected as stems for a translation into a morphologically rich 
-language was 5, so we applied it to other language pairs.
-We examined the unknown words for the experimental setup stem-5, and it appeared, that it contained either 
-rarely used named entities, less frequent spelling variants, typos, and a minimum of meaningful words. 
+The results for Russian to Czech translation are in the Figure \ref{graf:csru} and in Table \ref{tab:rescs} (with the 95\% confidence intervals with BLEU). As we can see, 1-stem3 decreased OOV to nearly zero, but the BLEU went down, too. We can also see that the adding of phrase table from form as the main table makes the results better overall.
 
+What was surprising to us is that "brute force" stemming can actually achieve better OOV rate \textbf{and} BLEU score (although the differences in BLEU score are inside the confidence interval).
 
-\subsection{Results}
+We can see that we can both decrease the OOV and increase the BLEU score.
 
-In order to see which technique was more efficient for our 
-task we compared all the experiments -simple, factored on lemmas and stems. 
-described above. The results are shown in Table \ref{tab:overall}.
+\subsection{Russian to English}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{plot_enru}
+\caption{Russian to English results}
+\label{graf:enru}
+\end{figure}
+
 \begin{table}
+
 \begin{center}
-\begin{tabular} {ccccccc}
+\begin{tabular}{|r|l|l|}
+  \hline
+  \textbf{Type} & \textbf{OOV} & \textbf{BLEU} \\
 \hline
-%lang pair & simple  &factored &stemmed-5\\\hline
-lang pair &\multicolumn{2}{c}{Simple model} & \multicolumn{2}{c}{Factored-lemma} & \multicolumn{2}{c}{Factored-stem}\\ \hline
-                       & BLEU   &OOV    & BLEU   & OOV & BLEU  & OOV \\ \hline
-ru $\rightarrow$ cs    & 11.14  &6.41   &11.68   &2.81 & 12.22 &1.19 \\ %08b6, 9e688, a0f5
-en $\rightarrow$ cs    & 14.58  &4.67   &15.49   &3.11 & 15.39  &3.47  \\ \hline %instead TODO ru-enru-ensimple: a8290, ru-en lenmma??? ru-en stem
+
+
+
+baseline & 4.81 & 20.43($\pm$ 0.71) \\ \hline
+1-lemma & 2.56 & 21.33($\pm$ 0.73) \\ \hline
+1-stem3 & 0.11 & 16.47($\pm$ 0.60) \\ \hline
+1-stem4 & 0.51 & 19.54($\pm$ 0.69) \\ \hline
+1-stem5 & 1 & 20.83($\pm$ 0.74) \\ \hline
+1-stem6 & 1.53 & 21.69($\pm$ 0.71) \\ \hline
+2-lemma & 2.45 & 23($\pm$ 0.79) \\ \hline
+2-stem3 & 0.12 & 15.2($\pm$ 0.76) \\ \hline
+2-stem4 & 0.5 & 22.79($\pm$ 0.77) \\ \hline
+2-stem5 & 1 & 23.22($\pm$ 0.79) \\ \hline
+2-stem6 & 1.52 & 23.49($\pm$ 0.79) \\ 
+
+\hline
 \end{tabular}
 \end{center}
-\caption{Overall evaluation.}
-\label{tab:overall}
+\caption{Results for Russian-to-English}
+\label{tab:resen}
 \end{table}
+The results for Russian to English translation are in the Figure \ref{graf:enru} and in Table \ref{tab:resen} (with the 95\% confidence intervals with BLEU).
 
-It became evident, that our techniques to improve the translation quality help especially in the
-case of MT between morphologically rich languages. The score for English-Czech translation, both simple
-or factored, was higher than Russian-Czech, but have not gained much improvement when 
-factored models were introduced. 
+We can again see the same general trends as in previous example - but it's not that surprising, taking into consideration the fact that the source text is the same. Again, brute-force stemmers work better than lemmatizers. (There is something unusual in 1-stem3 and 2-stem3, where 2-stem3 BLEU is unexpectedly lower, than 1-stem3. Given that the translations from 3 lettered stem are not very truststworthy, we consider this just a strange anomaly.)
 
-\section{Statistical Machine Translation setup}
-Statistical Machine Translation nowadays has become one of the easiest and cheapest paradigms of the MT systems. 
-%Researchers can now usevarious toolkits to experiment with different language pairs.
-From the various available tools, we chose to experiment with Moses, an open-source implementation of phrase-based statistical translation system.
+What is, however, surprising is, that the "deeper" relationship between Russian and Czech \textbf{doesn't help the translation at all}. The BLEU score is higher in Russian to English, the OOV rate too. Again, as we touched upon this issue before, this is probably mainly the fault of the morphological richness of Slavic languages.
 
-\subsection{Moses}
-The Moses toolkit \cite{moses} is a complex system which includes many components
-for data preprocessing and MT evaluation, for example
-GIZA++ %\footnote{http://www.fjoch.com/GIZA++.html}
-involved in finding word alignment, the SRI Language Modeling
-Toolkit %\footnote{http://www.speech.sri.com/projects/srilm/} 
-and the built-in implementation of model optimization (Minimum Error Rate Training, MERT) on a
-given development set of sentences.
-%We included direct translation as a basic setting.
-%There are still weights
-%combining phrase and language model into a log-linear model to be mentioned.
-%They are tuned by Minimum error rate training (MERT) algorithm which is driven
-%by BLEU feedback scored on held-out sentences.
+Even though, the results were still a little unexpected to us.
 
-To establish a baseline for further experiments, we trained translation models for direct translation
-from Russian to Czech
-(\emph{ru$\rightarrow$cs simple}) and Russian to English (\emph{ru$\rightarrow$en simple}), %TODO -1 udelame radsi en-ru, kde bude OOV jasne videt.
-optimizing them on the development set.
-
-In our second experiment, we used the so-called factored models. Factored translation is an extension of the basic translation model, where on both the source and the target side there doesn't have to be just form, but we can enrich the forms with some more information. We will touch on the specific factors later.
-
-
-%In our second experiment we have trained a factored model.
-%While the first one is based on pure data from a parallel corpus, the second one
-%uses morphology to improve the out-of-vocabulary rate.
-%%in order to avoid a problem caused by data sparseness. 
-%Factored translation is an extention of the basic translation model,
-%where each word form from the parallel corpus is enriched with a lemma and a tag.
-
-
-%Although we could have
-%used additional parallel data (English-Russian or English-Czech) to train the translation models, or
-%add some huge monolingual corpus to train a language model.
-%but we need English-Russian and Russian-Czech corpus to be comparable, so we used only this data.
 \section{Conclusion}
-In this paper we have shown two ways to improve the translation quality and lower out-of-vocabulary rate:
-with the help of lemmatizing and stemming. These models have shown the slightest improvement in terms of BLEU
-score and a considerable decrease of out-of-vocabulary words especially for the morphologically rich languages. 
-The OOV rate for the translation between Czech and Russian reduced 2 times(lemma model) and 5 times(stem model) 
-against the baseline. The improvement in terms of OOV for English-Czech translation was not
-significant and the BLEU score has not changed a lot as well.
+In this paper we have shown two ways to improve the translation quality and lower out-of-vocabulary rate: with the help of lemmatizing and stemming. 
+
+
+We have shown that surprisingly, "brute force" stemming works better for both BLEU and OOV rates, than lemmatization, and that ideal length is six letters. 
+
+We have also shown that morphological closeness of two rich languages is not helping us in SMT, if we have the same amount of parallel data.
+
+
+
+%These models have shown an improvement in terms of BLEU
+%score and a considerable decrease of out-of-vocabulary words, especially for the morphologically rich languages. 
+
+%The OOV rate for the translation between Czech and Russian reduced 2 times(lemma model) and 5 times(stem model) 
+%against the baseline. The improvement in terms of OOV for English-Czech translation was not
+%significant and the BLEU score has not changed a lot as well.
 %Our future plans are to exploit more data
 %and this improvement was even more significant than for the respective rate for English-to-Czech translation. 
 
 
 \begin{thebibliography}{4} 
 
-%\bibitem{baltic} Raivis Skadin¹, Karlis Goba, and Valters ©ics: Improving SMT for Baltic Languages with Factored Models. 
-%In: Proceedings of the 2010 conference on Human Language Technologies, 125-132, 2010.
+%--\bibitem{baltic} Raivis Skadin¹, Karlis Goba, and Valters ©ics: Improving SMT for Baltic Languages with Factored Models. 
+%--In: Proceedings of the 2010 conference on Human Language Technologies, 125-132, 2010.
 
-\bibitem{habash} Habash, N.: Four techniques for online handling of out-of-vocabulary words in 
+\bibitem[Habash 2008]{habash} Habash, N.: Four techniques for online handling of out-of-vocabulary words in 
 Arabic-English statistical machine translation. In: Proceedings of the 46th Annual Meeting of 
 the Association for Computational Linguistics on Human Language Technologies:
-%Short Papers (HLT-Short '08). Association for Computational Linguistics, 
-Stroudsburg, PA, USA, 57-60.
+%----Short Papers (HLT-Short '08). Association for Computational Linguistics, 
 
-\bibitem{popovic} Popovic,M., Hermann, N.: Towards the Use of Word Stems and Suffixes for Statistical Machine Translation. 
+Stroudsburg 2008, PA, USA, 57-60.
+%???2008???nevim
+
+\bibitem[Popovic 2004]{popovic} Popovic,M., Hermann, N.: Towards the Use of Word Stems and Suffixes for Statistical Machine Translation. 
 In: Proceedings of 4th International Conference on Language Resources and Evaluation (LREC), Lisbon, Portugal, May 2004 
 
-\bibitem{oflazer} Oflazer, K.:Statistical Machine Translation into a Morphologically Complex Language. 
+\bibitem[Oflazer 2008]{oflazer} Oflazer, K.:Statistical Machine Translation into a Morphologically Complex Language. 
 In: Proceedings of CICLing 2008, Haifa, Israel, February 17-23, 2008. 
 
-\bibitem{gispert} Gispert,A., Marino,J, Crego, J: Improving statistical machine translation by classifying and generalizing inflected verb forms.  
+\bibitem[Gispert]{gispert} Gispert,A., Marino,J, Crego, J: Improving statistical machine translation by classifying and generalizing inflected verb forms.  
 In: Proceedings of 9th European Conference on Speech Communication and Technology
 
-\bibitem{turchi} Turchi, M., Ehrmann, M.: Knowledge Expansion of a Statistical Machine Translation System using Morphological Resources. 
+\bibitem[Turchi]{turchi} Turchi, M., Ehrmann, M.: Knowledge Expansion of a Statistical Machine Translation System using Morphological Resources. 
 In: Polibits, (43), 37-43, 2011.
 
-\bibitem{bojartamchyna} Bojar,O., Tamchyna, A.: Forms Wanted: Training SMT on Monolingual Data.
+\bibitem[Bojar, Tamchyna]{bojartamchyna} Bojar,O., Tamchyna, A.: Forms Wanted: Training SMT on Monolingual Data.
 In: Proceedings Research Workshop of the Israel Science Foundation University of Haifa, Israel. 2011.
 
-\bibitem{moses}Koehn, P., H. Hoang, A. Birch et al: Moses: Open source toolkit for statistical machine translation.
+\bibitem[Hoang, Birch]{moses}Koehn, P., H. Hoang, A. Birch et al: Moses: Open source toolkit for statistical machine translation.
 In: Proceeding ACL '07 Proceedings of the 45th Annual Meeting of the ACL, pp. 177-180, ACL, 2007.
 
 \end{thebibliography}
