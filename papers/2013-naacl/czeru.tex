@@ -38,8 +38,14 @@ We trained the Statistical Machine Translation system Moses
 for Russian-to-English - translating from the morphologically rich to the
 morphologically poor language - and Russian-to-Czech - the translation
 between two morphologically rich related languages. After the analysis of
-out-of-vocabulary word types, we show the ways to reduce the rate of out-of-vocabulary words (OOV), exploiting morphological analyzers
+out-of-vocabulary word types, we show the ways to reduce the rate of out-of-vocabulary words (OOV), 
+exploiting morphological analyzers
 and stemming techniques, and discuss the relation of OOV and other metrics.
+We also provide a manual evaluation of the oov words, namely how each of
+the suggested methods helped and show possible directions of future research of
+this problem.
+%from naacl srw web:
+%Since the main purpose of presenting at the workshop is to exchange ideas with other researchers and to receive helpful feedback for further development of the work, papers should clearly indicate directions for future research wherever appropriate.  how the suggested methods 
 \end{abstract}
 
 \section{Introduction}
@@ -165,7 +171,7 @@ The whole factored set-up can be seen in the Figure~\ref{graf:mss}.
 
 We are exploiting the morphological features in two ways. First, we use lemmatization of source language (in this case, Russian) for making OOV rates smaller. Also, we use tagging of the target languages for better language models.
 
-For Czech and English, we used Morče - morphological perceptron-based tagger, developed at Charles' University in Prague. For Russian, we used TreeTagger - modular tagger, developed at University of Stuttgart, with the Russian parameter file developed by Serge Sharoff.
+For Czech and English, we used Morče\footnote{\texttt{http://ufal.mff.cuni.cz/morce/}} - morphological perceptron-based tagger, developed at Charles' University in Prague. For Russian, we used TreeTagger\footnote{\texttt{http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/}} - modular tagger, developed at University of Stuttgart, with the Russian parameter file developed by Serge Sharoff.
 
 Because the Russian is always the source language in this case, the tagset is not relevant. For Czech, Morče uses Czech positional tagset\footnote{See \texttt{http://ufal.mff.cuni.cz/pdt/\-Mor\-pho\-logy\-\_\-and\-\_\-Tag\-ging\-/\-Doc/hmptagqr.html}}. For English, Morče uses tagset derived from Penn Treebank.
 
@@ -362,9 +368,12 @@ The results for Russian to English translation are in the Figure \ref{graf:enru}
 
 We can again see the same general trends as in previous example - but it's not that surprising, taking into consideration the fact that the source text is the same. Again, brute-force stemmers work better than lemmatizers. (There is something unusual in 1-stem3 and 2-stem3, where 2-stem3 BLEU is unexpectedly lower, than 1-stem3. Given that the translations from 3 lettered stem are not very truststworthy, we consider this just a strange anomaly.)
 
-What is, however, surprising is, that the "deeper" relationship between Russian and Czech \textbf{doesn't help the translation at all}. The BLEU score is higher in Russian to English, the OOV rate too. Again, as we touched upon this issue before, this is probably mainly the fault of the morphological richness of Slavic languages.
+What is, however, surprising is, that the "deeper" relationship between Russian and Czech \textbf{doesn't help the translation at all}. The BLEU score is higher in Russian to English, the OOV rate too. Again, as we touched upon this issue before, this is probably mainly the fault of the morphological richness of Slavic languages. 
 
-Even though, the results were still a little unexpected to us.
+Even though, the results were still a little unexpected to us. 
+The chosen direction of translation matters a lot in this case. Have we chosen the translation from English into Russian,
+the results might be less promising than that for Russian-English, as it is generally translation \textbf{into} 
+a morphologically rich language that is most challenging. 
 
 \section{Conclusion}
 In this paper we have shown two ways to improve the translation quality and lower out-of-vocabulary rate: with the help of lemmatizing and stemming. 
