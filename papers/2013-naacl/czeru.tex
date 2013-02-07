@@ -371,9 +371,10 @@ We can again see the same general trends as in previous example - but it's not t
 What is, however, surprising is, that the "deeper" relationship between Russian and Czech \textbf{doesn't help the translation at all}. The BLEU score is higher in Russian to English, the OOV rate too. Again, as we touched upon this issue before, this is probably mainly the fault of the morphological richness of Slavic languages. 
 
 Even though, the results were still a little unexpected to us. 
-The chosen direction of translation matters a lot in this case. Have we chosen the translation from English into Russian,
-the results might be less promising than that for Russian-English, as it is generally translation \textbf{into} 
-a morphologically rich language that is most challenging. 
+
+A small note: with experience from our past experiments, we think, that if we chose to do the experiments in the other direction - from Russian to English, the results would be less promising, as it is generally translation \textbf{into} 
+a morphologically rich language that causes problems.
+%nejsem si jistej, jestli je to pravda.... ale neověřim to, protože nám právě došlo místo na ufallabu.
 
 \section{Conclusion}
 In this paper we have shown two ways to improve the translation quality and lower out-of-vocabulary rate: with the help of lemmatizing and stemming. 
