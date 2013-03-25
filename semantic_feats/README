@@ -1,3 +1,10 @@
+Ruzne skripty na paper o semantice.
+
+Nebudou asi fungovat bez dat a adresaru, ktere na gitu nejsou, jsou v CzeRusT na ufalu.
+
+
+========old=====
+
 Goal: We want to build a model that will tag a noun with a semantic category.
 The model is trained on a set of nouns from a Ruslan dictionary and a monolingual corpus.
 

@@ -24,3 +24,14 @@ baseline uz je,takze jen pridavame pravidla:
 3.Porovnani TectoMT a Moses (v lete)
 
 4.Vallex pro rustinu??? (na podzim)
+
+
+------------
+
+Collecting data for a Czech->Russian and English->Russian Machine Translation:
+
+1. UMC cs-en-ru
+2. texty od yandex en-ru
+3. texty z intercorp ru-cs od A. Rosena - rucne zarovnane. (jeste nemame)
+4. Jednojazycny korpus rustiny (texty z lib.ru - beletrie):
+  monoru_beletrie, jen soubory '*.txt.seg.gz'

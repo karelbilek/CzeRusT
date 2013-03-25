@@ -1,0 +1,29 @@
+enru
+- yandex
+   - 1 milion en<->ru vět
+
+
+monoru
+- beletrie
+   - strasne moc vet
+   - konkretne:
+      - 1 343 648 vet
+- blbosti_ruslan
+  - nejake nejasne blbosti, co jsme tahali z ruslanu
+    a nejak jsme tagovali nejaka nahodna slova kategoriemi z ruslanu
+    no proste nejaka blbost
+
+monocs
+- pdt
+   - 115 844 vet
+   - vyhazel jsem vsechno, nechal jenom ciste vety
+- webcoll
+   - 4 053 223 vet
+   - puvodne je jich vic a v divnem formatu (v symlinku), ale nektere vety se tam casto opakuji, tak jsem
+      to zuniqoval
+
+csenru
+- umc 0.1/0.3
+   - je ve slozce "original", protoze UMC je ve skutecnosti nejake trochu rozbite
+     a musel jsem ho opravovat (uz si presne nepamatuju jak :( )
+   - opravene verze jsou v enru/encs/csru slozkach

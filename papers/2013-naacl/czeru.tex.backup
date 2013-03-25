@@ -10,7 +10,7 @@
 \usepackage[utf8]{inputenc}
 %\usepackage[utf8]{inputenc}
 %\usepackage[russian]{babel}
-%\usepackage[T2A]{fontenc}
+\usepackage[T2A]{fontenc}
 \usepackage{float}
 \usepackage{graphicx}
 %\usepackage{hyperref}
@@ -44,6 +44,9 @@ between two morphologically rich related languages. After the analysis of
 out-of-vocabulary word types, we show the ways to reduce the rate of out-of-vocabulary words (OOV), 
 exploiting morphological analyzers
 and stemming techniques, and discuss the relation of OOV and other metrics.
+We also provide a manual evaluation of the oov words, namely how each of
+the suggested methods helped and show possible directions of future research of
+this problem.
 %from naacl srw web:
 %Since the main purpose of presenting at the workshop is to exchange ideas with other researchers and to receive helpful feedback for further development of the work, papers should clearly indicate directions for future research wherever appropriate.  how the suggested methods 
 \end{abstract}
@@ -86,10 +89,10 @@ However, as we found out, this similarity surprisingly
 the translation between Czech and Russian demonstrates lower quality output than 
 between English and any of the two languages.
 
-\section{Characteristics of Slavic languages}
+\section{Characterstics of Slavic languages}
 Slavic languages are mostly inflecting languages characterized by free word order and rich
 inflectional paradigms. %(two facts depending on each other ). 
-The Table \ref{tab:slon} shows the explosion of word forms in Slavic languages on
+The Table \ref{tab:slon} shows the exposion of word forms in Slavic languages on
 We can argue that this 
 the example of a noun phrase. (Russian has been transliterated.)
 %Czech and Russian are very similar in 
@@ -102,7 +105,7 @@ English & Czech & Russian \\ \hline
 \textit{jolly elephant} & veselý slon & veselyj slon \\
  & veselého slona & veselogo slona \\
  & veselému slonu & veselomu slonu \\
- & veselého slona & veselogo slona \\ 
+ %& veselé slona & veselogo slona \\ 
  & veselému slonu & veselom slone\\
  & veselým slonem& veselym slonom\\
  & veselý slone & - \\ %????DODĚLEJ - vokativ v rustine neni)
@@ -129,7 +132,7 @@ In some cases, it's hard to specifically count the OOV rate.
 
 However, we specifically chose those language pairs, when one language is written in cyrillic, while the other is written in latin alphabet. This allows us to count OOV rate in a very efficient way, since cyrillic characters in non-cyrillic text almost surely mean untranslated cyrillic word and vice versa.
 
-(We can sometimes argue that latin alphabet in Russian text is understandable as, for example, a named entity; even though it is most time just an OOV word, we are taking the opposite way in our experiment, as there is almost zero chance of cyrillic letters appearing in the Czech or English data.)
+(We can sometimes argue that latin alphabet in Russian text is understandable as, for example, a named entity; even though it is most time just an OOV word, we are taking the oposite way in our experiment, as there is almost zero chance of cyrillic letters appearing in the Czech or English data.)
 
 \subsection{Relation between BLEU and OOV rates}
 We must always be reminded that decreasing OOV rate is not a goal in itself; we want to decrease it only to increase the translation quality.
@@ -171,7 +174,7 @@ The whole factored set-up can be seen in the Figure~\ref{graf:mss}.
 
 We are exploiting the morphological features in two ways. First, we use lemmatization of source language (in this case, Russian) for making OOV rates smaller. Also, we use tagging of the target languages for better language models.
 
-For Czech and English, we used Morče\footnote{\texttt{http://ufal.mff.cuni.cz/morce/}} - morphological perceptron-based tagger, developed at Charles' University in Prague. For Russian, we used TreeTagger\footnote{\texttt{http://www.ims.uni-stuttgart.de/\-projekte/corplex/TreeTagger/}} - modular tagger, developed at University of Stuttgart, with the Russian parameter file developed by Serge Sharoff.
+For Czech and English, we used Morče\footnote{\texttt{http://ufal.mff.cuni.cz/morce/}} - morphological perceptron-based tagger, developed at Charles' University in Prague. For Russian, we used TreeTagger\footnote{\texttt{http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/}} - modular tagger, developed at University of Stuttgart, with the Russian parameter file developed by Serge Sharoff.
 
 Because the Russian is always the source language in this case, the tagset is not relevant. For Czech, Morče uses Czech positional tagset\footnote{See \texttt{http://ufal.mff.cuni.cz/pdt/\-Mor\-pho\-logy\-\_\-and\-\_\-Tag\-ging\-/\-Doc/hmptagqr.html}}. For English, Morče uses tagset derived from Penn Treebank.
 
@@ -267,7 +270,7 @@ Test  & cs, en, ru          &  2000 \\
 
 In our experiment we exploited data from a parallel Czech-English-Russian
 corpus called UMC (UFAL Multilingual Corpus) with automatic pairwise sentence
-alignment. The texts were downloaded from the Project
+alignment. The texts were downloaded from from the Project
 Syndicate\footnote{http://www.project-syndicate.org/} page. 
 The data are divided into three sets: training set (train),
 development set (dev) for MERT and test set for testing BLEU and OOV rates.
@@ -376,6 +379,71 @@ A small note: with experience from our past experiments, we think, that if we ch
 a morphologically rich language that causes problems.
 %nejsem si jistej, jestli je to pravda.... ale neověřim to, protože nám právě došlo místo na ufallabu.
 
+\section{Manual evaluation} 
+The BLEU score and the oov rate are not enough to determine the
+the real improvement over the baseline, so we decided to check oov words manually.
+We have evaluated randomly selected 100 sentences with the respect to the OOV rate only,
+not taking into account morphological or syntactic errors.%\footnote{though they really matter, plans for future}
+For this task we have chosen the experiments 1-lemma and 1-stem5(see the convention above)
+to see the pure impact of adding information about either lemmas or stems.
+We compare the output of the systems against the baseline translation.
+As for the experiments with stems we have chosen the stem with length 5 as
+the correlation between bleu and oov is quite balanced in this case.
+
+For each oov word in a sentence from the baseline experiment we assign the
+following information: word class specification\footnote{We also specify whether a word is a named entity or not, as this might be useful in future experiments}
+; whether or not the word was
+translated properly by method 'lemma' or 'stem'. The annotated
+text looks like follows:\\
+\textit{adj::lemma+::stem+-::полноценный military resource} means that %TODO add package cyrillic
+the word was translated properly by method lemma, and badly by 'stem'.
+\textit{adj::stem+::трущобных} is an example where in 'lemma' method
+the word was unknown as well, whereas in 'stem' experiment
+it got the right translation.
+
+The table below shows the statistics of how unknown words were translated.
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|ccc|ccc|}
+  \hline
+ \textbf{ru-en} & \multicolumn{3}{|c|}{\textbf{lemma}} & \multicolumn{3}{c|}{\textbf{stem}} \\ \hline
+  pos      & +      & -      & oov & +      & -      & oov  \\ \hline
+  adj      & 15     & 0      & 17  & 31     & 4      & 0 \\
+  noun     & 29     & 3      & 18  & 39     & 7      & 4 \\ 
+  verb     & 8      & 1      & 3   & 6      &8       & 2 \\
+  NE       &10      & 0      & 30  & 13     & 5      & 22 \\
+ gerund     &13      & 6      & 12  & 20     &10      & 0 \\ \hline
+\textbf{Totally:} & 75 & 10& 80 &  109 & 34 &28 \\ \hline \hline
+ \textbf{ru-cs} & \multicolumn{3}{|c|}{\textbf{lemma}} & \multicolumn{3}{|c|}{\textbf{stem}} \\ \hline
+ pos  & + & -   & oov & +  & - & oov\\ \hline
+ adj  & 13& 4   & 3   & 10 & 9 & 1 \\ \hline
+ noun & 8& 4    &6    & 7  &15 &3 \\ \hline
+ verb & 4 & 2   & 1   & 5  & 2 & 0 \\ \hline
+ NE   & 8 & 4   & 8   & 8  &4  & 7 \\ \hline %named entities guessed similarily by stem and lemma
+gerund& 5  & 8  & 5   & 6  &11 & 1 \\ \hline
+\textbf{Totally:} & 38& 22 & 23& 36 & 41 & 12 \\ 
+\hline
+\end{tabular}
+\end{center}
+\caption{Manual analysis of oov words in the two setups against the baseline.'+' - number of words translated properly,
+'-' badly, oov - words also untranslated in the setup.}
+\label{tab:ruen-manual}
+\end{table}
+
+
+From the table we can see, that generally, the 'stem' method properly guessed
+words that were unknown in the baseline more often, than the 'lemma' experiment.
+We have also spotted some problems with concrete groups of words. %not exactly part of speech
+As we expected, the majority of problematic words were Named Entities, and we plan to adress the problem with the help of extracting the data from wikipedia or
+simple transliteration.
+There was often a problem in translating participles(gerunds), which occurs
+due to the fact, that Russian uses the gerund construction more often than
+either English or Czech.
+
+%the table for ru-cs and bla-bla later...
+
+
+
 \section{Conclusion}
 In this paper we have shown two ways to improve the translation quality and lower out-of-vocabulary rate: with the help of lemmatizing and stemming. 
 
@@ -408,22 +476,22 @@ the Association for Computational Linguistics on Human Language Technologies:
 Stroudsburg 2008, PA, USA, 57-60.
 %???2008???nevim
 
-\bibitem[Popovic and Ney 2004]{popovic} Popovic,M., Ney, H.: Towards the Use of Word Stems and Suffixes for Statistical Machine Translation. 
+\bibitem[Popovic 2004]{popovic} Popovic,M., Hermann, N.: Towards the Use of Word Stems and Suffixes for Statistical Machine Translation. 
 In: Proceedings of 4th International Conference on Language Resources and Evaluation (LREC), Lisbon, Portugal, May 2004 
 
 \bibitem[Oflazer 2008]{oflazer} Oflazer, K.:Statistical Machine Translation into a Morphologically Complex Language. 
 In: Proceedings of CICLing 2008, Haifa, Israel, February 17-23, 2008. 
 
-\bibitem[Gispert et al. 2005]{gispert} Gispert,A., Marino,J, Crego, J: Improving statistical machine translation by classifying and generalizing inflected verb forms.  
+\bibitem[Gispert 2005]{gispert} Gispert,A., Marino,J, Crego, J: Improving statistical machine translation by classifying and generalizing inflected verb forms.  
 In: Proceedings of 9th European Conference on Speech Communication and Technology. 2005.
 
-\bibitem[Turchi et al. 2011]{turchi} Turchi, M., Ehrmann, M.: Knowledge Expansion of a Statistical Machine Translation System using Morphological Resources. 
+\bibitem[Turchi]{turchi} Turchi, M., Ehrmann, M.: Knowledge Expansion of a Statistical Machine Translation System using Morphological Resources. 
 In: Polibits, (43), 37-43, 2011.
 
-\bibitem[Bojar and Tamchyna 2011]{bojartamchyna} Bojar,O., Tamchyna, A.: Forms Wanted: Training SMT on Monolingual Data.
+\bibitem[Bojar, Tamchyna]{bojartamchyna} Bojar,O., Tamchyna, A.: Forms Wanted: Training SMT on Monolingual Data.
 In: Proceedings Research Workshop of the Israel Science Foundation University of Haifa, Israel. 2011.
 
-\bibitem[Koehn et al. 2007]{moses}Koehn, P., H. Hoang, A. Birch et al: Moses: Open source toolkit for statistical machine translation.
+\bibitem[Koehn et al.]{moses}Koehn, P., H. Hoang, A. Birch et al: Moses: Open source toolkit for statistical machine translation.
 In: Proceeding ACL '07 Proceedings of the 45th Annual Meeting of the ACL, pp. 177-180, ACL, 2007.
 
 \end{thebibliography}
