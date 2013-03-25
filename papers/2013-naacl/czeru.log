@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.6.14)  9 FEB 2013 02:18
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  25 MAR 2013 06:14
 entering extended mode
  %&-line parsing enabled.
-**czeru.tex
+**czeru
 (./czeru.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
@@ -250,16 +250,18 @@ Now handling font encoding U ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-))
-(/usr/share/texmf-texlive/tex/latex/float/float.sty
+)) (./float/float.sty
+
+LaTeX Warning: You have requested package `float/float',
+               but the package provides `float'.
+
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count87
 \float@exts=\toks16
 \float@box=\box26
 \@float@everytoks=\toks17
 \@floatcapt=\box27
-)
-(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+) (/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
@@ -303,7 +305,7 @@ LaTeX Font Info:    Try loading font information for OT1+ptm on input line 35.
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-(/usr/share/texmf/tex/context/base/supp-pdf.mkii
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count89
 \scratchdimen=\dimen105
@@ -374,8 +376,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 149--149
 
 [2]
 
-pdfTeX warning: /usr/bin/pdflatex (file ./graf_moses.pdf): PDF inclusion: found
- PDF version <1.5>, but at most version <1.4> allowed
+pdfTeX warning: pdflatex (file ./graf_moses.pdf): PDF inclusion: found PDF vers
+ion <1.5>, but at most version <1.4> allowed
 <graf_moses.pdf, id=11, 539.60745pt x 703.84323pt>
 File: graf_moses.pdf Graphic file (type pdf)
  <use graf_moses.pdf>
@@ -390,8 +392,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--176
 
 [3 <./graf_moses.pdf>]
 
-pdfTeX warning: /usr/bin/pdflatex (file ./plot_csru.pdf): PDF inclusion: found 
-PDF version <1.5>, but at most version <1.4> allowed
+pdfTeX warning: pdflatex (file ./plot_csru.pdf): PDF inclusion: found PDF versi
+on <1.5>, but at most version <1.4> allowed
 <plot_csru.pdf, id=38, 462.19373pt x 420.46187pt>
 File: plot_csru.pdf Graphic file (type pdf)
  <use plot_csru.pdf>
@@ -401,8 +403,8 @@ Overfull \hbox (7.22688pt too wide) in paragraph at lines 293--294
 
 [4 <./plot_csru.pdf>]
 
-pdfTeX warning: /usr/bin/pdflatex (file ./plot_enru.pdf): PDF inclusion: found 
-PDF version <1.5>, but at most version <1.4> allowed
+pdfTeX warning: pdflatex (file ./plot_enru.pdf): PDF inclusion: found PDF versi
+on <1.5>, but at most version <1.4> allowed
 <plot_enru.pdf, id=63, 463.34914pt x 418.6546pt>
 File: plot_enru.pdf Graphic file (type pdf)
  <use plot_enru.pdf>
@@ -420,22 +422,19 @@ Underfull \hbox (badness 1616) in paragraph at lines 423--425
 ] (./czeru.aux) ) 
 Here is how much of TeX's memory you used:
  1355 strings out of 495061
- 16478 string characters out of 1182621
- 72381 words of memory out of 3000000
+ 16417 string characters out of 1182622
+ 72387 words of memory out of 3000000
  4520 multiletter control sequences out of 15000+50000
  24856 words of font info for 57 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 25i,9n,19p,461b,266s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,9n,19p,457b,266s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sh
 are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/font
-s/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvet
-ic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/
-share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/
-fonts/type1/urw/times/utmri8a.pfb>
-Output written on czeru.pdf (6 pages, 175235 bytes).
+exlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb><./ucrr8a.pfb><./utmb8a.pfb><.
+/utmr8a.pfb><./utmri8a.pfb>
+Output written on czeru.pdf (6 pages, 152508 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
+ 116 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
