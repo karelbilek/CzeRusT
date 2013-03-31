@@ -1,246 +1,92 @@
-s.evaluator.08b6f554.20121130-1045	DONE
-ru -> cs
-BLEU	0.1114	[0.1057,0.1175]
-s.evaluator.ba694828.20121130-1046	DONE
-cs -> ru
-BLEU	0.1248	[0.1186,0.1314]
-s.evaluator.44d63921.20121130-2103	DONE
-en -> ru
-BLEU	0.1650	[0.1554,0.1749]
-s.evaluator.eb6d9c05.20121201-1306	DONE
-ru -> en
-BLEU	0.2208	[0.2104,0.2312]
-s.evaluator.d1e1dcfc.20121206-1342	DONE
-ru -> cs
-BLEU	0.8677	[0.8587,0.8770]
-s.evaluator.3a4f8b4b.20121206-1348	DONE
-ru -> cs
-BLEU	0.8657	[0.8565,0.8752]
-s.evaluator.630c0220.20121206-1348	DONE
-ru -> cs
-BLEU	0.0000	[0.0000,0.0000]
-s.evaluator.03e7d4a7.20121207-1148	DONE
-ru -> cs
-BLEU	0.1812	[0.1750,0.1872]
-s.evaluator.0424c404.20121208-1542	DONE
-ru -> cs
-BLEU	0.8795	[0.8704,0.8888]
-s.evaluator.9f901ab5.20121208-2131	DONE
-cs -> ru
-BLEU	0.1373	[0.1306,0.1442]
-s.evaluator.7ea73f55.20121208-2257	DONE
-ru -> cs
-BLEU	0.1199	[0.1145,0.1260]
-s.evaluator.bc59fd80.20121209-0130	DONE
-ru -> cs
-BLEU	0.1166	[0.1104,0.1230]
-s.evaluator.156ec925.20121209-0413	DONE
-ru -> cs
-BLEU	0.1280	[0.1224,0.1345]
-s.evaluator.b16e9afd.20121209-0425	DONE
-ru -> cs
-BLEU	0.1204	[0.1144,0.1271]
-s.evaluator.a0f5504d.20121209-1152	DONE
-ru -> cs
-BLEU	0.1222	[0.1158,0.1288]
-s.evaluator.136eb348.20121209-1612	DONE
-ru -> cs
-BLEU	0.1258	[0.1206,0.1321]
-s.evaluator.69e4e8b6.20121210-0109	DONE
-ru -> cs
-BLEU	0.0072	[0.0057,0.0089]
-s.evaluator.84372b78.20121212-0051	DONE
-en -> cs
-BLEU	0.1539	[0.1468,0.1612]
-s.evaluator.077310b0.20121212-0056	DONE
-en -> cs
-BLEU	0.1549	[0.1478,0.1617]
-s.evaluator.f3535549.20121214-0105	DONE
-ru -> cs
-BLEU	0.0234	[0.0211,0.0257]
-s.evaluator.5c3c7d92.20121214-0109	DONE
-ru -> cs
-BLEU	0.1202	[0.1148,0.1264]
-s.evaluator.bd6ffe0a.20121214-1458	DONE
-ru -> cs
-BLEU	0.1231	[0.1175,0.1291]
-s.evaluator.46ffedc7.20121215-1808	DONE
-ru -> cs
-BLEU	0.1270	[0.1212,0.1332]
-s.evaluator.59efae72.20121217-0052	DONE
-ru -> cs
-BLEU	0.1251	[0.1192,0.1317]
-s.evaluator.5400a040.20121231-0401	DONE
-ru -> cs
-BLEU	0.1261	[0.1207,0.1324]
-s.evaluator.9ac5c5c8.20130111-1621	DONE
-ru -> cs
-BLEU	0.1148	[0.1093,0.1214]
-s.evaluator.9df297fd.20130119-0630	DONE
-ru -> cs
-BLEU	0.1286	[0.1225,0.1349]
-s.evaluator.34b7907f.20130120-1152	DONE
-ru -> cs
-BLEU	0.1183	[0.1125,0.1250]
-s.evaluator.79bf38c1.20130128-0743	DONE
-ru -> cs
-BLEU	0.1290	[0.1229,0.1355]
-s.evaluator.a078d30e.20130129-0738	DONE
-ru -> cs
-BLEU	0.1342	[0.1279,0.1407]
+s.evaluator.08b6f554.20121130-1045[smer:ru -> cs][preklad:ru_correct+form -> cs_correct+form][alignment:form -> form][lm:unmixed;umc-train+cs_correct+form][score:0.1114]
+s.evaluator.ba694828.20121130-1046[smer:cs -> ru][preklad:cs_correct+form -> ru_correct+form][alignment:form -> form][lm:unmixed;umc-train+ru_correct+form][score:0.1248]
+s.evaluator.44d63921.20121130-2103[smer:en -> ru][preklad:enNm+form -> ru_mssTok+form][alignment:form -> form][lm:unmixed;yandex-train+ru_mssTok+form][score:0.1650]
+s.evaluator.eb6d9c05.20121201-1306[smer:ru -> en][preklad:ru_mssTok+form -> enNm+form][alignment:form -> form][lm:unmixed;yandex-train+enNm+form][score:0.2208]
+s.evaluator.d1e1dcfc.20121206-1342[smer:ru -> cs][preklad:ru_tt+lc+lemma -> csNm_correct+lc][alignment:lemma -> lemma][lm:unmixed;umc-test+csNm_correct+lc][score:0.8677]
+s.evaluator.3a4f8b4b.20121206-1348[smer:ru -> cs][preklad:ru_tt+lc -> csNm_correct+lc][alignment:lemma -> lemma][lm:unmixed;umc-test+csNm_correct+lc][score:0.8657]
+s.evaluator.630c0220.20121206-1348[smer:ru -> cs][preklad:ru_tt+lc+lemma -> csNm_correct+lc+tag][alignment:lemma -> lemma][lm:unmixed;umc-test+csNm_correct+lc;umc-test+csNm_correct+tag][score:0.0000]
+s.evaluator.03e7d4a7.20121207-1148[smer:ru -> cs][preklad:ru_tt+lc+lemma -> csNm_correct+lc][alignment:lemma -> lemma][lm:unmixed;umc-test+csNm_correct+lc;umc-test+csNm_correct+tag][score:0.1812]
+s.evaluator.0424c404.20121208-1542[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-test+cs_lemmatized_treex+lc;umc-test+cs_lemmatized_treex+tag][score:0.8795]
+s.evaluator.9f901ab5.20121208-2131[smer:cs -> ru][preklad:cs_lemmatized_treex+lc+lemma -> ru_lemmatized_treetagger+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1373]
+s.evaluator.7ea73f55.20121208-2257[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1199]
+s.evaluator.bc59fd80.20121209-0130[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem4 -> cs_lemmatized_treex+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1166]
+s.evaluator.156ec925.20121209-0413[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc][score:0.1280]
+s.evaluator.b16e9afd.20121209-0425[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem6 -> cs_lemmatized_treex+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1204]
+s.evaluator.a0f5504d.20121209-1152[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem6][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1222]
+s.evaluator.136eb348.20121209-1612[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc][score:0.1258]
+s.evaluator.69e4e8b6.20121210-0109[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma+lcstem3+lcstem4+lcstem5+lcstem6 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+fftag;webcoll+cs_lemmatized_treex+fftag;zpravostroj+cs_tokenized_lemmatized_treex+fftag][score:0.0072]
+s.evaluator.84372b78.20121212-0051[smer:en -> cs][preklad:en_lemmatized_treex+lc+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-csen-train+cs_lemmatized_treex+lc;umc-filtered-csen-train+cs_lemmatized_treex+tag][score:0.1539]
+s.evaluator.077310b0.20121212-0056[smer:en -> cs][preklad:en_lemmatized_treex+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-csen-train+cs_lemmatized_treex+lc;umc-filtered-csen-train+cs_lemmatized_treex+tag][score:0.1549]
+s.evaluator.f3535549.20121214-0105[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma+lcstem6+lcstem5+lcstem4+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+fftag;webcoll+cs_lemmatized_treex+fftag;zpravostroj+cs_tokenized_lemmatized_treex+fftag][score:0.0234]
+s.evaluator.5c3c7d92.20121214-0109[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma+lcstem6+lcstem5+lcstem4+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+fftag;webcoll+cs_lemmatized_treex+fftag;zpravostroj+cs_tokenized_lemmatized_treex+fftag][score:0.1202]
+s.evaluator.bd6ffe0a.20121214-1458[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma+lcstem6+lcstem5+lcstem4+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc][score:0.1231]
+s.evaluator.46ffedc7.20121215-1808[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc][score:0.1270]
+s.evaluator.59efae72.20121217-0052[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc][score:0.1251]
+s.evaluator.5400a040.20121231-0401[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;webcoll+cs+lc;zpravostroj+cs_tokenized_lemmatized_treex+lc][score:0.1261]
+s.evaluator.9ac5c5c8.20130111-1621[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+tag][score:0.1148]
+s.evaluator.9df297fd.20130119-0630[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+tag][score:0.1286]
+s.evaluator.34b7907f.20130120-1152[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;zpravostroj+cs_tokenized_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+tag][score:0.1183]
+s.evaluator.79bf38c1.20130128-0743[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;zpravostroj+cs_tokenized_lemmatized_treex+tag;webcoll+cs_lemmatized_treex+tag;umc-plus-intercorp+cs_lemmatized_treex+tag;umc-plus-intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc][score:0.1290]
+s.evaluator.a078d30e.20130129-0738[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:mixed;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+tag;webcoll+cs_lemmatized_treex+tag;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+tag][score:0.1342]
 s.evaluator.c4da0091.20130129-0946	INITED
 s.evaluator.7eae8726.20130129-1127	INITED
 s.evaluator.33df1c41.20130129-1130	INITED
 s.evaluator.f2251d8e.20130130-0205	INITED
-s.evaluator.bad2f85b.20130130-0208	DONE
-ru -> cs
-BLEU	0.1296	[0.1234,0.1362]
-s.evaluator.cde7620a.20130130-1859	DONE
-ru -> cs
-BLEU	0.1334	[0.1272,0.1402]
-s.evaluator.cdf4af40.20130131-0715	DONE
-ru -> cs
-BLEU	0.1335	[0.1273,0.1400]
+s.evaluator.bad2f85b.20130130-0208[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:mixed;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+tag;webcoll+cs_lemmatized_treex+tag;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+tag][score:0.1296]
+s.evaluator.cde7620a.20130130-1859[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma+lcstem3 -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:mixed;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+tag;webcoll+cs_lemmatized_treex+tag;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+tag][score:0.1334]
+s.evaluator.cdf4af40.20130131-0715[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:mixed;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+tag;webcoll+cs_lemmatized_treex+tag;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+tag][score:0.1335]
 s.evaluator.ab6d1494.20130201-1759	INITED
-s.evaluator.8c8effe2.20130202-0010	DONE
-ru -> cs
-BLEU	0.1339	[0.1274,0.1406]
-s.evaluator.7be57993.20130205-1440	DONE
-ru -> cs
-BLEU	0.1071	[0.1015,0.1130]
-s.evaluatorcyrillics.bbc23901.20130205-1730	DONE
-ru -> cs
-BLEU	0.1071	[0.1015,0.1130]
-s.evaluatorcyrillics.fd9a46a5.20130205-1846	DONE
-ru -> cs
-BLEU	0.1118	[0.1063,0.1179]
-s.evaluatorcyrillics.87f079da.20130205-1847	DONE
-ru -> cs
-BLEU	0.1011	[0.0954,0.1075]
-s.evaluatorcyrillics.8674fd52.20130205-1848	DONE
-ru -> cs
-BLEU	0.0958	[0.0908,0.1013]
-s.evaluatorcyrillics.b3ffaca7.20130205-1849	DONE
-ru -> cs
-BLEU	0.0856	[0.0803,0.0914]
-s.evaluatorcyrillics.99ee3eec.20130205-1850	DONE
-ru -> cs
-BLEU	0.1042	[0.0985,0.1106]
-s.evaluatorcyrillics.cc948225.20130205-1903	DONE
-ru -> cs
-BLEU	0.0116	[0.0106,0.0127]
-s.evaluatorcyrillics.c0cd4c8c.20130205-1909	DONE
-ru -> cs
-BLEU	0.1264	[0.1204,0.1331]
-s.evaluatorcyrillics.99998a35.20130205-1913	DONE
-ru -> cs
-BLEU	0.1223	[0.1164,0.1290]
-s.evaluatorcyrillics.9b929690.20130205-1914	DONE
-ru -> cs
-BLEU	0.1212	[0.1154,0.1276]
-s.evaluatorcyrillics.abee4dcc.20130205-1915	DONE
-ru -> cs
-BLEU	0.1226	[0.1162,0.1294]
-s.evaluatorcyrillics.8032ce6d.20130205-2236	DONE
-ru -> en
-BLEU	0.2043	[0.1972,0.2113]
-s.evaluatorcyrillics.f1600b72.20130205-2246	DONE
-ru -> en
-BLEU	0.2083	[0.2009,0.2159]
-s.evaluatorcyrillics.8f7db9fa.20130205-2248	DONE
-ru -> en
-BLEU	0.2300	[0.2221,0.2378]
-s.evaluatorcyrillics.6df7e7ab.20130205-2249	DONE
-ru -> en
-BLEU	0.1520	[0.1444,0.1601]
-s.evaluatorcyrillics.5495eca7.20130205-2252	DONE
-ru -> en
-BLEU	0.2322	[0.2243,0.2401]
-s.evaluatorcyrillics.0b217d47.20130205-2256	DONE
-ru -> cs
-BLEU	0.1235	[0.1177,0.1304]
-s.evaluatorcyrillics.c030f500.20130205-2344	DONE
-ru -> en
-BLEU	0.2279	[0.2202,0.2355]
-s.evaluatorcyrillics.af956c9a.20130205-2346	DONE
-ru -> en
-BLEU	0.1954	[0.1885,0.2025]
-s.evaluatorcyrillics.6b052d73.20130205-2347	DONE
-ru -> en
-BLEU	0.2349	[0.2270,0.2425]
-s.evaluatorcyrillics.74f57dd5.20130205-2349	DONE
-ru -> en
-BLEU	0.1647	[0.1587,0.1713]
-s.evaluatorcyrillics.fa1910b0.20130205-2350	DONE
-ru -> en
-BLEU	0.2133	[0.2060,0.2205]
-s.evaluatorcyrillics.8b125510.20130205-2352	DONE
-ru -> en
-BLEU	0.2169	[0.2098,0.2247]
-s.evaluatorcyrillics.7bdc5a66.20130207-0706	DONE
-en -> ru
-BLEU	0.1553	[0.1484,0.1621]
-s.evaluatorcyrillics.16a27d30.20130316-1309	DONE
-cs -> ru
-BLEU	0.1243	[0.1180,0.1308]
-s.evaluatorcyrillics.f1df104f.20130316-1316	DONE
-cs -> ru
-BLEU	0.1184	[0.1120,0.1249]
-s.evaluatorcyrillics.57e10b09.20130316-1320	DONE
-cs -> ru
-BLEU	0.1412	[0.1343,0.1480]
-s.evaluatorcyrillics.1b884e49.20130316-1340	DONE
-cs -> ru
-BLEU	0.1151	[0.1086,0.1219]
-s.evaluatorcyrillics.5905e184.20130316-1344	DONE
-cs -> ru
-BLEU	0.1235	[0.1166,0.1301]
-s.evaluatorcyrillics.5bdfcefb.20130316-1420	DONE
-cs -> ru
-BLEU	0.1282	[0.1220,0.1354]
-s.evaluatorcyrillics.40ff17ee.20130316-1421	DONE
-cs -> ru
-BLEU	0.1384	[0.1319,0.1449]
+s.evaluator.8c8effe2.20130202-0010[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:mixed;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+lc;umc-filtered-train+cs_lemmatized_treex+lc;wiki-text+cs_lemmatized_treex+lc;intercorp+cs_lemmatized_treex+lc;webcoll+cs_lemmatized_treex+lc;wiki-text+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+tag;webcoll+cs_lemmatized_treex+tag;zpravostroj-pitome-obchazeni-corpmana+cs_lemmatized_treex+tag;intercorp+cs_lemmatized_treex+tag][score:0.1339]
+s.evaluator.7be57993.20130205-1440[smer:ru -> cs][preklad:ru+form -> cs+form][alignment:form -> form][lm:unmixed;umc-filtered-train+cs+form][score:0.1071]
+s.evaluatorcyrillics.bbc23901.20130205-1730[smer:ru -> cs][preklad:ru+form -> cs+form][alignment:form -> form][lm:unmixed;umc-filtered-train+cs+form][score:0.1071][cyril:0.066]
+s.evaluatorcyrillics.fd9a46a5.20130205-1846[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lcstem6 -> cs_lemmatized_treex+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1118][cyril:0.019]
+s.evaluatorcyrillics.87f079da.20130205-1847[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1011][cyril:0.012]
+s.evaluatorcyrillics.8674fd52.20130205-1848[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lcstem4 -> cs_lemmatized_treex+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.0958][cyril:0.006]
+s.evaluatorcyrillics.b3ffaca7.20130205-1849[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.0856][cyril:0.001]
+s.evaluatorcyrillics.99ee3eec.20130205-1850[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1042][cyril:0.030]
+s.evaluatorcyrillics.c0cd4c8c.20130205-1909[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem6 -> cs_lemmatized_treex+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1264][cyril:0.018]
+s.evaluatorcyrillics.99998a35.20130205-1913[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem5 -> cs_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1223][cyril:0.012]
+s.evaluatorcyrillics.9b929690.20130205-1914[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem4 -> cs_lemmatized_treex+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1212][cyril:0.006]
+s.evaluatorcyrillics.abee4dcc.20130205-1915[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lcstem3 -> cs_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1226][cyril:0.001]
+s.evaluatorcyrillics.8032ce6d.20130205-2236[smer:ru -> en][preklad:ru+form -> en+form][alignment:form -> form][lm:unmixed;umc-filtered-enru-train+en+form][score:0.2043][cyril:0.048]
+s.evaluatorcyrillics.f1600b72.20130205-2246[smer:ru -> en][preklad:ru_lemmatized_treetagger+lcstem5 -> en_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2083][cyril:0.010]
+s.evaluatorcyrillics.8f7db9fa.20130205-2248[smer:ru -> en][preklad:ru_lemmatized_treetagger+lc+lemma -> en_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2300][cyril:0.024]
+s.evaluatorcyrillics.6df7e7ab.20130205-2249[smer:ru -> en][preklad:ru_lemmatized_treetagger+lc+lcstem3 -> en_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.1520][cyril:0.001]
+s.evaluatorcyrillics.5495eca7.20130205-2252[smer:ru -> en][preklad:ru_lemmatized_treetagger+lc+lcstem5 -> en_lemmatized_treex+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2322][cyril:0.010]
+s.evaluatorcyrillics.0b217d47.20130205-2256[smer:ru -> cs][preklad:ru_lemmatized_treetagger+lc+lemma -> cs_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+cs_lemmatized_treex+tag;umc-filtered-train+cs_lemmatized_treex+lc][score:0.1235][cyril:0.029]
+s.evaluatorcyrillics.c030f500.20130205-2344[smer:ru -> en][preklad:ru_lemmatized_treetagger+lc+lcstem4 -> en_lemmatized_treex+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2279][cyril:0.005]
+s.evaluatorcyrillics.af956c9a.20130205-2346[smer:ru -> en][preklad:ru_lemmatized_treetagger+lcstem4 -> en_lemmatized_treex+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.1954][cyril:0.005]
+s.evaluatorcyrillics.6b052d73.20130205-2347[smer:ru -> en][preklad:ru_lemmatized_treetagger+lc+lcstem6 -> en_lemmatized_treex+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2349][cyril:0.015]
+s.evaluatorcyrillics.74f57dd5.20130205-2349[smer:ru -> en][preklad:ru_lemmatized_treetagger+lcstem3 -> en_lemmatized_treex+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.1647][cyril:0.001]
+s.evaluatorcyrillics.fa1910b0.20130205-2350[smer:ru -> en][preklad:ru_lemmatized_treetagger+lemma -> en_lemmatized_treex+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2133][cyril:0.025]
+s.evaluatorcyrillics.8b125510.20130205-2352[smer:ru -> en][preklad:ru_lemmatized_treetagger+lcstem6 -> en_lemmatized_treex+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-enru-train+en_lemmatized_treex+tag;umc-filtered-enru-train+en_lemmatized_treex+lc][score:0.2169][cyril:0.015]
+s.evaluatorcyrillics.7bdc5a66.20130207-0706[smer:en -> ru][preklad:en_lemmatized_treex+lc+lemma -> ru_lemmatized_treetagger+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1553][cyril:0.811]
+s.evaluatorcyrillics.16a27d30.20130316-1309[smer:cs -> ru][preklad:cs+form -> ru+form][alignment:form -> form][lm:unmixed;umc-filtered-train+ru+form][score:0.1243][cyril:0.758]
+s.evaluatorcyrillics.f1df104f.20130316-1316[smer:cs -> ru][preklad:cs_lemmatized_treex+lemma -> ru_lemmatized_treetagger+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1184][cyril:0.803]
+s.evaluatorcyrillics.57e10b09.20130316-1320[smer:cs -> ru][preklad:cs_lemmatized_treex+lc+lcstem3 -> ru_lemmatized_treetagger+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1412][cyril:0.817]
+s.evaluatorcyrillics.1b884e49.20130316-1340[smer:cs -> ru][preklad:cs_lemmatized_treex+lcstem4 -> ru_lemmatized_treetagger+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1151][cyril:0.813]
+s.evaluatorcyrillics.5905e184.20130316-1344[smer:cs -> ru][preklad:cs_lemmatized_treex+lcstem5 -> ru_lemmatized_treetagger+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1235][cyril:0.807]
+s.evaluatorcyrillics.5bdfcefb.20130316-1420[smer:cs -> ru][preklad:cs_lemmatized_treex+lcstem6 -> ru_lemmatized_treetagger+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1282][cyril:0.805]
+s.evaluatorcyrillics.40ff17ee.20130316-1421[smer:cs -> ru][preklad:cs_lemmatized_treex+lc+lemma -> ru_lemmatized_treetagger+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1384][cyril:0.810]
 s.evaluatorcyrillics.6ccbd04a.20130316-1422	INITED
 s.evaluatorcyrillics.6af2b429.20130316-1423	INITED
 s.evaluatorcyrillics.a789135a.20130316-1423	INITED
-s.evaluatorcyrillics.e037eef1.20130316-1733	DONE
-cs -> ru
-BLEU	0.1402	[0.1335,0.1471]
-s.evaluatorcyrillics.a7b0095d.20130316-1734	DONE
-cs -> ru
-BLEU	0.1423	[0.1358,0.1492]
-s.evaluatorcyrillics.d6ba6129.20130316-1734	DONE
-cs -> ru
-BLEU	0.1383	[0.1318,0.1453]
-s.evaluatorcyrillics.101bf9dc.20130317-1229	DONE
-cs -> ru
-BLEU	0.0988	[0.0933,0.1049]
+s.evaluatorcyrillics.e037eef1.20130316-1733[smer:cs -> ru][preklad:cs_lemmatized_treex+lc+lcstem4 -> ru_lemmatized_treetagger+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1402][cyril:0.816]
+s.evaluatorcyrillics.a7b0095d.20130316-1734[smer:cs -> ru][preklad:cs_lemmatized_treex+lc+lcstem6 -> ru_lemmatized_treetagger+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1423][cyril:0.806]
+s.evaluatorcyrillics.d6ba6129.20130316-1734[smer:cs -> ru][preklad:cs_lemmatized_treex+lc+lcstem5 -> ru_lemmatized_treetagger+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.1383][cyril:0.807]
+s.evaluatorcyrillics.101bf9dc.20130317-1229[smer:cs -> ru][preklad:cs_lemmatized_treex+lcstem3 -> ru_lemmatized_treetagger+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-train+ru_lemmatized_treetagger+tag;umc-filtered-train+ru_lemmatized_treetagger+lc][score:0.0988][cyril:0.810]
 s.evaluatorcyrillics.90c51bf5.20130317-1229	INITED
-s.evaluatorcyrillics.b9ebafa9.20130317-1259	DONE
-en -> ru
-BLEU	0.1334	[0.1273,0.1400]
-s.evaluatorcyrillics.5fbad79d.20130317-1334	DONE
-en -> ru
-BLEU	0.1321	[0.1257,0.1385]
-s.evaluatorcyrillics.af027664.20130317-1334	DONE
-en -> ru
-BLEU	0.1444	[0.1375,0.1511]
-s.evaluatorcyrillics.1145f6a8.20130317-1335	DONE
-en -> ru
-BLEU	0.1187	[0.1130,0.1249]
-s.evaluatorcyrillics.61cb2511.20130317-1337	DONE
-en -> ru
-BLEU	0.1433	[0.1369,0.1498]
+s.evaluatorcyrillics.b9ebafa9.20130317-1259[smer:en -> ru][preklad:en_lemmatized_treex+lcstem4 -> ru_lemmatized_treetagger+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1334][cyril:0.808]
+s.evaluatorcyrillics.5fbad79d.20130317-1334[smer:en -> ru][preklad:en+form -> ru+form][alignment:form -> form][lm:unmixed;umc-filtered-enru-train+ru+form][score:0.1321][cyril:0.800]
+s.evaluatorcyrillics.af027664.20130317-1334[smer:en -> ru][preklad:en_lemmatized_treex+lemma -> ru_lemmatized_treetagger+lc][alignment:lemma -> lemma][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1444][cyril:0.799]
+s.evaluatorcyrillics.1145f6a8.20130317-1335[smer:en -> ru][preklad:en_lemmatized_treex+lcstem3 -> ru_lemmatized_treetagger+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1187][cyril:0.810]
+s.evaluatorcyrillics.61cb2511.20130317-1337[smer:en -> ru][preklad:en_lemmatized_treex+lcstem6 -> ru_lemmatized_treetagger+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1433][cyril:0.810]
 s.evaluatorcyrillics.2e7996b4.20130317-1338	INITED
 s.evaluatorcyrillics.41f838fa.20130317-1338	INITED
-s.evaluatorcyrillics.c67ccf30.20130317-1339	DONE
-en -> ru
-BLEU	0.1553	[0.1486,0.1623]
+s.evaluatorcyrillics.c67ccf30.20130317-1339[smer:en -> ru][preklad:en_lemmatized_treex+lc+lcstem5 -> ru_lemmatized_treetagger+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1553][cyril:0.809]
 s.evaluatorcyrillics.71aaf730.20130317-1340	INITED
-s.evaluatorcyrillics.04570ebc.20130326-0214	RUNNING
-s.evaluatorcyrillics.66ea3b05.20130326-0214	RUNNING
-s.evaluatorcyrillics.b5345b80.20130326-0214	RUNNING
-s.evaluatorcyrillics.dbdd3122.20130326-0214	DONE
-en -> ru
-BLEU	0.1425	[0.1361,0.1491]
+s.evaluatorcyrillics.04570ebc.20130326-0214[smer:en -> ru][preklad:en_lemmatized_treex+lc+lcstem4 -> ru_lemmatized_treetagger+lc][alignment:lcstem4 -> lcstem4][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1486][cyril:0.807]
+s.evaluatorcyrillics.66ea3b05.20130326-0214[smer:en -> ru][preklad:en_lemmatized_treex+lc+lcstem6 -> ru_lemmatized_treetagger+lc][alignment:lcstem6 -> lcstem6][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1574][cyril:0.810]
+s.evaluatorcyrillics.b5345b80.20130326-0214	FAILED
+s.evaluatorcyrillics.dbdd3122.20130326-0214[smer:en -> ru][preklad:en_lemmatized_treex+lcstem5 -> ru_lemmatized_treetagger+lc][alignment:lcstem5 -> lcstem5][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1425][cyril:0.805]
+s.evaluatorcyrillics.91d612cd.20130331-2044[smer:en -> ru][preklad:en_lemmatized_treex+lc+lcstem3 -> ru_lemmatized_treetagger+lc][alignment:lcstem3 -> lcstem3][lm:unmixed;umc-filtered-enru-train+ru_lemmatized_treetagger+tag;umc-filtered-enru-train+ru_lemmatized_treetagger+lc][score:0.1537][cyril:0.816]
