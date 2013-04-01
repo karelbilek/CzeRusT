@@ -28,7 +28,7 @@ while (my $line = <$file>) {
 
     push @stepnicks, '"'.$stepnick.'"';
     push @bleus, $bleu*100;
-    push @cyrilics, $cyril;
+    push @cyrilics, $cyril*100;
 }
 
 sub printa {

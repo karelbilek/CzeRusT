@@ -1,6 +1,6 @@
-png("czru.png")
+png("rucs.png")
 BLEU<-c(10.71, 10.42, 8.56, 9.58, 10.11, 11.18, 11.64, 12.35, 12.26, 12.12, 12.23, 12.64, 9.31)
-OOV<-c(0.066, 0.030, 0.001, 0.006, 0.012, 0.019, 0.025, 0.029, 0.001, 0.006, 0.012, 0.018, 0.024)
+OOV<-c(6.6, 3, 0.1, 0.6, 1.2, 1.9, 2.5, 2.9, 0.1, 0.6, 1.2, 1.8, 2.4)
 natpisi<-c("baseline", "1-lemma", "1-stem3", "1-stem4", "1-stem5", "1-stem6", "1-stem7", "2-lemma", "2-stem3", "2-stem4", "2-stem5", "2-stem6", "2-stem7 ")
 plot(BLEU,OOV, xlim=c(8.5,13.5), ylab="OOV (in percents)")
 text(BLEU, OOV, natpisi, pos=4)
