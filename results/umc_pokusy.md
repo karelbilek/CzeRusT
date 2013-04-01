@@ -13,7 +13,9 @@ Alignment je vzdy stejny.
 
 Vizualizace
 ==========
-![](results_visualisation/rucs.png?raw=true)
+RU->CS
+---
+![](../results_visualisation/rucs.png?raw=true)
 
 
 Seznamy
