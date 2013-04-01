@@ -13,20 +13,21 @@ Alignment je vzdy stejny.
 
 Vizualizace
 ==========
-TODO
+![](results_visualisation/rucs.png?raw=true)
+
 
 Seznamy
 =========
-- cs->ru baseline s.evaluatorcyrillics.bbc23901.20130205-1730
-- cs->ru 1 way
+- ru->cs baseline s.evaluatorcyrillics.bbc23901.20130205-1730
+- ru->cs 1 way
 - lemma: s.evaluatorcyrillics.99ee3eec.20130205-1850
 - lcstem3: s.evaluatorcyrillics.b3ffaca7.20130205-1849
 - lcstem4: s.evaluatorcyrillics.8674fd52.20130205-1848
 - lcstem5: s.evaluatorcyrillics.87f079da.20130205-1847
 - lcstem6: s.evaluatorcyrillics.fd9a46a5.20130205-1846
 - lcstem7: s.evaluatorcyrillics.bca0fa90.20130401-0332 
-- cs->ru 2 way
-- lemma: s.evaluatorcyrillics.c2589160.20130205-1916
+- ru->cs 2 way
+- lemma: s.evaluatorcyrillics.0b217d47.20130205-2256
 - lcstem3: s.evaluatorcyrillics.abee4dcc.20130205-1915
 - lcstem4: s.evaluatorcyrillics.9b929690.20130205-1914
 - lcstem5: s.evaluatorcyrillics.99998a35.20130205-1913
