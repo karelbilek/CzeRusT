@@ -25,6 +25,14 @@ RU->EN
 ---
 ![](../results_visualisation/ruen.png?raw=true)
 
+2-stem7 už má očekávané výsledky.
+
+Má to 2x lepší výsledek, než ru->cs, ale to se dalo čekat...
+
+CS->RU
+---
+![](../results_visualisation/csru.png?raw=true)
+
 Seznamy
 =========
 - ru->cs baseline s.evaluatorcyrillics.bbc23901.20130205-1730
@@ -57,34 +65,33 @@ Seznamy
 - lcstem5: s.evaluatorcyrillics.5495eca7.20130205-2252
 - lcstem6: s.evaluatorcyrillics.6b052d73.20130205-2347
 - lcstem7: s.evaluatorcyrillics.51b584a6.20130401-0339  
-- ru->cs baseline s.evaluatorcyrillics.16a27d30.20130316-1309
-- ru->cs 1 way
-- lemma: s.evaluatorcyrillics.f1df104f.20130316-1316
-- lcstem3: s.evaluatorcyrillics.101bf9dc.20130317-1229
-- lcstem4: s.evaluatorcyrillics.1b884e49.20130316-1340
-- lcstem5: s.evaluatorcyrillics.5905e184.20130316-1344
-- lcstem6: s.evaluatorcyrillics.5bdfcefb.20130316-1420
-- lcstem7: s.evaluatorcyrillics.3d0b958e.20130401-0659 
-- ru->cs 2 way
-- lemma: s.evaluatorcyrillics.40ff17ee.20130316-1421
-- lcstem3: s.evaluatorcyrillics.57e10b09.20130316-1320
-- lcstem4: s.evaluatorcyrillics.e037eef1.20130316-1733
-- lcstem5: s.evaluatorcyrillics.d6ba6129.20130316-1734
-- lcstem6: s.evaluatorcyrillics.a7b0095d.20130316-1734
-- lcstem7: s.evaluatorcyrillics.b48f9fb7.20130401-0440 
-- ru->en baseline  s.evaluatorcyrillics.5fbad79d.20130317-1334
+- cs->ru baseline s.evaluatorreversecyrillics.0f9ad641.20130401-0939
+- cs->ru 1 way
+- lemma:   s.evaluatorreversecyrillics.386ccb0f.20130401-0950
+- lcstem3: s.evaluatorreversecyrillics.6494aaae.20130401-0950
+- lcstem4: s.evaluatorreversecyrillics.9dc985ab.20130401-0950
+- lcstem5: s.evaluatorreversecyrillics.fb6511f7.20130401-0950
+- lcstem6: s.evaluatorreversecyrillics.253d7586.20130401-0950
+- lcstem7: s.evaluatorreversecyrillics.b97f1a56.20130401-0951
+- cs->ru 2 way
+- lemma: s.evaluatorreversecyrillics.f620d315.20130401-0951
+- lcstem3: s.evaluatorreversecyrillics.0808ec80.20130401-0953
+- lcstem4: s.evaluatorreversecyrillics.f82fda30.20130401-0951
+- lcstem5: s.evaluatorreversecyrillics.2767700f.20130401-0951
+- lcstem6: s.evaluatorreversecyrillics.f1b07305.20130401-0951
+- lcstem7: s.evaluatorreversecyrillics.42c9f52e.20130401-0951
+- ru->en baseline  s.evaluatorreversecyrillics.932930c1.20130401-0951
 - ru->en 1 way
-- lemma: s.evaluatorcyrillics.af027664.20130317-1334
-- lcstem3: s.evaluatorcyrillics.1145f6a8.20130317-1335
-- lcstem4: s.evaluatorcyrillics.b9ebafa9.20130317-1259
-- lcstem5: s.evaluatorcyrillics.dbdd3122.20130326-0214
-- lcstem6: s.evaluatorcyrillics.61cb2511.20130317-1337
-- lcstem7: s.evaluatorcyrillics.e804fc89.20130401-0406 
+- lemma: s.evaluatorreversecyrillics.1d73dffb.20130401-0951
+- lcstem3: s.evaluatorreversecyrillics.13c057f8.20130401-0951
+- lcstem4: s.evaluatorreversecyrillics.abe97a47.20130401-0951
+- lcstem5: s.evaluatorreversecyrillics.fa99fabe.20130401-0951
+- lcstem6: s.evaluatorreversecyrillics.749db3fc.20130401-0952
+- lcstem7: s.evaluatorreversecyrillics.3cc911b5.20130401-0952
 - ru->en 2 way
-- lemma: s.evaluatorcyrillics.7bdc5a66.20130207-0706
-- lcstem3: s.evaluatorcyrillics.91d612cd.20130331-2044 
-- lcstem4: s.evaluatorcyrillics.04570ebc.20130326-0214
-- lcstem5: s.evaluatorcyrillics.c67ccf30.20130317-1339
-- lcstem6: s.evaluatorcyrillics.66ea3b05.20130326-0214
-- lcstem7: s.evaluatorcyrillics.ed60936f.20130401-0441
-
+- lemma: s.evaluatorreversecyrillics.ebce40d1.20130401-0952
+- lcstem3: s.evaluatorreversecyrillics.0ad19769.20130401-0952
+- lcstem4: s.evaluatorreversecyrillics.826ae0d0.20130401-0952
+- lcstem5: s.evaluatorreversecyrillics.18bbfb1f.20130401-0952
+- lcstem6: s.evaluatorreversecyrillics.65dce982.20130401-0952
+- lcstem7: s.evaluatorreversecyrillics.e4efc1e6.20130401-0952

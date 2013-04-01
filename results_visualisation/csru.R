@@ -1,0 +1,7 @@
+png("csru.png")
+BLEU<-c(12.43, 11.84, 9.88, 11.51, 12.35, 12.82, 13.48, 13.84, 14.12, 14.02, 13.83, 14.23, 14.05)
+OOV<-c(7.6, 2.7, 0.7, 1.2, 1.9, 2.6, 3.3, 2.6, 0.7, 1.3, 1.9, 2.6, 3.3)
+natpisi<-c("baseline", "1-lemma", "1-stem3", "1-stem4", "1-stem5", "1-stem6", "1-stem7", "2-lemma", "2-stem3", "2-stem4", "2-stem5", "2-stem6", "2-stem7")
+plot(BLEU,OOV, xlim=c(9,15), ylab="OOV (in percents)")
+text(BLEU, OOV, natpisi, pos=4)
+dev.off()

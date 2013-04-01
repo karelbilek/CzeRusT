@@ -22,13 +22,13 @@ while (my $line = <$file>) {
     $res =~ /BLEU.*?(0\.[0-9]*)/ or die ":O";
     my $bleu = $1;
 
-    my $cres = `cat $stepname/cyrillic`;
+    my $cres = `cat $stepname/reverse_cyrillic`;
     $cres =~ /(0\....)/ or die "O:";
     my $cyril = $1;
 
     push @stepnicks, '"'.$stepnick.'"';
     push @bleus, $bleu*100;
-    push @cyrilics, $cyril*100;
+    push @cyrilics, ($cyril*100);
 }
 
 sub printa {
@@ -44,7 +44,7 @@ print $ofile "png(\"$filename.png\")\n";
 printa("BLEU", @bleus);
 printa("OOV", @cyrilics);
 printa("natpisi", @stepnicks);
-print $ofile 'plot(BLEU,OOV, xlim=c(8.5,13.5), ylab="OOV (in percents)")';
+print $ofile 'plot(BLEU,OOV, xlim=c(9,15), ylab="OOV (in percents)")';
 print $ofile "\n";
 print $ofile 'text(BLEU, OOV, natpisi, pos=4)';
 print $ofile "\n";
