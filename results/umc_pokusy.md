@@ -21,6 +21,8 @@ RU->CS
 
 Že je 2-stem7 tak mimo je divné, ale VŮBEC NEVÍM, co s tím sakra je.
 
+Každopádně, i z dalších výsledků stejně vyplývá, že nejlepší je 2-lcstem6.
+
 RU->EN
 ---
 ![](../results_visualisation/ruen.png?raw=true)
@@ -32,6 +34,8 @@ Má to 2x lepší výsledek, než ru->cs, ale to se dalo čekat...
 CS->RU
 ---
 ![](../results_visualisation/csru.png?raw=true)
+
+lemma a lcstem6 je teď nějak zmatlané dohromady, ale zase vychází nejlím 2-lcstem6.
 
 Seznamy
 =========
