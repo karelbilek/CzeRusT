@@ -37,6 +37,10 @@ CS->RU
 
 lemma a lcstem6 je teď nějak zmatlané dohromady, ale zase vychází nejlím 2-lcstem6.
 
+EN->RU
+---
+![](../results_visualisation/enru.png?raw=true)
+
 Seznamy
 =========
 - ru->cs baseline s.evaluatorcyrillics.bbc23901.20130205-1730
@@ -84,15 +88,15 @@ Seznamy
 - lcstem5: s.evaluatorreversecyrillics.2767700f.20130401-0951
 - lcstem6: s.evaluatorreversecyrillics.f1b07305.20130401-0951
 - lcstem7: s.evaluatorreversecyrillics.42c9f52e.20130401-0951
-- ru->en baseline  s.evaluatorreversecyrillics.932930c1.20130401-0951
-- ru->en 1 way
+- en->ru baseline  s.evaluatorreversecyrillics.932930c1.20130401-0951
+- en->ru 1 way
 - lemma: s.evaluatorreversecyrillics.1d73dffb.20130401-0951
 - lcstem3: s.evaluatorreversecyrillics.13c057f8.20130401-0951
 - lcstem4: s.evaluatorreversecyrillics.abe97a47.20130401-0951
 - lcstem5: s.evaluatorreversecyrillics.fa99fabe.20130401-0951
 - lcstem6: s.evaluatorreversecyrillics.749db3fc.20130401-0952
 - lcstem7: s.evaluatorreversecyrillics.3cc911b5.20130401-0952
-- ru->en 2 way
+- en->ru 2 way
 - lemma: s.evaluatorreversecyrillics.ebce40d1.20130401-0952
 - lcstem3: s.evaluatorreversecyrillics.0ad19769.20130401-0952
 - lcstem4: s.evaluatorreversecyrillics.826ae0d0.20130401-0952
