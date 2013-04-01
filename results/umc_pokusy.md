@@ -1,3 +1,5 @@
+OOV pokusy
+========
 Pokusy, kdy
 - neni pridana do UMC zadna dalsi vec (ani v LM)
 - jeden z jazyku je rustina (at zdroj, nebo cil), aby se dal trivialne merit OOV pomoci cyrilice
@@ -17,6 +19,11 @@ RU->CS
 ---
 ![](../results_visualisation/rucs.png?raw=true)
 
+Že je 2-stem7 tak mimo je divné, ale VŮBEC NEVÍM, co s tím sakra je.
+
+RU->EN
+---
+![](../results_visualisation/ruen.png?raw=true)
 
 Seznamy
 =========
@@ -35,15 +42,15 @@ Seznamy
 - lcstem5: s.evaluatorcyrillics.99998a35.20130205-1913
 - lcstem6: s.evaluatorcyrillics.c0cd4c8c.20130205-1909
 - lcstem7: s.evaluatorcyrillics.8cf43c99.20130401-0438 
-- en->ru baseline s.evaluatorcyrillics.8032ce6d.20130205-2236
-- en->ru 1 way
+- ru->en baseline s.evaluatorcyrillics.8032ce6d.20130205-2236
+- ru->en 1 way
 - lemma: s.evaluatorcyrillics.fa1910b0.20130205-2350
 - lcstem3: s.evaluatorcyrillics.74f57dd5.20130205-2349
 - lcstem4: s.evaluatorcyrillics.af956c9a.20130205-2346
 - lcstem5: s.evaluatorcyrillics.f1600b72.20130205-2246
 - lcstem6: s.evaluatorcyrillics.8b125510.20130205-2352
 - lcstem7: s.evaluatorcyrillics.99e62c69.20130401-0337 
-- en->ru 2 way
+- ru->en 2 way
 - lemma: s.evaluatorcyrillics.8f7db9fa.20130205-2248
 - lcstem3: s.evaluatorcyrillics.6df7e7ab.20130205-2249
 - lcstem4: s.evaluatorcyrillics.c030f500.20130205-2344
