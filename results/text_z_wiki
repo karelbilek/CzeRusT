@@ -1,0 +1,70 @@
+
+
+
+===Pozn.===
+- "u sebe" znamená v /a/merkur2/ufallabhome/CzeRusT/playground/ufal-smt-playground/playground
+- s.evaluator..... je klasický step v emanovi (pozor, jak jsem v průběhu opravoval emana, tak ne vše je reprodukovatelné)
+- wiki engine mi přepisuje normální pomlčku na dlouhou. Nemám čas hledat proč a opravovat to.
+
+=== Monolingvální CS ===
+==webcoll==
+- Zpravodajská data
+- Netuším, kdo to tvořil 
+- Věty se tam dost divně opakují
+- po zavolání "sort | uniq" půlka vět zmizí
+- s uniqem - 4m vět
+- mám u sebe v corpmanovi
+==pdt==
+- Počty vět nevím
+- nemám u sebe
+==zpravostroj==
+- Zpravodajská data z mojí bakalářky
+- 1m vět
+- data nejsou moc důvěryhodná, totálně zkažená interpunkce, věty náhodně končeny
+   - v té době mi šlo hlavně o četnosti unigramů, maximálně trigramů, a interpunkci jsem ignoroval
+- mám u sebe v corpmanovi
+
+=== CS RU ===
+==UMC==
+- 93k vět
+- zpravodajství
+- mám v corpmanovi
+- Výsledky:
+ - baseline: 
+      - ru->cs : s.evaluator.08b6f554.20121130-1045 : 11.14
+      - cs->ru : s.evaluator.ba694828.20121130-1046 : 12.48
+   - vylepšení ru->cs:
+       - přidání "záložní" druhé tabulky s lemmaty (případně 5-stemmy, vyjde plus minus nastejno) jako backoff model
+       - uvažování tagů v jazykovém modelu cs
+       - přihození zpravostroje + webcolu do jazykového modelu
+       - celkem - s.evaluator.156ec925.20121209-0413 - 12.80
+   - vylepšení cs->ru:
+       - stejný postup jako ru-cs, ale bez rozšiřování LM o další data
+       - celkem - s.evaluator.9f901ab5.20121208-2131 - 13.73
+- Popis stavu:
+   - Před zlepšováním byl hlavní problém "hloupé" OOV. To se, zdá se, vyřešilo lemmatizací/stemmerem v záložní tabulce.
+   - Stále máme OOV, ale osobně se mi zdá, že jde o "opravdové" OOV, tj. ta slova ve trénovacích datech opravdu nebyla. Nevím, jestli je to hlavní problém, který teď musíme řešit.
+   - Je otázka, jestli se vydat cestou "přidáme víc dat", nebo "budeme zlepšovat se současnými daty". Nevím.
+
+
+==Beletrie==
+- 160k vět
+- Intercorp
+- CS-RU, ale na BELTERIJNICH datech (tedy ne uplne srovnatelne s UMC) vychazi podle Natálky 7 BLEU
+- bude nutné zkusit spustit spíš co se stane s původním UMC test setem, když tam přilejeme tuhle beletrii
+- nemám u sebe
+
+==Titulky==
+- Nevím nic, ještě není vytáhnutý korpus
+- Nevím, jestli to vůbec zlepší nebo zhorší, zase je to úplně mimo doménu zpráv
+- Čekal bych, že zlepšení nebude velké, protože věty v titulcích se často opakují, ale nejsou moc "informativní"
+
+=== RU EN ===
+
+Yandex data
+- RU i EN 1m vět
+- lowercased (obě části)
+- původně bez tokenizace
+- dávám test prvních 1000 řádků, dev dalších 2000, zbytek train
+
+Výsledky si nepamatuju :( ale překvapivě nebyly o moc lepší/horší, než to, co máme u cs-ru
