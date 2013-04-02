@@ -1,13 +1,12 @@
 Posouvani alignmentu
 =========
 
-V kroku 0 byly pokusy vzdycky soubezne alignment a zalozni preklad.
+V kroku 0 jsem v pokusech vždycky zároveň posouval alignment a faktor záložního překladu.
 
 Jak moc je to dusledek alignmentu a jak moc naopak dusledek prekladu?
 
 Jdu to zkusit - jdu vzit nejlepsi vysledek (lcstem6) a hybat POUZE s alignmentem, zatimco ten zalozni preklad zustane stem6->stem6.
 
-Tohle je pouze posouvani alignmentu.
 
 Vizualizace
 ==========
