@@ -54,7 +54,7 @@ print $ofile "png(\"$filename.png\")\n";
 printa("BLEU", @bleus);
 printa("OOV", @cyrilics);
 printa("natpisi", @stepnicks);
-print $ofile 'plot(BLEU,OOV, xlim=c(12,13), ylim=c(1,2), ylab="OOV (in percents)")';
+print $ofile 'plot(BLEU,OOV, xlim=c(23,24), ylim=c(1,2), ylab="OOV (in percents)")';
 print $ofile "\n";
 print $ofile 'text(BLEU, OOV, natpisi, pos=4)';
 print $ofile "\n";
