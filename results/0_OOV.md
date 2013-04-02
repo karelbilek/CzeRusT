@@ -8,8 +8,9 @@ Pokusy, kdy
     - jaky je backoff model
 
 Jsou vzdy dva typy pokusu
- - jeden ma "pro kontrolu" translate krok pouze stem->stem (1way)
- - druhy ma translate krok form->form, ale s backoffem
+ - jeden ma "pro kontrolu" translate krok pouze stem->form+tag (1way)
+ - druhy ma translate krok form->form+tag, ale s backoffem stem->form+tag
+ - ruske tagy treetagger, ceske a anglicke tagy treex 
 
 Alignment je vzdy stejny.
 
