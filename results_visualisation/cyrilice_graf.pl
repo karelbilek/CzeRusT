@@ -18,11 +18,21 @@ while (my $line = <$file>) {
     $line =~ /(.*?)\s+(.*)/;
     my $stepname=$1;
     my $stepnick=$2;
+    if ($stepnick=~/^s\./) {
+        my $t = $stepnick;
+        $stepnick=$stepname;
+        $stepname=$t;
+    }
+
+
+    my $isReverse = $line=~/reverse/;
+    my $cyrilName = $isReverse?"reverse_cyrillic":"cyrillic";
+
     my $res = `cat $stepname/scores`;
     $res =~ /BLEU.*?(0\.[0-9]*)/ or die ":O";
     my $bleu = $1;
 
-    my $cres = `cat $stepname/reverse_cyrillic`;
+    my $cres = `cat $stepname/$cyrilName`;
     $cres =~ /(0\....)/ or die "O:";
     my $cyril = $1;
 

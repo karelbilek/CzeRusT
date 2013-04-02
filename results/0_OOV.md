@@ -41,6 +41,12 @@ EN->RU
 ---
 ![](../results_visualisation/enru.png?raw=true)
 
+Výsledky ve smyslu "která je nejlepší" nejsou nečekané, zase vyšlo nejlíp lcstem6.
+
+Co je nečekané je lepší výsledek en->ru než cs->ru. 
+
+
+
 Seznamy
 =========
 - ru->cs baseline s.evaluatorcyrillics.bbc23901.20130205-1730
