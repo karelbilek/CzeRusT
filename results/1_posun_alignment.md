@@ -25,7 +25,7 @@ Zajímavé. Nejlépe vychází trojka, ale ne zas o tolik.
 
 CS->RU
 ---
-(pořád běží)
+![](../results_visualisation/csru_align.png?raw=true)
 
 EN->RU
 ---
@@ -56,7 +56,7 @@ CS->RU
 - lemma   s.evaluatorreversecyrillics.38ef9451.20130402-0558
 - lcstem3 s.evaluatorreversecyrillics.2409dbd5.20130401-1157
 - lcstem4 s.evaluatorreversecyrillics.ab30495d.20130401-1158
-- Xlcstem5 s.evaluatorreversecyrillics.2f312502.20130402-0558X
+- lcstem5 s.evaluatorreversecyrillics.2f312502.20130402-0558
 - lcstem6 s.evaluatorreversecyrillics.253d7586.20130401-0950
 - lcstem7 s.evaluatorreversecyrillics.d220e3dd.20130401-1200
 

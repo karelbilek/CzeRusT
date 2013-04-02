@@ -1,7 +1,7 @@
 png("enru_align.png")
 BLEU<-c(15.57, 15.65, 15.46, 15.34, 15.74, 15.7)
 OOV<-c(1.7, 1.5, 1.5, 1.7, 1.7, 1.7)
-natpisi<-c("lemma", "lcstem3", "lcstem4", "lcstem5", "lcstem6", "lcstem7")
+natpisi<-c("lemma", "istem3", "stem4", "stem5", "stem6", "stem7")
 plot(BLEU,OOV, xlim=c(15,16), ylim=c(1,2), ylab="OOV (in percents)")
 text(BLEU, OOV, natpisi, pos=4)
 dev.off()
