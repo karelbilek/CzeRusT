@@ -31,6 +31,12 @@ EN->RU
 ---
 ![](../results_visualisation/enru_align.png?raw=true)
 
+Komentář
+=====
+- Vychází to trochu nečekaně - pro nějaké jazykové páry vychází dobře krátký alignment, pro některé dlouhý.
+- Původně jsem chtěl zkusit hýbat s alignmentem u obou jazyků, ale to by vytvořilo 49 kombinací x 4 jazyky = 150 běhů mojžíše, a když se něco podobného dá na cluster, tak skoro vždycky něco z toho spadne/nedoběhne a musí se opravovat. Těch 4*7=28 běhů úplně stačilo. Hlavně když z toho vyplývá další věc...
+- Na alignmentu **skoro nezáleží** a víc záleží na faktorech v modelu. Tady mi sice něco vyšlo, ale ty rozdíly se mi zdají tak malé, že pro jiný vstup to bude vycházet zase úplně jinak.
+
 Seznamy
 ===
 RU->CS
