@@ -5,7 +5,7 @@ V kroku 0 byly pokusy vzdycky soubezne alignment a zalozni preklad.
 
 Jak moc je to dusledek alignmentu a jak moc naopak dusledek prekladu?
 
-Jdu to zkusit - jdu vzit nejlepsi vysledek (lcstem6) a hybat jednak POUZE s velikosti zalozniho prekladu, a pak naopak POUZE s alignmentem.
+Jdu to zkusit - jdu vzit nejlepsi vysledek (lcstem6) a hybat POUZE s alignmentem, zatimco ten zalozni preklad zustane stem6->stem6.
 
 Tohle je pouze posouvani alignmentu.
 
@@ -15,12 +15,21 @@ RU->CS
 ---
 ![](../results_visualisation/rucs_align.png?raw=true)
 
-Pozor - rozdíly jsou tady o dost menší, než v grafu v kroku 0, je to mnohem blíž u sebe.
+Pozor - rozdíly jsou tady o dost menší, než v grafu v kroku 0, je to mnohem blíž u sebe. V grafech v kroku 0 bylo rozpětí BLEU > 5, tady cca 0.5.
 
 RU->EN
 ---
 ![](../results_visualisation/ruen_align.png?raw=true)
 
+Zajímavé. Nejlépe vychází trojka, ale ne zas o tolik.
+
+CS->RU
+---
+(pořád běží)
+
+EN->RU
+---
+![](../results_visualisation/enru_align.png?raw=true)
 
 Seznamy
 ===
