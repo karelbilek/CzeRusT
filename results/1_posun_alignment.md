@@ -15,6 +15,13 @@ RU->CS
 ---
 ![](../results_visualisation/rucs_align.png?raw=true)
 
+Pozor - rozdíly jsou tady o dost menší, než v grafu v kroku 0, je to mnohem blíž u sebe.
+
+RU->EN
+---
+![](../results_visualisation/ruen_align.png?raw=true)
+
+
 Seznamy
 ===
 RU->CS

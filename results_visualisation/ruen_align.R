@@ -1,0 +1,7 @@
+png("ruen_align.png")
+BLEU<-c(23.44, 23.55, 23.49, 23.42, 23.49, 23.48)
+OOV<-c(1.4, 1.2, 1.3, 1.4, 1.5, 1.4)
+natpisi<-c("lemma", "stem3", "stem4", "stem5", "stem6", "stem7")
+plot(BLEU,OOV, xlim=c(12,13), ylim=c(1,2), ylab="OOV (in percents)")
+text(BLEU, OOV, natpisi, pos=4)
+dev.off()
