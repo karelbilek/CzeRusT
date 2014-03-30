@@ -41,12 +41,12 @@
 
 \title{CUni Multilingual Matrix in the WMT 2013 Shared Task}
 
-%\author{Karel Bílek \hspace{3cm} Daniel Zeman\\
-%	Charles University in Prague, Faculty of Mathematics and Physics, \\
-%	Institute of Formal and Applied Linguistics\\
-%            Malostranské náměstí 25, CZ-11800 Praha, Czechia \\
-%	{\tt kb@karelbilek.com, zeman@ufal.mff.cuni.cz}\\
-%}
+\author{Karel Bílek \hspace{3cm} Daniel Zeman\\
+	Charles University in Prague, Faculty of Mathematics and Physics, \\
+	Institute of Formal and Applied Linguistics\\
+            Malostranské náměstí 25, CZ-11800 Praha, Czechia \\
+	{\tt kb@karelbilek.com, zeman@ufal.mff.cuni.cz}\\
+}
 
 \date{}
 
@@ -61,7 +61,7 @@
 We describe our experiments with phrase-based machine translation for the WMT 2013 Shared Task.
 We trained one system for 18 translation directions between English or Czech on one side
 and English, Czech, German, Spanish, French or Russian on the other side.
-We describe a set of results with different training data sizes and subsets. For directions between English and Russian and English and Czech, we describe a set of independent experiments with slightly different translation models.
+We describe a set of results with different training data sizes and subsets. For the pairs containing Russian, we describe a set of independent experiments with slightly different translation models.
 	\end{abstract}
 
 
@@ -103,7 +103,8 @@ Furthermore, the multitude of possible Czech word forms (at least order of magni
 Most of the above characteristics of Czech also apply to Russian, another Slavic language.
 Similar issues have to be expected when translating between Russian and English.
 Still, there are also interesting divergences between Russian and Czech, especially
-on the syntactic level. Russian sentences typically omit copula and there is also no
+on the syntactic level. Russian sentences typically omit copula in the present tense
+and there is also no
 direct equivalent of the verb ``to have''. Periphrastic constructions such as
 ``there is XXX by him'' are used instead. These differences make the Czech-Russian
 translation interesting as well. Interestingly enough, results of machine translation between Czech and Russian has so far been worse than between English and any of the two languages, language relatedness notwithstanding.
@@ -114,14 +115,15 @@ For instance, parsing and syntax-aware reordering of the source-language sentenc
 Factored translation, a secondary language model of morphological tags or even a morphological generator are some of the possible solutions to the poor-to-rich translation issues.
 \end{comment}
 
-Our goal is to run one system under as similar conditions as possible to all fourteen translation directions,
+Our goal is to run one system under as similar conditions as possible
+to all eighteen translation directions,
 to compare their translation accuracies and see why some directions are easier than others.
-Future work will benefit from knowing what are the special processing needs for a given language pair.
+%Future work will benefit from knowing what are the special processing needs for a given language pair.
 The current version of the system does not include really language-specific techniques:
 we neither split German compounds, nor do we address the peculiarities of Czech and Russian
 mentioned above.
 
-In an independent set of experiments, we tried to deal with the data sparseness of Russian language with the addition of a backoff model with a simple stemming and some additional data; those experiments were done for Russian and Czech combinations and English and Russian combinations.
+In an independent set of experiments, we tried to deal with the data sparseness of Russian language with the addition of a backoff model with a simple stemming and some additional data; those experiments were done for Russian and Czech|English combinations.
 
 
 \section{The Translation System}
@@ -143,10 +145,11 @@ Note that there is only News Commentary and no Europarl for Russian.
 We were also able to evaluate several combinations with large parallel corpora:
 the UN corpus (English, French and Spanish), the Giga French-English corpus and CzEng
 (Czech-English). We did not use any large corpus for Russian-English.
-Tables \ref{tab:newscommentary} and \ref{tab:largeparallel} show the sizes of the training data.
+Table \ref{tab:newscommentary} shows the sizes of the training data.
 
 \begin{table}[htbl]
 \begin{center}
+{\small
 \begin{tabular}{l | r r r}
 Corpus & SentPairs & Tkns lng1 & Tkns lng2\\
 \hline
@@ -159,35 +162,24 @@ de-cs & 657,539 & 18,160,857 & 17,788,600\\
 es-cs & 697,898 & 19,577,329 & 18,926,839\\
 fr-cs & 693,093 & 19,717,885 & 18,849,244\\
 ru-cs & 103,931 & 2,642,772 & 2,319,611\\
-\end{tabular}
-\end{center}
-\caption{Number of sentence pairs and tokens for every language pair in the parallel training corpus. Languages are identified by their ISO 639 codes: cs = Czech, de = German, en = English, es = Spanish, fr = French, ru = Russian.
-Every line corresponds
-to the respective version of EuroParl + News Commentary.}
-\label{tab:newscommentary}
-\end{table}
-
-\begin{table}[h!]
-\begin{center}
-{\small
-\begin{tabular}{l | r r r}
-Czeng & SentPairs & Tkns lng1 & Tkns lng2\\
 \hline
+Czeng & & &\\
 cs-en & 14,833,358 & 204,837,216 & 235,177,231\\
 \hline
 UN & & &\\
-\hline
 es-en & 11,196,913 & 368,154,702 & 328,840,003\\
 fr-en & 12,886,831 & 449,279,647 & 372,627,886\\
 \hline
 Giga & & &\\
-\hline
 fr-en & 22,520,400 & 854,353,231 & 694,394,577\\
 \end{tabular}
 }
 \end{center}
-\caption{Sizes of additional large parallel corpora.}
-\label{tab:largeparallel}
+\caption{Number of sentence pairs and tokens for every language pair in the parallel training corpus. Languages are identified by their ISO 639 codes: cs = Czech, de = German, en = English, es = Spanish, fr = French, ru = Russian.
+Every line corresponds
+to the respective version of EuroParl + News Commentary;
+the second part presents the extra corpora.}
+\label{tab:newscommentary}
 \end{table}
 
 The News Test 2010
@@ -200,11 +192,15 @@ We do not use the News Tests 2008, 2009 and 2011.
 
 All parallel and monolingual corpora underwent the same preprocessing.
 They were tokenized and some characters normalized or cleaned.
-A set of language-dependent heuristics was applied in an attempt to restore and normalize
-the directed (opening/closing) quotation marks (i.e. \code{"}quoted\code{"} $\rightarrow$ ``quoted'').
+A set of language-dependent heuristics was applied in an attempt to restore
+% and normalize
+the opening/closing quotation marks (i.e. \code{"}quoted\code{"} $\rightarrow$ ``quoted'')
+\cite{zemanwmt12}.
+\begin{comment}
 The motivation is twofold here:
 First, we hope that paired quotation marks could occasionally work as brackets and better denote parallel phrases for Moses;
 second, if Moses learns to output directed quotation marks, subsequent detokenization will be easier.
+\end{comment}
 
 \begin{comment}
 We use a slightly modified tokenization rules compared to CzEng export format.
@@ -227,81 +223,12 @@ uppercased as a form of HIGHLIGHTING.
 
 
 
-\subsubsection{Quotation Marks}
-\label{sec:quotes}
-
-%%%%%%%%%%
-\begin{comment}
-< Portugal ' s three Presidencies can best be summed up as ' ambitious on the Community ' s behalf ' , for on each occasion Portugal has tackled vital contemporary issues - the Lisbon Strategy , fo
-r example , or the EU ' s relations with Africa and with South America .
----
-> Portugal ' s three Presidencies can best be summed up as “ ambitious on the Community ' s behalf ” , for on each occasion Portugal has tackled vital contemporary issues - the Lisbon Strategy , fo
-r example , or the EU ' s relations with Africa and with South America .
-4308c4310
-
-Spanish directed ? and !
-
-mezery kolem někdy jsou, někdy ne
-pravidla pro pořadí (tečka a uvozovka) se liší jazyk od jazyka a situace od situace
-
-gdiff.pl europarl-v6.de-en/en.orig.gz europarl-v6b.de-en/en.orig.gz | less
-
-< " The Commission ' s internal control " he said " is not forceful enough in preventing incorrect operation .
-> “ The Commission ' s internal control ” he said “ is not forceful enough in preventing incorrect operation .
-
-gdiff.pl europarl-v6.de-en/en.orig.gz europarl-v6b.de-en/en.orig.gz | grep -P '“[^“”]*“[^“”]*”[^“”]*”'
-
-< As the Wise Men ' s Report also says , and I quote : ' It is elementary ' common sense ' that the Commission should have supported the Parliament ' s decision - making process . '
-> As the Wise Men ' s Report also says , and I quote : “ It is elementary “ common sense ” that the Commission should have supported the Parliament ' s decision - making process . ”
-\end{comment}
-%%%%%%%%%%
-
-A broad range of characters is used to represent quotation marks in the training data:
-straight ASCII quotation mark; Unicode directed quotation marks (U+2018 to U+201F);
-acute and grave accents; math symbols such as prime and double prime (U+2032 to U+2037)
-etc. Spaces around quotes in the original untokenized text ought to provide hints as to the
-direction of the quotes (no space between the opening quote and the next word, and
-no space between the closing quote and the previous word) but unfortunately there are
-numerous cases where superfluous spaces are inserted or required spaces are missing.
-
-Nested quoting is also possible, such as in
-
-\textit{As the Wise Men ' s Report also says , and I quote : ' It is elementary ' common sense ' that the Commission should have supported the Parliament ' s decision - making process . '}
-
-We want all possible quotation marks converted to one pair of characters.
-We do not mind the distinction between single and double quotes but we want to keep
-(or restore) the distinction between opening and closing quotes.
-In addition, we want to identify the apostrophe acting as grapheme
-in some languages, and keep it (or normalize it, as it could also be mis-typed
-as acute accent or something else):
-
-\textit{As the Wise Men ' s Report also says , and I quote : “ It is elementary “ common sense ” that the Commission should have supported the Parliament ' s decision - making process . ”}
-
-We attempt at solving the problem by a set of rules that consider mutual positions of
-quotation marks, spaces and other punctuation, and also some language-dependent
-rules (especially on the lexical apostrophe, e.g. in French \textit{d', l'}).
-
-Our rules applied to 1.84~\% of Spanish sentences, 2.47~\% Czech, 2.77~\% German,
-4.33~\% English and 16.9~\% French (measured on Europarl data).
-%%%TODO: Tohle by se mělo zjistit i pro ruštinu (porovnat normalizovaná data s nenormalizovanými),
-%%%TODO: ale teď na to nemám čas ani chuť.
-
-Our approach is different from the normalization script provided and applied by the organizers
-of the shared task, which merely converts all quotes to the undirected ASCII characters.
-We believe that such MT output is incorrect, so we submitted two versions of each system run:
-the \textit{primary} version is intended for human evaluation and does not apply the
-``official'' normalization of punctuation. In contrast, the \textit{secondary} version is normalized,
-which naturally leads to higher scores in the automatic evaluation.
-
-
-
 \subsection{Experiments}
 \label{sec:experiments}
 
-In the following section we describe several different settings and corpora combinations we experimented with.
-BLEU scores have been computed by our system,
+%In the following section we describe several different settings and corpora combinations we experimented with.
+BLEU scores were computed by our system,
 comparing truecased tokenized hypothesis with truecased tokenized reference translation.
-
 Such scores must differ from the official evaluation---see \Sref{sec:final} for discussion of the final results.
 
 The confidence interval for most of the scores lies between ±0.5 and ±0.6 BLEU $\%$ points.
@@ -324,20 +251,18 @@ of the target side of the parallel corpus).
 \subsubsection{Larger Monolingual Data}
 \label{sec:lm}
 
-Besides the monolingual halves of the parallel corpora, additional monolingual data were provided / permitted:
-
-\begin{itemize}
-\item The Crawled News corpus from the years 2007 to 2012, various sizes for each language and year.
-\item The Gigaword corpora published by the Linguistic Data Consortium, available only for English ($5^{th}$ edition), Spanish ($3^{rd}$) and French ($3^{rd}$).
-\end{itemize}
-
-Our experiments in previous years clearly showed that the Crawled News corpus, in-domain and large, contributed
+Besides the monolingual halves of the parallel corpora, additional monolingual data were provided / permitted.
+Our experiments in previous years clearly showed that the Crawled News corpus (2007--2012), in-domain and large, contributed
 significantly to better BLEU scores. This year we included it in our baseline experiments
 for all language pairs: translation model on News Commentary + Europarl,
-language model on monolingual part of the two, plus Crawled News (\texttt{news.all}).
+language model on monolingual part of the two, plus Crawled News.
+% (\texttt{news.all}).
 
-\Tref{tab:mono} gives the sizes of the subsets available for our experiments and \Tref{tab:largelmbleu} compares BLEU scores with Gigaword against the baseline.
-Gigaword mainly contains texts from news agencies and as such should be also in-domain.
+In addition there are the Gigaword corpora published by the Linguistic Data Consortium, available only for English ($5^{th}$ edition), Spanish ($3^{rd}$) and French ($3^{rd}$).
+\Tref{tab:mono} gives the sizes
+%of the subsets available for our experiments
+and \Tref{tab:largelmbleu} compares BLEU scores with Gigaword against the baseline.
+Gigaword mainly contains texts from news agencies and as such it should be also in-domain.
 Nevertheless, the crawled news are already so large that the improvement contributed by Gigaword
 is rarely significant.
 
@@ -394,7 +319,7 @@ ru-cs & 0.1506 & \\
 \end{tabular}
 \end{center}
 \caption{BLEU scores of the baseline experiments (left column) on News Test 2013 data, computed by the system on tokenized data, versus similar setup with Gigaword.
-The improvement, if any, was typically not significant.}
+The difference was typically not significant.}
 \label{tab:largelmbleu}
 \end{table}
 
@@ -488,7 +413,7 @@ fr-cs & 0.1420 & 0.145 & 0.137\\
 ru-cs & 0.1506 & 0.151 & 0.144\\
 \end{tabular}
 \end{center}
-\caption{BLEU scores with the large language models. $BLEU$ is truecased computed by the system, $BLEU_l$ is the official lowercased evaluation by \url{matrix.statmt.org}. $BLEU_t$ is official truecased evaluation. Although lower official scores are expected, notice the larger gap in en-fr and cs-fr translation. There seems to be a problem in our French detokenization procedure.}
+\caption{Final BLEU scores. $BLEU$ is truecased computed by the system, $BLEU_l$ is the official lowercased evaluation by \url{matrix.statmt.org}. $BLEU_t$ is official truecased evaluation. Although lower official scores are expected, notice the larger gap in en-fr and cs-fr translation. There seems to be a problem in our French detokenization procedure.}
 \label{tab:finalbleu}
 \end{table}
 
@@ -505,57 +430,54 @@ Aligning the UN corpora with Giza++ took around 5 days.
 Giga French-English corpus was even worse and required several weeks to complete.
 Using such a large corpus without pruning is not practical.
 
-\section{Experiments for Russian}
+\section{Extra Experiments with Russian}
 In a separate set of experiments, we tried to take a basic Moses framework and change the setup a little for better results on morphologically rich languages.
 
 Tried combinations were Russian-Czech and Russian-English.
 
 \subsection{Data}
-For systems involving Russian, we used following parallel data:
+For the additional Russian-to-Czech systems, we used following parallel data:
 
-For Russian to Czech translation, we used combination of
 \begin{itemize}
-\item UMC 0.1 \parcite{umc} - tri-parallel set, consisting of news articles  - 93,432 sentences
-\item data, mined from movie subtitles (described in further detail below) - 2,324,373 sentences
-\item Czech-Russian part of InterCorp - a corpus from translation of fiction books \parcite{cermak:rosen:10} - 148,847 sentences
+\item UMC 0.1 \parcite{umc} -- tri-parallel set, consisting of news articles -- 93,432 sentences
+\item data mined from movie subtitles (described in further detail below) -- 2,324,373 sentences
+\item Czech-Russian part of InterCorp -- a corpus from translation of fiction books \parcite{cermak:rosen:10} -- 148,847 sentences
 \end{itemize}
-For Russian to English translation, we used combination of
+For Russian-to-English translation, we used combination of
 \begin{itemize}
-\item UMC 0.1 - 95,540 sentences
-\item subtitles - 1,790,209 sentences
-\item Yandex English-Russian parallel corpus \footnote{\url{https://translate.yandex.ru/corpus?lang=en}} - 1,000,000 sentences
-\item wiki headlines from WMT website \footnote{\url{http://www.statmt.org/wmt13/translation-task.html}} - 514,859 sentences
-\item common crawl from WMT website - 878,386 sentences
-
+\item UMC 0.1 -- 95,540 sentences
+\item subtitles -- 1,790,209 sentences
+\item Yandex English-Russian parallel corpus \footnote{\url{https://translate.yandex.ru/corpus?lang=en}} -- 1,000,000 sentences
+\item wiki headlines from WMT website \footnote{\url{http://www.statmt.org/wmt13/translation-task.html}} -- 514,859 sentences
+\item common crawl from WMT website -- 878,386 sentences
 \end{itemize}
 
 Added together, Russian-Czech parallel data consisted of 2,566,615 sentences and English-Czech parallel data consisted of 4,275,961 sentences \footnote{some sentences had to be removed for technical reasons}.
 
 We also used 765 sentences from UMC003 as a devset for MERT training.
 
-For monolingual data for Russian-Czech and Russian-English system, we used the following monolingual corpora:
+We used the following monolingual corpora to train language models. Russian:
 
-For Russian:
 \begin{itemize}
-\item Russian sides of all the parallel data - 4,275,961 sentences
-\item News commentary from WMT website - 150,217 sentences
-\item News crawl 2012 - 9,789,861 sentences
+\item Russian sides of all the parallel data -- 4,275,961 sentences
+\item News commentary from WMT website -- 150,217 sentences
+\item News crawl 2012 -- 9,789,861 sentences
 \end{itemize}
 
 For Czech:
 \begin{itemize}
-\item Czech sides of all the parallel data - 2,566,615 sentences
-\item Data, downloaded from Czech news articles\footnote{\url{http://thepiratebay.sx/torrent/7121533/}} - 1,531,403 sentences
-\item WebColl \parcite{webcoll} - 4,053,223 sentences
-\item PDT \footnote{\url{http://ufal.mff.cuni.cz/pdt2.0/}} - 115,844 sentences
-\item Complete Czech Wikipedia - 3,695,172 sentences
-\item Sentences scraped from Czech social server okoun.cz - 580,249 sentences
+\item Czech sides of all the parallel data -- 2,566,615 sentences
+\item Data downloaded from Czech news articles\footnote{\url{http://thepiratebay.sx/torrent/7121533/}} -- 1,531,403 sentences
+\item WebColl \parcite{webcoll} -- 4,053,223 sentences
+\item PDT \footnote{\url{http://ufal.mff.cuni.cz/pdt2.0/}} -- 115,844 sentences
+\item Complete Czech Wikipedia -- 3,695,172 sentences
+\item Sentences scraped from Czech social server okoun.cz -- 580,249 sentences
 \end{itemize}
 
 For English:
 \begin{itemize}
-\item English sides of all the paralel data - 4,275,961 sentences
-\item News commentary from WMT website - 150,217 sentences
+\item English sides of all the paralel data -- 4,275,961 sentences
+\item News commentary from WMT website -- 150,217 sentences
 \end{itemize}
 
 \Tref{tab:russdata} and \Tref{tab:russdatam} shows the sizes of the training data.
@@ -563,7 +485,7 @@ For English:
 \begin{table}[htbl]
 \begin{center}
 \begin{tabular}{l | r r r}
-Corpus & SentPairs & Tokens lng1 & Tokens lng2\\
+Corpus & SentPairs & Tok lng1 & Tok lng2\\
 \hline
 cs-ru & 2,566,615 & 19,680,239 & 20,031,688 \\
 en-ru & 4,275,961 & 64,619,964 & 58,671,725 \\
@@ -591,41 +513,41 @@ cs mono& 12,542,506 & 202,510,993
 %tokenizaci provedly taggery... nevim, jak to napsat dobre
 Czech and English data was tokenized and tagged using Morče tagger; Russian was tokenized and tagged using TreeTagger. TreeTagger also does lemmatization; however, we didn't use lemmas for alignment or translation models, since our experiments showed that primitive stemming got better results.
 
-However, what is important to mention is that TreeTagger had problems with some corpora, mostly Common Crawl. For some reason, Russian TreeTagger has problems with "dirty" data - sentences in English, French or random non-unicode noise. It either slows down significantly or stop working at all. For this reason, we wrapped TreeTagger in a script, that detected those hangs and replaced the errorneous Russian sentences with bogus, one-letter Russian sentences (we can't delete those, since the lines already exist in the opposite languages; but since the pair doesn't really make sense in the first place, it doesn't matter as much).
+However, what is important to mention is that TreeTagger had problems with some corpora, mostly Common Crawl. For some reason, Russian TreeTagger has problems with ``dirty'' data---sentences in English, French or random non-unicode noise. It either slows down significantly or stops working at all. For this reason, we wrapped TreeTagger in a script that detected those hangs and replaced the erroneous Russian sentences with bogus, one-letter Russian sentences (we can't delete those, since the lines already exist in the opposite languages; but since the pair doesn't really make sense in the first place, it doesn't matter as much).
 
 All the data are lowercased for all the models and we recase the letters only at the very end.
 
 %pozn.: uvozovky jsem absolutně neřešil.
 %Spoustu věcí, co mám výše i níže napsané jako fakta ("zkusili jsme titulky" apod.) by to chtělo asi víc exaktně, ale neměl jsem na to nějak čas :-(
 \subsubsection{Subtitle data}
-For an unrelated project dealing with movie subtitles translation, we obtained data from OpenSubtitles.org for Czech and English subtitles. However, those data were not aligned on sentence level and were more unstructured - we had thousands of .srt files with some sort of metadata.
+For an unrelated project dealing with movie subtitles translation, we obtained data from OpenSubtitles.org for Czech and English subtitles. However, those data were not aligned on sentence level and were less structured---we had thousands of \texttt{.srt} files with some sort of metadata.
 
 When exploiting the data from the subtitles, we made several observations:
 \begin{itemize}
-\item language, used in subtitles, is very different from the language, used in news articles% and the data generally doesn't help that much
+\item language used in subtitles is very different from the language used in news articles% and the data generally doesn't help that much
 \item one of the easiest and most accurate sentence alignments in movie subtitles is the one based purely on the time stamps
 \item allowing bigger differences in the time stamps in the alignment produced more data, but less accurate
 \item the subtitles are terribly out of domain (as experiments with using \emph{only} the subtitle data showed us), but adding the corpus mined from the subtitles \emph{still} increases the accuracy of the translation
 \item allowing bigger differences in the time stamps and, therefore, more (albeit less accurate) data always led to better results in our tests.
 \end{itemize}
 
-In the end, we decided to pair as much subtitles as possible, even with the risk of some being misaligned, because we found out that it helps us the most in the end.
+In the end, we decided to pair as much subtitles as possible, even with the risk of some being misaligned, because we found out that this helped the most.
 
 
 \subsection{Translation model, language model}
-For alignment, we used primitive stemming, that takes just first 6 letters from a word. We found out that using this "brute force" stemming - for reasons that will have to be explored in a further research - return better results than regular lemmatization, for both alignment and translation model, as described further.
+For alignment, we used primitive stemming that takes just first 6 letters from a word. We found out that using this ``brute force'' stemming---for reasons that will have to be explored in a further research---return better results than regular lemmatization, for both alignment and translation model, as described further.
 
-For each language pair, we used a translation model with two translation tables, one of them being as backoff model. More exactly, the primary translation is from a form to a combination of (lower case) form and tag, and the secondary backoff translation is from a "stem" described above to a combination of (lower case) form and tag.
+For each language pair, we used a translation model with two translation tables, one of them as backoff model. More exactly, the primary translation is from a form to a combination of (lower case) form and tag, and the secondary backoff translation is from a ``stem'' described above to a combination of (lower case) form and tag.
 
-We built two language models - one for tags and one for lower case forms.
+We built two language models---one for tags and one for lower case forms.
 
-The models were actually a mixed model using interpolate option in SRILM - we trained a different language model for each corpus, and then we mixed the language models using a small development set from UMC003.
+The models were actually a mixed model using interpolate option in SRILM---we trained a different language model for each corpus, and then we mixed the language models using a small development set from UMC003.
 
 %Unlike with previous set of experiments, we didn't 
 
 \subsection{Final Results}
 
-The final results from  \url{matrix.statmt.org} are in the table \Tref{tab:finalbleukarel}. You might notice a sharp difference between lowercased and truecased BLEU - that is due to a technical error that we didn't notice before the deadline. %Jsem blby, vsimnul jsem si toho fakt az ted :((
+The final results from  \url{matrix.statmt.org} are in the table \Tref{tab:finalbleukarel}. You might notice a sharp difference between lowercased and truecased BLEU---that is due to a technical error that we didn't notice before the deadline. %Jsem blby, vsimnul jsem si toho fakt az ted :((
 
 \begin{table}[htbl]
 \begin{center}
@@ -652,10 +574,10 @@ We have described two independent Moses-based SMT systems we used for the WMT 20
 
 % funding Dan
 The work on this project was supported by the grant
-P406/11/1499 of the Czech Science Foundation (GAČR).
-
+P406/11/1499 of the Czech Science Foundation (GAČR),
 % funding Karel
-The work on this project was supported by the grant
+%The work on this project was supported by the grant
+and by the grant
 639012 of the Grant Agency of Charles University (GAUK).
 
 
