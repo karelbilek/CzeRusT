@@ -1,0 +1,84 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Baroni and Lenci}{2009}]{baroni:2009}
+Baroni, M., and Lenci, A.
+\newblock 2009.
+\newblock One distributional memory, many semantic spaces.
+\newblock In {\em Proceedings of the Workshop on Geometrical Models of Natural
+  Language Semantics}, GEMS '09,  1--8.
+\newblock Stroudsburg, PA, USA: Association for Computational Linguistics.
+
+\bibitem[\protect\citeauthoryear{Biemann and Osswald}{2005}]{biemann05}
+Biemann, C., and Osswald, R.
+\newblock 2005.
+\newblock Automatic extension of feature-based semantic lexicons via contextual
+  attributes.
+\newblock In {\em Proceedings of the 29th Annual Conference of the Gesellschaft
+  fA 1/4 r Klassifikation e.V., University of Magdeburg, March 9-11, 2005},
+  326--333.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Bojar, Homola, and Kubo{\v{n},
+  V.}}{2005}]{mt-recycled}
+Bojar, O.; Homola, P.; and Kubo{\v{n}, V.}
+\newblock 2005.
+\newblock {An MT System Recycled}.
+\newblock In {\em Proceedings of MT Summit X},  380--387.
+
+\bibitem[\protect\citeauthoryear{Fellbaum}{1998}]{wordnet}
+Fellbaum, C.
+\newblock 1998.
+\newblock {\em WordNet: An Electronic Lexical Database}.
+\newblock Bradford Books.
+
+\bibitem[\protect\citeauthoryear{Hughes}{1968}]{hughes:1968}
+Hughes, G.
+\newblock 1968.
+\newblock On the mean accuracy of statistical pattern recognizers.
+\newblock {\em IEEE Transactions on Information Theory 14 (1)}  55--63.
+
+\bibitem[\protect\citeauthoryear{Justeson and Katz}{1995}]{principled_disam}
+Justeson, J.~S., and Katz, S.~M.
+\newblock 1995.
+\newblock Principled disambiguation: Discriminating adjective senses with
+  modified nouns.
+\newblock {\em Computational Linguistics} 21(1):1--27.
+
+\bibitem[\protect\citeauthoryear{Kirschner}{1983}]{kirschner1983}
+Kirschner, Z.
+\newblock 1983.
+\newblock {\em MOSAIC, a Method of Automatic Extraction of Significant Terms
+  from Texts}.
+\newblock Explizite Beschreibung der Sprache und automatische Textbearbeitung.
+  Matematicko-fyzik{\'a}ln{\'\i} fakulta Univerzity Karlovy.
+
+\bibitem[\protect\citeauthoryear{Klyueva and Kubo{\v{n}, V.}}{2010}]{pisa2010}
+Klyueva, N., and Kubo{\v{n}, V.}
+\newblock 2010.
+\newblock Verbal valency in the mt between related languages.
+\newblock In {\em Proceedings of Verb 2010, Interdisciplinary Workshop on
+  Verbs, The Identification and Representation of Verb Features}.
+
+\bibitem[\protect\citeauthoryear{Oliva}{1989}]{oliva1989parser}
+Oliva, K.
+\newblock 1989.
+\newblock {\em A Parser for Czech Implemented in Systems Q}.
+\newblock Explizite Beschreibung der Sprache und automatische Textbearbeitung.
+  Matematicko-fyzik{\'a}ln{\'\i} fakulta UK.
+
+\bibitem[\protect\citeauthoryear{Peirsman}{2011}]{peirsman}
+Peirsman, Y.and~Pad\'o, S.
+\newblock 2011.
+\newblock Semantic relations in bilingual vector spaces.
+\newblock {\em ACM Transactions in Speech and Language Processing}  3:1--3:21.
+
+\bibitem[\protect\citeauthoryear{Spoustova, Spousta, and
+  Pecina}{2010}]{webcoll}
+Spoustova, J.; Spousta, M.; and Pecina, P.
+\newblock 2010.
+\newblock Building a web corpus of czech.
+\newblock In {\em Proceedings of the Seventh International Conference on
+  Language Resources and Evaluation (LREC'10)}.
+\newblock Valletta, Malta: European Language Resources Association (ELRA).
+
+\end{thebibliography}
