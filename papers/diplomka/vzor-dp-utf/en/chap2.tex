@@ -1,0 +1,38 @@
+\chapter{Experiment setting}
+\section{Statistical vs. rule-based translation systems}
+
+Machine translation (MT) systems has historically used many different approaches. One way of classifying the approaches is on the axis of rule-based vs. statistical.
+
+In general, we can re-use the descriptions, used by \cite{bojar}, which is as follows:
+\begin{itemize}
+\item rule based MT systems:
+\begin{itemize}
+\item use analysis, transfer and synthesis steps
+\item rule-based machine translation systems use formal grammars
+\item rule-based machine translation systems use hand-made dictionaries
+\item has linguistic information hard-coded and therefore aren't language-agnostic
+\end{itemize}
+\item statistical MT systems
+\begin{itemize}
+    \item use more variants of outputs, rank them with some score, and choose the best one
+    \item train internal dictionaries from big parallel data
+    \item the core of the system is compact and its inner working less obvious
+    \item uses statistics instead of linguistic rules and therefore are language-agnostic
+\end{itemize}
+\end{itemize}
+
+However, with some of the modern system, the distinction is not as clear-cut as we would like, for the purpose of our comparison. 
+For example, statistical MT systems like Moses can get significantly better with some added linguistic information; 
+on the other hand, systems like TectoMT, which can sometimes be classified as more rule-based, actually have big modules more or less based on statistics.
+
+%In this thesis, I will present several existing solutions to Czech-Russian machine translation, describe their position on the aforementioned axis, present their history and discuss their results on a testing data.
+\section{Development and testing data}
+
+To compare several machine translation systems, we need some consistent data to show the deficiencies and/or improvements of different MT systems.
+
+In general, we want to produce a system that's general enough and performs well on unseen sentences; for that reason, we should have -- in the case of statistical MT systems -- separated test set and training/development set.\footnote{As noted in for example \cite{koehn2010statistical}, p. 274, or \cite{bishop}, pg. 6}
+
+We have tried to do that in our experiments with our data models. However, some systems evaluated in this thesis are only black-box systems (Google Translate, PC Translator). Especially with Google Translate, we cannot rule out the possibility that they already use some parts of the test/development data.
+
+
+
