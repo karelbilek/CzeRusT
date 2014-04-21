@@ -1,0 +1,477 @@
+%% Saved with string encoding Unicode (UTF-8) 
+
+%% DZ: Poor man's bibliographic style:
+%% I am inserting 'xxx' to the fields that I do not want to appear in References.
+
+@string{apr = {April}}
+@string{aug = {August}}
+@string{dec = {December}}
+@string{feb = {February}}
+@string{jan = {January}}
+@string{jul = {July}}
+@string{jun = {June}}
+@string{mar = {March}}
+@string{march = {March}}
+@string{may = {May}}
+@string{nov = {November}}
+@string{oct = {October}}
+@string{sep = {September}}
+
+%%-----------------------------------------------------
+%% Zásadní publikace o nástrojích pro strojový překlad.
+%%-----------------------------------------------------
+
+@inproceedings{srilm,
+  author = {Stolcke, Andreas},
+  title = {SRILM -- An Extensible Language Modeling Toolkit},
+  booktitle = {Proceedings of International Conference on Spoken Language Processing},
+  address = {Denver, Colorado, USA},
+  year = {2002},
+  projectURL = {http://www-speech.sri.com/projects/srilm/},
+}
+
+@inproceedings{kneser-ney,
+ author = {Kneser, Reinhard and Ney, Hermann},
+ title = {Improved backing-off for m-gram language modeling},
+ booktitle = {Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing},
+ publisher = {IEEE Computer Society Press},
+ address = {Los Alamitos, California, USA},
+ year = {1995},
+ pages = {181--184},
+}
+
+%% SRILM option -kndiscount je zřejmě ve skutečnosti modifikace popsaná zde:
+@inproceedings{modified-kneser-ney,
+	author = {Chen, Stanley F. and Goodman, Joshua},
+	title = {An Empirical Study of Smoothing Techniques for Language Modeling},
+	booktitle = {Technical report TR-10-98, Computer Science Group},
+	publisher = {Harvard University},
+	address = {Harvard, MA, USA},
+	month = {August},
+	year = {1998},
+	url = {http://research.microsoft.com/en-us/um/people/joshuago/tr-10-98.pdf},
+}
+
+@inproceedings{mkcls,
+	author = {Och, Franz Josef},
+	title = {An Efficient Method for Determining Bilingual Word Classes},
+	booktitle = {Proceedings of the Ninth Conference of the European Chapter of the Association for Computational Linguistics (EACL'99)},
+	publisher = {Association for Computational Linguistics},
+	address = {Bergen, Norway},
+	month = {June},
+	year = {1999},
+	pages = {71--76},
+	projectURL = {http://fjoch.com/mkcls.html},
+}
+
+@ARTICLE{giza,
+	AUTHOR = {Franz Josef Och and Hermann Ney},
+	TITLE = {A Systematic Comparison of Various Statistical Alignment Models},
+	JOURNAL= {Computational Linguistics}, 
+	NUMBER = 1,
+	VOLUME = 29,
+	YEAR = 2003,
+	PAGES = {19--51},
+	projectURL = {http://fjoch.com/GIZA++.html},
+}
+
+@inproceedings{grow-diag-final-and,
+ author = {Koehn, Philipp and Och, Franz Josef and Marcu, Daniel},
+ title = {Statistical phrase-based translation},
+ booktitle = {NAACL '03: Proceedings of the 2003 Conference of the North American Chapter of the Association for Computational Linguistics on Human Language Technology},
+ year = {2003},
+ pages = {48--54},
+ location = {Edmonton, Canada},
+ doi = {http://dx.doi.org/10.3115/1073445.1073462},
+ publisher = {Association for Computational Linguistics},
+ address = {Morristown, NJ, USA},
+ }
+
+@inproceedings{mert,
+ author = {Och, Franz Josef},
+ title = {Minimum error rate training in statistical machine translation},
+ booktitle = {ACL '03: Proceedings of the 41st Annual Meeting on Association for Computational Linguistics},
+ year = {2003},
+ pages = {160--167},
+ location = {Sapporo, Japan},
+ doi = {http://dx.doi.org/10.3115/1075096.1075117},
+ publisher = {Association for Computational Linguistics},
+ address = {Morristown, NJ, USA},
+ }
+
+@article{zaidan:zmert:2009,
+ author = {Zaidan, Omar F.},
+ title = {Z-MERT: A Fully Configurable Open Source Tool for Minimum Error Rate Training of Machine Translation Systems},
+ journal = {The Prague Bulletin of Mathematical Linguistics},
+ ISSN = {0032-6585},
+ Publisher = {Univerzita Karlova v~Praze},
+ PubAddress = {Praha, Czechia},
+ volume = {91},
+ pages = {79--88},
+ year = {2009}
+}
+
+@inproceedings{moses,
+	Title = {{Moses: Open Source Toolkit for Statistical Machine Translation}},
+	Author = {Koehn, Philipp and Hoang, Hieu and Birch, Alexandra and Callison-Burch, Chris and Federico, Marcello and Bertoldi, Nicola and Cowan, Brooke and Shen, Wade and Moran, Christine and Zens, Richard and Dyer, Chris and Bojar, Ondřej and Constantin, Alexandra and Herbst, Evan},
+	Booktitle = {Proceedings of the 45th Annual Meeting of the Association for Computational Linguistics Companion Volume Proceedings of the Demo and Poster Sessions},
+	shortBooktitle = {Proceedings of ACL Demo and Poster Sessions},
+	Month = {June},
+	Pages = {177--180},
+	Publisher = {Association for Computational Linguistics},
+	Address = {Praha, Czechia},
+	Url = {http://www.aclweb.org/anthology/P07-2045},
+	Year = {2007},
+	projectURL = {http://www.statmt.org/moses/},
+}
+
+@inproceedings{chiang:etal:2005,
+	Address = {Morristown, NJ, USA},
+	Author = {Chiang, David and Lopez, Adam and Madnani, Nitin and Monz, Christof and Resnik, Philip and Subotin, Michael},
+	Booktitle = {Proceedings of Human Language Technology Conference and Conference on Empirical Methods in Natural Language Processing (HLT/EMNLP)},
+	Location = {Vancouver, Canada},
+	Month = {October},
+	Pages = {779--786},
+	Publisher = {Association for Computational Linguistics},
+	Title = {{The Hiero Machine Translation System: Extensions, Evaluation, and Analysis}},
+	Url = {http://aclweb.org/anthology-new/H/H05/H05-1098.pdf},
+	Year = {2005},
+}
+
+@article{chiang:2007,
+	Author = {Chiang, David},
+	Journal = {Computational Linguistics},
+	Number = 2,
+	Pages = {201-228},
+	Title = {{Hierarchical Phrase-Based Translation}},
+	Url = {http://www.aclweb.org/anthology-new/J/J07/J07-2003.pdf},
+	Volume = 33,
+	Year = 2007,
+}
+
+@article{joshua,
+	Author = {Li, Zhifei and Callison-Burch, Chris and Khudanpur, Sanjeev and Thornton, Wren},
+	Title = {{Decoding in Joshua: Open Source, Parsing-Based Machine Translation}},
+	Journal = {The Prague Bulletin of Mathematical Linguistics},
+	Month = 1,
+	Pages = {47-56},
+	Url = {http://ufal.mff.cuni.cz/pbml/91/art-li.pdf},
+	Volume = {91},
+	Year = 2009,
+	projectURL = {http://sourceforge.net/projects/joshua/},
+}
+
+@inproceedings{zollmann-et-al-coling-2008,
+	author    = {Zollmann, Andreas and Venugopal, Ashish and Och, Franz and Ponte, Jay},
+	title     = {{A Systematic Comparison of Phrase-Based, Hierarchical and Syntax-Augmented Statistical MT}},
+	booktitle = {Proceedings of the 22nd International Conference on Computational Linguistics (Coling 2008)},
+	year      = {2008},
+	pages     = {1145--1152},
+	month     = {August},
+	address   = {Manchester, UK},
+}
+
+@inproceedings{tectomt,
+	author = {\v{Z}abokrtský, Zdeněk and Ptáček, Jan and Pajas, Petr},
+	title = {Tecto{MT}: Highly Modular {MT} System with Tectogrammatics Used as Transfer Layer},
+	booktitle = {{ACL} 2008 {WMT}: Proceedings of the Third Workshop on Statistical Machine Translation},
+	shortBooktitle = {Proceedings of WMT},
+	year = {2008},
+	publisher = {Association for Computational Linguistics},
+	address = {Columbus, {OH}, {USA}},
+	pages = {167--170},
+	isbn = {978-1-932432-09-1},
+}
+
+@inproceedings{bleu,
+	author = {Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
+	title = {BLEU: a method for automatic evaluation of machine translation},
+	booktitle = {ACL '02: Proceedings of the 40th Annual Meeting on Association for Computational Linguistics},
+	year = {2002},
+	pages = {311--318},
+	location = {Philadelphia, Pennsylvania},
+	doi = {http://dx.doi.org/10.3115/1073083.1073135},
+	publisher = {Association for Computational Linguistics},
+	address = {Morristown, NJ, USA},
+}
+
+%%-----------------------------------------------------
+%% Ostatní.
+%%-----------------------------------------------------
+
+@inproceedings{ BoStEnglishHindiTranslation2009,
+  title = "{English-Hindi Translation---Obtaining Mediocre Results with Bad Data and Fancy Models}",
+  author = {Ond{\v{r}}ej Bojar and Pavel Stra{\v{n}}{\'{a}}k and Daniel Zeman and Gaurav Jain and Michal Hru{\v{s}}eck{\'{y}} and Michal Richter and Jan Haji{\v{c}}},
+  year = {2009},
+  xxxmonth = dec,
+  xxxbooktitle = {Proceedings of the 7th International Conference On Natural Language Processing ({ICON}-2009)},
+  booktitle = {Proceedings of ICON 2009},
+  xxxorganization = {{NLP} Association of India},
+  institution = {International Institute of Information Technologies, Hyderabad},
+  address = {Hyderabad, India},
+}
+
+@inproceedings{Zeman:2008,
+	Author = {Zeman, Daniel},
+	Date-Added = {2009-08-07 23:58:55 +0200},
+	Pages = {892--899},
+	Title = {{Unsupervised Acquiring of Morphological Paradigms from Tokenized Text}},
+	URL = {http://www.springerlink.com/content/77k4025433m09127/fulltext.pdf},
+	Editor = {Peters et al., Carol},
+	Isbn = {978-3-540-85759-4},
+	Issn = {0302-9743},
+	Series = {Lecture Notes in Computer Science},
+	Number = {5152},
+	Publisher = {Springer},
+	BookTitle = {Advances in Multilingual and Multimodal Information Retrieval, 8th Workshop of the Cross-Language Evaluation Forum, {CLEF} 2007},
+	Year = {2008}}
+
+@inproceedings{arabic-final,
+	Author = {Katrin Kirchhoff and Jeff Bilmes and Sourin Das and Nicolae Duta and Melissa Egan and Gang Ji and Feng He and John Henderson and Daben Liu and Mohamed Noamany and Pat Schone and Richard Schwartz and Dimitra Vergyri},
+	Booktitle = {Technical Report, Johns Hopkins University},
+	Date-Added = {2009-08-07 16:29:10 +0200},
+	Date-Modified = {2009-08-07 19:11:15 +0200},
+	Title = {{Novel approaches to arabic speech recognition -- final report from the JHU summer workshop 2002}},
+	xxxUrl = {http://ssli.ee.washington.edu/people/katrin/Papers/icassp03-arabic.pdf},
+	Address = {Baltimore, MD, USA},
+	Year = {2002}}
+
+@inproceedings{kirchhoff-acl05,
+	Author = {Katrin Kirchhoff and Mei Yang},
+	Booktitle = {In ACL'05 workshop on Building and Using ParallelText},
+	Date-Added = {2009-08-07 12:45:27 +0200},
+	Date-Modified = {2009-08-07 12:52:07 +0200},
+	Pages = {125-128},
+	Title = {{Improved Language Modeling for Statistical Machine Translation}},
+	xxxUrl = {http://ssli.ee.washington.edu/people/katrin/kirchhoff-acl05.pdf},
+	Year = {2005},
+	Bdsk-Url-1 = {http://ssli.ee.washington.edu/people/katrin/kirchhoff-acl05.pdf}}
+
+@inproceedings{Cunningham:2002rw,
+	Abstract = {In this paper we present GATE, a framework and graphical development environment which enables users to develop and deploy language engineering components and resources in a robust fashion. The GATE architecture has enabled us not only to develop a number of successful applications for various language processing tasks (such as Information Extraction), but also to build and annotate corpora and carry out evaluations on the applications generated. The framework can be used to develop applications and resources in multiple languages, based on its thorough Unicode support.},
+	Address = {Philadelphia, US},
+	Author = {Cunningham, Hamish and Maynard, Diana and Bontcheva, Kalina and Tablan, Valentin},
+	Booktitle = {Proceedings of the 40th Anniversary Meeting of the Association for Computational Linguistics (ACL'02)},
+	Date-Added = {2009-08-07 14:47:08 +0200},
+	Date-Modified = {2009-08-07 14:48:46 +0200},
+	Title = {{GATE: A Framework and Graphical Development Environment for Robust NLP Tools and Applications}},
+	xxxUrl = {http://gate.ac.uk/sale/acl02/acl-main.pdf},
+	Year = {2002},
+	Bdsk-Url-1 = {http://gate.ac.uk/sale/acl02/acl-main.pdf}}
+
+@inproceedings{Kuhoo-Gupta:2006gd,
+	Address = {Sydney, Australia},
+	Author = {Kuhoo Gupta and Manish Shrivastava and Smriti Singh and Pushpak Bhattacharyya},
+	Booktitle = {COLING/ACL-2006},
+	Date-Added = {2009-08-07 14:05:05 +0200},
+	Date-Modified = {2009-08-07 14:14:34 +0200},
+	Month = {July},
+	Title = {{Morphological Richness Offsets Resource Poverty- an Experience in Building a POS Tagger for Hindi}},
+	xxxUrl = {http://www.cse.iitb.ac.in/~pb/papers/ACL-2006-Hindi-POS-Tagging.pdf},
+	Year = {2006},
+	Bdsk-Url-1 = {http://www.cse.iitb.ac.in/~pb/papers/ACL-2006-Hindi-POS-Tagging.pdf}}
+
+@inproceedings{rama:2008,
+	Address = {Pune, India},
+	Author = {Taraka Rama and Karthik Gali and Avinesh PVS},
+	Booktitle = {Proceedings of the 6th International Conference On Natural Language Processing (ICON-2008) NLP Tools Contest},
+	Date-Added = {2009-08-07 12:50:26 +0200},
+	Date-Modified = {2009-08-07 14:09:55 +0200},
+	Title = {{Does Syntactic Knowledge help English-Hindi SMT?}},
+	xxxUrl = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iiithyd.pdf},
+	Year = {2008},
+	Bdsk-Url-1 = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iitmum.pdf}}
+
+@inproceedings{srivastava:2008,
+	Address = {Pune, India},
+	Author = {Ankit Kumar Srivastava and Rejwanul Haque and Sudip Kumar Naskar and Andy Way},
+	xxxBooktitle = {Proceedings of the 6th International Conference On Natural Language Processing (ICON-2008) NLP Tools Contest},
+	Booktitle = {Proceedings of ICON 2008 NLP Tools Contest},
+	Date-Added = {2009-08-07 12:50:24 +0200},
+	Date-Modified = {2009-08-07 12:54:00 +0200},
+	Title = {{MaTrEx: The DCU Machine Translation System for ICON 2008}},
+	xxxUrl = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-dcu.pdf},
+	Year = {2008},
+	Bdsk-Url-1 = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iitmum.pdf}}
+
+@inproceedings{Damani:2008,
+	Address = {Pune, India},
+	Author = {Om P. Damani and Vasudevan N. and Amit Sangodkar},
+	Booktitle = {Proceedings of the 6th International Conference On Natural Language Processing (ICON-2008) NLP Tools Contest},
+	Date-Added = {2009-08-07 12:41:07 +0200},
+	Date-Modified = {2009-08-07 12:41:07 +0200},
+	Title = {{Statistical Machine Translation with Rule Based Re-ordering of Source Sentences}},
+	xxxUrl = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iitmum.pdf},
+	Year = {2008},
+	Bdsk-Url-1 = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iitmum.pdf}}
+
+@inproceedings{goswami:2008,
+	Address = {Pune, India},
+	Author = {Sumit Goswami and Nirav Shah and Devshri Roy and Sudeshna Sarkar},
+	Booktitle = {Proceedings of the 6th International Conference On Natural Language Processing (ICON-2008) NLP Tools Contest},
+	Date-Added = {2009-08-07 12:33:40 +0200},
+	Date-Modified = {2009-08-07 14:10:31 +0200},
+	Title = {{NLP Tools Contest: Statistical Machine Translation (English to Hindi)}},
+	xxxUrl = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iitkgp1.doc},
+	Year = {2008},
+	Bdsk-Url-1 = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-iitkgp1.doc}}
+
+@inproceedings{baker:2002,
+	Address = {Lancaster},
+	Author = {Baker, Paul and Hardie, Andrew and McEnery, Tony and Cunningham, Hamish and Gaizauskas, Rob},
+	Booktitle = {Proceedings of LREC 2002},
+	Date-Added = {2009-08-06 16:30:32 +0200},
+	Date-Modified = {2009-08-06 16:33:58 +0200},
+	Organization = {Lancaster University},
+	Pages = {819--827},
+	Title = {{EMILLE, A 67-Million Word Corpus of Indic Languages: Data Collection, Mark-up and Harmonisation}},
+	xxxUrl = {http://gandalf.aksis.uib.no/lrec2002/pdf/319.pdf},
+	Year = {2002},
+	Bdsk-Url-1 = {http://gandalf.aksis.uib.no/lrec2002/pdf/319.pdf}}
+
+@inproceedings{BoStEnglishHindiTranslation2008,
+	Address = {Pune, India},
+	Author = {Bojar, Ond{\v{r}}ej and Stra{\v{n}}{\'{a}}k, Pavel and Zeman, Daniel},
+	xxxBooktitle = {Proceedings of the 6th International Conference On Natural Language Processing (ICON-2008) NLP Tools Contest},
+	Booktitle = {Proceedings of ICON 2008 NLP Tools Contest},
+	Date-Modified = {2009-08-06 15:26:57 +0200},
+	Institution = {International Institute of Information Technologies, Hyderabad},
+	xxxMonth = dec,
+	xxxOrganization = {{NLP} Association of India},
+	Title = {{English-Hindi Translation in 21 Days}},
+	xxxUrl = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-czech.pdf},
+	Venue = {Mahratta Chamber of Commerce, Industries & Agriculture},
+	Year = {2008},
+	Bdsk-Url-1 = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/icon-2008-czech.pdf}}
+
+@inproceedings{nlptoolscontest:2008:summary,
+	Address = {Pune, India},
+	Author = {Venkatapathy, Sriram},
+	xxxBooktitle = {Proceedings of the 6th International Conference On Natural Language Processing (ICON-2008) NLP Tools Contest},
+	Booktitle = {{Proceedings of ICON 2008 NLP Tools Contest}},
+	Institution = {International Institute of Information Technologies, Hyderabad},
+	xxxMonth = dec,
+	xxxOrganization = {{NLP} Association of India},
+	Title = {{NLP Tools Contest -- 2008: Summary}},
+	xxxUrl = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/nlpToolsSummary.pdf},
+	Venue = {Mahratta Chamber of Commerce, Industries & Agriculture},
+	Year = {2008},
+	Bdsk-Url-1 = {http://ltrc.iiit.ac.in/nlptools2008/nlpToolsPapers/nlpToolsSummary.pdf}}
+
+@inproceedings{affisixtsd2008,
+	Author = {Hlav\'{a}\v{c}ov\'{a}, Jaroslava and Hru\v{s}eck\'{y}, Michal},
+	Booktitle = {{Text, Speech and Dialogue}},
+	Date-Modified = {2009-08-06 17:05:59 +0200},
+	Doi = {10.1007/978-3-540-87391-4_13},
+	Pages = {{85--92}},
+	Publisher = {{Springer Berlin / Heidelberg}},
+	Title = {{Affisix: Tool for Prefix Recognition}},
+	xxxUrl = {http://www.springerlink.com/content/w1v8144234102322/},
+	Volume = {{Volume 5246/2008}},
+	Year = 2008,
+	Bdsk-Url-1 = {http://www.springerlink.com/content/w1v8144234102322/fulltext.pdf}}
+
+@inproceedings{callisonburch-EtAl:2009:WMT,
+	Address = {Athens, Greece},
+	Author = {Callison-Burch, Chris and Koehn, Philipp and Monz, Christof and Schroeder, Josh},
+	Booktitle = {Proceedings of the Fourth Workshop on Statistical Machine Translation},
+	Date-Modified = {2009-08-06 15:33:56 +0200},
+	Month = march,
+	Publisher = {Association for Computational Linguistics},
+	Title = {{Findings of the 2009 Workshop on Statistical Machine Translation}},
+	xxxUrl = {http://www.statmt.org/wmt09/pdf/WMT-0901.pdf},
+	Year = {2009},
+	Bdsk-Url-1 = {http://www.statmt.org/wmt09/pdf/WMT-0901.pdf}}
+
+@inproceedings{bilmes:kirchhoff:factored:2003,
+	Address = {Morristown, NJ, USA},
+	Author = {Bilmes, Jeff A. and Kirchhoff, Katrin},
+	Booktitle = {NAACL '03: Proceedings of the 2003 Conference of the North American Chapter of the Association for Computational Linguistics on Human Language Technology},
+	Date-Modified = {2009-08-06 15:28:14 +0200},
+	Location = {Edmonton, Canada},
+	Pages = {4--6},
+	Publisher = {Association for Computational Linguistics},
+	Title = {{Factored language models and generalized parallel backoff}},
+	xxxUrl = {http://acl.ldc.upenn.edu/N/N03/N03-2002.pdf},
+	Year = {2003},
+	Bdsk-Url-1 = {http://acl.ldc.upenn.edu/N/N03/N03-2002.pdf}}
+
+@book{teach_yourself_hindi,
+	Address = {London, UK},
+	Author = {Snell, Rupert and Weightman, Simon},
+	Isbn = {978-0-340-86687-0},
+	Publisher = {Hodder Education},
+	Title = {{Teach Yourself Hindi}},
+	Year = {2003}}
+
+@InProceedings{google-reordering-to-urdu,
+  author    = {Xu, Peng  and  Kang, Jaeho  and  Ringgaard, Michael  and  Och, Franz},
+  title     = {{Using a Dependency Parser to Improve SMT for Subject-Object-Verb Languages}},
+  xxxbooktitle = {Proceedings of Human Language Technologies: The 2009 Annual Conference of the North American Chapter of the Association for Computational Linguistics},
+  booktitle = {Proc. of HLT-NAACL},
+  xxxmonth     = {June},
+  year      = {2009},
+  address   = {Boulder, Colorado},
+  xxxpublisher = {Association for Computational Linguistics},
+  pages     = {245--253},
+  xxxurl       = {http://www.aclweb.org/anthology/N/N09/N09-1028}
+}
+
+@Article{czeng:pbml:2009,
+ publicationtype = {article},
+ Author = {Bojar, Ondřej and Žabokrtský, Zdeněk},
+ title = {CzEng 0.9: Large Parallel Treebank with Rich Annotation},
+ Journal = {The Prague Bulletin of Mathematical Linguistics},
+ ISSN = {0032-6585},
+ Publisher = {Univerzita Karlova v~Praze},
+ PubAddress = {Praha, Czechia},
+ Year = {2009},
+ Volume =   {92},
+ pages = {63--83},
+}
+
+@InProceedings{webcoll,
+  author = {Spoustová, Johanka and Spousta, Miroslav and Pecina, Pavel},
+    title = {Building a Web Corpus of Czech},
+      booktitle = {Proceedings of the Seventh International Conference on Language Resources and Evaluation (LREC'10)},
+        year = {2010},
+          month = {may},
+            address = {Valletta, Malta},
+              publisher = {European Language Resources Association (ELRA)},
+               }
+
+
+@article{cermak:rosen:10, Author = {Franti{\v{s}}ek {\v{C}}erm{\'{a}}k and Alexandr Rosen}, Issn = {1384-6655}, Journal = {International Journal of Corpus Linguistics}, Number = {3}, Pages = {411--427}, Title = {The Case of {I}nter{C}orp, a multilingual parallel corpus}, Url = {http://utkl.ff.cuni.cz/~rosen/public/2012_intercorp_ijcl.pdf}, Volume = {13}, Year = {2012}}
+
+@inproceedings{umc,
+    author = {Klyueva, Natalia and Bojar, Ond\v{r}ej},
+    booktitle = {International Conference Corpus Linguistics},
+    citeulike-article-id = {11996341},
+    keywords = {machine\_translation},
+    posted-at = {2013-02-05 12:59:00},
+    priority = {0},
+    title = {{UMC} 0.1: {Czech-Russian}-English Multilingual Corpus},
+    year = {2008}
+}
+
+@InProceedings{tiedemann:2009,
+    Author = {Tiedemann, Jörg},
+    title = {News from OPUS -- A Collection of Multilingual Parallel Corpora with Tools and Interfaces},
+    BookTitle = {Recent Advances in Natural Language Processing (vol. V)},
+    pages = {237--248},
+    Year = {2009},
+    Language = {eng},
+    publisher = {John Benjamins},
+    pubaddress = {Amsterdam / Philadelphia},
+}
+
+@inproceedings{zemanwmt12,
+  author    = {Daniel Zeman},
+  year      = 2012,
+  title     = {Data Issues of the Multilingual Translation Matrix},
+  booktitle = {Proceedings of the Seventh Workshop on Statistical Machine Translation},
+  pages     = {395--400},
+  publisher = {Association for Computational Linguistics},
+  address   = {Montréal, Canada},
+  isbn      = {978-1-937284-20-6},
+}
