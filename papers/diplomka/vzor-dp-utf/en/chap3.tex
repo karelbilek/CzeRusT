@@ -1,0 +1,171 @@
+\chapter{Unrunnable systems}
+\section{RUSLAN}
+
+RUSLAN is a machine-translation system, developed between 1984 and 1988 at several departments of Charles University, Prague.
+
+\subsection{Q-Systems}
+Q-Systems (sometimes also Systems Q) -- Q stands for \uv{Quebec} -- are a tool for machine translation, developed at Montreal University by Alain Colmerauer, also the creator of Prolog.\footnote{See \cite{qsystems}.} 
+
+Q-Systems are similarly declarative as Prolog, focusing more on the result than the procedural order of analysis. If there is any ambiguity, all the possibilities are explored \emph{in parallel}. In theory, this could make writing the lexical rules better; in reality, the rules are still quite unreadable, as will be seen later.
+
+Q-Systems are not very widely used or widely worked with. One of the reasons might be the fact that all documentation is in French. However, \cite{nguyen2009systemes} describes modern-day experiments with Systems Q, also mentioning, that all Fortran implementations has been lost\footnote{Which would make UFAL's version, if it was working, quite unique.} and reimplementing it in C. I haven't been able to try this version.
+
+
+\subsection{RUSLAN components}
+
+Description of the system can be found in \cite{olivaruslan} or \cite{hajic1987} -- however, the reader has to bear in mind that not only the systems are severly dated, but so is their manual and description. \footnote{At least for me personally, the book \cite{olivaruslan} especially was hard to read and hard to find needed information in.} Contemporary (but not as detailed) description of the system can be found in \cite{recycled}.
+
+The whole RUSLAN system has several components:
+\begin{itemize}
+\item preprocessing, written in Pascal
+\item morphological analysis, using dictionary, written in Q-Systems and interpreted in Fortran IV
+\item syntactico-semantical analysis, using morphology, also written in Q-Systems; this component uses FGD as its theoretical starting point
+\item generation, also using Q-Systems
+\item morphological synthesis, using Pascal
+\end{itemize}
+
+RUSLAN uses a Czech-to-Russian dictionary, written by hand in afforementioned Q-Systems. Dictionary item looks like this:
+
+\begin{verbatim}
+DLOUH==M(RS(+(*INT)),MI2289,DLINNYJ).
+DLOUH==M(RS(-(*INT)),MI2276,DOLGIJ).
+\end{verbatim}
+
+This describes two possibilites of the translation of the word \uv{dlouhý} to Russian: the first is \uv{длинный} and the second is \uv{долгий}. They differ by the semantic feature INT (TODO: find out) they require or forbid from the word they depend on. 
+
+More complex dictionary item looks like this:
+\begin{verbatim}
+C3ES3TIN
+  ==Z(@(*A), MIO109, $(JAZYK), 
+     2(POS, #($), &, $(MI28), $(C2ES2KIJ),
+       1(=,@($), #($),$($))),
+     1(=,@($),#($),$($))).
+\end{verbatim}
+
+This item translates the word \uv{čeština} to Russian words \uv{чешский язык} and also describes their relationship.
+
+Maybe because memory was more expensive than today, all similar rules are in the dictionary without any comments, leaving only very difficult-to-decypher rules.
+
+The rules for analysis are even less readable. Random examplo of two such rules are as follows:
+
+\begin{verbatim}
+1(B*, X*1, /, X*2, F*1(C*), X*3, /, X*4, @(V*), X*5, %(X*),
+ I(*), 1(X*6, $($)), X*7)
+
+1Z(A*9), (Z*2)
+  == 1(D*, /, X*2, F*1/X*),/,@(V*),X*5,%(X*),1*,1(X*6,$($)),X*7,A*B,
+     5(U*1, @(U*2), U*3, $(U*), 3(E*(Y*1), B*(C*), W*1, W*3, %(X*), 
+        $(W*)),
+     +1Z(A*9, Z*2)
+       / -NON- (, + -DANS- X*9 -ET- +(V*) -HORS- X*9, +(VZT)
+        -ET- -(V*) -HORS- X*9, *
+        -ET- C* = S
+        -ET- X*3,* -HORS- /,N(S), S(S), D(S), A(S), L(S), I(S)
+        -ET- / -HORS- X*2, 2
+        -ET- (, Y%1 = -NUL-
+             -OU- E*(Y*1) -HORS- U*2,*
+             -OU- E*(+(V*, *)) -HORS- U*2, *
+             -OU- -NON- E*(-(V*)) -HORS- U*2, * .)
+        -ET- (. E*(Y*1) *N
+             -OU- H(B*(C*)) -DANS- U*1 .) .
+\end{verbatim}
+
+Of course this is all left without any comments, and the only comment for these two rules and about 20 more is \uv{RELATIVE CLAUSES ADJOINED TO THEIR HEADS}.
+
+\subsection{Dictionary coverage of WebColl}
+
+The dictionary contains about 8,000 lexical items. However, the domain of the translation and, therefore, the dictionary, was manuals for old computers from 1980's. 
+
+In different experiments (\cite{florida}), we tried to measure how many nouns from the RUSLAN dictionary appear at all in a modern text.
+
+For that, we used a monolingual Czech corpus WebColl, consisting of roughly 7 million sentences (114 million tokens)\footnote{See \cite{webcoll}; the corpus is also more thoroughly described in the chapter ????}.
+
+RUSLAN dictionary has 2,783 nouns. In the WebColl corpus, from those nouns, 611 appear less than 10 times -- and from those, 412 don't appear \emph{at all}.
+
+The reverse is similarly infavourable: from 39,434,505 nouns in the corpus, only 11,862,221 is in the dictionary.
+
+\subsection{Experiments}
+
+Despite the general un-maintainability of the RUSLAN code and despite the small dictionary, we tried to run the system on our test data.
+
+However, all our experiments ended in some sort of error.
+
+Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Systems-Q interpreter is coded), I gave up on this experiment.
+
+
+\section{Česílko}
+
+Česílko is actually a name for two different machine translation systems with slightly different goals and, more importantly, slightly different structure.
+
+\subsection{Česílko 1.0}
+Česílko 1.0 was a system, developed in 2000, and was aimed for direct translation between Czech and Slovak and was intended to assist a translation memory\footnote{see \cite{cesilko1}}. The translation works lemma-by-lemma in a following fashion:
+\begin{itemize}
+\item morphological analysis of source Czech language
+\item disambiguation
+\item direct translation, lemma-by-lemma
+\item morphological synthesis
+\end{itemize}
+
+
+
+The system is written in a mixture of C, C++ and Flex (fast lexical analyser generator). The code itself is not really well documented and modular, but that can be attributed to the age of some of the components -- despite the whole system being developed in 2000, some files seem to be as old as 1991.
+
+This system itself is not very extendable from Slovak to Russian, because -- as we can see on the examples in the section \ref{sec:experiments} -- the sentences are not really translatable word-by-word.
+
+For that reason I decided not to further experiment with Česílko 1.0 for Czech-to-Russian machine translation.
+
+\subsection{Česílko 2.0}
+Česílko 2.0 is a different project with similar goals, but using different frameworks and adding more transfer rules\footnote{See \cite{cesilko2}}. However, it has its own shares of problems, that prevented us to use it.
+
+The system works in following fashion:
+\begin{itemize}
+\item \textbf{non-deterministic} morphological analysis of source Czech language
+\item translation of lemmas
+\item applying transfer rules by changing syntactic tree
+\item morphological synthesis
+\item ranking of all the generated sentences
+\end{itemize}
+
+Unlike Česílko 1.0, Česílko 2.0 uses a non-deterministic parser and explores all the possibilities in parallel. 
+
+The more advanced transfer would, by itself, make the system more modular and extensionable for our purposes. However, the implementation details prevented us from doing so.
+
+To illuminate why, let me focus a little on the technical details.
+
+\subsubsection{Objective-C}
+Objective-C is a very simple and elegant extension of C language, developed by Brad Cox in 1980s by adding Smalltalk features to C\footnote{See \cite{cocoa4}}. 
+
+Objective-C is, in my opinion, very easy to learn and understand, at least compared to C++, its more popular counterpart.
+
+Objective-C is not a proprietary language and is possible to compile with either gcc or Clang/LLVM compilers. However, what is proprietary is its most used standard library, Cocoa.
+
+\subsubsection{Cocoa}
+When Steve Jobs left Apple, he made a smaller company called NeXT. Among other things, they produced a proprietary operating system called NeXTSTEP, based on Unix.\footnote{For a more detailed history, see \url{https://developer.apple.com/legacy/library/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html\#//apple\_ref/doc/uid/TP40002974-CH3-SW12}.}
+
+This operating system used Objective-C as its standard language, and proprietary libraries, called OpenStep.\footnote{Despite the name, OpenStep is not open source -- the Open allude to the fact that its API specification was open.}
+
+Several years later, Apple (now merged with NeXT) made its new version of Mac OS, called Mac OS X; this operating system was partially based on NeXTSTEP and also used some of its proprietary libraries, now renamed Cocoa.\footnote{The kernel of Mac OS X is open source, as is its \uv{underlying} operating system called Darwin -- however, this system does not contain Cocoa libraries.}
+
+Cocoa is not the only library for Objective-C, but because Apple is the main investor in Objective-C-based systems, it's a de-facto standard library.
+
+\subsubsection{GNUstep}
+GNUstep is a free re-implementation of OpenStep/Cocoa.\footnote{See \url{http://www.gnustep.org/}}.
+
+Its development started in the NeXTSTEP days; however, it still hasn't met feature parity with Cocoa's OS X.
+
+Aaron Hillegass in 2nd edition of his popular book \emph{Cocoa Programming on Mac OS X} discouraged people from using GNUStep. He redacted this note in later versions of the book, perhaps because of protests from GNUstep developers\footnote{\url{http://www.gnustep.org/resources/BookClarifications.html}}, but in my opinion, his notes are still valid.
+
+GNUstep implementations are very often buggy and not feature-complete with Cocoa and, most unfortunately, unpredictable. This is what hurt us with Česílko 2.0.
+
+\subsubsection{Cocoa and Česílko}
+When Petr Homola was writing Česílko 2.0, he decided to use Cocoa and Objective-C for development.
+
+On Mac OS X, this configuration is just fine; however, on Linux, where we wanted to run the MT systems, this creates unpredictable results.
+
+In my experiments with Czech-to-Slovak translations, I noticed that on Mac OS X, there are about 5-times more sentences generated, than on Linux -- while the program was compiled from the same sources.
+
+After thorough inspection, I found out the error was in GNUstep implementation of NSDictionary -- Cocoa's implementation of associative array\footnote{\url{https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary\_Class/Reference/Reference.html}} -- that in some unpredictable cases for two equal NSStrings returns two different values. As a result, one of the modules returned wrong inflection patterns for a number of words and the morphological analyzer then returned only a fraction of the results.
+
+After workaround for this issue, the system returned same results on both OS X and Linux. However, I am not at all confident there aren't more similar issues in GNUstep to further develop the system for Russian; when the very basic frameworks themselves are unstable and unreliable, the development ceases to make sense.
+
+It's possible the same issue plagued the authors of the paper \cite{evalquality_cesilko} -- it's unprobable the BLEU of the correctly working system would be that low, when in \cite{cesilko2}, the results of Česílko 2.0 were slightly better, than in Česílko 1.0. 

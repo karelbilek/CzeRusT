@@ -38,7 +38,7 @@
 
 
 \usepackage{libertine}
-
+\setmonofont{Anonymous Pro}
 
 %% Ostatní balíčky
 \usepackage{verbatim}
@@ -110,9 +110,7 @@
 
 }
 
-\def\uv#1{
- ``#1''
-}
+\def\uv#1{``#1''}
 
 \long\def\jednatabulkan#1#2#3#4{
  \begin{tabulka}[h]
@@ -132,6 +130,22 @@
 }
 
 
+\long\def\jednatabulkam#1#2#3#4{
+ \begin{tabulka}[h]
+     
+         \centergraf{
+         \scriptsize
+    \begin{tabularx}{\textwidth}{ #2 }
+        #3
+        
+    \end{tabularx}
+             
+             }
+     
+     \caption{#4} 
+     \label{tabulka:#1}
+ \end{tabulka}
+}
 
 \long\def\jednatabulka#1#2#3#4{
  \begin{tabulka}[h]
@@ -336,6 +350,8 @@ Czech, Russian, Machine translation
 \include{chap0}
 \include{chap1}
 \include{chap2}
+\include{chap3}
+\include{chap4}
 
 % Ukázka použití některých konstrukcí LateXu (odkomentujte, chcete-li)
 % \include{example}
