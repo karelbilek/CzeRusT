@@ -45,6 +45,23 @@ We used the newest version of PC Translator available at the time, which is PC T
 
 
 \subsection{Results}
+\subsubsection{Demonstration}
+\priklady {
+\priklad{ Je mi teprve čtyřiadvacet let a nemohu prožit celý svůj život s legitimací invalidy práce a potloukat se po nemocnicích , když vím , že je to marné~. }{ Есть мне только двадцать четыре рейс и не могу пережив весь свой жизнь с удостоверение личности инвалидами труд и болтаться по больницах , когда знаю , что это бесполезные~. }{Est` mne tol`ko dvadczat` chety're rejs i ne mogu perezhiv ves` svoj zhizn` s udostoverenie lichnosti invalidami trud i boltat`sya po bol`niczax , kogda znayu , chto e`to bespolezny'e~.}
+\priklad{ Generál chodil po pokoji sem a tam , kouře svou pěnovku~. }{ Генерал ходил по комнате туда - сюда , дыма свою пенковая трубка~. }{General xodil po komnate tuda - syuda , dy'ma svoyu penkovaya trubka~.}
+\priklad{ " Možná že žádné brilianty neexistují ? " }{ " возможно никакие бриллианты отсутствовать ?  }{" vozmozhno nikakie brillianty' otsutstvovat` ? }
+\priklad{ Nesměl při tom udělat chybu , vyžadovalo to stejnou přesnost , jako když se zaměřuje dělo~. }{ Обмен причём ошибиться , требовало то такой же аккуратность , как когда специализируется пушка~. }{Obmen prichyom oshibit`sya , trebovalo to takoj zhe akkuratnost` , kak kogda specializiruetsya pushka~.}
+\priklad{ S hrdostí vzpomněl , jak snadno dobyl kdysi srdce krásné Heleny Baurové~. }{ С гордостью вспомнил , как ходко захватил когда - то сердце красивое Елена Баурове~. }{S gordost`yu vspomnil , kak xodko zaxvatil kogda - to serdce krasivoe Elena Baurove~.}
+\priklad{ Thiago Silva, který patří k nejlepším obráncům na světě, taky umožňuje ostatním vedle sebe růst. }{ Тhиаго Силва, какой принадлежать к лучшим защитник в мире, тоже даёт возможность остальным плечом к плечу рост. }{Thiago Silva, kakoj prinadlezhat` k luchshim zashhitnik v mire, tozhe dayot vozmozhnost` ostal`ny'm plechom k plechu rost.}
+\priklad{ "Dávali mi pět let života a už je to sedm," říká bez emocí na svém lůžku v domě pro paliativní péči Victor-Gadbois v Beloeil, kam přijel předešlý den. }{ "давали мне пять лет жизни и уже это семь," говорит минус эмоций в своем гнезде в доме для башка опеку Victor-Гадбоис зажечься Бєлоєил, куда доехал предшествующий день. }{"davali mne pyat` let zhizni i uzhe e`to sem`," govorit minus e`mocij v svoem gnezde v dome dlya bashka opeku Victor-Gadbois zazhech`sya Bєloєil, kuda doexal predshestvuyushhij den`.}
+\priklad{ Opatrnost je ovšem na místě například na některých přemostěních, kde může být povrch namrzlý a kluzký. }{ Осторожность есть конечно на месте например на некоторых перекрытие, где может быть покрытие замёрзший и сальный. }{Ostorozhnost` est` konechno na meste naprimer na nekotory'x perekry'tie, gde mozhet by't` pokry'tie zamyorzshij i sal`ny'j.}
+\priklad{ Prostě je ignoruji. }{ Запросто есть игнорирую. }{Zaprosto est` ignoriruyu.}
+\priklad{ Podle doktorky Christiane Martelové není quebecký zdravotnický systém dostatečně výkonný, aby zajistil přístup všech osob ke kvalitní paliativní péči, než bude možno souhlasit s provedením eutanazie. }{ По врачи Christiane Мартєлове нет qуєбєцкэ медицинский комплекс достаточно производительный, чтобы обеспечил подход всех» личностей к качественный башка опеку, нежели можно будет согласиться с проведением єутаназиє. }{Po vrachi Christiane Martєlove net quєbєczke` medicinskij kompleks dostatochno proizvoditel`ny'j, chtoby' obespechil podxod vsex» lichnostej k kachestvenny'j bashka opeku, nezheli mozhno budet soglasit`sya s provedeniem єutanaziє.}
+}
+
+
+
+\subsubsection{BLEU}
 
 \jednatabulkan{bleutrans} { |r|r|r | }
 {
@@ -59,28 +76,7 @@ BLEU & 5.02\% $\pm$ 0.01\%
 \\ \hline
 }{PC translator BLEU}
 
-\jednatabulka{transsent1} { |X|X|X | }
-{
-\hline
-Je mi teprve čtyřiadvacet let a nemohu prožit celý svůj život s legitimací invalidy práce a potloukat se po nemocnicích , když vím , že je to marné .   &   Есть мне только двадцать четыре рейс и не могу пережив весь свой жизнь с удостоверение личности инвалидами труд и болтаться по больницах , когда знаю , что это бесполезные .   &   Est` mne tol`ko dvadczat` chety're rejs i ne mogu perezhiv ves` svoj zhizn` s udostoverenie lichnosti invalidami trud i boltat`sya po bol`niczax , kogda znayu , chto e`to bespolezny'e .\\ \hline
-Generál chodil po pokoji sem a tam , kouře svou pěnovku .   &   Генерал ходил по комнате туда - сюда , дыма свою пенковая трубка .   &   General xodil po komnate tuda - syuda , dy'ma svoyu penkovaya trubka .\\ \hline
-" Možná že žádné brilianty neexistují ? "   &   " возможно никакие бриллианты отсутствовать ?    &   " vozmozhno nikakie brillianty' otsutstvovat` ? \\ \hline
-Nesměl při tom udělat chybu , vyžadovalo to stejnou přesnost , jako když se zaměřuje dělo .   &   Обмен причём ошибиться , требовало то такой же аккуратность , как когда специализируется пушка .   &   Obmen prichyom oshibit`sya , trebovalo to takoj zhe akkuratnost` , kak kogda specializiruetsya pushka .\\ \hline
-S hrdostí vzpomněl , jak snadno dobyl kdysi srdce krásné Heleny Baurové .   &   С гордостью вспомнил , как ходко захватил когда - то сердце красивое Елена Баурове .   &   S gordost`yu vspomnil , kak xodko zaxvatil kogda - to serdce krasivoe Elena Baurove .\\ \hline
-
-}{PC Translator demonstration - InterCorp}
-\jednatabulka{transsent2} { |X|X|X | }
-{
-\hline
-Thiago Silva, který patří k nejlepším obráncům na světě, taky umožňuje ostatním vedle sebe růst.   &   Тhиаго Силва, какой принадлежать к лучшим защитник в мире, тоже даёт возможность остальным плечом к плечу рост.   &   Thiago Silva, kakoj prinadlezhat` k luchshim zashhitnik v mire, tozhe dayot vozmozhnost` ostal`ny'm plechom k plechu rost.\\ \hline
-"Dávali mi pět let života a už je to sedm," říká bez emocí na svém lůžku v domě pro paliativní péči Victor-Gadbois v Beloeil, kam přijel předešlý den.   &   "давали мне пять лет жизни и уже это семь," говорит минус эмоций в своем гнезде в доме для башка опеку Victor-Гадбоис зажечься Бєлоєил, куда доехал предшествующий день.   &   "davali mne pyat` let zhizni i uzhe e`to sem`," govorit minus e`mocij v svoem gnezde v dome dlya bashka opeku Victor-Gadbois zazhech`sya Bєloєil, kuda doexal predshestvuyushhij den`.\\ \hline
-Opatrnost je ovšem na místě například na některých přemostěních, kde může být povrch namrzlý a kluzký.   &   Осторожность есть конечно на месте например на некоторых перекрытие, где может быть покрытие замёрзший и сальный.   &   Ostorozhnost` est` konechno na meste naprimer na nekotory'x perekry'tie, gde mozhet by't` pokry'tie zamyorzshij i sal`ny'j.\\ \hline
-Prostě je ignoruji.   &   Запросто есть игнорирую.   &   Zaprosto est` ignoriruyu.\\ \hline
-Podle doktorky Christiane Martelové není quebecký zdravotnický systém dostatečně výkonný, aby zajistil přístup všech osob ke kvalitní paliativní péči, než bude možno souhlasit s provedením eutanazie.   &   По врачи Christiane Мартєлове нет qуєбєцкэ медицинский комплекс достаточно производительный, чтобы обеспечил подход всех» личностей к качественный башка опеку, нежели можно будет согласиться с проведением єутаназиє.   &   Po vrachi Christiane Martєlove net quєbєczke` medicinskij kompleks dostatochno proizvoditel`ny'j, chtoby' obespechil podxod vsex» lichnostej k kachestvenny'j bashka opeku, nezheli mozhno budet soglasit`sya s provedeniem єutanaziє.\\ \hline
-
-
-}{PC Translator demonstration - WMT2013}
-
+\subsubsection{Discussion}
 We can see the results are not ideal. The sentences are evidently translated word-by-word, without any regard for the whole sentence, or the correct word order.
 
 Because the languages are similar, the morphological information is sometimes transferred correctly -- for example, \uv{s hrdostí vzpomněl} -> \uv{с гордостью вспомнил} -- but sometimes, very incorrectly -- for example, genitive \uv{překrásné} is not with the correct ending as \uv{-ой}, but incorrectly as \uv{-ое}.
@@ -110,7 +106,21 @@ The tests were done on 3rd May, 2014.\footnote{I think it's important to note th
 
 \subsection{Results}
 
+\subsubsection{Demonstration}
+\priklady {
+\priklad{ Je mi teprve čtyřiadvacet let a nemohu prožit celý svůj život s legitimací invalidy práce a potloukat se po nemocnicích , když vím , že je to marné~. }{ Я всего двадцать четыре года, и я живу свою жизнь с купоном недействительным работы и болтаться в больнице, зная, что это бесполезно. }{Ya vsego dvadczat` chety're goda, i ya zhivu svoyu zhizn` s kuponom nedejstvitel`ny'm raboty' i boltat`sya v bol`nice, znaya, chto e`to bespolezno.}
+\priklad{ Generál chodil po pokoji sem a tam , kouře svou pěnovku~. }{ Генеральный ходил по комнате взад и вперед, его дым пены. }{General`ny'j xodil po komnate vzad i vpered, ego dy'm peny'.}
+\priklad{ " Možná že žádné brilianty neexistují ? " }{ "Возможно, не алмазы там?" }{"Vozmozhno, ne almazy' tam?"}
+\priklad{ Nesměl při tom udělat chybu , vyžadovalo to stejnou přesnost , jako když se zaměřuje dělo~. }{ Он не мог ошибиться в этом, это требуется такой же точности, как при фокусировке пушки. }{On ne mog oshibit`sya v e`tom, e`to trebuetsya takoj zhe tochnosti, kak pri fokusirovke pushki.}
+\priklad{ S hrdostí vzpomněl , jak snadno dobyl kdysi srdce krásné Heleny Baurové~. }{ Мы с гордостью вспомнил, как легко покорил когда-то сердце прекрасной Елены Баур. }{My' s gordost`yu vspomnil, kak legko pokoril kogda-to serdce prekrasnoj Eleny' Baur.}
+\priklad{ Thiago Silva, který patří k nejlepším obráncům na světě, taky umožňuje ostatním vedle sebe růst. }{ Тьяго Силва, один из лучших защитников в мире, также позволяет другой параллельный рост. }{T`yago Silva, odin iz luchshix zashhitnikov v mire, takzhe pozvolyaet drugoj parallel`ny'j rost.}
+\priklad{ "Dávali mi pět let života a už je to sedm," říká bez emocí na svém lůžku v domě pro paliativní péči Victor-Gadbois v Beloeil, kam přijel předešlý den. }{ "Они дали мне пять лет жизни, и это семь", говорит он без эмоций на его постели у себя дома для паллиативной помощи Виктор-Гадбуа в Beloeil, куда они прибыли в предыдущий день. }{"Oni dali mne pyat` let zhizni, i e`to sem`", govorit on bez e`mocij na ego posteli u sebya doma dlya palliativnoj pomoshhi Viktor-Gadbua v Beloeil, kuda oni priby'li v predy'dushhij den`.}
+\priklad{ Opatrnost je ovšem na místě například na některých přemostěních, kde může být povrch namrzlý a kluzký. }{ Внимание, однако, находится в месте, например, некоторые перемычки, где поверхность может быть ледяной и скользкий. }{Vnimanie, odnako, naxoditsya v meste, naprimer, nekotory'e peremy'chki, gde poverxnost` mozhet by't` ledyanoj i skol`zkij.}
+\priklad{ Prostě je ignoruji. }{ Просто игнорируйте их. }{Prosto ignorirujte ix.}
+\priklad{ Podle doktorky Christiane Martelové není quebecký zdravotnický systém dostatečně výkonný, aby zajistil přístup všech osob ke kvalitní paliativní péči, než bude možno souhlasit s provedením eutanazie. }{ По словам доктора Кристиана Martel Квебеке система здравоохранения не является достаточно мощным, чтобы обеспечить доступ для всех людей на высококачественной паллиативной помощи, прежде чем он может согласиться проводить эвтаназию. }{Po slovam doktora Kristiana Martel Kvebeke sistema zdravooxraneniya ne yavlyaetsya dostatochno moshhny'm, chtoby' obespechit` dostup dlya vsex lyudej na vy'sokokachestvennoj palliativnoj pomoshhi, prezhde chem on mozhet soglasit`sya provodit` e`vtanaziyu.}
+}
 
+\subsubsection{BLEU}
 \jednatabulkan{bleugoog} { |r|r|r | }
 {
 \hline
@@ -124,6 +134,8 @@ BLEU & 8.79\% $\pm$ 0.15\%
 \\ \hline
 }{Google translate BLEU}
 
+\subsubsection{Discussion}
+
 The first thing to note is the radically different results for Intercorp and WMT corpus. This disprepancy is not repeated in our other experiments, where both sets have BLEU that's closer to each other.
 
 This might be caused by two reasons. One reason might be that the complete WMT data are simply already included in Google's training data, while Intercorp is not. It's not that far-fetched theory: WMT is one year old already, and Google is one of WMT sponsors. On the other hand, in this case, the results should be even better than they actually are -- Google's results are, after all, worse, than our Moses experiments in chapter ??.
@@ -131,33 +143,6 @@ This might be caused by two reasons. One reason might be that the complete WMT d
 Other reason might be that Google is domain specificity of Google's training data. It's possible that Google is generally using far more newspaper data for training than just fiction, which might disadvantage Google's system in Intercorp case. Since we don't know Google's training data structure, we can't know for sure.
 
 
-
-\jednatabulkam{googsent1} { |X|X|X | }
-{
-\hline
-
-Je mi teprve čtyřiadvacet let a nemohu prožit celý svůj život s legitimací invalidy práce a potloukat se po nemocnicích , když vím , že je to marné .   &   Я всего двадцать четыре года, и я живу свою жизнь с купоном недействительным работы и болтаться в больнице, зная, что это бесполезно.   &   Ya vsego dvadczat` chety're goda, i ya zhivu svoyu zhizn` s kuponom nedejstvitel`ny'm raboty' i boltat`sya v bol`nice, znaya, chto e`to bespolezno.\\ \hline
-Generál chodil po pokoji sem a tam , kouře svou pěnovku .   &   Генеральный ходил по комнате взад и вперед, его дым пены.   &   General`ny'j xodil po komnate vzad i vpered, ego dy'm peny'.\\ \hline
-" Možná že žádné brilianty neexistují ? "   &   "Возможно, не алмазы там?"   &   "Vozmozhno, ne almazy' tam?"\\ \hline
-Nesměl při tom udělat chybu , vyžadovalo to stejnou přesnost , jako když se zaměřuje dělo .   &   Он не мог ошибиться в этом, это требуется такой же точности, как при фокусировке пушки.   &   On ne mog oshibit`sya v e`tom, e`to trebuetsya takoj zhe tochnosti, kak pri fokusirovke pushki.\\ \hline
-S hrdostí vzpomněl , jak snadno dobyl kdysi srdce krásné Heleny Baurové .   &   Мы с гордостью вспомнил, как легко покорил когда-то сердце прекрасной Елены Баур.   &   My' s gordost`yu vspomnil, kak legko pokoril kogda-to serdce prekrasnoj Eleny' Baur.\\ \hline
-
-
-}{Google Translate demonstration -- Intercorp}
-
-
-\jednatabulkam{googsent2} { |X|X|X | }
-{
-\hline
-
-Thiago Silva, který patří k nejlepším obráncům na světě, taky umožňuje ostatním vedle sebe růst.   &   Тьяго Силва, один из лучших защитников в мире, также позволяет другой параллельный рост.   &   T`yago Silva, odin iz luchshix zashhitnikov v mire, takzhe pozvolyaet drugoj parallel`ny'j rost.\\ \hline
-"Dávali mi pět let života a už je to sedm," říká bez emocí na svém lůžku v domě pro paliativní péči Victor-Gadbois v Beloeil, kam přijel předešlý den.   &   "Они дали мне пять лет жизни, и это семь", говорит он без эмоций на его постели у себя дома для паллиативной помощи Виктор-Гадбуа в Beloeil, куда они прибыли в предыдущий день.   &   "Oni dali mne pyat` let zhizni, i e`to sem`", govorit on bez e`mocij na ego posteli u sebya doma dlya palliativnoj pomoshhi Viktor-Gadbua v Beloeil, kuda oni priby'li v predy'dushhij den`.\\ \hline
-Opatrnost je ovšem na místě například na některých přemostěních, kde může být povrch namrzlý a kluzký.   &   Внимание, однако, находится в месте, например, некоторые перемычки, где поверхность может быть ледяной и скользкий.   &   Vnimanie, odnako, naxoditsya v meste, naprimer, nekotory'e peremy'chki, gde poverxnost` mozhet by't` ledyanoj i skol`zkij.\\ \hline
-Prostě je ignoruji.   &   Просто игнорируйте их.   &   Prosto ignorirujte ix.\\ \hline
-Podle doktorky Christiane Martelové není quebecký zdravotnický systém dostatečně výkonný, aby zajistil přístup všech osob ke kvalitní paliativní péči, než bude možno souhlasit s provedením eutanazie.   &   По словам доктора Кристиана Martel Квебеке система здравоохранения не является достаточно мощным, чтобы обеспечить доступ для всех людей на высококачественной паллиативной помощи, прежде чем он может согласиться проводить эвтаназию.   &   Po slovam doktora Kristiana Martel Kvebeke sistema zdravooxraneniya ne yavlyaetsya dostatochno moshhny'm, chtoby' obespechit` dostup dlya vsex lyudej na vy'sokokachestvennoj palliativnoj pomoshhi, prezhde chem on mozhet soglasit`sya provodit` e`vtanaziyu.\\ \hline
-
-
-}{Google Translate demonstration -- WMT2013}
 
 NĚJAKÉ HODNOCENÍ VÝSLEDKŮ - já osobně to nedokážu vůbec zhodnotit.
 
@@ -176,3 +161,39 @@ Again, we used Microsoft's Translator API (marketed as part of Windows Azure).
 The API is slightly more complicated than Google's API because of the auto-expiring token, but we used the example PHP script from the API documentation\footnote{\url{http://msdn.microsoft.com/en-us/library/hh454950.aspx}}.
 
 The pricing is slightly different in Microsoft Translator than in Google Translate, but in general is slightly cheaper. First 2 million letters are for free, next 2 million are for about 40 US dollars.
+
+\subsection{Results}
+\subsubsection{Demonstration}
+
+\priklady {
+\priklad{ Je mi teprve čtyřiadvacet let a nemohu prožit celý svůj život s legitimací invalidy práce a potloukat se po nemocnicích , když vím , že je to marné~. }{ Já jsem jen dvacet čtyři let, a já nemůžu žít jejich dní s relax pracovních Rove na nemocnic, protože věděl, že nemá cenu se. }{Já jsem jen dvacet čtyři let, a já nemůžu žít jejich dní s relax pracovních Rove na nemocnic, protože věděl, že nemá cenu se.}
+\priklad{ Generál chodil po pokoji sem a tam , kouře svou pěnovku~. }{ Generál pohyboval sem a tam, kouření jeho potrubí penkovuû. }{Generál pohyboval sem a tam, kouření jeho potrubí penkovuû.}
+\priklad{ " Možná že žádné brilianty neexistují ? " }{ -Možná, diamanty, ne? }{-Možná, diamanty, ne?}
+\priklad{ Nesměl při tom udělat chybu , vyžadovalo to stejnou přesnost , jako když se zaměřuje dělo~. }{ Tato práce však neumožňuje Přepis chyb-stejně jako zrak. }{Tato práce však neumožňuje Přepis chyb-stejně jako zrak.}
+\priklad{ S hrdostí vzpomněl , jak snadno dobyl kdysi srdce krásné Heleny Baurové~. }{ Hrdě připomněl, jak snadno dobyl srdce krásné Bouryho Helen. }{Hrdě připomněl, jak snadno dobyl srdce krásné Bouryho Helen.}
+\priklad{ Thiago Silva, který patří k nejlepším obráncům na světě, taky umožňuje ostatním vedle sebe růst. }{ Thiago Silva, který je jedním z nejlepších na světě, také motivuje, vše se pohnout kupředu. }{Thiago Silva, který je jedním z nejlepších na světě, také motivuje, vše se pohnout kupředu.}
+\priklad{ "Dávali mi pět let života a už je to sedm," říká bez emocí na svém lůžku v domě pro paliativní péči Victor-Gadbois v Beloeil, kam přijel předešlý den. }{ "Dostal jsem pět let, žil jsem sedm," říká, že mezi životem a smrtí, ležící v posteli a v útulku paliativní péče, Viktor-Gadbua v Belœil, den před příjezdem. }{"Dostal jsem pět let, žil jsem sedm," říká, že mezi životem a smrtí, ležící v posteli a v útulku paliativní péče, Viktor-Gadbua v Belœil, den před příjezdem.}
+\priklad{ Opatrnost je ovšem na místě například na některých přemostěních, kde může být povrch namrzlý a kluzký. }{ Nicméně péče je zapotřebí, například jako na mosty, kde může být kluzký povrch a namerzšaâ. }{Nicméně péče je zapotřebí, například jako na mosty, kde může být kluzký povrch a namerzšaâ.}
+\priklad{ Prostě je ignoruji. }{ Jen nevěnují velkou pozornost. }{Jen nevěnují velkou pozornost.}
+\priklad{ Podle doktorky Christiane Martelové není quebecký zdravotnický systém dostatečně výkonný, aby zajistil přístup všech osob ke kvalitní paliativní péči, než bude možno souhlasit s provedením eutanazie. }{ Podle Dr. Christiane Martel Quebec systém zdravotní péče není účinně zajistit právo na kvalitní paliativní péče, než jim bude povoleno přechod k eutanazii. }{Podle Dr. Christiane Martel Quebec systém zdravotní péče není účinně zajistit právo na kvalitní paliativní péče, než jim bude povoleno přechod k eutanazii.}
+}
+
+\subsubsection{BLEU}
+
+\jednatabulkan{bleubing} { |r|r|r | }
+{
+\hline
+&
+intercorp&
+WMT\\ \hline
+BLEU & 7.60\% $\pm$ 0.13\%
+&
+16.27\% $\pm$ 0.52\%
+
+\\ \hline
+}{Microsoft Translator BLEU}
+
+\subsubsection{Discussion}
+
+Já to celý budu muset nějak přepsat. Nevim co sem psát.
+

@@ -113,7 +113,7 @@
 \def\uv#1{``#1''}
 
 \long\def\jednatabulkan#1#2#3#4{
- \begin{tabulka}[h]
+ \begin{tabulka}[H]
      
          \centergraf{
          \footnotesize
@@ -162,6 +162,27 @@
      \caption{#4} 
      \label{tabulka:#1}
  \end{tabulka}
+}
+
+
+\newenvironment{pitemize}{
+\begin{itemize}
+  \setlength{\itemsep}{5pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+
+\long\def\priklady#1 {
+    \begin{pitemize}
+#1
+
+    \end{pitemize}
+}
+
+\long\def\priklad#1#2#3 {
+ \item \textbf{#1} \par\nobreak #2 \par\nobreak \emph{#3}
+
 }
 
 \begin{document}
@@ -352,6 +373,7 @@ Czech, Russian, Machine translation
 \include{chap2}
 \include{chap3}
 \include{chap4}
+\include{chap5}
 
 % Ukázka použití některých konstrukcí LateXu (odkomentujte, chcete-li)
 % \include{example}

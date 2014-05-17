@@ -1,0 +1,132 @@
+\chapter{Moses}
+
+\section{General description}
+Moses is an open-source machine translation toolkit with GPL licence, developed as a successor to the closed-source Pharaoh system.\footnote{See for example \cite{mosespaper} or \cite{moseslink} -- but Moses is used so often and so extensively that many other papers could be found}
+
+The system is very modular and very customizable, which makes it a bit harder to describe. In this section, I will try to describe our Moses set-up; bear in mind, however, that a completely different set-up is also possible.
+
+
+\subsection{Pipeline overview}
+At the start, we have a bilingual corpora of a given language pair, and bigger monolingual corpora of the target language.
+
+The bilingual corpora has to be prepared by aligning the sentences, so every sentence has exactly one translation. We describe our corpora in the part ???
+
+The sentences are then word-aligned, which means pairing words to their translations. We are using MGIZA++\footnote{See \cite{mgiza}}.
+
+From this word alignment, Moses learns a so-called \emph{phrase-based translation model}.
+
+From the monolingual corpora, we then learn a statistical language model. We use SRILM language model\footnote{See \cite{srilm}}.
+
+Moses is then used for so-called \emph{decoding} of the information from both the language model and the translation model, which choses the best possible translation, using things like beam-search.
+
+However, for the best translation, we need to tune Moses parameters for optimal results. This is done using so-called \emph{minimum rate error rating} -- or MERT for short, which is tuning the parameters on a small separate development set.
+
+After MERT tuning, we finally have working language model, translation model and Moses parameters, which is our complete translation system.
+
+To reiterate, this is our Moses pipeline
+\begin{pitemize}
+\item getting sentence-aligned parallel Czech-Russian corpus, plus Russian monolingual corporus
+\item world-alignment on parallel corpus
+\item creating phrase-based translation model
+\item creating Russian language model
+\item tuning the parameters for Moses decoder
+\end{pitemize}
+
+For managing input and output from the various steps, we use \emph{eman} system, which we transformed a little.
+
+\subsection{Factored translation}
+
+The pipeline, described in the previous section, translates phrases from the source language directly to the target language.
+
+However, with morphologically rich languages such as Russian or Czech, this can result in too low results. With so-called factored translation, we can add some morphological information while still keeping the main ideas of phrase-based translation.
+
+With factored translation, we add some morphological (or other) information to either source, target or both -- for example, lemma or morphological tag -- this is called a \emph{factor}. Then, instead of making language models and/or translation models on the words alone, we train them on some combination of these factors and then somehow put them together.
+
+
+\section{Our Moses setup}
+In this section, I am describing our exact setup and our data.
+
+\subsection{Parallel data}
+\subsubsection{Intercorp}
+In general, we described Intercorp corpus in \ref{intercorp_p1}.
+
+
+We created the Moses system before we started evaluating the system on the evaluation corpus, as described in Section \ref{intercorp_p1}. 
+The data we had access to were more limited at that time: they were from the previous version of Intercorp, didn't have all the metadata, such as the publishing dates and information about the original translation source, and were shuffled. However, we can reconstruct the metadata by comparing this shuffled data with the newest version of intercorp.
+
+
+TODO: popis intercorp dat
+
+\subsubsection{Subtitles}
+Another set of data that we used were subtitles from OpenSubtitles database.
+
+In a separate FilmTit project\footnote{???citovat ročníkový projekt/dokumentaci k němu?}, we tried to make a machine translation project for subtitle translation from English to Czech.
+
+For that project, we were given access to the set of subtitles from the server OpenSubtitles (\url{http://opensubtitles.org}). This dataset was not a pair of aligned sentences, not even a pair of aligned \emph{files}; we were given just a set of SRT files, and a table which paired each of those files with a movie (identified by IMDB number). Each movie usually has more subtitle files.
+
+Subtitle files have the sentences paired with timestamps.
+
+From a set of SRT files paired with a movie, we selected just one Czech and just one English SRT file which we find most similar, based on the timestamps.
+From the pair of the files, we then extract the sentences that have the most similar timestamps.
+
+These two pairings -- pairings of subtitle files and pairing of the actual lines -- are non-trivial task, and require a \uv{tolerance} -- how different can the times of a sentence be to be still paired together.
+
+Higher tolerance produces bigger corpus with more errors, while lower tolerance produces smaller, but more correct corpus.
+
+When we were experimenting on the afforementioned project, we found out, that the best results (tested both on another movie subtitles and a different corpus) are -- without exception -- with \emph{bigger corpus} and \emph{higher tolerance}. Even when that introduced a lot of incorrect sentence pairs, the overall results were still better with the biggest possible corpus.
+
+For Czech-to-Russian experiments, we were given another, similar set of subtitels from OpenSubtitles. The set was naturally much smaller than with English and Czech, but we were still able to use the same algorithms to build a parallel corpora.
+
+We again used the highest possible tolerance, and therefore surely introduced a lot of errors. Unfortunately, for a lack of time, we weren't able to replicate the experiments for the ideal tolerance here, however, we hoped that the results would be similar than in English-to-Czech translation, that is, the biggest corpus resulting in the best translation.
+
+\subsubsection{UMC corpus}
+UMC (UFAL Multilingual Corpus) is a Czech-English-Russian corpus\footnote{See \cite{umc}}. The data are downloaded from Project Syndicate, a Prague-based non-profit news organization, translating news and opinions from around the world.
+
+TODO: počty vět a tokenů, jediná věc, co o UMC můžu napsat
+
+\subsubsection{Wiki titles}
+We also extracted all of the titles from the Czech and Russian wikipedia, that correspond to each other.
+
+Those are usually only noun phrases and the main word is usually in nominative singular, so the morphology isn't that rich -- however, we hope that the model will learn some phrases needed for the translation of the named entities.
+
+\subsection{Monolignual data}
+\subsubsection{News Crawl}
+The largest part of our monolingual data is corpus from WMT workshops that they call \uv{News Crawl}.
+
+According to \cite{wmt_findings_2009}, WMT workshop has been continously crawling web articles since 2007 for making test sets. This allowed them to make a big, randomized corpus from all these sources.
+
+
+\subsection{Managing experiments}
+For managing the steps described further, such as training models, we need some overaching system -- steps variously fail, don't compile, don't fit in memory, etc., plus we would like to reuse partial results in more experiments.
+
+Moses itself has built-in perl-based experiment managment system, called prosaically Experiment Management System (EMS). However, this system is not very widely used in on UFAL.
+
+Instead of EMS, we use instead another perl-based tool called eman (experiment manager). Eman is described well in \cite{eman} or at its website, \url{http://ufal.mff.cuni.cz/eman}.  
+
+Eman breaks down experiment into so-called \uv{steps}. Step encapsulates an atomic part of an experiment and can be in one of a few various states. More importantly, step can be dependent on various other states; if a step fails, all steps dependent on it automatically fail. The whole experiment is then just another step, dependent on all the necessary substeps.
+
+Step is represented by a directory in a playground directory. Step is created by copying a script, called \uv{seed}, from a library of seeds, to a new directory.
+
+In our opinion, eman itself is well written, while we found the seeds themselves hard to read, too repetitive, and with large amount of code copied and pasted over. We tried to rewrite the seeds as perl modules, so the reusability is higher.
+
+I am not personally sure if this effort was successful. We decided to use MooseX::Declare, which seemed to us like a modern way to write modules in perl. 
+
+Unfortunately, MooseX::Declare is using very difficult-to-understand perl concepts and source code transformations, and as a result, it takes long to run and, perhaps worse, returns very confusing and undecypherable errors. So as a result of our refractoring, we have seeds that have code that's probably easier to read and refractor, but on the other hand, it's slow and produces very opaque errors.
+
+\subsection{Word alignment}
+For word alignment, we are using MGIZA++\footnote{See \cite{mgiza}}, which is a GPL toolkit based on GIZA++\footnote{See \cite{giza}}, which is itself based on models, sometimes called IBM Model 1 to IBM Model 5\footnote{See \cite{ibm}}, which is itself based on expectation–maximization algorithm (EM).
+
+IBM Models and the underlying EM algorithms are explained perfectly in Chapter~4 of \cite{koehn2010statistical} or in those slides by the same author -- \url{http://www.inf.ed.ac.uk/teaching/courses/mt/lectures/ibm-model1.pdf}.
+
+GIZA++ is an implementation of those models. MGIZA++ is just its multi-threaded variant, which makes the word alignment slightly faster.
+
+\subsection{Phrase-extraction}
+In this step, Moses takes the word alignment from the previous step and learns a so-called \uv{phrase table}.
+Unlike word alignment, phrase extraction spans multiple words on every side in so-called \uv{phrases}.
+
+Phrase table consists of list of phrases, their probabilities in both ways of translation, and their lexical weighting -- lexical weighting is the probability of the translated phrase counted by individual word pairs. The exact meaning of the numbers is well explained in \cite{koehn2003}.
+
+The phrase-table - defines a so-called \uv{translation model}. 
+
+\subsection{Language model}
+Language model is a part of the system, that tries to model the probability of a target language sentence alone. It's trained
