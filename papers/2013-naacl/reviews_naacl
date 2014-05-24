@@ -1,0 +1,220 @@
+
+============================================================================
+NAACL-HLT-SRW 2013 Reviews for Submission #17
+============================================================================
+
+Title: Unknown words in Statistical Machine Translation between
+morphologically rich and poor languages
+
+Authors: Karel Bilek and Natalia Klyueva
+============================================================================
+                            REVIEWER #1
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         Appropriateness: 5
+              Originality/Innovativeness: 2
+                   Soundness/Correctness: 4
+                 Impact of Ideas/Results: 3
+               Potential for Future Work: 4
+                   Meaningful Comparison: 3
+                            Thoroughness: 2
+                           Replicability: 5
+                                 Clarity: 5
+                                 Overall: 3
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+The paper presents backoff methods to handle unknown words - if a surface
+translation is not found, then translations are acquired by backoff to stemmed
+or lemmatized translation models.
+
+The paper uses the method of:
+Interpolated Backoff for Factored Translation Models, Philipp Koehn and Barry
+Haddow, Meeting of the Association for Machine Translation of the Americas
+(AMTA), 2012.
+But this paper is not cited.
+
+There is little new in terms of new methods, and also using stems or lemmas to
+cover unknown words is not novel (it has been tried for instance by the cited
+paper by Popopic and Nye, 2004). So, what remains as contribution is the
+experimentation on new language pairs for these methods, and the details of the
+design.
+
+However, there is very little analysis carried out. The curve of lower OOV rate
+but first higher and then falling quality is shorter stems is nice. The
+differences between lemma and stem-6 are interesting, but seem to partly
+attributable to the reason that the lemmatization does reduce much less unknown
+words. I would assume that lemmatization does no POS conversions (e.g., unknwon
+noun to known verb).
+
+I would like to see the author to dig a bit deeper what is happening here. What
+is the total number of tokens under the different reduction methods? What is
+the entropy of the translation probabilities?
+
+The author expresses surprise that Russian-Czech is worse than Russian-English.
+This should not be a surprise given the results from:
+462 Machine Translation Systems for Europe, Philipp Koehn, Alexandra Birch and
+Ralf Steinberger, MT Summit XII, 2009
+which indicate that rich target side morphology is a main cause for bad
+translation quality.
+
+The comparable bad performance of Russian-Czech may be also an artifact of the
+data. Most of the content in the parallel corpus is likely to be originally in
+English, and was then translated into Czech and Russian. So, the parallel data
+is "closer" for language pairs with English, then others were each side of the
+corpus was generated with a different translation process, allowing for more
+and different variation to creep in.
+
+The author measures the number of unknown words by the number of cyrillic
+words. Why not look at the phrase table to see what is covered or use more
+detailed reporting from Moses? This would give more accurate numbers.
+
+One thing to try out would be the use of multiple backoff stages: If no stem6
+translation is found, then stem5 is tried. If that fails again, then go down to
+stem4.
+
+============================================================================
+                            REVIEWER #2
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         Appropriateness: 5
+              Originality/Innovativeness: 3
+                   Soundness/Correctness: 4
+                 Impact of Ideas/Results: 3
+               Potential for Future Work: 3
+                   Meaningful Comparison: 4
+                            Thoroughness: 3
+                           Replicability: 5
+                                 Clarity: 4
+                                 Overall: 3
+
+
+---------------------------------------------------------------------------
+Questions for Authors
+---------------------------------------------------------------------------
+
+Do you really believe that simply stripping words to their first 6
+characters is the best long-term solution to translation from
+morphologically-rich languages? If not, what do you think is the path
+forward from here? It's nice to get some improvement in BLEU score, but
+I would like to understand how this paper can fit in to future work
+on getting very accurate translations between these languages.
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper explores the problem of OOV words in phrase-based
+translation from morphologically-rich languages. I am not an MT
+expert, but the problem seems to be well-identified, as the large
+number of affixes can cause many surface forms not to appear in the
+labeled data, despite the fact that they are closely related to
+surface forms which do appear. The proposed solution, if I understand
+it correctly, is to simply strip the endings of these words (for
+various definitions of "ending"). This reduces the OOV rate and
+increases the BLEU score. I wasn't clear on the information contained
+in these affixes was ever restored to the translation, or whether it
+was felt to be irrelevant to obtaining a good translation.
+
+One surprising point about the experiments is that length 6 seems to
+give the best results, yet higher lengths were not tried!
+
+The paper claims that since Russian-English translation gets higher
+BLEU scores than Russian-Czech translation, this shows that the
+relationship between the two Slavic languages is irrelevant.  I'm not
+sure I agree that BLEU scores in two different target languages can be
+compared in this way. English has lots of function words which might
+be easy to get, making BLEU scores in English just intrinsically
+higher.
+
+As someone who is familiar with but far from an expert on phrase-based
+MT, I found some aspects of the paper hard to follow. This is mainly
+due to a lack of context and explicit detail, rather than opaqueness
+of the writing itself. But from a stylistic standpoint, the writing is
+rather different from other NLP papers, and this may hurt you with
+reviewers in the future. I would suggest that you model your writing
+closely after good writers in the community, such as Kevin Knight,
+Lillian Lee, Philip Resnick, as well as the organizers of this
+workshop :)
+
+============================================================================
+                            REVIEWER #3
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         Appropriateness: 5
+              Originality/Innovativeness: 2
+                   Soundness/Correctness: 3
+                 Impact of Ideas/Results: 2
+               Potential for Future Work: 2
+                   Meaningful Comparison: 3
+                            Thoroughness: 2
+                           Replicability: 3
+                                 Clarity: 3
+                                 Overall: 1
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper addresses the task of MT for morphologically complex languages.
+Complex surface forms lead to sparsity in the phrase tables, which hurts
+translation. The authors present an approach that relies on first
+morphologically analyzing the input, and then using the new forms for MT.
+
+I will begin with the caveat that I am not an MT researcher, thought I didn't
+have any trouble understanding the topics of this paper.
+
+The problem the authors tackle is important and well known. However, I don't
+see anything novel about the solutions proposed by the authors. There has been
+a lot of work on these tasks. This paper describes a simple approach taken for
+a specific language pair, but I didn't learn anything generally useful from the
+experiments.
+
+A few comments.
+
+Section 2 doesn't make much sense. It seems like it hasn't been properly
+edited.
+
+"This allows us to count OOV rate in a very efficient way, since cyrillic
+characters in non-cyrillic text almost surely mean untranslated cyrillic word
+and vice versa."
+Are you talking about machine translated data or the reference? If MT output,
+this is a strange comment. If the reference translation, why wouldn't they be
+translated?
+
+Section 3.2 is meaningless. It should be removed.
+
+Section 4: You don't discuss how you do alignments. One approach would be to
+align using the analyzed form of the words, but extract phrases based on the
+full surface form.
+
+Section 6: The numeric labeling system for results is really confusing. Use
+meaningful descriptors.
+
+Every table is formatted differently. Be consistent.
+
+"What is, however, surprising is, that the ”deeper” relationship between
+Russian and Czech doesn’t help the translation at all. "
+The "surprising" result isn't surprising at all. Russian and Czech are much
+more complex than English in terms of morphology. Trying to translate between
+them only increases sparsity. English is much simpler and so will have less
+sparsity in the extracted phrases. This is entirely what I'd expect.

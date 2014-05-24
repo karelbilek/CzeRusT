@@ -34,14 +34,6 @@ To reiterate, this is our Moses pipeline
 
 For managing input and output from the various steps, we use \emph{eman} system, which we transformed a little.
 
-\subsection{Factored translation}
-
-The pipeline, described in the previous section, translates phrases from the source language directly to the target language.
-
-However, with morphologically rich languages such as Russian or Czech, this can result in too low results. With so-called factored translation, we can add some morphological information while still keeping the main ideas of phrase-based translation.
-
-With factored translation, we add some morphological (or other) information to either source, target or both -- for example, lemma or morphological tag -- this is called a \emph{factor}. Then, instead of making language models and/or translation models on the words alone, we train them on some combination of these factors and then somehow put them together.
-
 
 \section{Our Moses setup}
 In this section, I am describing our exact setup and our data.
@@ -95,6 +87,21 @@ The largest part of our monolingual data is corpus from WMT workshops that they 
 
 According to \cite{wmt_findings_2009}, WMT workshop has been continously crawling web articles since 2007 for making test sets. This allowed them to make a big, randomized corpus from all these sources.
 
+The corpus is categorized by year, and we treat each year as its own corpus for the interpolation.
+\subsubsection{Common Crawl}
+Common Crawl is publicly available web crawl\footnote{From Wikipedia -- \uv{A Web crawler is an Internet bot that systematically browses the World Wide Web, typically for the purpose of Web indexing. }; web crawl is then a result of such a web crawler} -- \url{http://commoncrawl.org/}.
+
+As described in \cite{commoncrawl}, group of researchers tried to extract parallel data from this web crawl. One of the language pairs was English-Russian and the result is publicly available on WMT site. We used the Russian side of the corpus.
+
+However, the quality of this corpus is very discutable. Because it contains data downloaded from the \uv{raw web}, it often has sentences in different languages, sentences in machine-translated Russian, random UTF-8 symbols, random HTML data, some code, and so on.
+
+This was one of the reasons why we decided to use linear interpolation as discussed above -- hoping, that the tuning algorithm will automatically \uv{find the right balance} between the language models.
+
+\subsubsection{Yandex}
+%Yandex is a Russian portal and search service, that can be described like a Russian mix between Google and Yahoo!. One of its services is a free translation service
+Yandex was already described in the chapter ??. Apart from providing free translation API, Yandex also provides an English-Russian parallel corpus.
+
+We used the Russian part of this corpus for language modelling.
 
 \subsection{Managing experiments}
 For managing the steps described further, such as training models, we need some overaching system -- steps variously fail, don't compile, don't fit in memory, etc., plus we would like to reuse partial results in more experiments.
@@ -129,4 +136,57 @@ Phrase table consists of list of phrases, their probabilities in both ways of tr
 The phrase-table - defines a so-called \uv{translation model}. 
 
 \subsection{Language model}
-Language model is a part of the system, that tries to model the probability of a target language sentence alone. It's trained
+Language model is a part of the system, that tries to model the probability of a target language sentence alone. It's trained on a monolingual corpus.
+
+We use SRILM, which is an open source language modeling toolkit. (Although it's open-source, it uses its own license, that allows free use only for non-commercial and educational purposes.) Current status of SRILM is described in \cite{srilm}, original design is described in \cite{srilm_old}. 
+
+SRILM uses several models, one of them is n-gram word model, described well in \cite{koehn2010statistical}\footnote{chapter 7}. We use n-grams model to the order 3 with words and order 5 with tags (see ???). We smooth the models with Kreser-Ney smoothing with Chen and Goodman's modification\footnote{See \cite{chen} and \url{http://www.speech.sri.com/projects/srilm/manpages/ngram-discount.7.html}}. 
+
+
+\subsection{Language model interpolation}
+
+We had more than one monolingual Russian corpora, but we weren't sure of how high quality each of them were and how helpful it would be. For this reason, we used so-call interpolation (also called mixing).
+
+Linear interpolation in general is described for example in \cite{gutkin}. On a separate heldout data, set of \emph{lambdas} are trained -- the resulting probabilities are then just the individual probabilities, multiplied by the lambdas and summed.
+
+Linear interpolation is supported by undocumented script in Moses \texttt{interpolate-lm.perl}, which in turn uses SRILM's undocumented AWK script \texttt{compute-best-mix.gawk} and SRILM's \texttt{ngram} with \texttt{-mix-lm} option\footnote{See \url{http://www.speech.sri.com/projects/srilm/manpages/ngram.1.html}}.
+
+We used a linear interpolation instead of log-linear interpolation simply because we didn't notice the option until later in the project.
+
+\subsection{Factored translation}
+\subsubsection{Overview}
+
+The pipeline, described in the previous section, translates phrases from the source language directly to the target language.
+
+However, with morphologically rich languages such as Russian or Czech, this can result in too low results. With so-called factored translation, we can add some morphological information while still keeping the main ideas of phrase-based translation.
+
+With factored translation, we add some morphological (or other) information to either source, target or both -- for example, lemma or morphological tag -- this is called a \emph{factor}. Then, instead of making language models and/or translation models on the words alone, we train them on some combination of these factors and then somehow put them together.
+
+\subsubsection{Factor experiments}
+In a separate set of experiments, that predate the whole experiment described here, only on the UMC data described in the section ??, we compared several set-ups for factored translation.
+
+We used a set-up described for example in \cite{backoff}. However, since we do not have Russian morhpology fully working, we used only the system described as \texttt{lemma backoff} -- with the exception of not translating to lemma. We were not using interpolated backoff, simply because regular backoff is easier to use with Moses.
+
+The main model translates from a word form on the source side to word form and tag on the target side. The backoff model translates from a lemma (or a stem -- see below) to form and tag on the target side.
+
+For Russian, we used TreeTagger software\footnote{\url{http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/}, also see \cite{treetagger1} and \cite{treetagger2}} with a Russian parameter file\footnote{trained on a corpus created by Serge Sharoff, see \url{http://corpus.leeds.ac.uk/mocky/}}. TreeTagger is a closed-source software with a restrictive license, but for free for research purposes.
+
+For Czech, we used tokenizer from UFAL project Treex (described further in section XXX) and morphological analyzer Morče (\url{http://ufal.mff.cuni.cz/morce/references.php}); however, we didn't actually use its output, as described further.
+
+When we experimented further, we found out that using not lemma on the source side, but a very crude lexical stem -- just using the first 4 letters of a word -- gets better results\footnote{Using stems instead of lemmas is suggested for example in XX. However, their stems are more linguistically motivated, while we just crudely take first few letter}. When we tried the experiment with different lengths of the stem, we got the results, shown in the graph XX -- the lexical stem of the lengths XX was the best.
+
+Therefore, we continued to use that in our further experiments, as for example in the WMT submissions\footnote{citace tu}.
+
+
+
+
+???? výsledky, ale stejně to budu přehazovat
+
+
+
+
+
+
+
+
+
