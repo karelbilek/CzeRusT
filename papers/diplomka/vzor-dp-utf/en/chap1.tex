@@ -1,17 +1,75 @@
-\chapter{Brief history of Czech and Russian}
+\chapter{Brief comparison of Czech and Russian}
 
-\section{Proto-Slavic}
+\section{Slavic in general}
+This section is an overview of history of Slavic languages and also of some characteristics of Slavic languages in general.
+%, mainly with the respect of machine translation.
+
+%I am focusing mainly on syntactical changes -- not because there are no morphological, phonological or lexical changes, but because there are too many to cover here.
+
+If a reader is interested in a further study of Slavic languages as a whole from linguistic perspective, I can only recommend \cite{sussex2011slavic}.
+Unless otherwise noted, information in this chapter are taken from this book.\subsection{History}
+
+\label{ch:common_history}
 
 The Indo-Europeans occupied European lands from approximately 4000 BC. Their language, Proto-Indo-European (PIE), is not known and can only be linguistically reconstructed. 
 
-In approximately 2000 BC, a Proto-Slavic (PS) language started to emerge. Until approximately 400 AD, the language was fairly uniform and the land occupied by Slavs was broadly coherent, stretched approximately from Oder river (Odra in Polish) to Dnieper (Днепр in Russian).\footnote{See \cite{sussex2011slavic}, pg.19 and further} 
+In approximately 2000 BC, a Proto-Slavic (PS) language started to emerge. Until approximately 400 AD, the language was fairly uniform and the land occupied by Slavs was broadly coherent, stretched approximately from Oder river (Odra in Polish) to Dnieper (Днепр in Russian).
 
-In this part, I am describing some of the general changes from PIE to PS.
-I am focusing mainly on syntactical changes -- not because there are no morphological, phonological or lexical changes, but because there are too many to cover here.
+\subsection{Slavic languages overview}
+\subsubsection{Morhpology}
+On the morphological typology, Slavic languages belong to synthetic inflectional languages. It's morphologically rich, with a sophisticated system of prefixes, roots and suffixes, with some analytical approaches (for example, in verb morphology).
 
-If a reader is interested in a further study of a history of Slavic languages and their difference in total, I can only recommend \cite{sussex2011slavic}. \footnote{Unless otherwise noted, information in this chapter are taken from this book.}
+Slavic words consist of one or more roots -- the main component of the word -- and then several prefixes and suffixes. Prefixes usually modify the word's meaning somehow (for example, \uv{ne-} for negative), while suffixes are either derivational, inflectional or post-inflectional (appearing in this order).
 
-\subsection{Cases}
+The derivational suffixes can determine word's class with processes like nominalization, verbalization, adjectivalization. Next are inflectional suffixes (also called endings), that mark one of several categories.
+
+\jednatabulkan{reflex} { |l |l | l | }
+{
+         \hline
+
+to wash (someone) & mýt & мыть \\ \hline
+to wash (self) & mýt se & мыться \\ \hline
+
+
+} {Reflectives in Russian vs. Czech} 
+
+Post-inflectional suffixes are found in some languages (like Russian) for example for reflectivity, whereas in other languages a separate word is used. See for example Table~\ref{tabulka:voices} (also compare to the voices in the section~\ref{ch:mediopassive}).
+
+\jednatabulkan{categories} { |l |l | l | }
+{
+         \hline
+
+\textbf{Verbs} & \textbf{Nominals} & \textbf{Both} \\ \hline
+Tense & Case & Person \\ \hline
+Aspect & Definiteness & Gender \\ \hline
+Mood & Deixis & Number \\ \hline
+Voice &  &  \\ \hline
+
+
+} {Inflectional categories} 
+
+Inflectional categories that are presented in the Slavic languages are described in the Table~\ref{tabulka:categories} (definiteness and deixis as inflectional categories are, however, not relevant to either Czech or Russian, but are used as such in Macedonian or Bulgarian).
+
+Slavic languages are surprisingly uniform in the word formation system, and the operations and grammatical processes are simmilar -- however, the affixes themselves are usually either wholly different, or have vastly different semantic and stylistic properties -- either absolutely, or in combination with other words.
+
+The result of the described morphological richness is that the number of word forms arise significantly, especially when compared with more analytical languages (like English). As you can see in the section XXX, in the same corpus, Czech and Russian have \emph{significantly} more word forms, than English.
+%That can hurt us 
+\subsubsection{Word order}
+%Word-classes in Slavic languages are very similar to other European languages. They have open word-classes: nous, verbs, adjectives, adverbs; and closed word-classes: auxiliaries, determiners, pronouns, prepositions, conjunctions and interjections. Across the Slavic languages, those part of speech are fairly simmilar.
+In English, syntactic relations are marked mainly by word order. In Slavic languages, however, those relations are marked instead by three types of inflexion: concord, agreement and government.
+
+For example, subject \emph{agrees} with predicate in number, person and gender. 
+
+Because the relations are marked by inflexion, it \uv{allows} the language to be of freer word order; and indeed, in Slavic languages, the word order variations are more common than in other languages. The \emph{standard} order is SVO, however, this is possible to change when different emphasis is needed.
+
+In particular, this reffers to the so-called Functional Sentence Perspective. Very simply said, it states that sentence could be split in two parts -- Topic and Comment, appearing in this order and being separated by a verb. Topic is the part of sentence, \emph{about which something is said} -- while Comment is the \emph{new information presented}. Most importantly, Topic doesn't have to be a grammatical subject of the sentence -- for example, the Czech sentence \uv{Ve městě bydlí strašidla} (\emph{Ghosts live in the city}, literally \emph{In city live ghosts}).
+
+Slavic languages usually (with some exceptions like Bulgarian and Macedonian) don't have particles or any other means of marking definitiveness -- except for definite information being in the topic of the sentence. In other view, the word order and functional sentence perspective can be seen as \uv{replacing} the definitive particles, and is usually translated as such in translation to English.
+
+In respect to the translation between English and Slavic languages, word order can be seen as a nuisance and hard to translate correctly. However, with translation between Slavic languages, it can actually help us, since we can preserve the word order and move the words less.
+\subsection{Some changes from PIE to PS}
+
+\subsubsection{Cases}
 \jednatabulka{korintskym} { |l|X |X | X | }
 {
          \hline
@@ -38,13 +96,14 @@ Milost vám a pokoj od Boha, našeho Otce, a od \textbf{Pána} Ježíše Krista 
 PIE had seven cases - nominative, accusative, genitive, dative, instrumental, locative, ablative and vocative. 
 In PS, ablative and genitive were conflated into just genitive. 
 
-To illustrate, I have added a simple comparison of old latin and Czech. 
+Two phrases from New Testament can offer us a demonstration.
+%To illustrate, I have added a simple comparison of old latin and Czech. 
 
-Latin retained both ablative and genitive. Latin genitive of \emph{dominus} (lord, master) is \emph{dominī}, latin ablative of the same word is  \emph{dominō}. Both these forms were used in the very beginning of 1~Corinthians in Latina Vulgata (latin version of The Bible).
+Old Latin retained both ablative and genitive. Latin genitive of \emph{dominus} (lord, master) is \emph{dominī}, latin ablative of the same word is  \emph{dominō}. Both these forms were used in the very beginning of 1~Corinthians in Latina Vulgata (latin version of The Bible).
 
 In the Table~\ref{tabulka:korintskym}, I have shown the translation to both Czech and English. We can see that both cases are inflated in Czech as genitive \uv{(našeho) pána}.\footnote{Bible sources: \cite{latinavulgata}, \cite{bibleniv}, \cite{bible21}. Note that English and Czech translations are not actually translations from Latin, but from more primary sources, but it will suffice for this simple comparison.}
 
-\subsection{Numbers}
+\subsubsection{Numbers}
 \jednatabulkan{kravy} { |l|l |l | l | }
 {
          \hline
@@ -84,18 +143,19 @@ To illustrate, I have added a comparison of \uv{one cow}, \uv{two cows} and \uv{
 
 In Czech, dual was retained in declensions of several words, like \uv{hands}; in Russian, the dual \uv{рукама} survives in some dialects, but is generally incorrect.\footnote{See \cite{offord1996using}, page 18.}
 
-\subsection{Genders}
+\subsubsection{Genders}
 PIE had three genders, masculine, feminine and neutral. PS retained these genders, adding categories Personal and Animate.
 
-\subsection{Tenses}
+\subsubsection{Tenses}
 PIE had six tenses: present, future, aorist, imperfect, perfect and pluperfect. 
 
 The tenses were somehow retained in PS; however, future, perfect and pluperfect were in many cases re-formed analytically --- creating more complex forms with auxiliary verb and either an infinitive or past participle -- for example, \uv{budu zpívat} (I will sing) in Czech, or \uv{буду петь} in Russian.
 
-\subsection{Moods}
+\subsubsection{Moods}
 PIE had four moods: indicative, subjunctive, optative and imperative. In PS, imperative forms were replaced by the optatives, and subjunctive mood slowly became conditional.
 
-\subsection{Voices}
+\subsubsection{Voices}
+\label{ch:mediopassive}
 \jednatabulkan{voices} { |l|l |l | l | }
 {
          \hline
@@ -113,7 +173,9 @@ In PS, this was refined as a reflexive and a non-reflexive voice, with the addit
 
 To illustrate, I have added an example of Classic Greek that still retained the mediopassive voice, in Table~\ref{tabulka:voices}.\footnote{See for example \cite{greek1}, \cite{greek2}}
 
-\subsection{Aspects}
+
+
+\subsubsection{Aspects}
 \jednatabulkan{nosim} { |l|l |l |  }
 {
          \hline
