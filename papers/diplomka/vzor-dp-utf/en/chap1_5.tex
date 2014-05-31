@@ -203,6 +203,7 @@ fixing the issues of the standard frameworks, copying API of a closed-source lib
 Reading the paper \cite{evalquality_cesilko}, that presents Česílko 2.0 with a very low BLEU, I think the same issue plagued the authors of that paper -- it's unprobable the BLEU of the correctly working system would be that low, when in \cite{cesilko2}, the results of Česílko 2.0 were slightly better than of Česílko 1.0.
 
 \section{Black-box systems}
+\label{blackbox}
 In this chapter, I am describing all the \uv{black-box} systems -- that is, without any access to the source code -- that we successfully tried.
 
 \subsection{PC Translator}
@@ -375,7 +376,7 @@ SRILM uses several models, one of them is n-gram word model, described well in \
 
 
 \subsection{Language model interpolation}
-
+\label{interpol}
 As described in the section XX, we had more than one monolingual Russian corpora, but we weren't sure of how high quality each of them were and how helpful it would be. For this reason, we used so-call interpolation (also called mixing).
 
 Linear interpolation in general is described for example in \cite{gutkin}. On a separate heldout data, set of \emph{lambdas} are trained -- the resulting probabilities are then just the individual probabilities, multiplied by the lambdas and summed.
@@ -400,27 +401,37 @@ morphological (or other) information. We can add additional information (for exa
 
 \subsubsection{Our factored translation experiments}
 \label{factors}
-In a separate set of experiments only on UMC data (described in the section ??), we realized our Moses results have a high OOV rate\footnote{Out Of Vocabulary; how many words were untranslated due to not being found in the phrase table}; this is easily recognizable by Latin script appearing in Czech-to-Russian translation (or Cyrillics in the opposite direction). We then tried to compare several set-ups for factored tranlation to get lower OOV rate and higher BLEU scores.
+In a separate set of experiments only on UMC data (this dataset is described in the section ??), we realized our Moses results have a high OOV rate\footnote{Out Of Vocabulary; how many words were untranslated due to not being found in the phrase table}; this is easily recognizable by Latin script appearing in Czech-to-Russian translation (or Cyrillics in the opposite direction). We then tried to compare several set-ups for factored tranlation to get lower OOV rate and higher BLEU scores.
 
-We used a set-up described for example in \cite{backoff}. However, since we did not have Russian morhpology fully working, we used only the system described as \texttt{lemma backoff} -- with the exception of not translating to lemma. We were not using interpolated backoff, simply because regular backoff is easier to use with Moses.
+\grafff{backoff}{Backoff model}{60}
 
-The main model translates from a word form on the source side to word form and tag on the target side. The backoff model translates from a lemma (or a stem -- see below) to form and tag on the target side.
+We used a modified version of a set-up described for example in \cite{backoff} as \texttt{lemma backoff}. The set-up is illustrated on Figure~\ref{graf:backoff}, on the left.
 
-For Russian, we used TreeTagger software\footnote{\url{http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/}, also see \cite{treetagger1} and \cite{treetagger2}} with a Russian parameter file\footnote{trained on a corpus created by Serge Sharoff, see \url{http://corpus.leeds.ac.uk/mocky/}}. TreeTagger is a closed-source software with a restrictive license, but for free for research purposes.
+The primary translation model is from full word on source side to the full word and morphological tag on target side. The backoff translation model is from lemma on source side to the full word and morphological tag on target side. Then we are using two language models, one for tags and one for words (both separately interpolated, as described in \ref{interpol}).
 
-For Czech, we used tokenizer from UFAL project Treex (described further in section XXX) and morphological analyzer Morče (\url{http://ufal.mff.cuni.cz/morce/references.php}); however, we didn't actually use its output, as described further.
+We were not using interpolated backoff, simply because regular backoff is easier to use with Moses. We were not using models that generate the words from lemma+tag, because we didn't have a working module for Russian morphological generation -- as a result, we can only get the word-forms found on the target side of the parallel training data.
 
-When we experimented further, we found out that using not lemma on the source side, but a very crude lexical stem -- just using the first 4 letters of a word -- gets better results\footnote{Using stems instead of lemmas is suggested for example in XX. However, their stems are more linguistically motivated, while we just crudely take first few letter}. When we tried the experiment with different lengths of the stem, we got the results, shown in the graph XX -- the lexical stem of the lengths XX was the best.
-
-Therefore, we continued to use that in our further experiments, as for example in the WMT submissions\footnote{citace tu}.
+%Primary, we are translating from full word to fill word and morphological tag; only as a backoff, we are translating from 
 
 
+%However, since we did not have Russian morhpology fully working, we used only the system described as \texttt{lemma backoff} -- with the exception of not translating to lemma. 
+%We were not using interpolated backoff, simply because regular backoff is easier to use with Moses.
 
+%The main model translates from a word form on the source side to word form and tag on the target side. The backoff model translates from a lemma (or a stem -- see below) to form and tag on the target side.
 
+For tagging Russian, we used TreeTagger software\footnote{\url{http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/}, also see \cite{treetagger1} and \cite{treetagger2}} with a Russian parameter file\footnote{trained on a corpus created by Serge Sharoff, see \url{http://corpus.leeds.ac.uk/mocky/}}. TreeTagger is a closed-source software with a restrictive license, but for free for research purposes.
 
+For Czech, we used tokenizer from UFAL project Treex (described further in section XXX) and for lemmatizing, we used morphological analyzer Morče (\url{http://ufal.mff.cuni.cz/morce/references.php}); however, as described further, in the final system we didn't actually use its output.
 
+With further experimenting, we discovered that using not lemma on the source side, but a \emph{very crude} stem -- just using the first $n$ letters of a word -- gets better results.\footnote{Using stems instead of lemmas is suggested for example in \cite{stemy}. However, their stems are more linguistically motivated, while we just crudely take first few letters. It's actually debatable if our \uv{stems} can be called stems at all.} 
+The model is illustrated on Figure~\ref{graf:backoff}, on the right.
 
+\grafff{stem-plot-csru}{Comparison of various set-ups}{100}
 
+The results of our experiment are seen on Figure~\ref{graf:stem-plot-csru} -- \emph{baseline} is original moses with no factors, \emph{1-lemma} and \emph{1-stem} are the \uv{backoff} models without the main model, and \emph{2-stem} and \emph{2-lemma} are the whole models with backoff.
+ 
+We can see that stem with length 6 gets the best results. So, we used stemma with the length 6 in further experiments, such as the WMT submission \cite{mujpaper}.
 
-
+\section{Treex}
+TODO
 %limited to 1 million

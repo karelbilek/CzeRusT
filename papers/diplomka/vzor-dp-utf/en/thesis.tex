@@ -98,6 +98,12 @@
 \newfloat{tabulka}{tbph}{lop}
 \floatname{tabulka}{Table}
 
+
+\newfloat{graff}{tbph}{lop}
+\floatname{graff}{Figure}
+
+
+
 \long\def\centergraf#1 {
 {
     \begingroup
@@ -163,6 +169,17 @@
      \label{tabulka:#1}
  \end{tabulka}
 }
+
+\long\def\grafff#1#2#3{
+ \begin{graff}[h]
+         \centergraf{
+      \includegraphics[width=#3mm]{./#1.pdf}
+       \caption{#2}
+      \label{graf:#1}
+ }
+     \end{graff}
+ }
+
 
 
 \newenvironment{pitemize}{
@@ -372,6 +389,7 @@ Czech, Russian, Machine translation
 \include{chap1}
 \include{chap1_5}
 %\include{chap2}
+\include{chap2_data}
 %\include{chap3}
 %\include{chap4}
 %\include{chap5}
