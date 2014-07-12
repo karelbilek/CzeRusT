@@ -191,14 +191,31 @@
 
 
 \long\def\priklady#1 {
-    \begin{pitemize}
+
+\begin{pitemize}
 #1
 
     \end{pitemize}
+
 }
 
+\usepackage{stringstrings}
+
+
+
+\makeatletter
+\newcommand*{\stripstartspaces}{%
+  \expandafter\@ifnextchar\expandafter X\expandafter{\expandafter
+  }\expandafter{\expandafter}%
+}
+\makeatother
+
+
+\newcommand{\removelinebreaks}[1]{%
+  \begingroup\def\\{}#1\endgroup}
+
 \long\def\priklad#1#2#3 {
- \item \textbf{#1} \par\nobreak #2 \par\nobreak \emph{#3}
+ \item\textbf{#1}\par\nobreak#2\nobreak\noindent\par\emph{\stripstartspaces#3}
 
 }
 
@@ -390,6 +407,7 @@ Czech, Russian, Machine translation
 \include{chap1_5}
 %\include{chap2}
 \include{chap2_data}
+\include{chap3_results}
 %\include{chap3}
 %\include{chap4}
 %\include{chap5}
