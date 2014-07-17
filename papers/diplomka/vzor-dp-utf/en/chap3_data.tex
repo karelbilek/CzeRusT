@@ -1,0 +1,201 @@
+\chapter{Data}
+In this chapter, I am describing both data, used for testing the systems, and training data used for training Moses and Treex(???) models.
+
+\section{Test data}
+\label{testset}
+To compare several machine translation systems, we need some consistent data to show the deficiencies and/or improvements of different MT systems.
+
+In general, we want to produce a system that's general enough and performs well on unseen sentences; for that reason, we should have -- in the case of statistical MT systems -- separated test set and training set.\footnote{As noted in for example \cite{koehn2010statistical}, p. 274, or \cite{bishop}, pg. 6}
+
+We have tried to do that in experiments with systems that we control. However, the systems described in \ref{blackbox} are systems that we don't control. Especially with Google Translate, we cannot rule out the possibility that they already use some parts of the test data. The only way to absolutely prevent this would be to make our own test data, but we don't have enough resources to do that on a bigger scale.
+
+In general, we use two test sets with two different domains - WMT data and Intercorp data.
+
+\subsection{WMT}
+One of our test sets is WMT test data. 
+
+WMT (short for Workshop on Statistical Machine Translation) is an annual workshop, where various teams compete on a shared translation task with a shared test data.\footnote{See for example \cite{wmt_findings_2013}, or the rich history on \url{http://www.statmt.org}.} As noted in \cite{wmt_findings_2013}, in 2013, Russian was added as one of the languages. 
+
+In this workshop, every year, for all the available languages, one multi-lingual parallel testset is created. 
+The sentences in the training set are manually translated; for the year 2013, the set is described in \cite{wmt_findings_2013} and available on \url{http://www.statmt.org/wmt13/translation-task.html}. For each of the languages, a fixed number of (different) sentences is taken and then translated to all the other languages; the languages include Czech and Russian.
+
+Therefore, most Czech and Russian sentences in this set are not a direct translation of each other, but they are different translations of the same source sentences from various languages -- except for sentences that are originally from either Czech or Russian sources. 
+
+It can be argued, that because the Czech and Russian side are translated separatedly from different languages, the advantage of similarity of the two languages is lost -- different idoms and different word order will be used.
+However, if we used only the directly translated sentences, the data would be significantly smaller. 
+
+We extracted pairs of Czech and Russian from the 2013 test dataset.
+
+%for the year 2013 (WMT2013) and ??? sentences for the year 2014 (WMT2014). We use WMT2014 as a final test set, and WMT2013 as a development set, for fine-tuning the results.
+
+
+
+\subsection{Intercorp}
+\label{intercorp_p1}
+Intercorp\footnote{Sometimes written as InterCorp} is a parallel corpus for many language pairs, each including Czech. The history and other information is thoroughly described in \cite{intercorp}. One of the language pairs in Intercorp is Czech-Russían.
+
+The data itself is organized by source, and each data source is given an information of the original language; even in the Czech-Russian part of Intercorp, there are texts with an English source (for example, Czech and Russian translation of Harry Potter novels). 
+
+We were able to extract just the data, that are either direct translations from Russian to Czech or vice versa, thanks to this metadata.
+
+Because we trained the Moses system \emph{before} putting together test data\footnote{This might sound illogical and backwards, but it's mainly because we built the Moses system first as a part of a different research, see \cite{mujpaper}.},
+we needed to remove the Moses training data to avoid duplication. 
+
+The resulting data is purely from fictional novels, except for Jiří Levý's Art of Translation, which is (as the name suggests) a translation theory book. Interestingly, this is also the only book that has been translated from Czech to Russian and not the other way.
+
+\jednatabulkan{icorpdata} { |l|l |l | l | }
+{
+         \hline
+\textbf{Author}
+&
+\textbf{English name}
+&
+\textbf{Year}
+&
+\textbf{Sent.}
+
+\\ \hline
+Nikolai Ostrovsky &
+How the Steel Was Tempered &
+1936 &
+9844
+\\ \hline
+Ilya Ilf, Yevgeni Petrov &
+The Twelve Chairs &
+1928 &
+8525
+
+\\ \hline
+
+Mikhail Bulgakov &
+The Master and Margarita &
+1967 &
+7124 
+\\ \hline
+
+Nikolai Nikolaevich Nosov &
+ The Adventures of Neznaika and His Friends 
+&1953-1954 &
+3523
+
+
+
+
+\\ \hline
+
+Jiří Levý &
+The Art of Translation &
+1957 &
+3149
+
+\\ \hline
+
+Aleksandr Solzhenitsyn
+&
+One Day in the Life of Ivan Denisovich
+&
+1962
+&
+3090
+
+\\ \hline
+
+Alexander Pushkin &
+The Captain's Daughter 
+&1863&
+2984 
+\\ \hline
+
+Aleksandr Solzhenitsyn &
+An Incident at Krechetovka Station &
+1963&
+1467 
+
+\\ \hline
+Aleksandr Solzhenitsyn &
+Matryona's Place  
+&1963
+&
+880
+
+\\ \hline
+
+} {Intercorp data} 
+
+
+All the used novels are in the Table~\ref{tabulka:icorpdata}, \footnote{English transcriptions, English title translations and years of publication are taken from English wikipedia.}
+sorted by the sentenced count.
+
+As the reader can probably see, this dataset is markedly different from the first dataset. The data are bigger and are translated directly, on the other hand, the youngest book is from 1967 and the language itself is -- as a prosaic text -- harder to translate in general. Because the two corpora are too different, we did not join the WMT and the Intercorp sets and instead test the systems on each set separately.
+\subsection{Data size}
+TODO
+
+\section{Moses training data}
+\subsection{Parallel data}
+\subsubsection{Intercorp}
+In general, we described Intercorp corpus in \ref{intercorp_p1}. As mentioned in that section, we created the Moses system before we put together the testing data.
+
+When we were building the Moses system, we did not have access to the whole Intercorp corpus, only a subset of it, from a previous version, without any metada and shuffled across the whole corpus.
+
+However, the metadata can still be reconstructed by comparing the Intercorp data with the corpus.
+
+
+TODO: popis intercorp dat
+
+\subsubsection{Subtitles}
+Another set of data that we used were subtitles from OpenSubtitles database.
+
+In a separate FilmTit project\footnote{see the documentation here - \url{https://github.com/runn1ng/FilmTit/blob/master/src/doc/result/documentation.pdf?raw=true}}, we tried to make a machine translation project for subtitle translation from English to Czech.
+
+For that project, we were given access to the set of subtitles from the server OpenSubtitles (\url{http://opensubtitles.org}). This dataset was not a pair of aligned sentences, not even a pair of aligned \emph{files}; we were given just a set of SRT files, and a table which paired each of those files with a movie (identified by IMDB number). Each movie usually has more subtitle files.
+
+Subtitle files have the sentences paired with timestamps.
+
+From a set of SRT files paired with a movie, we selected just one Czech and just one English SRT file which we find most similar, based on the timestamps.
+From the pair of the files, we then extract the sentences that have the most similar timestamps.
+
+These two pairings -- pairings of subtitle files and pairing of the actual lines -- are non-trivial task, and require a \uv{tolerance} -- how different can the times of a sentence be to be still paired together.
+
+Higher tolerance produces bigger corpus with more errors, while lower tolerance produces smaller, but more correct corpus.
+
+When we were experimenting on the FilmTit project, we found out, that the best results (tested both on another movie subtitles and a different corpus) are -- without exception -- with \emph{bigger corpus} and \emph{higher tolerance}. Even when that introduced a lot of incorrect sentence pairs, the overall results were still better with the biggest possible corpus.
+
+For Czech-to-Russian experiments, we were given another, similar set of subtitles from OpenSubtitles. The set was naturally much smaller than with English and Czech, but we were still able to use the same algorithms to build a parallel corpora.
+
+We again used the highest possible tolerance, and therefore surely introduced a lot of errors. Unfortunately, for a lack of time, we weren't able to replicate the experiments for the ideal tolerance here, however, we hoped that the results would be similar than in English-to-Czech translation, that is, the biggest corpus resulting in the best translation.
+
+\subsubsection{UMC corpus}
+UMC (UFAL Multilingual Corpus) is a Czech-English-Russian corpus\footnote{See \cite{umc}}. The data are downloaded from Project Syndicate, a Prague-based non-profit news organization, translating news and opinions from around the world.
+
+
+\subsubsection{Wiki titles}
+We also extracted all of the titles from the Czech and Russian wikipedia, that correspond to each other.
+
+Those are usually only noun phrases and the main word is usually in nominative singular, so the morphology isn't that rich -- however, we hope that the model will learn some phrases needed for the translation of the named entities.
+\subsubsection{Data size}
+TODO
+\subsection{Monolingual data}
+\subsubsection{News Crawl}
+The largest part of our monolingual data is corpus from WMT workshops that they call \uv{News Crawl}.
+
+According to \cite{wmt_findings_2009}, WMT workshop has been continously crawling web articles since 2007 for making test sets. This allowed them to make a big, randomized corpus from all these sources.
+
+The corpus is categorized by year, and we treat each year as its own corpus for the interpolation (as described in \ref{interpol}).
+\subsubsection{Common Crawl}
+Common Crawl is publicly available web crawl\footnote{From Wikipedia -- \uv{A Web crawler is an Internet bot that systematically browses the World Wide Web, typically for the purpose of Web indexing. }; web crawl is then a result of such a web crawler} -- \url{http://commoncrawl.org/}.
+
+As described in \cite{commoncrawl}, group of researchers tried to extract parallel data from this web crawl. One of the language pairs was English-Russian and the result is publicly available on WMT site. We used the Russian side of the corpus.
+
+However, the quality of this corpus is very discutable. Because it contains data downloaded from the \uv{raw web}, it often has sentences in different languages, sentences in machine-translated Russian, random UTF-8 symbols, random HTML data, some code, and so on.
+
+This was one of the reasons why we decided to use linear interpolation as discussed in \ref{interpol} -- hoping, that the tuning algorithm will automatically \uv{find the right balance} between the language models.
+
+\subsubsection{Yandex}
+%Yandex is a Russian portal and search service, that can be described like a Russian mix between Google and Yahoo!. One of its services is a free translation service
+Yandex was already described in \ref{yandex}. Apart from providing free translation API, Yandex also provides an English-Russian parallel corpus (\url{https://translate.yandex.ru/corpus?lang=en}). We used the Russian part of this corpus for language modelling.
+
+The interested thing to note is that Yandex parallel corpus is lowercased.
+
+\subsubsection{Data size}
+
+TODO

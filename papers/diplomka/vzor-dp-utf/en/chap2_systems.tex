@@ -1,0 +1,445 @@
+\chapter{Translation systems}
+\section{Statistical vs. rule-based -- an overview}
+Machine translation (MT) systems has historically used many different approaches. One way of classifying the approaches is on the axis of rule-based vs. statistical.
+
+In general, we can re-use the descriptions, used by \cite{bojar}, which is as follows:
+\begin{itemize}
+\item rule-based MT systems:
+\begin{itemize}
+\item use analysis, transfer and synthesis steps
+\item use formal grammars
+\item use hand-made dictionaries
+\item have linguistic information hard-coded and therefore aren't lan\-guage-ag\-nos\-tic
+\end{itemize}
+\item statistical MT systems
+\begin{itemize}
+    \item use more variants of outputs, rank them with some score, and choose the best one
+    \item train internal dictionaries from big parallel data
+    \item have more compact translation core, their inner working are less obvious
+    \item use statistics instead of linguistic rules and therefore are more language-agnostic
+\end{itemize}
+\end{itemize}
+
+However, with some of the modern systems, the distinction is not as clear-cut as we would like, for the purpose of our comparison. 
+For example, statistical MT systems like Moses can get significantly better with some added linguistic information; 
+on the other hand, systems like TectoMT, which can sometimes be classified as more rule-based, actually have big modules more or less based on statistics.
+
+
+\section{Unrunnable systems}
+In this section I will present some historical systems, that I haven't been able to get successfully running.
+
+\subsection{RUSLAN}
+
+RUSLAN is a machine-translation system, developed between 1984 and 1988 at several departments of Charles University, Prague. RUSLAN firmly belongs to the \emph{rule-based} category, since at that timeframe, statistical machine translation wasn't even invented yet.
+
+\subsubsection{Q-Systems}
+Q-Systems (sometimes also Systems Q) -- Q stands for \uv{Quebec} -- are a tool for machine translation, developed at Montreal University by Alain Colmerauer, also the creator of Prolog.\footnote{See \cite{qsystems}.} 
+
+Q-Systems are similarly declarative as Prolog, focusing more on the result than the procedural order of analysis. If there is any ambiguity, all the possibilities are explored \emph{in parallel}. In theory, this could make writing the lexical rules easier and the rules themselves more readable; in reality, the rules are still quite unreadable, as will be seen later.
+
+Q-Systems are not very widely used or widely worked with. One of the reasons might be the fact that all documentation is in French. However, \cite{nguyen2009systemes} describes\footnote{Unsurprisingly, also in French.} modern-day experiments with Systems Q, also mentioning, that all Fortran implementations has been lost\footnote{Which would make UFAL's version, if it was working, quite unique.} and that he reimplemented it in C. I haven't been able to try this version.
+
+
+\subsubsection{RUSLAN components}
+
+Description of the system can be found in \cite{olivaruslan} or \cite{hajic1987} -- however, the reader has to bear in mind that not only the systems are severly dated, but so is their manual and description.\footnote{At least for me personally, especially the book \cite{olivaruslan} was hard to read and hard to find the needed information in.} Contemporary (but not as detailed) description of the system can be found in \cite{recycled}.
+
+The whole RUSLAN system has several components:
+\begin{pitemize}
+\item preprocessing, written in Pascal
+\item morphological analysis, using dictionary, written in Q-Systems and interpreted in Fortran IV
+\item syntactico-semantical analysis, using morphology, also written in Q-Systems; this component uses FGD as its theoretical starting point
+\item generation, also using Q-Systems
+\item morphological synthesis, using Pascal
+\end{pitemize}
+
+RUSLAN uses a Czech-to-Russian dictionary, written by hand in afforementioned Q-Systems. Dictionary item looks like this:
+
+\begin{verbatim}
+DLOUH==M(RS(+(*INT)),MI2289,DLINNYJ).
+DLOUH==M(RS(-(*INT)),MI2276,DOLGIJ).
+\end{verbatim}
+
+This describes two possibilites of the translation of the word \uv{dlouhý} to Russian: the first is \uv{длинный} and the second is \uv{долгий}. They differ by the semantic feature INT they require or forbid from the word they depend on. 
+
+More complex dictionary item looks like this:
+\begin{verbatim}
+C3ES3TIN
+  ==Z(@(*A), MIO109, $(JAZYK), 
+     2(POS, #($), &, $(MI28), $(C2ES2KIJ),
+       1(=,@($), #($),$($))),
+     1(=,@($),#($),$($))).
+\end{verbatim}
+
+This item translates the word \uv{čeština} to Russian words \uv{чешский язык} and also describes their relationship.
+
+Maybe because memory was more expensive than today, all similar rules are in the dictionary without any comments, leaving only very difficult-to-decypher rules.
+
+The rules for analysis are even less readable. Random examplo of two such rules are as follows:
+
+\begin{verbatim}
+1(B*, X*1, /, X*2, F*1(C*), X*3, /, X*4, @(V*), X*5, %(X*),
+ I(*), 1(X*6, $($)), X*7)
+
+1Z(A*9), (Z*2)
+  == 1(D*, /, X*2, F*1/X*),/,@(V*),X*5,%(X*),1*,1(X*6,$($)),X*7,
+      A*B,
+     5(U*1, @(U*2), U*3, $(U*), 3(E*(Y*1), B*(C*), W*1, W*3, %(X*), 
+        $(W*)),
+     +1Z(A*9, Z*2)
+       / -NON- (, + -DANS- X*9 -ET- +(V*) -HORS- X*9, +(VZT)
+        -ET- -(V*) -HORS- X*9, *
+        -ET- C* = S
+        -ET- X*3,* -HORS- /,N(S), S(S), D(S), A(S), L(S), I(S)
+        -ET- / -HORS- X*2, 2
+        -ET- (, Y%1 = -NUL-
+             -OU- E*(Y*1) -HORS- U*2,*
+             -OU- E*(+(V*, *)) -HORS- U*2, *
+             -OU- -NON- E*(-(V*)) -HORS- U*2, * .)
+        -ET- (. E*(Y*1) *N
+             -OU- H(B*(C*)) -DANS- U*1 .) .
+\end{verbatim}
+
+This is all left with very little comments. For example, the only comment for the two rules above and about 20 more is \texttt{RELATIVE CLAUSES ADJOINED TO THEIR HEADS}.
+
+\subsubsection{Dictionary coverage of WebColl}
+
+The dictionary contains about 8,000 lexical items. However, the domain of the translation and, therefore, the dictionary, was manuals for old computers from 1980's. 
+
+In different experiments (\cite{florida}), we tried to measure how many nouns from the RUSLAN dictionary appear at all in a modern text.
+
+For that, we used a monolingual Czech corpus WebColl, consisting of roughly 7~million sentences (114~million tokens)\footnote{See \cite{webcoll}}.
+
+RUSLAN dictionary has 2,783 nouns. In the WebColl corpus, from those nouns, 611 appear less than 10 times -- and from those, 412 don't appear \emph{at all}.
+
+The reverse is similarly infavourable: from 39,434,505 nouns in the corpus, only 11,862,221 is in the dictionary.
+
+\subsubsection{Experiments}
+
+Despite the general un-maintainability of the RUSLAN code and despite the small dictionary, we tried to run the system on our test data.
+
+However, all our experiments ended in some sort of error.
+
+Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Systems-Q interpreter is coded), I gave up on this experiment. (?????)
+
+
+\subsection{Česílko 1.0}
+
+\uv{Česílko} is a name for two entirely different machine translation systems with slightly different goals and, more importantly, slightly different structure. Both were originally intended for Czech-to-Slovak translation.
+
+Česílko 1.0 was a system, developed in 2000, and was aimed for direct translation between Czech and Slovak and intended to assist a translation memory\footnote{See \cite{cesilko1}.}. The translation works lemma-by-lemma in a following fashion:
+\begin{pitemize}
+\item morphological analysis of source (Czech) language
+\item disambiguation
+\item direct translation, lemma-by-lemma
+\item morphological synthesis
+\end{pitemize}
+
+
+
+The system is written in a mixture of C, C++ and Flex (fast lexical analyser generator). The code itself is not really well documented and modular, but that can be attributed to the age of some of the components -- despite the whole system being developed in 2000, some files seem to be as old as 1991.
+
+This system itself is not very extendable from Slovak to Russian. Partly because of the design itself, partly because -- as we can see on the examples in the section \ref{sec:experiments} -- the sentences are not really translatable word-by-word.
+
+For that reason I decided not to further experiment with Česílko 1.0 for Czech-to-Russian machine translation.
+
+\subsection{Česílko 2.0}
+Česílko 2.0 is a different project with similar goals, but using different frameworks and adding more transfer rules\footnote{See \cite{cesilko2}}. However, it has its own shares of problems, that prevented us to use it.
+
+The system works in a following fashion:
+\begin{pitemize}
+\item \textbf{non-deterministic} morphological analysis of source Czech language
+\item translation of lemmas
+\item applying transfer rules by changing syntactic tree
+\item morphological synthesis
+\item ranking of all the generated sentences
+\end{pitemize}
+
+Unlike Česílko 1.0, Česílko 2.0 uses a non-deterministic parser and explores all the possi\-bi\-li\-ties in parallel. 
+
+The more advanced transfer would, in an ideal world, make the system more modular and extensionable for our purposes. However, the implementation details prevented us from doing any significant work on Česílko 2.0.
+
+To illuminate why, let me focus a little on the technical details.
+
+\subsubsection{Objective-C}
+Objective-C is a very simple and elegant extension of C language, developed by Brad Cox in 1980s by adding Smalltalk features to C\footnote{See \cite{cocoa4}}. 
+
+Objective-C is, in my opinion, very easy to learn and understand, at least compared to C++, its more popular counterpart.
+
+Objective-C is not a proprietary language and is possible to compile with either gcc or Clang/LLVM compilers. However, what is proprietary is its most used standard library, Cocoa.
+
+\subsubsection{Cocoa}
+When Steve Jobs left Apple, he made a smaller company called NeXT. Among other things, they produced a proprietary operating system called NeXTSTEP, based on Unix.\footnote{For a more detailed history, see \url{https://developer.apple.com/legacy/library/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html\#//apple\_ref/doc/uid/TP40002974-CH3-SW12}.}
+
+This operating system used Objective-C as its standard language, and proprietary libraries, called OpenStep.\footnote{Despite the name, OpenStep is not open source -- the Open allude to the fact that its API specification was open.}
+
+Several years later, Apple (now merged with NeXT) made its new version of Mac OS, called Mac OS X; this operating system was partially based on NeXTSTEP and also used some of its proprietary libraries, now renamed Cocoa.\footnote{The kernel of Mac OS X is open source, as is its \uv{underlying} operating system called Darwin -- however, this system does not contain Cocoa libraries.}
+
+Cocoa is not the only library for Objective-C, but because Apple is the main investor in Objective-C-based systems, it's a de-facto standard library.
+
+\subsubsection{GNUstep}
+GNUstep is a free re-implementation of OpenStep/Cocoa.\footnote{See \url{http://www.gnustep.org/}}.
+
+Its development started in the NeXTSTEP days; however, it still hasn't met feature parity with Cocoa's OS X.
+
+Aaron Hillegass in 2nd edition of his popular book \emph{Cocoa Programming on Mac OS X} discouraged people from using GNUStep. He redacted this note in later versions of the book, perhaps because of protests from GNUstep developers\footnote{\url{http://www.gnustep.org/resources/BookClarifications.html}}, but in my opinion, his notes are still valid.
+
+GNUstep implementations are very often buggy and not feature-complete with Cocoa and, most unfortunately, unpredictable. This is what hurt us with Česílko 2.0.
+
+\subsubsection{Cocoa and Česílko}
+When Petr Homola was writing Česílko 2.0, he decided to use Cocoa and Objective-C for development.
+
+On Mac OS X, this configuration is just fine; however, on Linux, where we wanted to run the MT systems (and where only GNUstep is available), this creates unpredictable results.
+
+In my experiments with Czech-to-Slovak translations, I noticed that on Mac OS X, there are about 5-times more sentences generated, than on Linux -- while the program was compiled from the same sources.
+
+After thorough inspection, I found out the error was in GNUstep implementation of NSDictionary -- Cocoa's implementation of associative array\footnote{\url{https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary\_Class/Reference/Reference.html}} -- in some unpredictable cases, NSDictionary returns two different values for two equal NSString keys\footnote{it might have to do something with Unicode; however, NSStrings are supposed to be UTF-8 by default}. As a result, one of the modules returned wrong inflection patterns for a number of words and the morphological analyzer then returned only a fraction of the results.
+
+After a \uv{hacky}, but working workaround for this issue, the system returned same correct results on both OS X and Linux. However, I am not at all confident there aren't more similar issues in GNUstep to further develop the system for Russian;
+fixing the issues of the standard frameworks, copying API of a closed-source library, that's normally very rarely used, is way beyond the scope of this thesis.
+
+%when the very basic frameworks themselves are unstable and unreliable, the development ceases to make sense.
+
+Reading the paper \cite{evalquality_cesilko}, that presents Česílko 2.0 with a very low BLEU, I think the same issue plagued the authors of that paper -- it's unprobable the BLEU of the correctly working system would be that low, when in \cite{cesilko2}, the results of Česílko 2.0 were slightly better than of Česílko 1.0.
+
+\section{Black-box systems}
+\label{blackbox}
+In this chapter, I am describing all the \uv{black-box} systems -- that is, without any access to the source code -- that we successfully tried.
+
+\subsection{PC Translator}
+\label{langsoft}
+\subsubsection{Description}
+
+PC Translator is a commercial translation system from a Czech company LangSoft (\url{http://www.langsoft.cz/translator.htm}). PC Translator can translate several language pairs, all with Czech on either source or target side.
+
+Authors of PC Translator don't publish any papers or other literature about the system -- what can we tell about its functionality is gathered only from its promotional website and from the experiments with the software itself.
+
+PC translator seems to be purely rule-based. The system seems to work in following steps:
+
+\begin{pitemize}
+\item some (probably rule-based) morphological analysis of the source language
+\item translation of the lemmas from source language to target language by searching in a large dictionary
+\item some synthesis of morphological information and the translated lemma
+\end{pitemize}
+
+The system doesn't seem to do any kind of reordering. It also doesn't seem to do any analysis on a deeper level, like sentence constituents. Some of the phrases in the dictionary are longer than one word, but not too many of them.
+
+One of the advantages of PC Translator is its large dictionary -- however, the dictionary is sometimes choosing very odd and inprobable choices when disambiguating between more possible translations. For example, the English sentence \uv{I like dogs} is translated as \uv{Mám rád kleště}, because the term \uv{dog} can be also translated as \uv{kleště}\footnote{from Collins' Dictionary: \uv{dog -- 5. a mechanical device for gripping or holding, esp one of the axial slots by which gear wheels or shafts are engaged to transmit torque}}. This can be seen as a proof that PC Translator is a purely rule-based system.
+
+According to its marketing materials, PC Translator v14 uses a Czech-Russian dictionary with above 650.000 words.
+
+\subsubsection{Experiments}
+We found out it's not easy to automate translating with PC Translator. Its GUI is suited for translating by hand, sentence-by-sentence, but not for automated translation of thousands of sentences. Also, by definition, Windows GUI is harder to automate on Linux machine from a script.
+
+However, we were able to work around that, with the help of VMWare Player virtualization software (\url{http://www.vmware.com/cz/products/player}) and Au\-to\-Hot\-key GUI scripting software, that allows us to emulate screen clicking (\url{http://www.autohotkey.com/}). Our workflow therefore is:
+
+\begin{pitemize}
+\item on Linux machine, encode the source from UTF-8 to windows-friendly encoding
+\item encode the source as HTML code
+\item start a virtual machine with PC Translator pre-installed
+\item on the start of the virtual machine, run AutoHotkey script from an outer-machine folder (thanks to VMWare shared folders and Windows Startup scripts)
+\item via this AutoHotkey script, run PC Translator and click on \uv{translate file} feature 
+\item translate the HTML file (also shared in the VMWare shared folder)
+\item turn off the virtual machine
+\item turn the file back from HTML and Windows encodings back to UTF-8
+\end{pitemize}
+
+The HTML part is needed because PC Translator had some problems with translating ordinary text files, plus we can pair the translated sentences better thanks to \texttt{id} parameters in \texttt{div} tags.
+
+We used the newest version of PC Translator available at the time, which is PC Translator v14.
+
+
+
+
+\subsection{Google Translate}
+\label{google}
+Google Translate is a popular free online translation service by Google, an American web search giant (\url{http://translate.google.com}). 
+Although Google is producing many academic papers on machine translation, the whole system is still proprietary and we cannot fully inspect it, as in the case of PC Translator.
+
+Google Translate uses mostly statistical approach to machine translation, see for example \cite{och}\footnote{F. J. Och is a head of Google Translate group in Google}. Its results are often seen as \uv{state-of-the-art} in machine translation.
+
+However, thanks to its purely statistical approach, it either needs huge amounts of data for every language pair, or it needs to use so-called \uv{pivot languages}\footnote{See for example \cite{koehn2010statistical}} -- in the case of Google Translate, it's usually English; specific English word order and English idioms are then re-translated into the target language and sometimes introduce downright wrong translations.
+
+\subsubsection{API}
+To automate Google Translate, we cannot use the website itself, simply because pasting tens of thousands of lines into a browser window usually crashes the browser and is probably against Google Translate's Terms of Use.
+
+There are some workarounds around this, such as \uv{faking} browser environment using some automation tools and/or libraries, but we used more stable option.
+
+Google Translate, apart from being a website, has a paid translation API\footnote{\url{https://developers.google.com/translate/?hl=cs}}. We figured out it's not too expensive for our testing purposes, so we ended up paying for the API.\footnote{The cost is measured per character on the source side. We used about 3 million characters and paid about 60 dollars. This is rather high for any repeated experiments, but not that high for one-time translation.}
+
+%We used an unofficial Java library for Google Translate API, called prosaically \uv{google-api-translate-java} (\url{https://code.google.com/p/google-api-translate-java/}).
+We used a Java library for Google Translate API, called prosaically \uv{google-api-translate-java} (\url{http://code.google.com/p/google-api-translate-java}).
+
+The tests were done on 3rd May, 2014.\footnote{I think it's important to note the date of the tests, because the quality of online services might change overtime.}
+
+\subsection{Microsoft Bing Translator}
+\label{bing}
+Another online service that we  tried is Microsoft Translator/Bing Translator. (In Microsoft's own materials, the system is usually called Bing Translator when referring to the website and Microsoft Translator when referring to the API. I will call it Microsoft Translator further.)
+
+Microsoft Translator is very similar to Google Translate -- it is an online website with an easy GUI, and an additional paid API. Again, the team occasionally publishes some scientific papers, but is again otherwise proprietary.
+
+In different experiment, we found out (non-scientifically), that for some language pairs, Microsoft Translator does more post-editation, that seemed a little rule-based (for example, better verb separation in English-to-German translation). However the system as a whole seems similarly statistical as Google Translate.
+
+
+\subsubsection{API}
+Again, we used Microsoft Translator API (confusingly marketed as a \uv{dataset} inside Windows Azure platform).
+
+The API is slightly more complex than Google's API because of the auto-expiring token, but we used the example PHP script from the API documentation\footnote{\url{http://msdn.microsoft.com/en-us/library/hh454950.aspx}}.
+
+The pricing is slightly different in Microsoft Translator than in Google Translate, but in general is slightly cheaper. First 2 million letters are for free, next 2 million are for about 40 US dollars.
+
+\subsection{Yandex Translate}
+\label{yandex}
+Yandex (\url{http://www.yandex.ru}) is a Russian search portal that, according to its website\footnote{\url{http://company.yandex.com/}}, generates 61 percent of web search traffic in Russia.
+
+Apart from being a search engine, Yandex offers a variety of other services. One of them is Yandex Translate (\url{http://translate.yandex.com})\footnote{Or \url{http://translate.yandex.ru} for Russian version} -- again, a simple website for automatized translations, similar to aforementioned Google Translate or Microsoft Translator.
+
+I wanted to include Yandex Translate, because -- in theory -- as a Russian service, it could have better Russian language models and better Russian support in general.
+
+\subsubsection{API}
+%From the three online services, Yandex API is probably the simpliest to use. It uses a simple JSON interface, which requires an API key.
+Yandex Translate also has a translation API. 
+The API itself is absolutely free and is probably the easiest of the three online services to implement; however, it has strange and vaguely defined usage limits with no way of checking the actual usage.
+
+In our experiments, the API simply stopped returning sentences after approximately 1 million characters per 24 hours. After 24 hour period, the API became usable again.
+
+\section{Moses}
+\label{moses}
+Moses is an open-source machine translation toolkit with GPL licence, developed as a successor to the closed-source Pharaoh system.\footnote{See for example \cite{mosespaper} or \cite{moseslink} -- but Moses is used so often and so extensively that many other papers describing it can be found}
+
+The system is very modular and very customizable, which makes it a bit harder to describe. In this section, I will try to describe our Moses set-up; first, I describe the overview of the entire system, and then I further describe some of the elements and our contributions.
+%; bear in mind, however, that a completely different set-up is also possible.
+
+
+\subsection{Pipeline overview}
+At the start, we have a bilingual corpora of a given language pair, and bigger monolingual corpora of the target language.
+
+The bilingual corpora has to be prepared by aligning the sentences, so every sentence has exactly one translation. We describe our corpora in the part ???
+
+The sentences are then word-aligned, which means pairing words to their translations. We are using MGIZA++\footnote{See \cite{mgiza}}. From this word alignment, Moses learns a so-called \emph{phrase-based translation model}. From the monolingual corpora, we then learn a statistical \emph{language model} -- we use SRILM language model\footnote{See \cite{srilm}}.
+
+Moses is then used for so-called \emph{decoding} of the information from both the language model and the translation model, which choses the best possible translation, using algorithms like beam-search.
+
+However, for the best translation, we need to tune Moses parameters for optimal results. This is done using so-called \emph{minimum rate error rating} -- or MERT for short, which is tuning the parameters on a small separate development set.
+
+After MERT tuning, we finally have working language model, translation model and Moses parameters, which is our complete translation system.
+
+To reiterate, this is our Moses pipeline
+\begin{pitemize}
+\item getting sentence-aligned parallel Czech-Russian corpus, plus Russian monolingual corporus
+\item world-alignment on parallel corpus
+\item creating phrase-based translation model
+\item creating Russian language model
+\item tuning the parameters for Moses decoder
+\end{pitemize}
+
+%For managing input and output from the various steps, we use \emph{eman} system, which we transformed a little.
+
+\subsection{Managing experiments}
+For managing the steps described further, such as training models, we need some overaching system -- steps variously fail, don't compile, don't fit in memory, etc. We would also like to reuse partial results in more experiments.
+
+Moses itself has built-in perl-based experiment managment system, called prosaically Experiment Management System (EMS). However, this system is not very widely used on UFAL.
+
+Instead of EMS, we use instead another perl-based tool called eman (experiment manager). Eman is described well in \cite{eman} or at its website, \url{http://ufal.mff.cuni.cz/eman}.  
+
+Eman breaks down experiment into so-called \uv{steps}. Step encapsulates an atomic part of an experiment and can be in one of a few various states. More importantly, step can be dependent on various other states; if a step fails, all steps dependent on it automatically fail. The whole experiment is then just another step, dependent on all the necessary substeps.
+
+Step is represented by a directory in a playground directory. Step is created by copying a script, called \uv{seed}, from a library of seeds, to a new directory.
+
+In my opinion, while eman itself is well written, I found the seeds themselves hard to read, too repetitive, and with large amount of code copied and pasted over. 
+
+For that reason, I tried to rewrite the seeds as perl modules instead of bash scripts for more clarity and reusability. I am, however, not personally sure if my effort in this regard was successful. I decided to use the module \texttt{MooseX::Declare}\footnote{\url{http://search.cpan.org/~ether/MooseX-Declare-0.38/lib/MooseX/Declare.pm}}, which seemed to us like a modern way to write modules in perl. 
+
+Unfortunately, that module is using very difficult-to-understand perl concepts and source code transformations through \texttt{Devel::Declare}, and as a result, it takes long to run and, perhaps worse, returns very confusing and undecypherable errors. 
+So as a result of my rewrite, I have seeds with code that's probably easier to read and refractor, but on the other hand, it's slow and produces very opaque errors.
+
+Author of \texttt{MooseX::Declare} is now recommending \texttt{Moops} module instead for declarative syntax; this module is, however, requiring perl version 14 and above, while on UFAL's network, only perl 10 is installed.
+
+\subsection{Word alignment}
+For word alignment, we are using MGIZA++\footnote{See \cite{mgiza}}, which is a GPL toolkit based on GIZA++\footnote{See \cite{giza}}, which is itself based on models, sometimes called IBM Model 1 to IBM Model 5\footnote{See \cite{ibm}}, which is itself based on expectation–maximization algorithm (EM).
+
+IBM Models and the underlying EM algorithms are explained perfectly in Chapter~4 of \cite{koehn2010statistical} or in those slides by the same author -- \url{http://www.inf.ed.ac.uk/teaching/courses/mt/lectures/ibm-model1.pdf}.
+
+GIZA++ is an implementation of those models. MGIZA++ is just its mu\-lti-thre\-aded variant, which makes the word alignment slightly faster.
+
+\subsection{Phrase-extraction}
+In this step, Moses takes the word alignment from the previous step and learns a so-called \uv{phrase table}.
+Unlike word alignment, phrase extraction spans multiple words on every side in so-called \uv{phrases}.
+
+Phrase table consists of list of phrases, their probabilities in both ways of translation, and their lexical weighting -- lexical weighting is the probability of the translated phrase counted by individual word pairs. The exact meaning of the numbers is well explained in \cite{koehn2003}.
+
+The phrase-table defines a so-called \uv{translation model}. 
+
+\subsection{Language model}
+Language model is a part of the system, that tries to model the probability of a target language sentence alone. It's trained on a monolingual corpus.
+
+We use SRILM, which is an open source language modeling toolkit. (Although it's open-source, it uses its own license, that allows free use only for non-commercial and educational purposes.) Current status of SRILM is described in \cite{srilm}, original design is described in \cite{srilm_old}. 
+
+SRILM uses several models, one of them is n-gram word model, described well in \cite{koehn2010statistical}\footnote{chapter 7}. We use n-grams model to the order 3 with words and order 5 with tags (see section \ref{factors}). We smooth the models with Kreser-Ney smoothing with Chen and Goodman's modification\footnote{See \cite{chen} and \url{http://www.speech.sri.com/projects/srilm/manpages/ngram-discount.7.html}}. 
+
+
+\subsection{Language model interpolation}
+\label{interpol}
+As described in the section XX, we had more than one monolingual Russian corpora, but we weren't sure of how high quality each of them were and how helpful it would be. For this reason, we used so-call interpolation (also called mixing).
+
+Linear interpolation in general is described for example in \cite{gutkin}. On a separate heldout data, set of \emph{lambdas} are trained -- the resulting probabilities are then just the individual probabilities, multiplied by the lambdas and summed.
+
+Linear interpolation is supported by Moses by undocumented script in the codebase, called \texttt{interpolate-lm.perl}, which in turn uses SRILM's undocumented AWK script \texttt{compute-best-mix.gawk} and SRILM's \texttt{ngram} with \texttt{-mix-lm} option\footnote{See \url{http://www.speech.sri.com/projects/srilm/manpages/ngram.1.html}}. 
+Eman manager then uses these scripts in the \texttt{mixlm} seed.
+
+We used a linear interpolation instead of log-linear interpolation simply because we didn't notice the option until later in the project.
+
+\subsection{Factored translation}
+\subsubsection{Overview}
+
+
+The pipeline, described in the previous sections, translates phrases from the source language to the target language \uv{as is}. Only the exact phrases, found on the source side, can be translated to the exact phrases on the target side; and as they are decoded by Moses, only the phrases themselves are taken into account.
+
+However, with morphologically rich languages such as Russian or Czech, this can result in worse translations because of the number of word forms and resulting data sparsity.
+With so-called factored translation, we can add some morphological information while still keeping the main ideas of phrase-based translation. Factored translation was introduced in \cite{factored}.
+
+With factored translation, 
+phrased-based approach is extended with 
+morphological (or other) information. We can add additional information (for example, lemma or morphological tag) to either side of the translation, on a word level -- this is called a \emph{factor}. Then, instead of training language models and/or translation models on the words alone, we train them on some combination of these factors and then, with the help of Moses that supports factored translation models, combine them together.
+
+\subsubsection{Our factored translation experiments}
+\label{factors}
+In a separate set of experiments only on UMC data (this dataset is described in the section ??), we realized our Moses results have a high OOV rate\footnote{Out Of Vocabulary; how many words were untranslated due to not being found in the phrase table}; this is easily recognizable by Latin script appearing in Czech-to-Russian translation (or Cyrillics in the opposite direction). We then tried to compare several set-ups for factored tranlation to get lower OOV rate and higher BLEU scores.
+
+\grafff{backoff}{Backoff model}{60}
+
+We used a modified version of a set-up described for example in \cite{backoff} as \texttt{lemma backoff}. The set-up is illustrated on Figure~\ref{graf:backoff}, on the left.
+
+The primary translation model is from full word on source side to the full word and morphological tag on target side. The backoff translation model is from lemma on source side to the full word and morphological tag on target side. Then we are using two language models, one for tags and one for words (both separately interpolated, as described in \ref{interpol}).
+
+We were not using interpolated backoff, simply because regular backoff is easier to use with Moses. We were not using models that generate the words from lemma+tag, because we didn't have a working module for Russian morphological generation -- as a result, we can only get the word-forms found on the target side of the parallel training data.
+
+%Primary, we are translating from full word to fill word and morphological tag; only as a backoff, we are translating from 
+
+
+%However, since we did not have Russian morhpology fully working, we used only the system described as \texttt{lemma backoff} -- with the exception of not translating to lemma. 
+%We were not using interpolated backoff, simply because regular backoff is easier to use with Moses.
+
+%The main model translates from a word form on the source side to word form and tag on the target side. The backoff model translates from a lemma (or a stem -- see below) to form and tag on the target side.
+
+For tagging Russian, we used TreeTagger software\footnote{\url{http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/}, also see \cite{treetagger1} and \cite{treetagger2}} with a Russian parameter file\footnote{trained on a corpus created by Serge Sharoff, see \url{http://corpus.leeds.ac.uk/mocky/}}. TreeTagger is a closed-source software with a restrictive license, but for free for research purposes.
+
+For Czech, we used tokenizer from UFAL project Treex (described further in section XXX) and for lemmatizing, we used morphological analyzer Morče (\url{http://ufal.mff.cuni.cz/morce/references.php}); however, as described further, in the final system we didn't actually use its output.
+
+With further experimenting, we discovered that using not lemma on the source side, but a \emph{very crude} stem -- just using the first $n$ letters of a word -- gets better results.\footnote{Using stems instead of lemmas is suggested for example in \cite{stemy}. However, their stems are more linguistically motivated, while we just crudely take first few letters. It's actually debatable if our \uv{stems} can be called stems at all.} 
+The model is illustrated on Figure~\ref{graf:backoff}, on the right.
+
+\grafff{stem-plot-csru}{Comparison of various set-ups}{100}
+
+The results of our experiment are seen on Figure~\ref{graf:stem-plot-csru} -- \emph{baseline} is original moses with no factors, \emph{1-lemma} and \emph{1-stem} are the \uv{backoff} models without the main model, and \emph{2-stem} and \emph{2-lemma} are the whole models with backoff.
+ 
+We can see that stem with length 6 gets the best results. So, we used stemma with the length 6 in further experiments, such as the WMT submission \cite{mujpaper}.
+\subsection{Recasing}
+Our language and translation models are all trained on lowercased corpora. Because we evaluate BLEU as case-sensitive, we need to train a recaser that will convert the translated text from lower case back to upper case.
+
+We could make a rule-based recaser, such as the ones that are included in Moses, however, we decided to train a statistical recaser. The recaser is basically a complete Moses model, trained as a translation from lower-cased corpus to a cased corpus, where any (case-sensitive) monolingual corpus can serve asa source for the language model -- where source language is the lowercased corpus and the target language is the original corpus. 
+
+\section{Treex}
+\label{tecto}
+TODO
+%limited to 1 million
