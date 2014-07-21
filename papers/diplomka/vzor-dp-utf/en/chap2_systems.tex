@@ -534,9 +534,18 @@ PDT uses several layers, with an inspiration from FGD theory. However, instead o
 \item w-layer (word layer) for segmented words
 \item m-layer (morphological layer), where every word has been transformed into a combination of lemma and tag; but there is still so relation between words,
 \item a-layer (analytical layer), where the sentence is tranformed into a dependency tree, where edges represent constituent dependency (or some other relation) and the edge is marked with one of 28 analytical functions (\emph{afun}).\footnote{Technically, the edge is not marked with the function, only the dependent node.}
-\item t-layer (tectogrammatical layer), that tries to express semantic structure of a sentence, again with a dependency tree. Nodes on this layer sometimes correspond to nodes on a-layer, but sometimes some artificial nodes are added and, on the other hand, auxiliary words are removed. In addition to lexical lemma, each node has a \emph{functor}, that tries to somehow convey a semantic function of a relation to node's head (for example, \texttt{AIM} as adjunct expressing purpose). Morphological categories are represented by \emph{grammatemes} (for example, \texttt{number=sg} for singular).
+\item t-layer (tectogrammatical layer), that tries to express semantic structure of a sentence, again with a dependency tree. Nodes on this layer sometimes correspond to nodes on a-layer, but sometimes some artificial nodes are added and, on the other hand, auxiliary words are removed. In addition to \emph{t-lemma} (corresponding with morphological lemma), each node has a \emph{functor}, that tries to somehow convey a semantic function of a relation to node's head (for example, \texttt{AIM} as adjunct expressing purpose). Morphological categories are represented by \emph{grammatemes} (for example, \texttt{number=sg} for singular).
 \end{itemize}
 
-TectoMT keeps this distinction into layers. Originally, the plan was to convert source sentence through all the layers to t-layer, transfer the semantics and generate the target sentence.
+TectoMT keeps this distinction into layers. 
+The idea of TectoMT is to first convert source sentences through all the layers to t-layer (\emph{analysis}), translating the t-layer to the target language (\emph{transfer}) and converting it back to full sentences (\emph{synthesis}).
+%Originally, the plan was to convert source sentence through all the layers to t-layer, transfer the semantics and generate the target sentence.
+
+However, TectoMT modifies the PDT model with the addition of \emph{formemes} (described for example in \cite{zabokrtsky_hab}). Formemes are added to nodes on t-layer, and represent \uv{in which morphosyntactic form the t-node was (in the case of analysis) or will be (in the case of synthesis) expressed in the surface sentence shape}\footnote{\cite{zabokrtsky_hab}}. Theoretically, they should be seen as something \uv{between} the t-layer and the layers above.Example formeme is \texttt{n:since+X} for English expression of time, translatable as \texttt{n:od+2} for Czech (2 for genitive).
+
+Formemes are technically not \uv{correct} according to FGD description and they shouldn't be needed for analysis or synthesis, and we should be able to just transfer the functors. However, the motivation for formemes (at least my understanding of it) is, that \emph{we are not that far}, \uv{pure} semantic translation is not that powerful, and it's better to transfer t-lemmas, formemes and grammatemes, and generate the more surface layers from that.
+
+%Interesting techniques of using Hidden T
+\subsubsection{Blocks}
 
 
