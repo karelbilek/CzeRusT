@@ -509,12 +509,13 @@ The recaser is basically a complete Moses model, trained as a translation from l
 \section{Hybrid systems}
 \subsection{TectoMT}
 \label{tecto}
-TectoMT is a different translation system, developed almost exclusively at ÚFAL (\url{http://ufal.mff.cuni.cz/tectomt}; one of the descriptions in \cite{tmt_desc}). While it's partly based on more linguistically motivated theory, it still has many individual parts based on statistical approach -- therefore, I think it's appropriate to put it somewhere in the middle on the axis from the section \ref{axis}. Similarly to Moses in section \ref{moses}, I will try to describe the general structure of the system, but only as relevant to our experiments.
+TectoMT is a translation system, developed almost exclusively at ÚFAL (\url{http://ufal.mff.cuni.cz/tectomt}; \cite{tmt_desc}). 
+While it's based on linguistically motivated theory (unlike \uv{pure} statistical systems), some of its individual parts are based on statistical approaches (unlike \uv{pure} rule-based systems) -- therefore, I think it's appropriate to put it somewhere in the middle on the axis from the section \ref{axis}. Similarly to Moses in section \ref{moses}, I will try to describe the general structure of the system, but only as relevant to our experiments.
 
-TectoMT is built on the Treex platform, which used to be developed together with TectoMT under the same name, but later split as its own project and is nowadays used for other applications (Depfix, HamleDT). (\url{http://ufal.mff.cuni.cz/treex}). 
+TectoMT is built on the Treex platform, which used to be developed together with TectoMT under the same name, but later branched out as its own project and is nowadays used for other applications (Depfix, HamleDT). (\url{http://ufal.mff.cuni.cz/treex}). 
 Still, because of the long coupled development, Treex source code and its inner structures are based on the needs of TectoMT, and even today it's sometimes difficult to say where exactly the framework ends and application begins. For example, while Treex is downloadable from CPAN perl repository, the version on CPAN is outdated and doesn't work with TectoMT; all TectoMT blocks exist under Treex package; the only way to get newest Treex sources is to install the whole TectoMT framework.
 
-TectoMT is available for a download from UFAL's public SVN repository, with the instructions on UFAL's public wiki (\url{https://wiki.ufal.ms.mff.cuni.cz/external:tectomt:tutorial}). Even more than Moses, TectoMT is an experimental software for academic usage with constant changes from many participants and it takes a while to learn to use it.
+TectoMT is available for a download from UFAL's public SVN repository, with the instructions on UFAL's public wiki (\url{https://wiki.ufal.ms.mff.cuni.cz/external:tectomt:tutorial}). Even more than Moses, TectoMT is an experimental software for academic usage with constant changes from many contributors -- and for that reason it takes a while to learn to use it.
 
 Treex and TectoMT are free software. Treex is dual-licensed under Artistic License 1.0 and GPLv2, as most CPAN packages are. TectoMT is licensed under GPLv2 outright. However, there are modules in TectoMT with more restrictive licencing -- some of them can be used only non-commercially -- and some models are trained from non-free sources and probably couldn't be used outside of academia. 
 
@@ -522,37 +523,44 @@ Treex and TectoMT are free software. Treex is dual-licensed under Artistic Licen
 \subsubsection{Trees and layers}
 Ultimatively, TectoMT is based on a linguist theory that predates machine translation by decades.
 
-The Functional Generative Description theory comes from Prague's Linguist Circle (and its older theories), and was described for example in \cite{sgallczech} (in Czech) or \cite{sgallenglish} (in English). It describes a system of various layers of description and the system of their representation and composition, where the layers are (from the \uv{lowest} level) tectogrammatical, phenogrammatical, morphemic, morphophonemic and phonetical\footnote{\cite{sgallenglish}, page 26.}. The concept of tectogrammar was first introduced in \cite{curry}.
+The Functional Generative Description theory comes from Prague's Linguist Circle (and its older theories), and was described for example in \cite{sgallczech} (in Czech) or \cite{sgallenglish} (in English). It describes a system of various layers of description and the system of their representation and composition, where the layers are (from the \uv{deepest} level) tectogrammatical, phenogrammatical, morphemic, morphophonemic and phonetical\footnote{\cite{sgallenglish}, page 26.}. The concept of tectogrammar was first introduced in \cite{curry}.
 
 Some of the layers would use dependency trees, which are inspired by Czech \emph{sentence analysis} (described for example in \cite{smilauer}).
 
-While Functional Generative Description is a theory, Prague Dependency Treebank project \footnote{\cite{pdt_soft}, the latest description in \cite{pdt_desc} and more detailed in \cite{pdt_manual_a}, \cite{pdt_manual_m} and \cite{pdt_manual_t}} is an application of this theory on an actual treebank. Its data format and software tools are used directly in TectoMT.
+While Functional Generative Description is a theory, Prague Dependency Treebank project \footnote{\cite{pdt_soft}, the latest description in \cite{pdt_desc} and more detailed in \cite{pdt_manual_a}, \cite{pdt_manual_m} and \cite{pdt_manual_t}} is an application of this theory on actual data. Its data format and software tools are used directly in TectoMT.
 
 PDT uses several layers, with an inspiration from FGD theory. However, instead of the many FGD layers, PDT uses the following ones:
 \begin{itemize}
 \item w-layer (word layer) for segmented words
-\item m-layer (morphological layer), where every word has been transformed into a combination of lemma and tag; but there is still so relation between words,
-\item a-layer (analytical layer), where the sentence is tranformed into a dependency tree, where edges represent constituent dependency (or some other relation) and the edge is marked with one of 28 analytical functions (\emph{afun}).\footnote{Technically, the edge is not marked with the function, only the dependent node.}
-\item t-layer (tectogrammatical layer), that tries to express semantic structure of a sentence, again with a dependency tree. Nodes on this layer sometimes correspond to nodes on a-layer, but sometimes some artificial nodes are added and, on the other hand, auxiliary words are removed. In addition to \emph{t-lemma} (corresponding with morphological lemma), each node has a \emph{functor}, that tries to somehow convey a semantic function of a relation to node's head (for example, \texttt{AIM} as adjunct expressing purpose). Morphological categories are represented by \emph{grammatemes} (for example, \texttt{number=sg} for singular).
+\item m-layer (morphological layer), where every word has been transformed into a combination of lemma and tag; there is still no relation between words and the  structure is still \uv{flat}
+\item a-layer (analytical layer), where the sentence is tranformed into a dependency tree. The edges represent constituent dependency (or some other relation) and are marked with one of 28 analytical functions (also called \emph{afun})\footnote{Technically, the edge is not marked with the function, only the dependent node.}
+\item t-layer (tectogrammatical layer), that tries to express semantic structure of a sentence, again with a dependency tree. Nodes on this layer sometimes correspond to nodes on a-layer, but sometimes some artificial nodes are added and, on the other hand, auxiliary words are removed. In addition to \emph{t-lemma} (corresponding with morphological lemma), each node has a \emph{functor}, that tries to somehow convey a semantic function of a relation to node's head (for example, \texttt{AIM} as adjunct expressing purpose). Semantic morphological categories are represented by \emph{grammatemes} (for example, \texttt{number=sg} for singular).
 \end{itemize}
 
-TectoMT keeps this distinction into layers. 
+TectoMT uses the described PDT layer logic. 
 The idea of TectoMT is to first convert source sentences through all the layers to t-layer (\emph{analysis}), translating the t-layer to the target language (\emph{transfer}) and converting it back to full sentences (\emph{synthesis}).
 %Originally, the plan was to convert source sentence through all the layers to t-layer, transfer the semantics and generate the target sentence.
 
-However, TectoMT modifies the PDT model with the addition of \emph{formemes} (described for example in \cite{zabokrtsky_hab}). Formemes are added to nodes on t-layer, and represent \uv{in which morphosyntactic form the t-node was (in the case of analysis) or will be (in the case of synthesis) expressed in the surface sentence shape}\footnote{\cite{zabokrtsky_hab}}. Theoretically, they should be seen as something \uv{between} the t-layer and the layers above.Example formeme is \texttt{n:since+X} for English expression of time, translatable as \texttt{n:od+2} for Czech (2 for genitive).
+However, TectoMT modifies the PDT model with the addition of \emph{formemes} (described for example in \cite{zabokrtsky_hab}). Formemes are added to nodes on t-layer, and represent \uv{in which morphosyntactic form the t-node was (in the case of analysis) or will be (in the case of synthesis) expressed in the surface sentence shape}\footnote{\cite{zabokrtsky_hab}}. 
 
-Formemes are technically not \uv{correct} according to FGD description and they shouldn't be needed for analysis or synthesis, and we should be able to just transfer the functors. However, the motivation for formemes (at least my understanding of it) is, that \emph{we are not that far}, \uv{pure} semantic translation is not that powerful, and it's better to transfer t-lemmas, formemes and grammatemes, and generate the more surface layers from that.
+Theoretically, they should be seen as something \uv{between} the t-layer and the layers above.
+Example formeme is \texttt{n:since+X} for English expression of time, translatable as \texttt{n:od+2} for Czech (2 for genitive).
+
+Formemes are technically not \uv{correct} according to FGD description and they shouldn't be needed for analysis or synthesis, and in the tranfer phase, we should be able to just transfer the functors. 
+
+However, the motivation for formemes (at least my understanding of it) is, that \emph{we are not that far}, \uv{pure} semantic translation is not possible with our tools, and it's better to transfer t-lemmas, formemes and grammatemes, and generate the more surface layers from that.
+
+Getting back to Russian language, with respect to PDT layers -- while some preliminar research has been done into representing Russian according to the described model (\cite{syntagrus_pdt}), the application of PDT theory into Russian is far from complete.
 
 \subsubsection{Blocks}
 
-Every TectoMT task can be decomposed into so-called \emph{blocks}. To quote \cite{zabokrtsky}: \uv{The basic processing units are blocks. They serve for some very limited, well defined, and often linguistically interpretable tasks (e.g., tokenization, tagging, parsing).} In other words, block is given a tree as an input and the block then does some well-defined task on it.
+Every TectoMT task can be decomposed into so-called \emph{blocks}. To quote \cite{zabokrtsky_hab}: \uv{The basic processing units are blocks. They serve for some very limited, well defined, and often linguistically interpretable tasks (e.g., tokenization, tagging, parsing).} In other words, block is given a tree as an input and the block then does some well-defined task on it.
 
 More blocks in a row are called a \emph{scenario}.
 
 Blocks can be language specific or language agnostic; simple blocks like copying a tree are usually language agnostic, as well as other parametrizable blcks -- however, most blocks are usually language specific.
 
-Because of language specificity of most of the blocks, scenarios for various language pairs are language specific too. For example -- while it's not up-to-date, English-to-Czech scenario is thoroughly described in \cite{zabokrtsky}.
+Because of language specificity of most of the blocks, scenarios for various language pairs are language specific too. For example -- while it's not up-to-date, English-to-Czech scenario is thoroughly described in \cite{zabokrtsky_hab}.
 
 \subsubsection{Makefiles}
 
@@ -562,14 +570,16 @@ TectoMT package itself also contains various scripts and tools -- one of them ar
 Interesting techniques of using Hidden Markov Tree Models and Maximum Entropy models for TectoMT translation are described in \cite{tecto_hmtm} and \cite{tecto_maxent}. Unfortunately however, we haven't been able to train any of those for Czech-to-Russian translation.
 
 \subsubsection{Current Czech-to-Russian scenario}
-Unlike with Moses where we had to had to train whole models from zero, TectoMT already had some rudimentary scenario for Czech-to-Russian machine translation.
+Unlike Moses where we had to had to train whole models from zero, TectoMT already had some rudimentary scenario for Czech-to-Russian machine translation.
 
-From what I heard from colleagues, working on this scenario, it was put together in a very short timeframe (about 24 hours), and it's not documented in any paper or any other documentation. The scenario consists of 66 blocks, where Czech analysis is 33 blocks, transfer is 5 blocks and Russian analysis is 28 blocks. 
+From what I heard from colleagues, this scenario was put together in a very short timeframe (about 24 hours), and it's not described in any paper or any other documentation. The scenario consists of 66 blocks, where Czech analysis is 33 blocks, transfer is 5 blocks and Russian analysis is 28 blocks. 
 
 While I have to admit I don't have enough experience to judge it, Czech analysis seems to be well done and probably copied from some other working scenario.
 
-However, the transfer and Russian synthesis doesn't seem to be very advanced. Transfer of \uv{t-lemmas} actually only involves look-up in a very small dictionary, made by taking the proprietary PC-Translator dictionary (see section TODO) and taking a subset of its lexical lemmas that also appear in UMC (see TODO). Transfer of formemes is just a few hand-written rules.
+However, the transfer and Russian synthesis doesn't seem to be very advanced. Transfer of \uv{t-lemmas} actually only involves look-up in a very small dictionary, made by taking the proprietary PC-Translator dictionary (see section TODO) and taking a subset of its lexical lemmas that also appear in UMC (see TODO). Unlike more advanced models, in this model, any given lemma is always translated the same way, no matter the context. Similarly, transfer of formemes is just a copy and a few hand-written rules.
 
-Synthesis seem to downright use high amount of blocks from Czech synthesis. This can be somehow justified by the similarity of the two languages, but it also doesn't exactly inspire confidence.
+With regards to Russian synthesis -- about half of its blocks seem to be Czech synthesis blocks.
+This can be somehow justified by the similarity of the two languages, but it also doesn't exactly inspire confidence.
 
-In general, it's obvious the scenario was done very quickly and, to me, it's quite surprising it's even translating something\footnote{although, as will be seen in the chapter TODO, the results are quite bad, even when I managed to increase the quality by a few BLEU points}.
+
+In general, it's obvious the scenario was done very quickly and, to me, it's quite surprising it's even translating something.\footnote{Although, as will be seen in the chapter TODO, the results are quite bad, even when I managed to increase the quality by a few BLEU points.}
