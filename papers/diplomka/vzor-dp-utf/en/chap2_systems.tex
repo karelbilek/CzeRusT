@@ -518,7 +518,6 @@ TectoMT is available for a download from UFAL's public SVN repository, with the 
 
 Treex and TectoMT are free software. Treex is dual-licensed under Artistic License 1.0 and GPLv2, as most CPAN packages are. TectoMT is licensed under GPLv2 outright. However, there are modules in TectoMT with more restrictive licencing -- some of them can be used only non-commercially -- and some models are trained from non-free sources and probably couldn't be used outside of academia. 
 
-TectoMT package itself also contains various scripts and tools -- one of them are Make scripts for easier running and evaluation of experiments\footnote{What needs to be said is that's it's tailored mostly for UFAL's cluster infrastructure instead of for general usage.}. The goals are different from Moses evaluation managers, described in \ref{moses}, as well as it means, but we can imagine it as being slightly similar. (Those Make scripts don't, unfortunately, have any nice name to refer to them as.)
 
 \subsubsection{Trees and layers}
 Ultimatively, TectoMT is based on a linguist theory that predates machine translation by decades.
@@ -545,7 +544,32 @@ However, TectoMT modifies the PDT model with the addition of \emph{formemes} (de
 
 Formemes are technically not \uv{correct} according to FGD description and they shouldn't be needed for analysis or synthesis, and we should be able to just transfer the functors. However, the motivation for formemes (at least my understanding of it) is, that \emph{we are not that far}, \uv{pure} semantic translation is not that powerful, and it's better to transfer t-lemmas, formemes and grammatemes, and generate the more surface layers from that.
 
-%Interesting techniques of using Hidden T
 \subsubsection{Blocks}
 
+Every TectoMT task can be decomposed into so-called \emph{blocks}. To quote \cite{zabokrtsky}: \uv{The basic processing units are blocks. They serve for some very limited, well defined, and often linguistically interpretable tasks (e.g., tokenization, tagging, parsing).} In other words, block is given a tree as an input and the block then does some well-defined task on it.
 
+More blocks in a row are called a \emph{scenario}.
+
+Blocks can be language specific or language agnostic; simple blocks like copying a tree are usually language agnostic, as well as other parametrizable blcks -- however, most blocks are usually language specific.
+
+Because of language specificity of most of the blocks, scenarios for various language pairs are language specific too. For example -- while it's not up-to-date, English-to-Czech scenario is thoroughly described in \cite{zabokrtsky}.
+
+\subsubsection{Makefiles}
+
+TectoMT package itself also contains various scripts and tools -- one of them are Make scripts for easier running and evaluation of the scenarios\footnote{What needs to be said is that's it's tailored mostly for UFAL's cluster infrastructure instead of for general usage.}. The goals are different from Moses evaluation managers, described in \ref{moses}, as well as it means, but we can imagine it as being slightly similar. (Those Make scripts don't, unfortunately, have any nice name to refer to them as.)
+
+\subsubsection{MaxEnt, HMTM}
+Interesting techniques of using Hidden Markov Tree Models and Maximum Entropy models for TectoMT translation are described in \cite{tecto_hmtm} and \cite{tecto_maxent}. Unfortunately however, we haven't been able to train any of those for Czech-to-Russian translation.
+
+\subsubsection{Current Czech-to-Russian scenario}
+Unlike with Moses where we had to had to train whole models from zero, TectoMT already had some rudimentary scenario for Czech-to-Russian machine translation.
+
+From what I heard from colleagues, working on this scenario, it was put together in a very short timeframe (about 24 hours), and it's not documented in any paper or any other documentation. The scenario consists of 66 blocks, where Czech analysis is 33 blocks, transfer is 5 blocks and Russian analysis is 28 blocks. 
+
+While I have to admit I don't have enough experience to judge it, Czech analysis seems to be well done and probably copied from some other working scenario.
+
+However, the transfer and Russian synthesis doesn't seem to be very advanced. Transfer of \uv{t-lemmas} actually only involves look-up in a very small dictionary, made by taking the proprietary PC-Translator dictionary (see section TODO) and taking a subset of its lexical lemmas that also appear in UMC (see TODO). Transfer of formemes is just a few hand-written rules.
+
+Synthesis seem to downright use high amount of blocks from Czech synthesis. This can be somehow justified by the similarity of the two languages, but it also doesn't exactly inspire confidence.
+
+In general, it's obvious the scenario was done very quickly and, to me, it's quite surprising it's even translating something\footnote{although, as will be seen in the chapter TODO, the results are quite bad, even when I managed to increase the quality by a few BLEU points}.
