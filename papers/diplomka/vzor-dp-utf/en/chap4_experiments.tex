@@ -185,6 +185,29 @@ The results of our experiment are seen on Figure~\ref{graf:stem-plot-csru} -- \e
 We can see that stem with length 6 gets the best results. So, we used stemma with the length 6 in further experiments, such as the WMT submission \cite{mujpaper} or the one described in the next section.
 
 \subsection{Full setup}
-Our final Moses system uses the following setup:
+Our final Moses system uses the setup, described in this section (and section TODO).
+
+\subsubsection{Translation model}
+We use the following parallel corpora, concatenated into one big \uv{eman} corpus, for training a translation model:
+
+\begin{itemize}
+\item Mixed Intercorp
+\item Subtitles
+\item UMC train
+\item Wikinames
+\end{itemize}
+
+We do not use Filtered Intercorp because we intended it only for testing, as will be described in the section TODO.
+
+\subsubsection{Language model}
+
+We use all the following monolingual corpora from the section TODO, plus target sides of the parallel corpora from translation model.
+
+We use linear interpolation, with UMC dev as a development corpus. We use a linear interpolation instead of log-linear interpolation simply because we didn't notice the option for log-linear interpolation until later in the project.
+
+\subsubsection{Factors, other}
+We use factors as described in the section \ref{factors}. We use recaser, trained as a language model on all the monolingual corpora, as described in the section XXX.
 
 
+\section{TectoMT experiments}
+TODO: hezky popsat těch pár změn, co jsem udělal
