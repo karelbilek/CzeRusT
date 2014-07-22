@@ -1,47 +1,75 @@
 \chapter{Data}
-In this chapter, I am describing both data, used for testing the systems, and training data used for training Moses and Treex(???) models.
+In this chapter, I am describing some datasets that we use for our experiments.
 
-\section{Test data}
-\label{testset}
-To compare several machine translation systems, we need some consistent data to show the deficiencies and/or improvements of different MT systems.
+I will \emph{not} divide the data into test / train / development in this section; that will be done in the chapters about the given experiments.
 
-In general, we want to produce a system that's general enough and performs well on unseen sentences; for that reason, we should have -- in the case of statistical MT systems -- separated test set and training set.\footnote{As noted in for example \cite{koehn2010statistical}, p. 274, or \cite{bishop}, pg. 6}
+%In this chapter, I am describing both data, used for testing the systems, and training data used for training Moses and Treex(???) models.
 
-We have tried to do that in experiments with systems that we control. However, the systems described in \ref{blackbox} are systems that we don't control. Especially with Google Translate, we cannot rule out the possibility that they already use some parts of the test data. The only way to absolutely prevent this would be to make our own test data, but we don't have enough resources to do that on a bigger scale.
+%\section{Test data}
+%\label{testset}
+%To compare several machine translation systems, we need some consistent data to show the deficiencies and/or improvements of different MT systems.
 
-In general, we use two test sets with two different domains - WMT data and Intercorp data.
+%In general, we want to produce a system that's general enough and performs well on unseen sentences; for that reason, we should have -- in the case of statistical MT systems -- separated test set and training set.\footnote{As noted in for example \cite{koehn2010statistical}, p. 274, or \cite{bishop}, pg. 6}
 
-\subsection{WMT}
-One of our test sets is WMT test data. 
+%We have tried to do that in experiments with systems that we control. However, the systems described in \ref{blackbox} are systems that we don't control. Especially with Google Translate, we cannot rule out the possibility that they already use some parts of the test data. The only way to absolutely prevent this would be to make our own test data, but we don't have enough resources to do that on a bigger scale.
 
-WMT (short for Workshop on Statistical Machine Translation) is an annual workshop, where various teams compete on a shared translation task with a shared test data.\footnote{See for example \cite{wmt_findings_2013}, or the rich history on \url{http://www.statmt.org}.} As noted in \cite{wmt_findings_2013}, in 2013, Russian was added as one of the languages. 
+%In general, we use two test sets with two different domains - WMT data and Intercorp data.
+\section{Parallel data}
 
-In this workshop, every year, for all the available languages, one multi-lingual parallel testset is created. 
-The sentences in the training set are manually translated; for the year 2013, the set is described in \cite{wmt_findings_2013} and available on \url{http://www.statmt.org/wmt13/translation-task.html}. For each of the languages, a fixed number of (different) sentences is taken and then translated to all the other languages; the languages include Czech and Russian.
+\subsection{WMT test sets}
+Two of our sets are WMT test data -- WMT 2012 and WMT 2013.
+
+WMT (short for Workshop on Statistical Machine Translation) is, as the name suggests, an annual workshop about statistical machine translation. One of the recurring activities is \emph{shared translation task}, where various teams compete on translation of a shared test data, with a given set of languages. (See for example \cite{wmt_findings_2013}, or the rich history on \url{http://www.statmt.org}.) 
+
+
+In 2012 and 2013, for all the available languages, one multi-lingual parallel testset was created.
+As noted in \cite{wmt_findings_2013}, in 2013, Russian was added as one of the languages. 
+
+In the year 2012, Russian was not one of the languages. However, in the year 2013, WMT released data called \texttt{news-test2012} which \emph{does} include Russian, additionally to other languages from the year 2012, so we decided to use that, too.
+
+The sentences in the training set are manually translated; for the year 2013, the set is described in \cite{wmt_findings_2013} and available on \url{http://www.statmt.org/wmt13/translation-task.html}. For each of the languages, a fixed number of (different) sentences is taken and then translated to all the other languages.\footnote{In the year 2014, the testset was created slightly differently and we cannot extract Czech-Russian pair from it.}
+
 
 Therefore, most Czech and Russian sentences in this set are not a direct translation of each other, but they are different translations of the same source sentences from various languages -- except for sentences that are originally from either Czech or Russian sources. 
 
 It can be argued, that because the Czech and Russian side are translated separatedly from different languages, the advantage of similarity of the two languages is lost -- different idoms and different word order will be used.
 However, if we used only the directly translated sentences, the data would be significantly smaller. 
 
-We extracted pairs of Czech and Russian from the 2013 test dataset.
+%We extracted pairs of Czech and Russian from the 2013 test dataset.
 
 %for the year 2013 (WMT2013) and ??? sentences for the year 2014 (WMT2014). We use WMT2014 as a final test set, and WMT2013 as a development set, for fine-tuning the results.
-
 
 
 \subsection{Intercorp}
 \label{intercorp_p1}
 Intercorp\footnote{Sometimes written as InterCorp} is a parallel corpus for many language pairs, each including Czech. The history and other information is thoroughly described in \cite{intercorp}. One of the language pairs in Intercorp is Czech-Russían.
 
+We use two separate Intercorp corpora for technical reasons. 
+
+\subsubsection{Mixed Intercorp}
+The first Intercorp corpus was used at the start of the project for some of the Moses models (see TODO) and was created by my colleague Natalia Kljueva. 
+The source data are both from direct Russian-Czech translation and translations from third language, and the sources are not marked clearly.
+
+In this thesis I will call the corpus \uv{Mixed Intercorp}.
+
+\subsubsection{Original Intercorp}
+
+Because we wanted some additional data for testing purposes, we decided to take more data from Intercorp. We were given access to \uv{raw} Intercorp data for non-commercial, academic purposes.
+
 The data itself is organized by source, and each data source is given an information of the original language; even in the Czech-Russian part of Intercorp, there are texts with an English source (for example, Czech and Russian translation of Harry Potter novels). 
+
+The data are in a strange, XML-like format, that's apparently used by a Manatee corpus management system.\footnote{\url{https://www.sketchengine.co.uk/documentation/wiki/SkE/PreparingCorpusOverview}}
+
+\subsubsection{Filtered Intercorp}
 
 We were able to extract just the data, that are either direct translations from Russian to Czech or vice versa, thanks to this metadata.
 
-Because we trained the Moses system \emph{before} putting together test data\footnote{This might sound illogical and backwards, but it's mainly because we built the Moses system first as a part of a different research, see \cite{mujpaper}.},
-we needed to remove the Moses training data to avoid duplication. 
+To have a separate set, we removed the data from the \uv{mixed} Intercorp.
 
-The resulting data is purely from fictional novels, except for Jiří Levý's Art of Translation, which is (as the name suggests) a translation theory book. Interestingly, this is also the only book that has been translated from Czech to Russian and not the other way.
+The resulting data is purely from fictional novels, except for Jiří Levý's Art of Translation, which is (as the name suggests) a translation theory book.
+
+All of the data are translations from Russian to Czech, except, again, Jiří Levý's Art of Translation.
+%Interestingly, this is also the only book that has been translated from Czech to Russian and not the other way.
 
 \jednatabulkan{icorpdata} { |l|l |l | l | }
 {
@@ -120,27 +148,19 @@ Matryona's Place
 
 \\ \hline
 
-} {Intercorp data} 
+} {Filtered Intercorp data} 
 
 
-All the used novels are in the Table~\ref{tabulka:icorpdata}, \footnote{English transcriptions, English title translations and years of publication are taken from English wikipedia.}
-sorted by the sentenced count.
+All the used novels are in the Table~\ref{tabulka:icorpdata},
+sorted by the sentenced count. (English transcriptions, English title translations and years of publication are taken from English Wikipedia.)
 
-As the reader can probably see, this dataset is markedly different from the first dataset. The data are bigger and are translated directly, on the other hand, the youngest book is from 1967 and the language itself is -- as a prosaic text -- harder to translate in general. Because the two corpora are too different, we did not join the WMT and the Intercorp sets and instead test the systems on each set separately.
-\subsection{Data size}
-TODO
+%As the reader can probably see, this dataset is markedly different from the first dataset. The data are bigger and are translated directly, on the other hand, the youngest book is from 1967 and the language itself is -- as a prosaic text -- harder to translate in general. Because the two corpora are too different, we did not join the WMT and the Intercorp sets and instead test the systems on each set separately.
+
+
+\begin{comment}
 
 \section{Moses training data}
 \subsection{Parallel data}
-\subsubsection{Intercorp}
-In general, we described Intercorp corpus in \ref{intercorp_p1}. As mentioned in that section, we created the Moses system before we put together the testing data.
-
-When we were building the Moses system, we did not have access to the whole Intercorp corpus, only a subset of it, from a previous version, without any metada and shuffled across the whole corpus.
-
-However, the metadata can still be reconstructed by comparing the Intercorp data with the corpus.
-
-
-TODO: popis intercorp dat
 
 \subsubsection{Subtitles}
 Another set of data that we used were subtitles from OpenSubtitles database.
@@ -199,3 +219,4 @@ The interested thing to note is that Yandex parallel corpus is lowercased.
 \subsubsection{Data size}
 
 TODO
+\end{comment}
