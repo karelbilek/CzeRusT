@@ -125,30 +125,8 @@ The rules for analysis are even less readable. Random example of two such rules 
 
 Those are all left with next to no comments. For example, the only comment for the group of more than 20 rules, including the two rules above, is \texttt{RELATIVE CLAUSES ADJOINED TO THEIR HEADS}.
 
-\begin{comment}
-\subsubsection{Dictionary coverage of WebColl}
-
-The dictionary contains about 8,000 lexical items. However, the domain of the translation and, therefore, the dictionary, was manuals for old computers from 1980's. 
-
-In different experiments (\cite{florida}), we tried to measure how many nouns from the RUSLAN dictionary appear at all in a modern text.
-
-For that, we used a monolingual Czech corpus WebColl, consisting of roughly 7~million sentences (114~million tokens)\footnote{See \cite{webcoll}}.
-
-RUSLAN dictionary has 2,783 nouns. In the WebColl corpus, from those nouns, 611 appear less than 10 times -- and from those, 412 don't appear \emph{at all}.
-
-The reverse is similarly infavourable: from 39,434,505 nouns in the corpus, only 11,862,221 is in the dictionary.
-
-\subsubsection{Experiments}
-
-Despite the general un-maintainability of the RUSLAN code and despite the small dictionary, we tried to run the system on our test data.
-
-However, all our experiments ended in some sort of error.
-
-Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Systems-Q interpreter is coded), I gave up on this experiment. (?????)
-
-\end{comment}
-
 \subsection{Česílko 1.0}
+\label{cesilko10}
 
 \uv{Česílko} is a name for two entirely different machine translation systems with slightly different goals and, more importantly, slightly different structure. Both were originally intended for Czech-to-Slovak translation.
 
@@ -164,12 +142,14 @@ Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Sys
 
 The system is written in a mixture of C, C++ and Flex (fast lexical analyser generator). The code itself is not really well documented and modular, but that can be attributed to the age of some of the components -- despite the whole system being developed in 2000, some files seem to be as old as 1991.
 
-This system itself is unfortunately not very extendable from Slovak to Russian (as the target language). Partly because of the design itself, partly because translations from Czech to Russians are not doable only word-by-word basis.
+%This system itself is unfortunately not very extendable from Slovak to Russian (as the target language). Partly because of the design itself, partly because translations from Czech to Russians are not doable only word-by-word basis.
+
 %-- as we can see on the examples in the section \ref{sec:experiments} -- the sentences are not really translatable word-by-word.
 
 %For that reason I decided not to further experiment with Česílko 1.0 for Czech-to-Russian machine translation.
 
 \subsection{Česílko 2.0}
+\label{cesilko20}
 Česílko 2.0 is a different project with similar goals, but using different frameworks and adding more transfer rules\footnote{See \cite{cesilko2}}. 
 %However, it has its own shares of problems, that prevented us to use it.
 
@@ -210,37 +190,6 @@ Several years later, Apple (now merged with NeXT) made its new version of Mac OS
 
 Cocoa is not the only library for Objective-C, but because Apple is the main investor in Objective-C-based systems, it's a de-facto standard library. Cocoa is nowadays found in every Mac PC, iPhone and iPad and maybe other Apple's products.
 
-\begin{comment}
-\subsubsection{GNUstep}
-GNUstep is a free re-implementation of OpenStep/Cocoa.\footnote{See \url{http://www.gnustep.org/}}.
-
-Its development started in the NeXTSTEP days; however, it still hasn't met feature parity with Cocoa's OS X.
-
-Aaron Hillegass in 2nd edition of his popular book \emph{Cocoa Programming on Mac OS X} discouraged people from using GNUStep. He redacted this note in later versions of the book, perhaps because of protests from GNUstep developers\footnote{\url{http://www.gnustep.org/resources/BookClarifications.html}}, but in my opinion, his notes are still valid.
-
-GNUstep implementations are very often buggy and not feature-complete with Cocoa and, most unfortunately, unpredictable. This is what hurt us with Česílko 2.0.
-
-\subsubsection{Cocoa and Česílko}
-When Petr Homola was writing Česílko 2.0, he decided to use Cocoa and Objective-C for development.
-
-On Mac OS X, this configuration is just fine; however, on Linux, where we wanted to run the MT systems (and where only GNUstep is available), this creates unpredictable results.
-
-In my experiments with Czech-to-Slovak translations, I noticed that on Mac OS X, there are about 5-times more sentences generated, than on Linux -- while the program was compiled from the same sources.
-
-After thorough inspection, I found out the error was in GNUstep implementation of NSDictionary -- Cocoa's implementation of associative array\footnote{\url{https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary\_Class/Reference/Reference.html}} -- in some unpredictable cases, NSDictionary returns two different values for two equal NSString keys\footnote{it might have to do something with Unicode; however, NSStrings are supposed to be UTF-8 by default}. As a result, one of the modules returned wrong inflection patterns for a number of words and the morphological analyzer then returned only a fraction of the results.
-
-After a \uv{hacky}, but working workaround for this issue, the system returned same correct results on both OS X and Linux. However, I am not at all confident there aren't more similar issues in GNUstep to further develop the system for Russian;
-fixing the issues of the standard frameworks, copying API of a closed-source library, that's normally very rarely used, is way beyond the scope of this thesis.
-
-%when the very basic frameworks themselves are unstable and unreliable, the development ceases to make sense.
-
-Reading the paper \cite{evalquality_cesilko}, that presents Česílko 2.0 with a very low BLEU, I think the same issue plagued the authors of that paper -- it's unprobable the BLEU of the correctly working system would be that low, when in \cite{cesilko2}, the results of Česílko 2.0 were slightly better than of Česílko 1.0.
-
-\section{Black-box systems}
-\label{blackbox}
-In this chapter, I am describing all the \uv{black-box} systems -- that is, without any access to the source code -- that we successfully tried.
-\end{comment}
-
 \subsection{PC Translator}
 \label{langsoft}
 
@@ -262,30 +211,6 @@ One of the advantages of PC Translator is its large dictionary -- however, the d
 
 According to its marketing materials, PC Translator v14 uses a Czech-Russian dictionary with above 650.000 words.
 
-\begin{comment}
-
-\subsubsection{Experiments}
-We found out it's not easy to automate translating with PC Translator. Its GUI is suited for translating by hand, sentence-by-sentence, but not for automated translation of thousands of sentences. Also, by definition, Windows GUI is harder to automate on Linux machine from a script.
-
-However, we were able to work around that, with the help of VMWare Player virtualization software (\url{http://www.vmware.com/cz/products/player}) and Au\-to\-Hot\-key GUI scripting software, that allows us to emulate screen clicking (\url{http://www.autohotkey.com/}). Our workflow therefore is:
-
-\begin{pitemize}
-\item on Linux machine, encode the source from UTF-8 to windows-friendly encoding
-\item encode the source as HTML code
-\item start a virtual machine with PC Translator pre-installed
-\item on the start of the virtual machine, run AutoHotkey script from an outer-machine folder (thanks to VMWare shared folders and Windows Startup scripts)
-\item via this AutoHotkey script, run PC Translator and click on \uv{translate file} feature 
-\item translate the HTML file (also shared in the VMWare shared folder)
-\item turn off the virtual machine
-\item turn the file back from HTML and Windows encodings back to UTF-8
-\end{pitemize}
-
-The HTML part is needed because PC Translator had some problems with translating ordinary text files, plus we can pair the translated sentences better thanks to \texttt{id} parameters in \texttt{div} tags.
-
-We used the newest version of PC Translator available at the time, which is PC Translator v14.
-
-\end{comment}
-
 \section{Statistical systems}
 
 \subsection{Google Translate}
@@ -303,20 +228,6 @@ Google Translate, apart from being a website, has a paid translation API\footnot
 Some unofficial libraries remove this complexity and abstracts it away from the user.
 One of them is called prosaically \uv{google-api-translate-java} (\url{https://code.google.com/p/google-api-translate-java/}) and is, not very unexpectedtedly, Java-based.
 
-
-\begin{comment}
-We figured out it's not too expensive for our testing purposes, so we ended up paying for the API.\footnote{The cost is measured per character on the source side. We used about 3 million characters and paid about 60 dollars. This is rather high for any repeated experiments, but not that high for one-time translation.}
-
-To automate Google Translate, we cannot use the website itself, simply because pasting tens of thousands of lines into a browser window usually crashes the browser and is probably against Google Translate's Terms of Use.
-
-There are some workarounds around this, such as \uv{faking} browser environment using some automation tools and/or libraries, but we used more stable option.
-
-
-%We used an unofficial Java library for Google Translate API, called prosaically \uv{google-api-translate-java} (\url{https://code.google.com/p/google-api-translate-java/}).
-We used a Java library for Google Translate API, called prosaically \uv{google-api-translate-java} (\url{http://code.google.com/p/google-api-translate-java}).
-
-The tests were done on 3rd May, 2014.\footnote{I think it's important to note the date of the tests, because the quality of online services might change overtime.}
-\end{comment}
 
 \subsection{Bing Translator}
 \label{bing}
