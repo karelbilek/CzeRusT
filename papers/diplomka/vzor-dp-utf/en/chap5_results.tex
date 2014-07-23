@@ -1,19 +1,55 @@
-\chapter{Evaluation}
+\chapter{Results}
+TODO: tato celá kapitola ještě bude trochu předělána
+
 \section{Overview}
 \label{overvieweval}
 We are testing all the following systems:
 \begin{pitemize}
-\item PC Translator \emph{(rule-based, \ref{langsoft})}
-\item Google Translate \emph{(statistical, \ref{google})}
-\item Microsoft Translator \emph{(statistical, \ref{bing})}
-\item Yandex Translate \emph{(statistical, \ref{yandex})}
-\item Moses \emph{(mostly statistical, \ref{moses})}
-\item Treex \emph{(hybrid, \ref{tecto})}
+\item PC Translator \emph{(rule-based, TODO)}
+\item Google Translate \emph{(statistical, TODO)}
+\item Microsoft Translator \emph{(statistical, TODO)}
+\item Yandex Translate \emph{(statistical, TODO)}
+\item Moses \emph{(mostly statistical, TODO)}
+\item Treex \emph{(hybrid, TODO)}
 \end{pitemize}
 
-We are testing on the two test sets, described in \ref{testset}.
+We are testing on two separate test sets: WMT 2013 and Filtered Intercorp, as described in the section TODO.
 
-My original plan was that, apart from doing automatized testing, I would be able to look at the results, compare the translation and by comparing the original translation and the translated sentences, I would be able to give some insights on the systems -- as I can personally read Cyrillics, I have some basic understanding of a Russian language and I am a native Czech speaker. However, it turned out that for judging translation errors and classifying them, one needs to know the language on an advanced level -- especially with the phrase-based translation, that makes the sentences from feasibly looking phrases. For this reason, I will abstain for saying too much about the quality of every system.
+\subsection{Problem with my evaluation}
+My original plan was to do both automated testing \emph{and} do some human judgement on the results, as I do have some basic Russian language skills and I am fully fluent in CZech.
+
+However, I soon found out my level Russian understanding is not high enough for comparing various automated systems. Therefore I will talk about the translation quality only at a very surface level.
+
+At this point, the reader might ask -- why spend time on Czech-to-Russian translation with only passing knowledge of Russian, when Russian-to-Czech translation would be easier for me to evaluate?
+
+I agree that this question has some merit. However, I chose Czech-to-Russian translation pair for several reasons:
+\begin{pitemize}
+\item existing historical systems like RUSLAN, that I planned to compare with modern systems. Unfortunately, I wasn't able to make any of the systems work.
+\item pre-existing Czech-to-Russian TectoMT scenario. I was actually to utilize that and build on it, instead of making the system from scratch, as it would be needed.
+\end{pitemize}
+
+%My original plan was that, apart from doing automatized testing, I would be able to look at the results, compare the translation and by comparing the original translation and the translated sentences, I would be able to give some insights on the systems -- as I can personally read Cyrillics, I have some basic understanding of a Russian language and I am a native Czech speaker. However, it turned out that for judging translation errors and classifying them, one needs to know the language on an advanced level -- especially with the phrase-based translation, that makes the sentences from feasibly looking phrases. For this reason, I will abstain for saying too much about the quality of every system.
+
+
+\subsection{Metrics}
+\subsubsection{Automatic metrics}
+TODO: Nepoužít TER? neznám.
+
+First metric we test is a BLEU metric\footnote{See \cite{bleu}.}.
+
+For a comparable BLEU metric (because, as can be seen in the section \ref{samples}, even the reference sentences themselves are inconsistently tokenized), we re-tokenize both reference and the tested system by Moses' built-in tokenizer skript.
+
+We also normalize punctuation, using script from WMT pages. We also replace \texttt{\&quot;}, that appears often in Intercorp, with actual quotation marks.
+
+We decided to use \emph{not} lowercased BLEU -- that means that words \emph{Кристиан} and \emph{кристиан} are two different words.
+
+\subsubsection{Human evaluation}
+TODO: moje plány s TrueSkill/Appraise, co nevyšly, protože mi to nikdo neanotoval. Za celou dobu mi tam 4 lidé odanotovali asi 13 vět.
+
+\subsection{Sample sentences}
+
+\subsubsection{Sample sentences - Intercorp}
+\label{samples}
 
 For illustration purposes, we have randomly selected 5 sentences from Intercorp and 5 from WMT-2013; the results are shown below. 
 On those, I want to demonstrate the conrete results of various machine translation systems. 
@@ -22,8 +58,6 @@ On those, I want to demonstrate the conrete results of various machine translati
 I am presenting all Russian sentences with both original Cyrillic and GOST 7.79 RUS transliteration\footnote{See \cite{gost}}, for the convenience of the reader.
 %For every system, I will demonstrate the results on selected sentences from both test sets.
 
-\subsubsection{Sample sentences - Intercorp}
-\label{samples}
 
 \priklady{
 
@@ -108,21 +142,6 @@ Po slovam doktora Kristian Martel`, sistema zdravooxraneniya Kvebeka nedostatoch
 
 }
 
-\subsection{Metrics}
-\subsubsection{BLEU}
-
-First metric we test is a BLEU metric\footnote{See \cite{bleu}.}.
-
-For a comparable BLEU metric (because, as can be seen in the section \ref{samples}, even the reference sentences themselves are inconsistently tokenized), we re-tokenize both reference and the tested system by Moses' built-in tokenizer skript.
-
-We also normalize punctuation, using script from WMT pages. We also replace \texttt{\&quot;}, that appears often in Intercorp, with actual quotation marks.
-
-We decided to use \emph{not} lowercased BLEU -- that means that words \emph{Кристиан} and \emph{кристиан} are two different words.
-
-
-\subsubsection{TODO subjekt. hodnocení}
-
-TODO
 \subsection{Baseline}
 
 
@@ -143,7 +162,7 @@ As a baseline for the translation, I use an automatic transliteration GOST 7.79 
 
 Resulting BLEU is very low, as expected.
 
-\section{System evaluations}
+\section{Sample translations and commentary}
 \subsection{PC Translation}
 \subsubsection{Demonstration -- Intercorp}
 \priklady {

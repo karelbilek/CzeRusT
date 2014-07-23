@@ -2,19 +2,20 @@
 In this chapter, I am describing the experiments with the systems from the chapter TODO.
 
 In general, our goal was to 
-\begin{itemize}
+\begin{pitemize}
 \item try to run the historical systems on our data,
 \item automate the black-box systems, so we can at least reliably run them from the command line,
 \item explore the more open frameworks and try to use them for Czech-to-Russian machine translation and eventually identify possible future work,
 \item and finally, compare all the systems on the same set of data.
-\end{itemize}
+\end{pitemize}
 
 The last goal will be explored in further details in the next section.
 
 %The first goal was largely unsuccessful, as we were not able to run either of the more historical systems. 
 %We were able to automate the black-box systems like Google Translate and PC Translator, even when we had to pay for the official API.
 %We were successfully able to train a working Moses system, and we were able to improve on an existing TectoMT 
-\section{Unsuccessful historical systems}
+\section{Experiments on historical systems}
+Unfortunately, most experiments on historical systems were largely unsuccessful.
 
 \subsection{RUSLAN}
 \subsubsection{Dictionary coverage of WebColl}
@@ -25,9 +26,9 @@ In a set of experiments (\cite{florida}), we tried to measure how many nouns fro
 
 For that, we used a monolingual Czech corpus WebColl (\cite{webcoll}), consisting of roughly 7~million sentences (114~million tokens).
 
-RUSLAN dictionary has 2,783 nouns. In the WebColl corpus, from those nouns, 611 appear less than 10 times -- and from those, 412 don't appear \emph{at all}.
+%RUSLAN dictionary has 2,783 nouns. In the WebColl corpus, from those nouns, 611 appear less than 10 times -- and from those, 412 don't appear \emph{at all}.
 
-The reverse is similarly infavourable: from 39,434,505 noun tokens in the corpus, only 11,862,221 are represented in the dictionary.
+The results are infavourable: from 39,434,505 noun tokens in the corpus, only 11,862,221 are represented in the dictionary.
 
 This means that about two third of nouns would never be translated.
 
@@ -45,7 +46,7 @@ Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Sys
 
 %This system itself is unfortunately not very extendable from Slovak to Russian (as the target language). Partly because of the design itself, partly because translations from Czech to Russians are not doable only word-by-word basis.
 
-As described in the section \ref{cesilko10}, the system is not very extendable for Russian as the target language. Extending the system for Russian would mean significant addition to the code, which is not very mantainable by today's standards. 
+As described in the section \ref{cesilko10}, Česílko 1.0 is not very extendable for Russian as the target language. Extending the system for Russian would mean significant addition to the code, which is not very mantainable by today's standards. 
 
 Even then, the code in general assumes that the languages are directly translatable word-for-word. As we will see in the PC-Translator results, word-for-word translation from Czech to Russian doesn't give very good results anyway.
 
@@ -206,7 +207,7 @@ We use all the following monolingual corpora from the section TODO, plus target 
 We use linear interpolation, with UMC dev as a development corpus. We use a linear interpolation instead of log-linear interpolation simply because we didn't notice the option for log-linear interpolation until later in the project.
 
 \subsubsection{Factors, other}
-We use factors as described in the section \ref{factors}. We use recaser, trained as a language model on all the monolingual corpora, as described in the section XXX.
+We use factors as described in the section \ref{factors}. We use recaser, trained as a language model on all the monolingual corpora, as described in the section TODO.
 
 
 \section{TectoMT experiments}

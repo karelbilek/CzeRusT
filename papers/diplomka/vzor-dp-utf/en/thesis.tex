@@ -90,8 +90,8 @@
 }}
 \makeatother
 
-%\usepackage{setspace}
-%\setstretch{1.3}
+\usepackage{setspace}
+\setstretch{1.3}
 
 % Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v obsahu.
 \def\chapwithtoc#1{
@@ -177,7 +177,7 @@
 }
 
 \long\def\grafff#1#2#3{
- \begin{graff}[h]
+ \begin{graff}[tpb]
          \centergraf{
       \includegraphics[width=#3mm]{./#1.pdf}
        \caption{#2}
@@ -231,13 +231,13 @@
 \begin{document}
 
 %% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
-%\include{chapmin1}
-%\include{chap0_intro}
-%\include{chap1_linguistics}
-%\include{chap2_systems}
-%\include{chap3_data}
+\include{chapmin1}
+\include{chap0_intro}
+\include{chap1_linguistics}
+\include{chap2_systems}
+\include{chap3_data}
 \include{chap4_experiments}
-%\include{chap5_results}
+\include{chap5_results}
 
 
 
