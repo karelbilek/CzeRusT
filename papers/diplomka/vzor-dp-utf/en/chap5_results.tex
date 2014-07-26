@@ -1,5 +1,4 @@
 \chapter{Results}
-TODO: tato celá kapitola ještě bude trochu předělána
 
 \section{Overview}
 \label{overvieweval}
@@ -15,12 +14,14 @@ We are testing all the following systems:
 
 We are testing on two separate test sets: WMT 2013 and Filtered Intercorp, as described in the section TODO.
 
+\begin{comment}
 \subsection{Problem with my evaluation}
 My original plan was to do both automated testing \emph{and} do some human judgement on the results, as I do have some basic Russian language skills and I am fully fluent in CZech.
 
 However, I soon found out my level Russian understanding is not high enough for comparing various automated systems. Therefore I will talk about the translation quality only at a very surface level.
 
 At this point, the reader might ask -- why spend time on Czech-to-Russian translation with only passing knowledge of Russian, when Russian-to-Czech translation would be easier for me to evaluate?
+
 
 I agree that this question has some merit. However, I chose Czech-to-Russian translation pair for several reasons:
 \begin{pitemize}
@@ -29,11 +30,12 @@ I agree that this question has some merit. However, I chose Czech-to-Russian tra
 \end{pitemize}
 
 %My original plan was that, apart from doing automatized testing, I would be able to look at the results, compare the translation and by comparing the original translation and the translated sentences, I would be able to give some insights on the systems -- as I can personally read Cyrillics, I have some basic understanding of a Russian language and I am a native Czech speaker. However, it turned out that for judging translation errors and classifying them, one needs to know the language on an advanced level -- especially with the phrase-based translation, that makes the sentences from feasibly looking phrases. For this reason, I will abstain for saying too much about the quality of every system.
-
+\end{comment}
 
 \subsection{Metrics}
 \subsubsection{Automatic metrics}
-TODO: Nepoužít TER? neznám.
+
+We are using several automatic metrics from
 
 First metric we test is a BLEU metric\footnote{See \cite{bleu}.}.
 

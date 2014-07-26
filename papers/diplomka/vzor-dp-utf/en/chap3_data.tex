@@ -1,23 +1,10 @@
 \chapter{Data}
-In this chapter, I am describing some datasets that we use for our experiments.
+In this chapter, I am describing the datasets that I used for my experiments.
 
-%I will \emph{not} divide the data into test / train / development in this section; that will be done in the chapters about the given experiments.
-
-%In this chapter, I am describing both data, used for testing the systems, and training data used for training Moses and Treex(???) models.
-
-%\section{Test data}
-%\label{testset}
-%To compare several machine translation systems, we need some consistent data to show the deficiencies and/or improvements of different MT systems.
-
-%In general, we want to produce a system that's general enough and performs well on unseen sentences; for that reason, we should have -- in the case of statistical MT systems -- separated test set and training set.\footnote{As noted in for example \cite{koehn2010statistical}, p. 274, or \cite{bishop}, pg. 6}
-
-%We have tried to do that in experiments with systems that we control. However, the systems described in \ref{blackbox} are systems that we don't control. Especially with Google Translate, we cannot rule out the possibility that they already use some parts of the test data. The only way to absolutely prevent this would be to make our own test data, but we don't have enough resources to do that on a bigger scale.
-
-%In general, we use two test sets with two different domains - WMT data and Intercorp data.
 \section{Parallel data}
 
 \subsection{WMT test sets}
-Two of our sets are WMT test data -- WMT 2012 and WMT 2013.
+Two of my sets are WMT test data -- WMT 2012 and WMT 2013.
 
 WMT (short for Workshop on Statistical Machine Translation) is, as the name suggests, an annual workshop about statistical machine translation. One of the recurring activities is \emph{shared translation task}, where various teams compete on translation of a shared test data, with a given set of languages. (See for example \cite{wmt_findings_2013}, or the rich history on \url{http://www.statmt.org}.) 
 
@@ -25,36 +12,37 @@ WMT (short for Workshop on Statistical Machine Translation) is, as the name sugg
 In 2012 and 2013, for all the available languages, one multi-lingual parallel testset was created.
 As noted in \cite{wmt_findings_2013}, in 2013, Russian was added as one of the languages. 
 
-In the year 2012, Russian was not one of the languages. However, in the year 2013, WMT released data called \texttt{news-test2012} which \emph{does} include Russian, additionally to other languages from the year 2012, so we decided to use that, too.
+In the year 2012, Russian was not one of the languages. However, in the year 2013, WMT released data called \texttt{news-test2012} which \emph{does} include Russian, additionally to other languages from the year 2012, so I decided to use that, too.
 
-The sentences in the training set are manually translated; for the year 2013, the set is described in \cite{wmt_findings_2013} and available on \url{http://www.statmt.org/wmt13/translation-task.html}. For each of the languages, a fixed number of (different) sentences is taken and then translated to all the other languages.\footnote{In the year 2014, the testset was created slightly differently and we cannot extract Czech-Russian pair from it.}
+The sentences in the training set are manually translated; for the year 2013, the set is described in \cite{wmt_findings_2013} and available on \url{http://www.statmt.org/wmt13/translation-task.html}. For each of the languages, a fixed number of (different) sentences is taken and then translated to all the other languages.\footnote{In the year 2014, the testset was created slightly differently and I could not extract Czech-Russian pair from it.}
 
 
 Therefore, most Czech and Russian sentences in this set are not a direct translation of each other, but they are different translations of the same source sentences from various languages -- except for sentences that are originally from either Czech or Russian sources. 
 
-It can be argued, that because the Czech and Russian side are translated separatedly from different languages, the advantage of similarity of the two languages is lost -- different idoms and different word order will be used.
-However, if we used only the directly translated sentences, the data would be significantly smaller. 
-
+It can be argued, that because the Czech and Russian side are translated separatedly from different languages, the advantage of similarity of the two languages is lost -- different idoms and different word order will be usedHowever, if we used only the directly translated sentences, the data would be significantly smaller. 
+However, if I used only the directly translated sentences, the data would be significantly smaller. 
 %We extracted pairs of Czech and Russian from the 2013 test dataset.
 
 %for the year 2013 (WMT2013) and ??? sentences for the year 2014 (WMT2014). We use WMT2014 as a final test set, and WMT2013 as a development set, for fine-tuning the results.
 
+To reiterate -- I extracted the Czech and Russian sentences from WMT 2013 test set and from WMT 2012 test set\footnote{But only the version released in 2013.}.
 
 \subsection{Intercorp}
 \label{intercorp_p1}
-Intercorp\footnote{Sometimes written as InterCorp} is a parallel corpus for many language pairs, each including Czech. The history and other information is thoroughly described in \cite{intercorp}. One of the language pairs in Intercorp is Czech-Russían.
+Intercorp\footnote{Stylized as InterCorp in some materials.} is a parallel corpus for many language pairs, each including Czech. The history and other information is thoroughly described in \cite{intercorp}. One of the language pairs in Intercorp is Czech-Russían.
 
-We use two separate Intercorp corpora for technical reasons. 
+I am using two separate Intercorp corpora for technical reasons. 
 
 \subsubsection{Mixed Intercorp}
-The first Intercorp corpus was used at the start of the project for some of the Moses models (see TODO) and was created by my colleague Natalia Kljueva. 
+The first Intercorp corpus was used for some of the Moses models (see TODO) and was created by my colleague Natalia Kljueva. 
 The source data are both from direct Russian-Czech translation and translations from third language, and the sources are not marked clearly.
 
-In this thesis I will call the corpus \uv{Mixed Intercorp}.
+In this thesis I will call the corpus \uv{Mixed Intercorp}, because all the various sources are mixed together.
 
 \subsubsection{Original Intercorp}
 
-Because we wanted some additional data for testing purposes, we decided to take more data from Intercorp. We were given access to \uv{raw} Intercorp data for non-commercial, academic purposes.
+Because I wanted some additional data for testing purposes, I decided to take more data from Intercorp. 
+I was  given access to \uv{raw} Intercorp data (by Institute of the Czech National Corpus) for non-commercial, academic purposes.
 
 The data itself is organized by source, and each data source is given an information of the original language; even in the Czech-Russian part of Intercorp, there are texts with an English source (for example, Czech and Russian translation of Harry Potter novels). 
 
@@ -62,9 +50,9 @@ The data are in a strange, XML-like format, that's apparently used by a Manatee 
 
 \subsubsection{Filtered Intercorp}
 
-We were able to extract just the data, that are either direct translations from Russian to Czech or vice versa, thanks to this metadata.
+I was able to extract just the data, that are either direct translations from Russian to Czech or vice versa, thanks to the metadata in the corpus.
 
-To have a separate set, we removed the data from the \uv{mixed} Intercorp.
+To have a separate set, I removed the data already present in the \uv{mixed} Intercorp.
 
 The resulting data is purely from fictional novels, except for Jiří Levý's Art of Translation, which is (as the name suggests) a translation theory book.
 
@@ -156,7 +144,7 @@ sorted by the sentenced count. (English transcriptions, English title translatio
 
 %As the reader can probably see, this dataset is markedly different from the first dataset. The data are bigger and are translated directly, on the other hand, the youngest book is from 1967 and the language itself is -- as a prosaic text -- harder to translate in general. Because the two corpora are too different, we did not join the WMT and the Intercorp sets and instead test the systems on each set separately.
 \subsection{Subtitles}
-Another set of data that we used were subtitles from OpenSubtitles database.
+Another set of data that I used were subtitles from OpenSubtitles database.
 \subsubsection{FilmTit}
 
 In a separate FilmTit project (\cite{filmtit}), me and my colleagues  tried to make a project for subtitle translation from English to Czech, working simultaneously as a translation memory and a machine translation system.
@@ -164,65 +152,67 @@ In a separate FilmTit project (\cite{filmtit}), me and my colleagues  tried to m
 
 For that project, we were given access to the set of subtitles from the server OpenSubtitles (\url{http://opensubtitles.org}). 
 
-This dataset was, however, not a pair of aligned sentences. If was not even a pair of aligned \emph{files}; we were given just a set of SRT files, and a table which paired each of those files with a movie (identified by IMDB number) -- each movie usually has more subtitle files, and there are usually more errors in the data. 
+This dataset was, however, not a pair of aligned sentences. It was not even a pair of aligned \emph{files}; we were given just a set of SRT files, and a table which paired each of those files with a movie (identified by IMDB number) -- each movie usually has more subtitle files, and there are usually more errors in the data. 
 
 Subtitle files have the sentences paired with timestamps. (We described the format more thoroughly in \cite{filmtit}.)
 
-From a set of SRT files paired with a movie, we selected just one Czech and just one English SRT file which we find most similar, based on the timestamps.
-From the pair of the files, we then extract the sentences that have the most similar timestamps.
+From a set of SRT files paired with a movie, we selected just one Czech and just one English SRT file which we found most similar, based on the timestamps.
+From the pair of the files, we then extracted the sentences that have the most similar timestamps.
 \subsubsection{Tolerance}
 
-These two pairings -- pairings of subtitle files and pairing of the actual lines -- are non-trivial task, and require a \uv{tolerance} -- how different can the times of a sentence be to be still paired together.
+These two pairings -- pairings of subtitle files and pairing of the actual lines -- are non-trivial tasks, and require a \uv{tolerance} -- how different can the time marks of a sentence be to be still paired together.
 
 Higher tolerance produces bigger corpus with more errors, while lower tolerance produces smaller, but more correct corpus.
 
-When  experimenting on the FilmTit project (as, again, described more thoroughly in \cite{filmtit}), we found out, that the best results (tested both on another movie subtitles and on a different corpus) are -- without exception -- with \emph{bigger corpus} and \emph{higher tolerance}. Even when that introduced a lot of incorrect sentence pairs, the overall results were still better with the biggest possible corpus.
-\subsubsection{Czech-Russian subtitels}
+When experimenting on the FilmTit project (as, again, described more thoroughly in \cite{filmtit}), we found out, that the best results (tested both on another movie subtitles and on a different corpus) are -- without exception -- with \emph{bigger corpus} and \emph{higher tolerance}. Even when that introduced a lot of incorrect sentence pairs, the overall results were still better with the biggest possible corpus.
+\subsubsection{Czech-Russian subtitles}
 
-We asked OpenSubtitle maintainers, again, for another set of data, this time with Czech and Russian.
-Because it contains only movies, that have both Czech and Russian subtitles, the set was much smaller than with English and Czech. We were still able to use the same algorithms to build a parallel corpora, though.
+I asked OpenSubtitle maintainers, again, for another set of data, this time with Czech and Russian.
+Because it contains only movies, that have both Czech and Russian subtitles, the set was much smaller than with English and Czech. I was still able to use the same algorithms from FilmTit to build a parallel corpora, since the raw files were essentially the same.
 
-We again used the highest possible tolerance, and therefore surely introduced a lot of errors. Unfortunately, for a lack of time, we weren't able to replicate the experiments for the ideal tolerance here -- but we hope that the results would be similar than in English-to-Czech translation -- that is, the biggest possible corpus will result in the best translation.
+I again used the highest possible tolerance, and therefore surely introduced a lot of errors. Unfortunately, for a lack of time, I was't able to replicate the experiments for the ideal tolerance here. However, I hope that the results would be similar than in English-to-Czech translation -- that is, the biggest possible corpus will result in the best translation.
 
-Due to a technical error, we unfortunately no longer have the original data from OpenSubtitles.org, only the extracted pairs. 
+Due to a technical error\footnote{The raw subtitle file was too big to hold on school servers, and the only copy on a physical disk got corrupted.}, I unfortunately no longer have the original raw data from OpenSubtitles.org, only the extracted pairs. 
+
+
 \subsection{UMC corpus}
-UMC (UFAL Multilingual Corpus) is a Czech-English-Russian corpus (see \cite{umc}). The data are downloaded from Project Syndicate, a Prague-based non-profit news organization, translating news and opinions from around the world.
+UMC (ÚFAL Multilingual Corpus) is a Czech-English-Russian corpus (see \cite{umc}\footnote{This paper talks about UMC 0.1. I haven't been able to find any paper about 0.3, but there is some information on the website -- \url{http://ufal.mff.cuni.cz/legacy/umc/cer/}}). The data were given to UMC creators by Project Syndicate, Prague-based non-profit news organization, translating news and opinions from around the world.
 
 UMC has two versions -- UMC 0.3 and UMC 0.1. UMC 0.3 is then strangely divided into \emph{all}, \emph{test} and \emph{devel} -- however, the parts are strangely mixed together.
 
-We decided to use UMC 0.1 corpus as \uv{umc-train}, and from 0.3 we use the test part as \uv{umc-test} and the devel part as \uv{umc-devel}.
-
+I decided to use UMC 0.1 corpus as \uv{umc-train}, and from 0.3 I use the test part as \uv{umc-test} and the devel part as \uv{umc-devel}.
 
 
 \subsection{Wiki titles}
-We also extracted all of the titles from the Czech and Russian wikipedia, that correspond to each other.
+I also extracted all of the titles from the Czech and Russian Wikipedia, that correspond to each other.\footnote{There is a corpus called \emph{Wiki Headlines} on WMT2013 website, for English and Russian. I am not sure how that got created, but it has nothing to do with my corpus.} 
+Wikimedia Foundation (parent organization of Wikipedia) produces complete dumps of Wikipedia in XML; I used one of those dumps and derived pairs of Czech and Russian titles that are translations of each other.\footnote{Unfortunately, at some point in 2013, Wikipedia changed the way interlanguage links work, so my old script no longer works; however, the new way of saving interlanguage links should be even easier to exploit.}
 
-Those are usually only noun phrases and the main word is usually in nominative singular, so the morphology isn't that rich -- however, we hope that the model will learn some phrases needed for the translation of the named entities.
+Those are usually only noun phrases and the main word is usually in nominative singular, so the morphology isn't that rich -- however, I hoped that the model will learn some phrases needed for the translation of the named entities.
 \section{Monolingual Russian data}
 \subsection{News Crawl}
-The largest part of our monolingual data is corpus from WMT workshops that they call \uv{News Crawl}.
+The largest part of my monolingual data is corpus from WMT workshops that they call \uv{News Crawl}.
 
 According to \cite{wmt_findings_2009}, WMT workshop has been continously crawling web articles since 2007 for making test sets. This allowed them to make a big, randomized corpus from all these sources.
 
-The corpus is categorized by year, and we treat each year as its own corpus for the interpolation (as described in TODO).%\ref{interpol}).
+The corpus is categorized by year, and I treat each year as its own corpus for the interpolation (as described in TODO).%\ref{interpol}).
 \subsection{Common Crawl}
 Common Crawl is publicly available web crawl\footnote{From Wikipedia -- \uv{A Web crawler is an Internet bot that systematically browses the World Wide Web, typically for the purpose of Web indexing. }; web crawl is then a result of such a web crawler} -- \url{http://commoncrawl.org/}.
 
-As described in \cite{commoncrawl}, group of researchers tried to extract parallel data from this web crawl. One of the language pairs was English-Russian and the result is publicly available on WMT site. We used the Russian side of the corpus.
+As described in \cite{commoncrawl}, group of researchers tried to extract parallel data from this web crawl. One of the language pairs was English-Russian and the result is publicly available on WMT site. I used the Russian side of the corpus.
 
 However, the quality of this corpus is very discutable. Because it contains data downloaded from the \uv{raw web}, it often has sentences in different languages, sentences in machine-translated Russian, random UTF-8 symbols, random HTML data, some code, and so on.
 
-This was one of the reasons why we decided to use linear interpolation as discussed in 
+This was one of the reasons why I decided to use linear interpolation as discussed in 
 TODO %\ref{interpol} 
 -- hoping, that the tuning algorithm will automatically \uv{find the right balance} between the language models.
 \subsection{Yandex}
 %Yandex is a Russian portal and search service, that can be described like a Russian mix between Google and Yahoo!. One of its services is a free translation service
 Yandex was already described in 
 TODO. %\ref{yandex}. 
-Apart from providing free translation API, Yandex also provides an English-Russian parallel corpus (\url{https://translate.yandex.ru/corpus?lang=en}). We used the Russian part of this corpus as a monolingual corpus.
+Apart from providing free translation API, Yandex also provides an English-Russian parallel corpus (\url{https://translate.yandex.ru/corpus?lang=en}). I used the Russian part of this corpus as a monolingual corpus.
 
 %The interested thing to note is that Yandex parallel corpus is lowercased.
-The version of Yandex corpus that we used was originally lowercased. Since then, Yandex already made a new version with the correct cases; we did not use the new version for any experiments for time contrains.
+The version of Yandex corpus that I used was originally lowercased. Since then, Yandex already made a new version with the correct cases; I did not use the new version for any experiments for time constrains.
 
 \section{Statistics}
 \jednatabulkan{statcs} { |r|r |r | r |r| }
@@ -239,17 +229,15 @@ The version of Yandex corpus that we used was originally lowercased. Since then,
 
 \\ \hline
 
-WMT 2012 & 3,003 & 54,569 & \emph{18.17} & 17,258  \\ \hline 
-WMT 2013 & 3,000 & 48,268 & \emph{16.09} & 15,255 \\ \hline 
-
-
-InterCorp mixed & 148,847 & 1,595,531 & \emph{10.72} & 149,052  \\ \hline 
-InterCorp filtered & 37,586 & 379,432 & \emph{10.1} & 62,479 \\ \hline 
-Subtitles & 2,324,373 & 11,971,542 & \emph{5.15} & 333,166  \\ \hline 
-UMC train & 93,395 & 1,741,892 & \emph{18.65} & 111,107  \\ \hline 
-UMC test & 2,000 & 30,884 & \emph{15.44} & 11,575  \\ \hline 
 UMC dev & 765 & 11,870 & \emph{15.52} & 5,764  \\ \hline 
+UMC test & 2,000 & 30,884 & \emph{15.44} & 11,575  \\ \hline 
+WMT 2013 & 3,000 & 48,268 & \emph{16.09} & 15,255 \\ \hline 
+WMT 2012 & 3,003 & 54,569 & \emph{18.17} & 17,258  \\ \hline 
 Wikinames & 114,742 & 244,539 & \emph{2.13} & 91,766  \\ \hline 
+InterCorp filtered & 37,586 & 379,432 & \emph{10.1} & 62,479 \\ \hline 
+InterCorp mixed & 148,847 & 1,595,531 & \emph{10.72} & 149,052  \\ \hline 
+UMC train & 93,395 & 1,741,892 & \emph{18.65} & 111,107  \\ \hline 
+Subtitles & 2,324,373 & 11,971,542 & \emph{5.15} & 333,166  \\ \hline 
 
 }{Statistics of Czech side of parallel corpora}
 
@@ -266,17 +254,17 @@ Wikinames & 114,742 & 244,539 & \emph{2.13} & 91,766  \\ \hline
 \textbf{Types}
 
 \\ \hline
-WMT 2012 & 3,003 & 53,499 & \emph{17.82} & 16,473 \\ \hline
+UMC dev & 765 & 11,936 & \emph{15.6} & 5,622  \\ \hline
+UMC test & 2,000 & 31,884 & \emph{15.94} & 11,296  \\ \hline
 WMT 2013 & 3,000 & 48,080 & \emph{16.03} & 15,691 \\ \hline
+WMT 2012 & 3,003 & 53,499 & \emph{17.82} & 16,473 \\ \hline
 
+Wikinames & 114,742 & 253,128 & \emph{2.21} & 93,168  \\ \hline
+InterCorp filtered & 37,586 & 367,838 & \emph{9.79} & 67,666 \\ \hline
 
 InterCorp mixed & 148,847 & 1,508,591 & \emph{10.14} & 144,884  \\ \hline
-InterCorp filtered & 37,586 & 367,838 & \emph{9.79} & 67,666 \\ \hline
-Subtitles & 2,324,373 & 11,897,564 & \emph{5.12} & 327,510  \\ \hline
 UMC train & 93,395 & 1,750,475 & \emph{18.74} & 107,756  \\ \hline
-UMC test & 2,000 & 31,884 & \emph{15.94} & 11,296  \\ \hline
-UMC dev & 765 & 11,936 & \emph{15.6} & 5,622  \\ \hline
-Wikinames & 114,742 & 253,128 & \emph{2.21} & 93,168  \\ \hline
+Subtitles & 2,324,373 & 11,897,564 & \emph{5.12} & 327,510  \\ \hline
 
 }{Statistics of Russian side of parallel corpora}
 \jednatabulkan{statrumono} { |r|r |r | r |r| }
@@ -293,24 +281,21 @@ Wikinames & 114,742 & 253,128 & \emph{2.21} & 93,168  \\ \hline
 
 \\ \hline
 
-Common Crawl & 878,386 & 16,837,812 & \emph{19.17} & 665,385  \\ \hline
 News Crawl 2008 & 38,195 & 580,308 & \emph{15.19} & 63,003  \\ \hline
-News Crawl 2009 & 91,119 & 1,315,794 & \emph{14.44} & 98,901  \\ \hline
 News Crawl 2010 & 47,818 & 643,363 & \emph{13.45} & 70,430  \\ \hline
+News Crawl 2009 & 91,119 & 1,315,794 & \emph{14.44} & 98,901  \\ \hline
+Common Crawl & 878,386 & 16,837,812 & \emph{19.17} & 665,385  \\ \hline
+Yandex & 997,000 & 19,942,195 & \emph{20} & 694,787 \\ \hline
 News Crawl 2011 & 9,945,918 & 140,041,123 & \emph{14.08} & 1,569,963  \\ \hline
 News Crawl 2012 & 9,789,861 & 140,914,399 & \emph{14.39} & 1,450,003 \\ \hline
-Yandex & 997,000 & 19,942,195 & \emph{20} & 694,787 \\ \hline
 
 }{Statistics of Russian side of monolingual corpora }
 
-In the tables \ref{tabulka:statcs}, \ref{tabulka:statru} and \ref{tabulka:statrumono}, I am presenting some basic statistics about the given corpora.
-
-The tokenization for the task of counting tokens and types is very rudimentary and breaks words on every punctuation mark. Words were converted to lower-case before type counting.
-
+In the tables \ref{tabulka:statcs}, \ref{tabulka:statru} and \ref{tabulka:statrumono}, I am presenting some basic statistics about my corpora, sorted by token count.\footnote{The tokenization for the task of counting tokens and types is very rudimentary and just breaks words on every punctuation mark -- in my opinion, it doesn't matter, since the table is only for orientation anyway. Words were converted to lower-case before type counting.}
 
 \section{Unused data}
 \subsection{Lib.ru}
 
-My colleague Natalia Kljueva downloaded in the year 2012 large amount of fiction books from Russian online library \url{http://lib.ru}.
+My colleague Natalia Klyueva downloaded in the year 2012 large amount of fiction books from Russian online library \url{http://lib.ru}.
 
-Unfortunately, we neglected this source and we forgot to include it in any models; we noticed it only at a very late stage and too late for further inclusion in the models described further.
+Unfortunately, I neglected this source and I forgot to include it in any models; I noticed it only at a very late stage and too late for further inclusion in the models described in the section TODO.

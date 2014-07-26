@@ -1,10 +1,10 @@
 \chapter{Experiments}
-In this chapter, I am describing the experiments with the systems from the chapter TODO.
+In this chapter, I am describing my experiments with the systems, described in the chapter TODO.
 
-In general, our goal was to 
+In general, my goals were to 
 \begin{pitemize}
-\item try to run the historical systems on our data,
-\item automate the black-box systems, so we can at least reliably run them from the command line,
+\item try to run the historical systems on the data,
+\item automate the black-box systems, so I could at least reliably run them and compare their outputs,
 \item explore the more open frameworks and try to use them for Czech-to-Russian machine translation and eventually identify possible future work,
 \item and finally, compare all the systems on the same set of data.
 \end{pitemize}
@@ -15,12 +15,13 @@ The last goal will be explored in further details in the next section.
 %We were able to automate the black-box systems like Google Translate and PC Translator, even when we had to pay for the official API.
 %We were successfully able to train a working Moses system, and we were able to improve on an existing TectoMT 
 \section{Experiments on historical systems}
-Unfortunately, most experiments on historical systems were largely unsuccessful.
+Unfortunately, the experiments on historical systems were largely unsuccessful.
 
 \subsection{RUSLAN}
 \subsubsection{Dictionary coverage of WebColl}
 
-RUSLAN dictionary contains about 8,000 lexical items. The domain of the translation and, therefore, the domain of the dictionary itself, was manuals for old computers from 1980's. We decided to try, how much is this dictionary applicable to a current corpus.
+RUSLAN dictionary contains about 8,000 lexical items. The domain of the translation and, therefore, the domain of the dictionary itself, was manuals for old computers from 1980's. 
+With my coleague Natalia Klyueva, we decided to try, how much is this dictionary applicable to a current corpus.
 
 In a set of experiments (\cite{florida}), we tried to measure how many nouns from the RUSLAN dictionary appear at all in a modern text.\footnote{The goal of the experiment described in the paper was actually even broader -- we tried to work on machine learning and assignment of semantic categories. However, the dictionary coverage was a sub-experiment.} 
 
@@ -34,13 +35,11 @@ This means that about two third of nouns would never be translated.
 
 \subsubsection{Experiments}
 
-Despite the general un-maintainability of the RUSLAN code and despite the unfavourable results described in the last section, we tried to run the system on our test data.
+Despite the unfavourable results of WebColl coverage (last section) and despite the  general un-maintainability of the RUSLAN code (see section TODO), I intended to run the system and try it on some test data.
 
-However, all our experiments ended in some sort of error.
+Unfortunately, I have not been able to obtain any version that would even run, let alone translate the thousands of test sentences. Maybe because of the Pascal pre-processing, maybe because of the FORTRAN implementation of Q-Systems interpreter.
 
-TODO: vymyslet něco.
-
-Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Systems-Q interpreter is coded), I gave up on this experiment. (?????)
+Because the coverage is so poor and the domain of the dictionary so outdated, I have decided to not dedicate further time to fixing RUSLAN and investigating the errors.
 
 \subsection{Česílko 1.0}
 
@@ -48,48 +47,53 @@ Because I am not able to code in neither Systems-Q nor FORTRAN (in which the Sys
 
 As described in the section \ref{cesilko10}, Česílko 1.0 is not very extendable for Russian as the target language. Extending the system for Russian would mean significant addition to the code, which is not very mantainable by today's standards. 
 
-Even then, the code in general assumes that the languages are directly translatable word-for-word. As we will see in the PC-Translator results, word-for-word translation from Czech to Russian doesn't give very good results anyway.
+Even then, the code in general assumes that the languages are directly translatable word-for-word. As will be seen in the PC Translator results (TODO), word-for-word translation from Czech to Russian doesn't give very good results anyway.
+
+For those reasons, I decided to not extend Česílko 1.0 with Russian.
 
 \subsection{Česílko 2.0}
 
 When Petr Homola was writing Česílko 2.0, he decided to use Cocoa and Objective-C for development. In the section \ref{cesilko20}, I tried to describe those two.
 
-However, we planned on running Česílko 2.0 on Linux environment. Cocoa is not available on other systems than iOS and Max OS X. For running Česílko 2.0 on Linux, we need another library, called GNUStep -- and there lies our problem.
+However, I wanted to use Česílko 2.0 on Linux environment (for a better replicability). Cocoa is not available on other systems than iOS and Max OS X. For running Česílko 2.0 on Linux, we need another library, called GNUstep -- and that creates unpredictable problems.
 
 \subsubsection{GNUstep}
 GNUstep is a free re-implementation of OpenStep/Cocoa. (See \url{http://www.gnustep.org/}).
 
 Its development started in the NeXTSTEP days; however, it still hasn't met feature parity with Cocoa's OS X.
 
-Aaron Hillegass in 2nd edition of his popular book \emph{Cocoa Programming on Mac OS X} discouraged people from using GNUStep. He redacted this note in later versions of the book, perhaps because of protests from GNUstep developers\footnote{\url{http://www.gnustep.org/resources/BookClarifications.html}}, but in my opinion, his notes are still valid.
+Aaron Hillegass in 2nd edition of his popular book \emph{Cocoa Programming on Mac OS X} discouraged people from using GNUstep. He redacted this note in later versions of the book, perhaps because of protests from GNUstep developers\footnote{\url{http://www.gnustep.org/resources/BookClarifications.html}}, but in my opinion, his notes are still valid.
 
-GNUstep implementations are very often buggy and not feature-complete with Cocoa and, most unfortunately, unpredictable. This is what hurt us with Česílko 2.0.
+GNUstep implementations are very often buggy, not feature-complete with Cocoa and unpredictable. Unfortunately, those bugs are hitting Česílko 2.0.
 
-\subsubsection{GNUStep and Česílko}
+\subsubsection{GNUstep and Česílko}
 
 On Mac OS X, Česílko seems to run fine.
-However, on Linux, where we wanted to run the MT systems (and where only GNUstep is available), GNUStep bugs create unpredictable results.
+However, on Linux, where I wanted to run the MT systems (and where only GNUstep is available), GNUstep bugs create unpredictable results.
 
-In my experiments with Czech-to-Slovak translations, I noticed that on Mac OS X, there are about 5-times more sentences generated, than on Linux -- while the program was compiled from the same sources.\footnote{Of course linking to Cocoa instead of GNUStep on Mac OS X.}
+In my experiments with Czech-to-Slovak translations, I noticed that on Mac OS X, there are about 5-times more sentences generated, than on Linux -- while the program was compiled from the same sources.\footnote{Of course linking to Cocoa instead of GNUstep on Mac OS X.}
 
-After thorough inspection, I found out the error was in GNUstep implementation of NSDictionary -- Cocoa's implementation of associative array\footnote{\url{https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary\_Class/Reference/Reference.html}} -- in some unpredictable cases, NSDictionary returns two different values for two equal NSString keys. It might have to do something with Unicode; however, NSStrings are supposed to be UTF-8 by default. As a result, one of the modules returned wrong inflection patterns for a number of words and the morphological analyzer then returned only a fraction of the results.
+After thorough inspection, I found out the error was in GNUstep implementation of NSDictionary -- Cocoa's implementation of associative array\footnote{\url{https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary\_Class/Reference/Reference.html}}. In some unpredictable cases, NSDictionary returns two different values for two equal NSString keys. It might have to do something with Unicode; however, NSStrings are supposed to be UTF-8 by default.
 
-After a \uv{hacky}, but working workaround for this issue, the system returned same correct results on both OS X and Linux. (The hack involved concatenating a space to the original NSString.) 
+As a result of this bug, one of the Česílko modules returned \emph{completely wrong} inflection patterns for a number of words; the morphological analyzer then returned only a fraction of the results.
+
+After a \uv{hacky}, but working workaround for this issue, the system returned the same correct results on both OS X and Linux. The \uv{hack} involved concatenating a space to the NSStrings -- that somehow fixed the issue.\footnote{I want to note, again, that this issue did not appear on OS X/Cocoa, only Linux/GNUstep.} 
 
 However, I am not at all confident there aren't more similar issues in GNUstep to further develop the system for Russian.
-I believe fixing the issues of frameworks, copying API of a closed-source library, that's normally very rarely used, is way beyond the scope of this thesis.
+I believe findind and fixing the issues of a framework, that's basically copying API of another closed-source library, that's very rarely used in MT projects in the first place, is way beyond the scope of this thesis.
 
 %when the very basic frameworks themselves are unstable and unreliable, the development ceases to make sense.
 
 Reading the paper \cite{evalquality_cesilko}, that presents Česílko 2.0 with a very low BLEU, I think the same issue plagued the authors of that paper -- it's unprobable the BLEU of the correctly working system would be that low, especially when compared with \cite{cesilko2}, where the results of Česílko 2.0 were slightly better than of Česílko 1.0.
 
+On a personal note, I must add that I still \emph{do} like Objective-C as a language and I find its syntax very elegant and, to some degree, self-documenting. However, the poor compatibility of the de-facto standard library with non-Apple systems is making it not very practical.
 
 \section{PC Translator}
 We found out it's not easy to automate translating with PC Translator, especially when our goal is to be able to run it from a Linux command-line.
 
 Its GUI is suited for translating by hand, sentence-by-sentence, but not for automated translation of thousands of sentences. Also, by definition, Windows GUI is harder to automate on Linux machine from a script.
 
-However, we were able to work around that, with the help of VMWare Player virtualization software (\url{http://www.vmware.com/cz/products/player}) and Au\-to\-Hot\-key GUI scripting software, that allows us to emulate screen clicking (\url{http://www.autohotkey.com/}). Our workflow therefore is:
+However, I was able to work around that, with the help of VMWare Player virtualization software (\url{http://www.vmware.com/cz/products/player}) and Au\-to\-Hot\-key GUI scripting software, that allows us to emulate screen clicking (\url{http://www.autohotkey.com/}). My workflow is:
 
 \begin{pitemize}
 \item on Linux machine, encode the source from UTF-8 to windows-friendly encoding
@@ -104,39 +108,38 @@ However, we were able to work around that, with the help of VMWare Player virtua
 
 The HTML part is needed because PC Translator had some problems with translating ordinary text files, plus we can pair the translated sentences better thanks to \texttt{id} parameters in \texttt{div} tags.
 
-We used the newest version of PC Translator available at the time, which is PC Translator v14.
+I use the newest version of PC Translator available at the time of writing this, which is PC Translator v14.
 
 \section{Web translators}
+All the tests from this section were done around 3rd May, 2014. (I think it's important to note the date of the tests, because the quality of online services might change over time.)
 
 \subsection{Google Translate}
 \label{gtranslate_ex}
 
-To automate Google Translate, we cannot use the website itself, simply because pasting tens of thousands of lines into a browser window usually crashes the browser and is probably against Google Translate's Terms of Use.
+To automate Google Translate, I don't want use the website itself, simply because pasting tens of thousands of lines into a browser window usually crashes the browser and is probably against Google Translate's Terms of Use.
 
-There are some workarounds around this, such as \uv{faking} browser environment using some automation tools and/or libraries, but we used more stable option, which is the paid Google Translate API, as described in the section TODO.
+There are some workarounds around this, such as \uv{faking} browser environment using some automation tools and/or libraries and/or using some browser extensions, but I use more stable option, which is the paid Google Translate API, as described in the section TODO.
 
+I figured out using the paid API is not too expensive for testing purposes, so I ended up paying for it, and using it with the library described in TODO.
 
-We figured out using the paid API is not too expensive for our testing purposes, so we ended up paying for it, and using it with the library described in TODO.
+The cost is measured per character on the source side. I used about 3 million characters and paid about 60 dollars. This is rather high for any repeated experiments, but not that high for a one-time translation.
 
-The cost is measured per character on the source side. We used about 3 million characters and paid about 60 dollars. This is rather high for any repeated experiments, but not that high for a one-time translation.
-
-The tests were done on 3rd May, 2014.\footnote{I think it's important to note the date of the tests, because the quality of online services might change overtime.}
 \subsection{Bing Translator}
-With similar reasoning as described in \ref{gtranslate_ex}, we decided to use Bing Translator paid API, with the PHP script described in TODO.
+With similar reasoning as described in \ref{gtranslate_ex}, I decided to use Bing Translator paid API, with the PHP script described in TODO.
 
 The pricing is slightly different in Microsoft Translator than in Google Translate, but in general is slightly cheaper. First 2 million letters are for free, next 2 million are for about 40 US dollars.
 
 \subsection{Yandex Translate}
-Yandex Translate API is at the same time easiest and hardest to use from the online APIs.
+Yandex Translate API is at the same time easiest and hardest to use from the three web services.
 
 On one hand, its API is trivial and it's trully free to access, with no charges whatsoever.
 
-On the other hand, the API limits are very vague and majorly slow the experiments down. In our experiments, the API simply stopped returning sentences after approximately 1 million characters per 24 hours. After 24 hour waiting period, the API became usable again.
+On the other hand, the API limits are very vague and majorly slow the experiments down. In my experiments, the API simply stopped returning sentences after approximately 1 million characters per 24 hours. After 24 hour waiting period, the API became usable again.
 
-This actually means the experiments have to be regularly stopped for 24 hour \uv{cool-offs}.
+This actually means the experiments have to be regularly stopped for 24 hour \uv{cool-offs}, which is very impractical.
 
 \section{Moses experiments}
-We trained the whole Moses model from scratch, using data, described in chapted TODO. I will try to describe our experiments in this section.
+I trained the whole Moses model from scratch, using data, de\-scri\-bed in cha\-pter TO\-DO. I will try to describe those experiments in this section.
 \subsection{Alternative eman seeds}
 
 In my opinion, while eman itself is well written, I found the seeds themselves hard to read, too repetitive, and with large amount of code copied and pasted over. 
@@ -148,48 +151,96 @@ So as a result of my rewrite, I have seeds with code that's probably easier to r
 
 Author of \texttt{MooseX::Declare} is now recommending \texttt{Moops} module instead for declarative syntax; this module is, however, requiring perl version 14 and above, while on UFAL's network, only perl 10 is installed.
 
+My \uv{new} seeds -- now residing in \texttt{ufal-smt-playground} repository, in the \texttt{pm-seeds} directory -- are basically copying the functionality of the normal seeds, with some additions (better solution to binarization of the models, support for backoff models). They are compatible with \uv{old} seeds by using small \uv{helper} seeds that just run the perl modules.
+
+However, based on the git repository activity\footnote{\url{https://redmine.ms.mff.cuni.cz/projects/ufal-smt-playground/repository}}, it seems like my new seeds haven't really took traction between other colleagues on ÚFAL; I would guess because of the slow speed and the general complexity of the modules themselves.
+
 \subsection{Factored translation experiments}
 \label{factors}
-We first experimented only on UMC data -- that is, we used dataset UMC-train for training both language and translation model, UMC-dev for MERT tuning and UMC-test for BLEU testing.
+Experiments in this section were done together with my colleague, Natalia Klyueva. I was in charge of the Moses setup, while Natalia 
+Klyueva was recommending me the source of the data, 
+reccomending me the TreeTagger software
+and the general goal (reducing of OOV rate).
 
-At that point, we realized our Moses results have a high OOV rate\footnote{Out Of Vocabulary; how many words were untranslated due to not being found in the phrase table} -- this is easily recognizable by Latin script appearing in Czech-to-Russian translation (or Cyrillics in the opposite direction). We then tried to compare several set-ups for factored tranlation to get lower OOV rate and higher BLEU scores.
+Our first Moses model was essentially as described in the chapter TODO, without factors.
 
-\grafff{backoff}{Backoff model}{60}
+When we used the model without factors, we realized our Moses results have a high OOV rate\footnote{Out Of Vocabulary; how many words were untranslated due to not being found in the phrase table} -- this is easily recognizable by Latin script appearing in Czech-to-Russian translation (or Cyrillics in the opposite direction). 
 
-We used a modified version of a set-up described for example in \cite{backoff} as \texttt{lemma backoff}. The set-up is illustrated on Figure~\ref{graf:backoff}, on the left.
+I then tried to compare several set-ups for factored tranlation to get -- at the same time -- lower OOV rate and higher BLEU scores. I am describing our factored translation experiments in this section, together with the results.
 
-The primary translation model is from full word on source side to the full word and morphological tag on target side. The backoff translation model is from lemma on source side to the full word and morphological tag on target side. So, we are then using two language models, one for tags and one for words (both separately interpolated, as described in \ref{interpol}).
+\subsubsection{Data source}
+We used dataset UMC-train for training both language and translation model, UMC-dev for MERT tuning and UMC-test for BLEU testing.
 
-We were not using interpolated backoff, simply because regular backoff is easier to use with Moses. We were not using models that generate the words from lemma+tag, because we didn't have a working module for Russian morphological generation -- as a result, we can only get the word-forms found on the target side of the parallel training data.
+\subsubsection{Lemma backoff model -- overview}
 
-%Primary, we are translating from full word to fill word and morphological tag; only as a backoff, we are translating from 
+\grafff{backoff-l}{Lemma backoff model}{30}
+
+I used a modified version of a set-up described in \cite{backoff} as \texttt{lemma backoff}. The set-up is illustrated on Figure~\ref{graf:backoff-l} -- where: 
+\begin{itemize}
+\item w is for word form
+\item l is for lemma
+\item s is for stem (see further)
+\item t is for tag
+\end{itemize}
+
+\subsubsection{Lemma backoff model -- details}
+
+The primary translation model is from full word on source side to the full word and morphological tag on target side. 
+
+The backoff translation model is from lemma on source side to the full word and morphological tag on target side. I do \emph{not} generate words from lemma+tag.
+
+I am then using two language models, one for tags and one for words (both separately interpolated, as described in \ref{interpol}).
+
+I was not using \emph{interpolated} backoff, simply because regular backoff is easier to use with Moses -- for regular backoff, all that is needed is \texttt{TODO} section in the \texttt{moses.ini} configuration file.
+
+\subsubsection{Russian tagging}
+
+For tagging Russian, I used TreeTagger software (\url{http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/}, also see \cite{treetagger1} and \cite{treetagger2}) with a Russian parameter file\footnote{trained on a corpus created by Serge Sharoff, see \url{http://corpus.leeds.ac.uk/mocky/}}. TreeTagger is a closed-source software with a restrictive license, but for free for research purposes.
+\subsubsection{Russian analysis}
+
+Unfortunately, we do not have Russian morphological analysis ready. (I am touching on this subject in the section TODO.)
+
+For that reason, I could not generate new forms from lemma+tag -- that is why  I was translating directly to form+tag.
+
+This has the unfortunate disadvantage that no new forms are created, and all possible forms are taken only from the parallel corpus. Working Russian analysis would probably improve the translation (as also noted in TODO).
+
+\subsubsection{Czech lemmatizing}
+
+For Czech, I used morphological analyzer Morče (\url{http://ufal.mff.cuni.cz/morce/references.php}).
+%; however, as described further, in the final system we didn't actually use its output.
+\subsubsection{Stem backoff model}
+
+As another experiment, I tried to take \uv{stems} instead of lemmas. However, instead of lexically motivated stems, I tried \emph{very crude} stems -- just using the first $n$ letters of a word. (Separate experiments for $n$ between 3 and 6.)
+
+Surprisingly, this got better results, than linguistically motivates lemmas.
+
+\grafff{backoff-s}{Stem backoff model}{30}
+
+The model is illustrated on Figure~\ref{graf:backoff-s}.
+
+%With further experimenting, I discovered a surprising thing -- that using not lemma on the source side, but a \emph{very crude} stem --
+
+%just using the first $n$ letters of a word -- gets better results.
+
+Using stems instead of lemmas is suggested for example in \cite{stemy}. However, their stems are more linguistically motivated, while I just very crudely took first few letters.\footnote{It's actually debatable if my \uv{stems} can be called stems at all.}
 
 
-%However, since we did not have Russian morhpology fully working, we used only the system described as \texttt{lemma backoff} -- with the exception of not translating to lemma. 
-%We were not using interpolated backoff, simply because regular backoff is easier to use with Moses.
-
-%The main model translates from a word form on the source side to word form and tag on the target side. The backoff model translates from a lemma (or a stem -- see below) to form and tag on the target side.
-
-For tagging Russian, we used TreeTagger software (\url{http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/}, also see \cite{treetagger1} and \cite{treetagger2}) with a Russian parameter file\footnote{trained on a corpus created by Serge Sharoff, see \url{http://corpus.leeds.ac.uk/mocky/}}. TreeTagger is a closed-source software with a restrictive license, but for free for research purposes.
-
-For Czech, we used tokenizer from UFAL project TectoMT (described further in section TODO) and for lemmatizing, we used morphological analyzer Morče (\url{http://ufal.mff.cuni.cz/morce/references.php}); however, as described further, in the final system we didn't actually use its output.
-
-With further experimenting, we discovered a surprising thing -- that using not lemma on the source side, but a \emph{very crude} stem -- just using the first $n$ letters of a word -- gets better results.
-The model is illustrated on Figure~\ref{graf:backoff}, on the right.
-
-Using stems instead of lemmas is suggested for example in \cite{stemy}. However, their stems are more linguistically motivated, while we just crudely take first few letters.\footnote{It's actually debatable if our \uv{stems} can be called stems at all.}
+\subsubsection{Results}
 
 \grafff{stem-plot-csru}{Comparison of various set-ups}{100}
 
-The results of our experiment are seen on Figure~\ref{graf:stem-plot-csru} -- \emph{baseline} is original moses with no factors, \emph{1-lemma} and \emph{1-stem} are the \uv{backoff} models without the main model, and \emph{2-stem} and \emph{2-lemma} are the whole models with backoff.
+The results of the described experiments are seen on Figure~\ref{graf:stem-plot-csru} -- \emph{baseline} is original moses with no factors, \emph{1-lemma} and \emph{1-stem} are only the \uv{backoff} models without the main model, and \emph{2-stem} and \emph{2-lemma} are the whole models with backoff.
  
-We can see that stem with length 6 gets the best results. So, we used stemma with the length 6 in further experiments, such as the WMT submission \cite{mujpaper} or the one described in the next section.
+We can see that stem with length 6 gets the best results. So, I used stem with the length 6 in further Czech-Russian experiments, such as the WMT submission \cite{mujpaper} or the full setup described in the next section.
+
+As I already noted -- the fact that cutting words instead of using lemmas works better is \emph{surprising}, but it \emph{works}, so that is why I am using it further. 
 
 \subsection{Full setup}
-Our final Moses system uses the setup, described in this section (and section TODO).
+My final Moses system uses the setup, described in this section (and section TODO). 
+
 
 \subsubsection{Translation model}
-We use the following parallel corpora, concatenated into one big \uv{eman} corpus, for training a translation model:
+I use the following parallel corpora, concatenated into one big \uv{eman} corpus, for training a translation model:
 
 \begin{itemize}
 \item Mixed Intercorp
@@ -198,17 +249,83 @@ We use the following parallel corpora, concatenated into one big \uv{eman} corpu
 \item Wikinames
 \end{itemize}
 
-We do not use Filtered Intercorp because we intended it only for testing, as will be described in the section TODO.
+I do not use Filtered Intercorp because I intend it only for testing, as will be described in the section TODO.
 
 \subsubsection{Language model}
 
-We use all the following monolingual corpora from the section TODO, plus target sides of the parallel corpora from translation model.
+I use all the monolingual corpora from the section TODO, plus target sides of the parallel corpora from translation model.
 
-We use linear interpolation, with UMC dev as a development corpus. We use a linear interpolation instead of log-linear interpolation simply because we didn't notice the option for log-linear interpolation until later in the project.
+I use linear interpolation, with UMC-dev as a development corpus. I use a linear interpolation instead of log-linear interpolation simply because I didn't notice the option for log-linear interpolation until the model was already built.
 
-\subsubsection{Factors, other}
-We use factors as described in the section \ref{factors}. We use recaser, trained as a language model on all the monolingual corpora, as described in the section TODO.
+\subsubsection{Factors, recaser}
+I use factors as described in the section \ref{factors}, with the \uv{crude} stemming. I use recaser, trained as a language model on all the monolingual corpora, as described in the section TODO.
 
 
 \section{TectoMT experiments}
-TODO: hezky popsat těch pár změn, co jsem udělal
+As I already mentioned in TODO, TectoMT already had a Czech-to-Russian scenario -- however, the results were not very good.
+
+I have managed to make the results a bit better by editing TectoMT modules and adding some models. I will describe my changes to TectoMT.
+
+I measured the BLEU changes after each change on \uv{development} set WMT-2012.\footnote{I did not want to test the incremental BLEU improvements on the same data as the more \uv{final} testing, described in the section TODO.}
+The original scenario has BLEU 0.0561.
+
+%I am measuring BLEU with the Makefile included with the scenario (as described in TODO); I only added Moses tokenization and some additional punctuation normalization (since it produces a little more correct results, in my opinion).
+
+%\subsubsection{Original scenario}
+%revision: 12894
+
+
+\subsubsection{Better morphology}
+%revision: 12902
+TectoMT's module for Russian morphology works as a lookup in a simple, tab-separated file, with the list of lemmas, forms, tags and frequencies. When the lookup in this file fails and the word is not found, the word is used as-is, without any flexis.
+
+The original file seemed to be extracted from Syntagrus corpus, with morphological annotation converted to \uv{PDT-style} tags.
+
+However, this file is still rather small and the coverage could be bigger; from the 53.499 words in the WMT2012 corpus, 7.220 tokens (about 13 percent) wouldn't be found at all.
+
+I decided to made a larger morphology table by tagging monolingual corpora (see TODO) with TreeTagger (see TODO) and converting the tags from Multext-EAST, that is being used by TreeTagger, to PDT tags, using the tool Interset (\cite{interset}).
+
+In this bigger morphological table, only 1.118 tokens from WMT 2012 couldn't be found (about 2 percent). 
+
+BLEU was increased to 0.0613; this means 0.52 BLEU points increase.
+
+\subsubsection{Reflexives}
+%revision 12938
+One of the common errors I noticed was reocurring of wrong reflexive \texttt{\_ся} in the results, usually with wrongly translated verb. (Czech and Russian reflexives are slightly different, as demonstrated in TODO.)
+
+The problem was as follows:
+\begin{itemize}
+\item Czech verb with a reflexive is converted to a tectogrammatical lemma, that has the auxiliary \texttt{\_se} merged into it
+\item the static model for lemma transfer (see also the next section) contains only lexical lemmas, not t-lemmas, so it does not have the word with \texttt{\_se} / \texttt{\_ся}
+\item because the static model cannot find the lemma, the transliteration is used
+\item the transliteration is wrongly translated and still contains the \texttt{\_ся}
+\end{itemize}
+
+The best, more \uv{long-term} solution would be to train a better Russian transfer model. However, with the help of Martin Popel, we implemented a short-term fix that looks up the verb without the reflexive on Czech side and adds it on Russian side.
+
+This fix increases BLEU to 0.0632; this means 0.19 BLEU points increase from the previous version. 
+
+\subsubsection{Better transfer}
+%revision 12944
+As mentioned in section TODO, the transfer model was originally made in a strange way. 
+The original authors took PC Translator software, then extracted from its internal dictionary a list of lemmas (or, rather, a subset of it) and made an \emph{interset} of this dictionary and all the words in UMC. This produces only a very small dictionary of approximately 13.833 lemmas. 
+
+I decided to create a bigger dictionary. Unfortunately, we do not have a working Russian analysis (as mentioned in TODO) and therefore, I couldn't convert Russian corpora to t-lemmas and align them.
+
+Instead, I decided to align \uv{only} the lexical lemmas. Therefore, I aligned lexical lemmas using eman (see TODO), MGiza++ (see TODO), TreeTagger for tagging and MorČe for Czech tagging.
+
+From the word-alignment on the lemmas, I took only the interset and exported the lemmas. I also added the whole dictionary, exported from PC Translator. 
+
+The result is a dictionary that is 296.447 lemmas big.
+
+This new dictionary (added to TectoMT with the help of Martin Popel) increases the BLEU to 0.0704; this means 0.72 BLEU points increase from the previous version.
+\subsubsection{Final scenario}
+Final scenario is the same as the original scenario, with the described additions.
+
+On the development set WMT-2012, the described fixes increased BLEU from 0.561 to 0.704; that is 1.43 BLEU points.
+\section{Future work}
+\subsection{Better morphology and parser}
+In both Moses and TectoMT experiments, I very soon run into the unfortunate fact that we (on ÚFAL) do not have some more advanced working Russian morphology (both tagging and generation) and Russian parsing.
+
+It's true we can use TreeTagger and use it as a black box, as I did in the experiments above. 
+However, the generation would help us in the 

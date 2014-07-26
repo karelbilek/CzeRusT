@@ -235,7 +235,7 @@ Another available online translation service is Microsoft Translator / Bing Tran
 
 Bing Translator is very similar to Google Translate -- it is an online website with an easy GUI and an additional paid API. Again, the team occasionally publishes some scientific papers, but the system is again  proprietary as a whole.
 
-In non-related experiments, we found out that for some language pairs, Bing Translator does more rule-based-looking post-editation (for example, better verb separation in English-to-German translation). 
+In separate experiments between English and German, I found out that for some language pairs, Bing Translator does more rule-based-looking post-editation 
 However the system as a whole seems statistical, similarly to Google Translate.
 
 
@@ -263,9 +263,9 @@ The API itself is absolutely free, unlike the other two translation systems, and
 
 \subsection{Moses}
 \label{moses}
-Moses is an open-source machine translation toolkit with GPL licence, developed as a successor to a closed-source Pharaoh system.\footnote{See for example \cite{mosespaper} or \cite{moseslink}}
+Moses is an open-source machine translation toolkit with GPL licence, developed as a successor to a closed-source Pharaoh system. See for example \cite{mosespaper} or \cite{moseslink}.
 
-The system is very modular and very customizable, which makes it a bit harder to describe. What makes it also harder is that the term \uv{Moses} is usually applied for both the \uv{core} Moses decoder and the phrase extractor, and the whole toolkit that's bundled with it. I will try to describe it from the point of view that's relevant to our task and write only about the modules that we actually used and about our Moses use-case in general.
+The system is very modular and very customizable, which makes it a bit harder to describe. What makes it also harder is that the term \uv{Moses} is usually applied for both the \uv{core} Moses decoder and the phrase extractor, and the whole toolkit that's bundled with it. I will try to describe it from the point of view that's relevant to the task of this thesis and write only about the modules that I have actually used, and about my Moses use-case in general.
 
 %In this section, I will try to describe our Moses set-up; first, I describe the overview of the entire system, and then I further describe some of the elements and our contributions.
 %; bear in mind, however, that a completely different set-up is also possible.
@@ -285,7 +285,7 @@ Now we can look a little closer to what is actually hapenning and what are the a
 The bilingual corpora have to be first prepared by aligning the sentences, so every sentence has exactly one translation. (Almost every corpus, available online, is already sentence-aligned.)
 %We describe our corpora in the part TODO.
 
-The sentences are then word-aligned, which means pairing words to their translations. We are using MGIZA++\footnote{See \cite{mgiza}}. From this word alignment, Moses learns a so-called \emph{phrase-based translation model}. From the monolingual corpora, we then learn a statistical \emph{language model} -- using, for example, SRILM language model\footnote{See \cite{srilm}}.
+The sentences are then word-aligned, which means pairing words to their translations. I am using MGIZA++ (\cite{mgiza}). From this word alignment, Moses learns a so-called \emph{phrase-based translation model}. From the monolingual corpora, a statistical \emph{language model} is learned -- using, for example, SRILM language model\footnote{See \cite{srilm}}.
 
 Moses is then used for so-called \emph{decoding} of the information from both the language model and the translation model, which choses the best possible translation, using algorithms like beam-search.
 
@@ -295,7 +295,7 @@ However, for the best translation, we need to tune Moses parameters for optimal 
 
 After MERT tuning, we finally have working language model, translation model and Moses parameters, which is our complete translation system.
 
-To reiterate, this is our Moses pipeline
+To reiterate, this is the  Moses pipeline I am using
 \begin{pitemize}
 \item getting sentence-aligned parallel corpus, plus bigger monolingual corporus
 \item world-alignment on parallel corpus
@@ -309,9 +309,9 @@ To reiterate, this is our Moses pipeline
 \subsubsection{Managing experiments}
 The crucial part of Moses is its decoder and phrase extractor. However, we also need some overaching system for managing all the described steps (model training, etc.) -- steps variously fail, don't compile, don't fit in memory, etc. We would also like to reuse partial results in more experiments.
 
-Moses itself has built-in perl-based experiment managment system, called prosaically Experiment Management System (EMS). However, this system is not very widely used on UFAL and we decided to not use it either.
+Moses itself has built-in perl-based experiment managment system, called prosaically Experiment Management System (EMS). However, this system is not very widely used on UFAL and I decided to not use it.
 
-Instead of EMS, we use another perl-based tool called eman (experiment manager). Eman is described well in \cite{eman} or at its website, \url{http://ufal.mff.cuni.cz/eman}.  
+Instead of EMS, on ÚFAL, another perl-based tool called eman (experiment manager) is used. Eman is described well in \cite{eman} or at its website, \url{http://ufal.mff.cuni.cz/eman}.  
 
 Eman breaks down experiment into so-called \uv{steps}. Step encapsulates an atomic part of an experiment and can be in one of a few various states. More importantly, step can be dependent on various other states; if a step fails, all steps dependent on it automatically fail. The whole experiment is then just another step, dependent on all the necessary substeps.
 
@@ -327,7 +327,7 @@ Step is represented by a directory in a playground directory. Step is created by
 %Author of \texttt{MooseX::Declare} is now recommending \texttt{Moops} module instead for declarative syntax; this module is, however, requiring perl version 14 and above, while on UFAL's network, only perl 10 is installed.
 
 \subsubsection{Word alignment}
-For word alignment, we are using MGIZA++\footnote{See \cite{mgiza}}, which is a GPL toolkit based on GIZA++\footnote{See \cite{giza}}, which is itself based on models, sometimes called IBM Model 1 to IBM Model 5\footnote{See \cite{ibm}}, which are themselves based on expectation–maximization algorithm (EM).
+For word alignment, I am using MGIZA++\footnote{See \cite{mgiza}}, which is a GPL toolkit based on GIZA++\footnote{See \cite{giza}}, which is itself based on models, sometimes called IBM Model 1 to IBM Model 5\footnote{See \cite{ibm}}, which are themselves based on expectation–maximization algorithm (EM).
 
 IBM Models and the underlying EM algorithms are explained perfectly in Chapter~4 of \cite{koehn2010statistical} or in those slides by the same author -- \url{http://www.inf.ed.ac.uk/teaching/courses/mt/lectures/ibm-model1.pdf}.
 
@@ -344,14 +344,14 @@ The phrase-table defines a so-called \uv{translation model}.
 \subsubsection{Language model}
 Language model is a part of the system, that tries to model the probability of a target language sentence alone. It's trained on a monolingual corpus.
 
-We use SRILM, which is an open source language modeling toolkit. (Although it's open-source, it uses its own license, that allows free use only for non-commercial and educational purposes.) Current status of SRILM is described in \cite{srilm}, original design is described in \cite{srilm_old}. 
+I am using SRILM, which is an open source language modeling toolkit. (Although it's open-source, it uses its own license, that allows free use only for non-commercial and educational purposes.) Current status of SRILM is described in \cite{srilm}, original design is described in \cite{srilm_old}. 
 
-SRILM uses several models, one of them is n-gram word model, described well in \cite{koehn2010statistical}\footnote{chapter 7}. We use n-grams model to the order 3 with words and order 5 with tags (see section TODO). We smooth the models with Kreser-Ney smoothing with Chen and Goodman's modification\footnote{See \cite{chen} and \url{http://www.speech.sri.com/projects/srilm/manpages/ngram-discount.7.html}}. 
+SRILM uses several models, one of them is n-gram word model, described well in \cite{koehn2010statistical}\footnote{chapter 7}. I use n-grams model to the order 3 with words and order 5 with tags (see section TODO). I smooth the models with Kreser-Ney smoothing with Chen and Goodman's modification\footnote{See \cite{chen} and \url{http://www.speech.sri.com/projects/srilm/manpages/ngram-discount.7.html}}. 
 
 
 \subsubsection{Language model interpolation}
 \label{interpol}
-If we have more than one monolingual corpora (as we have, as described in TODO), but we are not sure how helpful each of them are, we can use so-called 
+If we have more than one monolingual corpora (as I do, as described in TODO), but we are not sure how helpful each of them are, we can use so-called 
 %As described in the section XX, we had more than one monolingual Russian corpora, but we weren't sure of how high quality each of them were and how helpful it would be. For this reason, we used so-call 
 interpolation (also called mixing).
 
@@ -441,10 +441,10 @@ Because of language specificity of most of the blocks, scenarios for various lan
 TectoMT package itself also contains various scripts and tools -- one of them are Make scripts for easier running and evaluation of the scenarios\footnote{What needs to be said is that's it's tailored mostly for UFAL's cluster infrastructure instead of for general usage.}. The goals are different from Moses evaluation managers, described in \ref{moses}, as well as it means, but we can imagine it as being slightly similar. (Those Make scripts don't, unfortunately, have any nice name to refer to them as.)
 
 \subsubsection{MaxEnt, HMTM}
-Interesting techniques of using Hidden Markov Tree Models and Maximum Entropy models for TectoMT translation are described in \cite{tecto_hmtm} and \cite{tecto_maxent}. Unfortunately however, we haven't been able to train any of those for Czech-to-Russian translation.
+Interesting techniques of using Hidden Markov Tree Models and Maximum Entropy models for TectoMT translation are described in \cite{tecto_hmtm} and \cite{tecto_maxent}. Unfortunately however, I haven't been able to train any of those for Czech-to-Russian translation.
 
 \subsubsection{Current Czech-to-Russian scenario}
-Unlike Moses where we had to had to train whole models from zero, TectoMT already had some rudimentary scenario for Czech-to-Russian machine translation.
+Unlike Moses where I had to had to train whole models from zero, TectoMT already had some rudimentary scenario for Czech-to-Russian machine translation.
 
 From what I heard from colleagues, this scenario was put together in a very short timeframe (about 24 hours), and it's not described in any paper or any other documentation. The scenario consists of 66 blocks, where Czech analysis is 33 blocks, transfer is 5 blocks and Russian analysis is 28 blocks. 
 
