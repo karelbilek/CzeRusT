@@ -325,7 +325,24 @@ Final scenario is the same as the original scenario, with the described addition
 On the development set WMT-2012, the described fixes increased BLEU from 0.561 to 0.704; that is 1.43 BLEU points.
 \section{Future work}
 \subsection{Better morphology and parser}
-In both Moses and TectoMT experiments, I very soon run into the unfortunate fact that we (on ÚFAL) do not have some more advanced working Russian morphology (both tagging and generation) and Russian parsing.
+In both Moses and TectoMT experiments, I soon run into the same problem: we (on ÚFAL) do not have some any advanced working Russian morphology (both tagging and generation) or Russian parser.
 
 It's true we can use TreeTagger and use it as a black box, as I did in the experiments above. 
-However, the generation would help us in the 
+However, some newer and more open system could help us to tune the tagger better. 
+
+Working generation would allow us to try better factors (with phrase-based translation), the synthesis in TectoMT would probably return better results.
+
+Working Russian parsing would allow us to train Hidden Tree Markov Models/MaxEnt models and then make better transfer models in TectoMT. It would also allow us to try some automatic post-editing, such as with Depfix system\footnote{\url{https://ufal.mff.cuni.cz/depfix}}.
+
+Martin Popel recommended me to use MorhpoDiTa and either MaltParser or MATE parser. For any future experiments, this should probably be the first step.
+
+\subsection{Traslation by letters}
+I decided to try an experiment with Moses phrase translation. Instead of taking words as the primary tokens, I tried to split the sentences on an individual letters and try to learn the models from that.
+
+(I have heard from my colleagues that there is some existing research on this, however, I haven't been able to find it.)
+
+This could, for example, somehow capture the transliteration, and in the case of similar languages (Czech and Slovak, maybe even Czech and Russian) make some reasonable guesses on translations.
+
+Unfortunately, for some reasons, translation models trained on my data got unbearingly big and took more resources -- both RAM and disk space -- than I could afford on ÚFAL's network. 
+
+I stopped with those experiments for a lack of time. However, I still think it would be interesting to investigate those further -- at least for really close languages (Czech and Slovak), but even for Czech and Russian.
