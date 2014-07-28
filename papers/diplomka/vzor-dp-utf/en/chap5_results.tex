@@ -91,7 +91,7 @@ Every system had better results on WMT than on Intercorp, even our baseline. How
 
 This is probably caused by the fact, that Google and Bing train their models on more publicly accessible news data, while I added some prose to Moses parallel data along with the news. I still have mostly news data in the language model; if I used the TODO mentioned in TODO, I could maybe get a better results on Intercorp.
 
-This all, however, begs more theoretical question. 
+This all, however, begs a more theoretical question. 
 Is it right that we, as MT researchers, mostly test our systems on news data, as for example in all WMT translation tasks? 
 Shouldn't we broad the domain a bit, to include fiction, and maybe other literature? 
 
@@ -103,17 +103,53 @@ This is an open question, and I don't claim to have an easy answer. So far, ever
 
 %Human evaluation experiment was largely unsucessful.
 
+\subsubsection{Appraise, TrueSkill}
 Originally, I planned to use Appraise system, used for human evaluation at WMT (\cite{appraise}), and afterwards use the TrueSkill algorithm (\cite{trueskill}), that was used in WMT 2014 as the best method for ordering systems based on human annotation (\cite{wmt_findings_2014}). 
+
+\subsubsection{My PHP system}
 
 Appraise ended up being too hard to install and set-up\footnote{Appraise is a Django application, and I have almost no experience with either Django or Python}, so I ended up writing my own simple PHP application, heavily inspired by Appraise. 
 
 Similar to Appraise, the application presents source sentence and a reference sentence to users, and
 asks them to rate them from best to worst.
-Unlike Appraise, that randomly chooses 5 systems every time, I used the fact that we have 6 systems and present all 6 to them to users.
+Unlike Appraise, that randomly chooses 5 systems every time, I used the fact that we have 6 systems and present all 6 to them to users. Sentences are took randomly from the two test sets.\footnote{Because of the difference in size of the sets, the set is selected first with 0.5 probability, and only then the sentence itself.}
+
+\grafff{cluster3}{TrueSkill results}{140}
+
+\subsubsection{Results}
 
 I put the systems online and invited several people and tried to advertise it. However, with little funds and little time to experiment with the incentives, I decided to not pay anything for the annotation and let the user decide, how much he wants to annotate.
 
-This lead to only 38 annotated sequences in total.
+This lead to only 38 annotated sequences in total.\footnote{For some reason, TrueSkill percieves this as 571 judgements; I am not sure how was this number created.} This is not very much; however, one of the described features of TrueSkill algorithm is that it doesn't need that many judgements, so I decided to run it anyway.
+
+The results are on Figure~\ref{graf:cluster3}. Moses is put as the best system into its own cluster, while the rest is put into another cluster. In the second cluster, PC Translator is probably the worst, but other than that we can't really say much.
+
+I am not sure how much does this result tell us, given that it's only 38 sentences in total. Looking back, I should have probably either make the task easier instead of harder (by giving less choices, not more choices), and I should have offer some financial incentives for annotators.
+\subsubsection{Some comments from the annotators}
+While I did not have that many annotators, I had some feedback about the test in general. I thought they would be interesting to note here.
+
+\begin{itemize}
+\item Some of the sentences are too long, which makes the judgements too hard.
+\item The translations seem either all correct or all wrong.
+\item The reference translation is either completely wrong (wrong alignment) or not literal translation, which confuses the annotator.
+\end{itemize}
+
+The first comment is probably caused by the fact that I had used prose along with news articles. It would be possible to limit the annotation to shorter sentences, but then the annotation wouldn't be entirely accurate.
+
+The second comment is probably caused by the nature of MT tasks in general.
+
+The last comment is the unfortunate side-effect of either misalignment or just less literal translation. It might be possible to \emph{not} show the reference translation at all; I am not sure if that would get the judgements easier or harder.
+
+\section{Some observation about typical mistakes}
+%I am not a native speaker of Russian. However, I can read cyrillic alphabet and I have some basic knowledge of the language; I originally thought that, 
+I haven't done any systematic classification of the mistakes. I am not a native speaker of Russian, and I found out that spotting translation errors is not an easy task for a person with only passing knowledge of a language, even when the correct, reference translations are available.\footnote{In retrospect, my assumtion that spotting errors without really knowing the language has been very naive.}
+
+I have originally planned to use human annotators for error classification. However, with the low annotator activity in an arguably easier task of ranking the translation quality, I gave up that idea too.
+
+As far as I know, systematic evaluation of translation mistakes in a given language pair is currently done by my colleague Natalia Klyueva, who is a native Russian speaker and, at the time of writing this thesis, PhD student on ÚFAL.
+
+I have, however, done some unsystematic observations about the translation quality, which follow. 
+
 
 \begin{comment}
 %We also replace \texttt{\&quot;}, that appears often in Intercorp, with actual quotation marks.
