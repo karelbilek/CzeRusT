@@ -1,3 +1,13 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-TODO
+
+I have automated, built, improved, demonstrated and compared (both by human annotators and by automated metrics) several translation systems, both phrase-based and rule-based, between Czech and Russian.
+
+From the systems I have tried, phrase-based translation systems are simply easier to build and give better results.
+
+TectoMT as a more hybrid system shows promise, but with this language pair, the work is only starting; however, it is telling, that it's probably easier to build a new system based on Moses that reaches about the same translation quality as \uv{state-of-the-art} systems, than it would be with TectoMT -- and impossible with purely rule-based systems.
+
+%However, this result can't be taken as final, because the work on the 
+
+\subsubsection{Future work}
+The first future work, as already mentioned in \ref{future:morpho}, should probably be a better Russian parser and a better Russian morphology. This would allow us to experiment more with post-editing; we could also use it in factored translation models in Moses; and of course it would allow us to build better models with TectoMT.

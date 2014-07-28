@@ -1,17 +1,18 @@
 \chapter{Translation systems}
+\label{chapter:systems}
 Machine translation (MT) is a task that's as old as the computer. When the very first computers were created for the task of encryption and decryption, one of the other areas of interest was translation of natural languages.\footnote{As noted in the introduction in \cite{koehn2010statistical} -- \uv{The history of machine translation goes back over 60 years, almost
 immediately after the first computers had been used to break encryption codes in the war, which seemed an apt metaphor for translation: what is
 a foreign language but encrypted English?}}
 
-Translation between Czech and Russian has, too, some history. TODO:líp
+Machine translation between Czech and Russian has, too, some history.
 
-In this section, I am describing both historical and more recent approaches for machine translation between those two languages. In the next section, I will describe our experiments with those systems.
+In this chapter, I am describing both historical and more recent approaches for machine translation between those two languages. In the chapter~\ref{chapter:experiments}, I am then describing our experiments with those systems.
 
 \section{Statistical vs. rule-based -- an overview}
 \label{axis}
 MT systems has historically used many different approaches. One way of classifying them is on the axis of rule-based vs. statistical.
 
-In general, we can re-use the definition, used in \cite{bojar}, which is as follows:
+In general, we can re-use the definition, used in \cite{bojar}, which is as follows\footnote{The following list is a rough translation from the mentioned book}:
 \begin{itemize}
 \item rule-based MT systems:
 \begin{itemize}
@@ -30,8 +31,8 @@ In general, we can re-use the definition, used in \cite{bojar}, which is as foll
 \end{itemize}
 
 However, with actual, real-life systems, the distinction is usually not as clear-cut. 
-For example, statistical MT systems like Moses (see TODO) can get significantly better results with added linguistic information; 
-on the other hand, systems like TectoMT (see TODO), which can for some intents and purposes be classified as more rule-based, have individual parts in some way based on statistics.
+For example, statistical MT systems like Moses (\ref{systems:moses}) can get significantly better results with added linguistic information; 
+on the other hand, systems like TectoMT (\ref{systems:tecto}), which can for some intents and purposes be classified as more rule-based, have individual parts in some way based on statistics.
 
 \section{Rule-based systems}
 
@@ -43,7 +44,7 @@ on the other hand, systems like TectoMT (see TODO), which can for some intents a
 %In this section I will present some historical systems, that I haven't been able to get successfully running.
 
 \subsection{RUSLAN}
-
+\label{systems:ruslan}
 RUSLAN is a machine-translation system, developed between 1984 and 1988 at several departments of Charles University, Prague. RUSLAN firmly belongs to the \emph{rule-based} category, since at that timeframe, statistical machine translation wasn't even invented yet.
 
 
@@ -166,7 +167,6 @@ Unlike Česílko 1.0, Česílko 2.0 uses a non-deterministic parser and explores
 
 Česílko 2.0 uses more advanced and more clearly defined tranfer rules. This advanced transfer would, in an ideal world, make the system more modular and extensionable for our purposes. 
 
-%However, technical problems -- more described in the section TODO -- prevented us from doing any significant work.
 
 Česílko 2.0 is written in the language Objective-C. Because Objective-C might not be known to the reader, I will describe it a slightly more detailed manner.
 
@@ -191,7 +191,7 @@ Several years later, Apple (now merged with NeXT) made its new version of Mac OS
 Cocoa is not the only library for Objective-C, but because Apple is the main investor in Objective-C-based systems, it's a de-facto standard library. Cocoa is nowadays found in every Mac PC, iPhone and iPad and maybe other Apple's products.
 
 \subsection{PC Translator}
-\label{langsoft}
+\label{systems:langsoft}
 
 PC Translator is a commercial translation system from a Czech company LangSoft (\url{http://www.langsoft.cz/translator.htm}). PC Translator works with several language pairs, all with Czech on either source or target side.
 
@@ -214,7 +214,7 @@ According to its marketing materials, PC Translator v14 uses a Czech-Russian dic
 \section{Statistical systems}
 
 \subsection{Google Translate}
-\label{google}
+\label{systems:google}
 Google Translate is a popular free online translation service by Google, an American web search giant (\url{http://translate.google.com}). 
 Although Google is producing many academic papers on machine translation, the whole system is still proprietary and we cannot fully inspect it, as in the case of PC Translator, and we can only state our conjectures.
 
@@ -223,23 +223,25 @@ According to Google's own papers\footnote{for example \cite{och} -- F. J. Och is
 However, because of its purely statistical approach, it either needs huge amounts of data for every language pair, or it needs to use so-called \uv{pivot languages}\footnote{See for example \cite{koehn2010statistical}} -- in the case of Google Translate, it's usually English; specific English word order and English idioms are then re-translated into the target language and sometimes introduce downright wrong translations.
 
 \subsubsection{API}
+\label{systems:googleapi}
 Google Translate, apart from being a website, has a paid translation API\footnote{\url{https://developers.google.com/translate/?hl=en}}. The API is a REST-based API which returns the translation in standard JSON; however, it also needs fairly complicated OAuth authentication.
 
-Some unofficial libraries remove this complexity and abstracts it away from the user.
+Some unofficial libraries remove this complexity and abstract it away from the user.
 One of them is called prosaically \uv{google-api-translate-java} (\url{https://code.google.com/p/google-api-translate-java/}) and is, not very unexpectedtedly, Java-based.
 
 
 \subsection{Bing Translator}
-\label{bing}
+\label{systems:bing}
 Another available online translation service is Microsoft Translator / Bing Translator. (In Microsoft's own materials, the system is usually called Bing Translator when referring to the website and Microsoft Translator when referring to the API, however it's not very consistent. I will call the whole system Bing Translator, even when referring to the API that's called just \uv{Microsoft Translator} in the documentation.)
 
 Bing Translator is very similar to Google Translate -- it is an online website with an easy GUI and an additional paid API. Again, the team occasionally publishes some scientific papers, but the system is again  proprietary as a whole.
 
-In separate experiments between English and German, I found out that for some language pairs, Bing Translator does more rule-based-looking post-editation 
+In separate experiments between English and German, I found out that for some language pairs, Bing Translator does more rule-based-looking post-editation.
 However the system as a whole seems statistical, similarly to Google Translate.
 
 
 \subsubsection{API}
+\label{systems:bingapi}
 Again, Microsoft offers paid Bing Translator API (confusingly marketed as a \uv{dataset} inside Windows Azure platform).
 
 The API is slightly more complex than Google's API because of the auto-expiring token, but Microsoft itself offers some abstracting code as an example in its documentation\footnote{\url{http://msdn.microsoft.com/en-us/library/hh454950.aspx}} in C\# and PHP.
@@ -247,7 +249,7 @@ The API is slightly more complex than Google's API because of the auto-expiring 
 %The pricing is slightly different in Microsoft Translator than in Google Translate, but in general is slightly cheaper. First 2 million letters are for free, next 2 million are for about 40 US dollars.
 
 \subsection{Yandex Translate}
-\label{yandex}
+\label{systems:yandex}
 Yandex (\url{http://www.yandex.ru}) is a Russian search portal that, according to its website\footnote{\url{http://company.yandex.com/}}, generates 61 percent of web search traffic in Russia.
 
 Apart from being a search engine, Yandex offers a variety of other services. One of them is Yandex Translate (\url{http://translate.yandex.com})\footnote{Or \url{http://translate.yandex.ru} for Russian version} -- again, a simple website for automatized translations, similar to aforementioned Google Translate or Bing Translator.
@@ -262,7 +264,7 @@ The API itself is absolutely free, unlike the other two translation systems, and
 %In our experiments, the API simply stopped returning sentences after approximately 1 million characters per 24 hours. After 24 hour period, the API became usable again.
 
 \subsection{Moses}
-\label{moses}
+\label{systems:moses}
 Moses is an open-source machine translation toolkit with GPL licence, developed as a successor to a closed-source Pharaoh system. See for example \cite{mosespaper} or \cite{moseslink}.
 
 The system is very modular and very customizable, which makes it a bit harder to describe. What makes it also harder is that the term \uv{Moses} is usually applied for both the \uv{core} Moses decoder and the phrase extractor, and the whole toolkit that's bundled with it. I will try to describe it from the point of view that's relevant to the task of this thesis and write only about the modules that I have actually used, and about my Moses use-case in general.
@@ -283,9 +285,8 @@ Similarly, language model contains probabilities of various word n-grams.
 Now we can look a little closer to what is actually hapenning and what are the actual needed steps.
 
 The bilingual corpora have to be first prepared by aligning the sentences, so every sentence has exactly one translation. (Almost every corpus, available online, is already sentence-aligned.)
-%We describe our corpora in the part TODO.
 
-The sentences are then word-aligned, which means pairing words to their translations. I am using MGIZA++ (\cite{mgiza}). From this word alignment, Moses learns a so-called \emph{phrase-based translation model}. From the monolingual corpora, a statistical \emph{language model} is learned -- using, for example, SRILM language model\footnote{See \cite{srilm}}.
+The sentences are then word-aligned, which means pairing words to their translations. I am using MGIZA++ (\cite{mgiza}). From this word alignment, Moses learns a so-called \emph{phrase-based translation model}. From the monolingual corpora, a statistical \emph{language model} is learned -- using, for example, SRILM language model (\cite{srilm}).
 
 Moses is then used for so-called \emph{decoding} of the information from both the language model and the translation model, which choses the best possible translation, using algorithms like beam-search.
 
@@ -295,10 +296,10 @@ However, for the best translation, we need to tune Moses parameters for optimal 
 
 After MERT tuning, we finally have working language model, translation model and Moses parameters, which is our complete translation system.
 
-To reiterate, this is the  Moses pipeline I am using
+To reiterate,  I am using following Moses pipeline:
 \begin{pitemize}
 \item getting sentence-aligned parallel corpus, plus bigger monolingual corporus
-\item world-alignment on parallel corpus
+\item word-alignment on parallel corpus
 \item creating phrase-based translation model
 \item creating language model
 \item tuning the parameters for Moses decoder
@@ -346,12 +347,12 @@ Language model is a part of the system, that tries to model the probability of a
 
 I am using SRILM, which is an open source language modeling toolkit. (Although it's open-source, it uses its own license, that allows free use only for non-commercial and educational purposes.) Current status of SRILM is described in \cite{srilm}, original design is described in \cite{srilm_old}. 
 
-SRILM uses several models, one of them is n-gram word model, described well in \cite{koehn2010statistical}\footnote{chapter 7}. I use n-grams model to the order 3 with words and order 5 with tags (see section TODO). I smooth the models with Kreser-Ney smoothing with Chen and Goodman's modification\footnote{See \cite{chen} and \url{http://www.speech.sri.com/projects/srilm/manpages/ngram-discount.7.html}}. 
+SRILM uses several models, one of them is n-gram word model, described well in \cite{koehn2010statistical}\footnote{chapter 7}. I use n-grams model to the order 3 with words and order 5 with tags (see section \ref{experiments:factors}). I smooth the models with Kreser-Ney smoothing with Chen and Goodman's modification\footnote{See \cite{chen} and \url{http://www.speech.sri.com/projects/srilm/manpages/ngram-discount.7.html}}. 
 
 
 \subsubsection{Language model interpolation}
-\label{interpol}
-If we have more than one monolingual corpora (as I do, as described in TODO), but we are not sure how helpful each of them are, we can use so-called 
+\label{systems:interpol}
+If we have more than one monolingual corpora (as I do, as described in \ref{corpora:monolingual}), but we are not sure how helpful each of them are, we can use so-called 
 %As described in the section XX, we had more than one monolingual Russian corpora, but we weren't sure of how high quality each of them were and how helpful it would be. For this reason, we used so-call 
 interpolation (also called mixing).
 
@@ -375,6 +376,7 @@ morphological (or other) information\footnote{Paraphrased from \cite{factored}. 
 additional information.}}. We can add additional information (for example, lemma or morphological tag) to either side of the translation, on a word level -- this is called a \emph{factor}. Then, instead of training language models and/or translation models on the words alone, we train them on some combination of these factors and then, with the help of Moses that supports factored translation models, combine them together.
 
 \subsubsection{Recasing}
+\label{systems:recaser}
 If the language and translation models are all trained on lowercased corpora (like ours are), we need to train a recaser that will convert the translated text from lower case back to upper case.
 
 We could make a rule-based recaser, such as the ones that are included in Moses; however, we can also train a statistical recaser. 
@@ -382,14 +384,16 @@ The recaser is basically a complete Moses model, trained as a translation from l
 
 \section{Hybrid systems}
 \subsection{TectoMT}
-\label{tecto}
+\label{systems:tecto}
 TectoMT is a translation system, developed almost exclusively at ÚFAL (\url{http://ufal.mff.cuni.cz/tectomt}; \cite{tmt_desc}). 
-While it's based on linguistically motivated theory (unlike \uv{pure} statistical systems), some of its individual parts are based on statistical approaches (unlike \uv{pure} rule-based systems) -- therefore, I think it's appropriate to put it somewhere in the middle on the axis from the section \ref{axis}. Similarly to Moses in section \ref{moses}, I will try to describe the general structure of the system, but only as relevant to our experiments.
+While it's based on linguistically motivated theory (unlike \uv{pure} statistical systems), some of its individual parts are based on statistical approaches (unlike \uv{pure} rule-based systems) -- therefore, I think it's appropriate to put it somewhere in the middle on the axis from the section \ref{axis}. Similarly to Moses in section \ref{systems:moses}, I will try to describe the general structure of the system, but only as relevant to our experiments.
 
-TectoMT is built on the Treex platform, which used to be developed together with TectoMT under the same name, but later branched out as its own project and is nowadays used for other applications (Depfix, HamleDT). (\url{http://ufal.mff.cuni.cz/treex}). 
-Still, because of the long coupled development, Treex source code and its inner structures are based on the needs of TectoMT, and even today it's sometimes difficult to say where exactly the framework ends and application begins. For example, while Treex is downloadable from CPAN perl repository, the version on CPAN is outdated and doesn't work with TectoMT; all TectoMT blocks exist under Treex package; the only way to get newest Treex sources is to install the whole TectoMT framework.
 
 TectoMT is available for a download from UFAL's public SVN repository, with the instructions on UFAL's public wiki (\url{https://wiki.ufal.ms.mff.cuni.cz/external:tectomt:tutorial}). Even more than Moses, TectoMT is an experimental software for academic usage with constant changes from many contributors -- and for that reason it takes a while to learn to use it.
+
+\subsubsection{Treex}
+TectoMT is built on the Treex platform, which used to be developed together with TectoMT under the same name, but later branched out as its own project and is nowadays used for other applications (Depfix, HamleDT). (\url{http://ufal.mff.cuni.cz/treex}). 
+Still, because of the long coupled development, Treex source code and its inner structures are based on the needs of TectoMT, and even today it's sometimes difficult to say where exactly the framework ends and application begins. For example, while Treex is downloadable from CPAN perl repository, the version on CPAN is outdated and doesn't work with TectoMT; all TectoMT blocks exist under Treex package; the only way to get newest Treex sources is to install the whole TectoMT framework.
 
 Treex and TectoMT are free software. Treex is dual-licensed under Artistic License 1.0 and GPLv2, as most CPAN packages are. TectoMT is licensed under GPLv2 outright. However, there are modules in TectoMT with more restrictive licencing -- some of them can be used only non-commercially -- and some models are trained from non-free sources and probably couldn't be used outside of academia. 
 
@@ -401,7 +405,7 @@ The Functional Generative Description theory comes from Prague's Linguist Circle
 
 Some of the layers would use dependency trees, which are inspired by Czech \emph{sentence analysis} (described for example in \cite{smilauer}).
 
-While Functional Generative Description is a theory, Prague Dependency Treebank project \footnote{\cite{pdt_soft}, the latest description in \cite{pdt_desc} and more detailed in \cite{pdt_manual_a}, \cite{pdt_manual_m} and \cite{pdt_manual_t}} is an application of this theory on actual data. Its data format and software tools are used directly in TectoMT.
+While Functional Generative Description is a theory, Prague Dependency Treebank project\footnote{\cite{pdt_soft}, the latest description in \cite{pdt_desc} and more detailed in \cite{pdt_manual_a}, \cite{pdt_manual_m} and \cite{pdt_manual_t}} is an application of this theory on actual data. Its data format and software tools are used directly in TectoMT.
 
 PDT uses several layers, with an inspiration from FGD theory. However, instead of the many FGD layers, PDT uses the following ones:
 \begin{itemize}
@@ -418,7 +422,7 @@ The idea of TectoMT is to first convert source sentences through all the layers 
 However, TectoMT modifies the PDT model with the addition of \emph{formemes} (described for example in \cite{zabokrtsky_hab}). Formemes are added to nodes on t-layer, and represent \uv{in which morphosyntactic form the t-node was (in the case of analysis) or will be (in the case of synthesis) expressed in the surface sentence shape}\footnote{\cite{zabokrtsky_hab}}. 
 
 Theoretically, they should be seen as something \uv{between} the t-layer and the layers above.
-Example formeme is \texttt{n:since+X} for English expression of time, translatable as \texttt{n:od+2} for Czech (2 for genitive).
+Example formeme is \texttt{n:since+X} for English expression of time, translatable as \texttt{n:od+2} for Czech (2 for genitive)\footnote{Example from \cite{zabokrtsky_hab}}.
 
 Formemes are technically not \uv{correct} according to FGD description and they shouldn't be needed for analysis or synthesis, and in the tranfer phase, we should be able to just transfer the functors. 
 
@@ -432,28 +436,30 @@ Every TectoMT task can be decomposed into so-called \emph{blocks}. To quote \cit
 
 More blocks in a row are called a \emph{scenario}.
 
-Blocks can be language specific or language agnostic; simple blocks like copying a tree are usually language agnostic, as well as other parametrizable blcks -- however, most blocks are usually language specific.
+Blocks can be language specific or language agnostic; simple blocks like copying a tree are usually language agnostic, as well as other parametrizable blocks -- however, most blocks are usually language specific.
 
 Because of language specificity of most of the blocks, scenarios for various language pairs are language specific too. For example -- while it's not up-to-date, English-to-Czech scenario is thoroughly described in \cite{zabokrtsky_hab}.
 
 \subsubsection{Makefiles}
 
-TectoMT package itself also contains various scripts and tools -- one of them are Make scripts for easier running and evaluation of the scenarios\footnote{What needs to be said is that's it's tailored mostly for UFAL's cluster infrastructure instead of for general usage.}. The goals are different from Moses evaluation managers, described in \ref{moses}, as well as it means, but we can imagine it as being slightly similar. (Those Make scripts don't, unfortunately, have any nice name to refer to them as.)
+TectoMT package itself also contains various scripts and tools -- one of them are Make scripts for easier running and evaluation of the scenarios\footnote{What needs to be said is that's it's tailored mostly for UFAL's cluster infrastructure instead of for general usage.}. The goals of those scripts are different from Moses evaluation managers, described in \ref{systems:moses}, as well as it means, but we can imagine it as being slightly similar. (Those Make scripts don't, unfortunately, have any nice name to refer to them as.)
 
 \subsubsection{MaxEnt, HMTM}
 Interesting techniques of using Hidden Markov Tree Models and Maximum Entropy models for TectoMT translation are described in \cite{tecto_hmtm} and \cite{tecto_maxent}. Unfortunately however, I haven't been able to train any of those for Czech-to-Russian translation.
 
 \subsubsection{Current Czech-to-Russian scenario}
+\label{systems:currenttecto}
 Unlike Moses where I had to had to train whole models from zero, TectoMT already had some rudimentary scenario for Czech-to-Russian machine translation.
+
 
 From what I heard from colleagues, this scenario was put together in a very short timeframe (about 24 hours), and it's not described in any paper or any other documentation. The scenario consists of 66 blocks, where Czech analysis is 33 blocks, transfer is 5 blocks and Russian analysis is 28 blocks. 
 
 While I have to admit I don't have enough experience to judge it, Czech analysis seems to be well done and probably copied from some other working scenario.
 
-However, the transfer and Russian synthesis doesn't seem to be very advanced. Transfer of \uv{t-lemmas} actually only involves look-up in a very small dictionary, made by taking the proprietary PC-Translator dictionary (see section TODO) and taking a subset of its lexical lemmas that also appear in UMC (see TODO). Unlike more advanced models, in this model, any given lemma is always translated the same way, no matter the context. Similarly, transfer of formemes is just a copy and a few hand-written rules.
+However, the transfer and Russian synthesis doesn't seem to be very advanced. Transfer of \uv{t-lemmas} actually only involves look-up in a very small dictionary, made by taking the proprietary PC-Translator dictionary (section \ref{systems:langsoft}) and taking a subset of its lexical lemmas that also appear in UMC (section \ref{corpora:umc}). Unlike more advanced models, in this model, any given lemma is always translated the same way, no matter the context. Similarly, transfer of formemes is just a copy and a few hand-written rules.
 
 With regards to Russian synthesis -- about half of its blocks seem to be Czech synthesis blocks.
 This can be somehow justified by the similarity of the two languages, but it also doesn't exactly inspire confidence.
 
 
-In general, it's obvious the scenario was done very quickly and, to me, it's quite surprising it's even translating something.\footnote{Although, as will be seen in the chapter TODO, the results are quite bad, even when I managed to increase the quality by a few BLEU points.}
+In general, it's obvious the scenario was done very quickly and, to me, it's quite surprising it's even translating something.\footnote{Although, as will be seen in the chapter \ref{chapter:results}, the results are not that good.}

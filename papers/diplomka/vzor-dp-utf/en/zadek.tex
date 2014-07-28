@@ -5,20 +5,24 @@
 \include{bibliography}
 
 %%% Tabulky v diplomové práci, existují-li.
-\chapwithtoc{List of Tables}
+%\chapwithtoc{List of Tables}
 
 %%% Použité zkratky v diplomové práci, existují-li, včetně jejich vysvětlení.
-\chapwithtoc{List of Abbreviations}
+%\chapwithtoc{List of Abbreviations}
 
 %%% Přílohy k diplomové práci, existují-li (různé dodatky jako výpisy programů,
 %%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního
 %%% textu práce. Přílohy se číslují.
 
-\renewcommand{\thechapter}{\Alph{chapter}}
 \setcounter{section}{0}
+\setcounter{chapter}{1}
+\renewcommand{\thechapter}{\Alph{chapter}}
+
 
 \chapwithtoc{Attachments}
 \include{zadek_pokusy}
+
+\section{Data on the attached disk}
 
 
 
