@@ -1,0 +1,120 @@
+\chapter{Data on the attached disk}
+
+The disk has several subfolders:
+\begin{itemize}
+\item \texttt{corpora} for the corpora
+\item \texttt{systems}  for the systems and experiments
+\item \texttt{thesis} for \XeLaTeX source code this thesis
+\end{itemize}
+
+All the scripts etc. are mostly experimental and, as most of the systems/frameworks themselves (Moses, TectoMT, GNUstep...), they are not easy to run. I have \emph{not} tried to run any of the experiments anywhere else than on the ÚFAL network. 
+
+For reference: ÚFAL network is made of 64-bit Ubuntu 10.04 LTS installations, with perl 5.10 and Sun Grid Engine installed.
+
+Some of the corpora and systems have special licenses that \emph{don't allow them to be shared}; for example, in Intercorp license agreement, I had to sign that \emph{The User agrees not to re-distribute or otherwise make publicly available the SCD, or any derivative work based on it}; I also include a VMWare virtual machine with pre-installed Microsoft Windows (that I don't have legal permission to share) and PC Translator (that I don't have legal permission to share). 
+
+My understanding of Czech copyright law is that it's legal to share such data in academic, non-commercial purposes, such as attaching them to a thesis on a hard drive.
+
+\section{Corpora}
+The folder \texttt{corpora} has several subfolders:
+\begin{itemize}
+\item \texttt{original\_data} for the raw, original data, as downloaded\footnote{Except for the subtitles, as described in \ref{corpora:subtitles}}
+\item \texttt{scripts} for some of the extraction scripts
+\item \texttt{cleaned\_data} for already filtered corpora
+\item \texttt{unused} for the unused data
+\end{itemize}
+
+\subsection{Original data}
+\subsubsection{WMT}
+Both WMT test sets are in the folder \texttt{wmt}. The files were downloaded from \url{http://www.statmt.org/wmt13/translation-task.html}.
+
+\texttt{wmt/test\_2013.tgz} has several SGML\footnote{As far as I know, SGML is a superset of XML; however the files seem like well-formed XML; not valid, because the DTDs are not present} files for every language in the competition. With every document, information about original language is included.
+
+\texttt{wmt/test\_2012.tgz} includes more languages and even previous years.
+
+The previously mentioned webpage is also saved in the \texttt{wmt/wmt.html} file.
+\subsubsection{Intercorp}
+\texttt{intercorp/mixed.gz} is a gzipped text file with all the data from the mixed corpus. Each line has both Czech and Russian text, divided by a tabulator.
+
+\texttt{intercorp/filtered/data.tgz} is all the Intercorp data.\footnote{This data source is under a license agreement, that's in the \texttt{License\_Agreement.odt} file.}
+
+The tarred and gzipped file includes \texttt{intercorp\_shuff\_cs} and \texttt{intercorp\allowbreak \_shuff\allowbreak \_ru}, that include the book data (both sentences and metadata) in a strange, XML-like format. The sentences in the books are shuffled.
+
+The file \texttt{intercorp\_shuff\_ru2cs} includes the linking of the sentences.
+
+\subsubsection{UMC}
+UMC corpus is in the files \texttt{umc/umc-0.1-corpus.zip} and \texttt{umc/\allowbreak umc003-\allowbreak cs-\allowbreak en-\allowbreak ru-\allowbreak triparallel-testset.zip} zipped, as downloaded from the UMC website, that's also saved in the folder \texttt{umc/doc}.
+
+In UMC 0.1, all that matters to us is the file \texttt{Czech-Russian.1-1.txt} with the sentences that are linked to one another.
+
+In UMC 003, the sentences are strangely mixed (and the \texttt{README} file is not entirely accurate) and strangely lowercased. The only non-lowercased text is in the file \texttt{all/ps2009.tok.csenru.gz}.
+
+\subsubsection{Wikipedia titles}
+As I already mentioned in \ref{corpora:wiki}, wikipedia now use a different format of inter-language linking somewhere in 2013, where my old script no longer works. I do not have the original dump; I, however, have an older 2012 dump on which my script works.
+
+The dump is in the file \texttt{wiki/cswiki-\allowbreak 20121112-\allowbreak pages-\allowbreak articles.xml.bz2}
+
+\subsubsection{News Crawl}
+All News Crawl corpora are in the folder \texttt{newscrawl}. The files are exactly as downloaded from the page already mentioned in the section WMT.
+
+The files are tarred and gzipped in the \texttt{training-\allowbreak monolingual-\allowbreak news-\allowbreak 2008.\allowbreak tgz} (and similar for other years). There are more language files in each of them.
+
+\subsubsection{Common Crawl}
+Common Crawl is in the folder \texttt{commoncrawl}. The file is exactly as downloaded from the page already mentioned in the section WMT.
+
+The files are tarred and gzipped in the file \texttt{training-\allowbreak parallel-\allowbreak commoncrawl.tgz}. 
+
+We use only \texttt{commoncrawl.\allowbreak ru-\allowbreak en.\allowbreak ru}
+with the Russian text, but in the file \texttt{commoncrawl.\allowbreak ru-\allowbreak en.\allowbreak annotation}, there are links to sources of all the data.
+\subsubsection{Yandex}
+Yandex data are in the \texttt{yandex} directory, tarred and gzipped in the \texttt{corpus.\allowbreak en\_ru.\allowbreak 1m.\allowbreak tgz} file. The file contains just two text files -- one for English (that we don't use) and one for Russian.
+
+
+\subsection{Scripts}
+Most of the data require only some very easy one-liners to prepare; I have included only the more complicated scripts. 
+
+As I mentioned before, those scripts were intended for one-time use on specific computers and I am not guaranteeing their reusability; however I am including them for completeness.
+
+\subsubsection{Intercorp}
+Scripts for extracting Filtered Intercorp data (\ref{corpora:filteredintercorp}) from the original data are in the \texttt{intercorp} directory.
+
+Following must be done before running any of the scripts:
+\begin{itemize}
+\item the \texttt{intercorp\_shuff\_ru} has to be corrected to be well formed XML by enclosing with a big \texttt{<all>} tag; also some other minor corrections (like replacing \texttt{\&} with \texttt{\&amp;} and so on), and saved as \texttt{intercorp\_shuff\_ru.corrected}, similar with the Czech data
+\item the \texttt{intercorp\_shuff\_ru2cs} data has to be split into separate XML files (for example by using UNIX \texttt{split}) and saved as \texttt{xx01} to \texttt{xx86}
+\end{itemize}
+
+The scripts then do the following:
+\begin{itemize}
+\item \texttt{make\_info.pl} parses the corrected XML and prints metadata about the books in YAML into \texttt{info.yaml}
+\item \texttt{extract\_text.pl} extracts the text from one of the \texttt{xx} books and prints it in \texttt{splitbooks} directory; first argument to the script is the number of the book.  
+\item \texttt{are\_used.pl} takes the data in \texttt{info.yaml}, the directory \texttt{splitbooks} and a sorted corpus (its address is the first argument) and detects which books were and which weren't used in the corpus
+\item \texttt{direct.pl} takes the info from the last script and determines, which books were not used and were direct translations of each other, instead of translation from third language, and prints this information
+\end{itemize}
+
+\subsubsection{Subtitles}
+This script is not that useful, since we need the raw subtitle files that I no longer have (\ref{corpora:subtitles}), but again, I am providing it for completeness.
+
+The \uv{script} is actually the whole FilmTit project (\ref{filmtit}) with a lot of unrelated modules, but also with a subtitle alignment module. For running it, we need correctly set-up Maven.\footnote{Scala is probably not needed as Maven installs it correctly based on the pom.xml file.} 
+
+\texttt{align\_files.sh} runs the correct module; the input and output directories are defined as variables at the top of the script.
+
+\subsubsection{Wikipedia}
+\texttt{extract.pl} is a perl script, that extracts the title pairs from a Czech wikipedia dump.\footnote{As noted elsewhere, the dump has to be in an old, pre-2013 format, like the file that's on the disk.}
+
+\section{Systems}
+In the folder \texttt{systems}, there are several systems available.
+\subsection{Česílko 1.0}
+Česílko 1.0 is in the folder \texttt{cesilko10}. I haven't done any experiments with the code, as noted in \ref{experiments:cesilko10}.
+
+\subsection{Česílko 2.0}
+My slightly fixed version of Česílko 2.0 is in the folder \texttt{cesilko20}; the difference between the original code and my slightly fixed code is in the file \texttt{code\_diff}.
+
+
+\subsection{Česílko 2.0}
+
+
+
+
+
+

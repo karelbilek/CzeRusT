@@ -52,7 +52,7 @@ The data itself is organized by source, and each data source is given an informa
 The data are in a strange, XML-like format, that's apparently used by a Manatee corpus management system.\footnote{\url{https://www.sketchengine.co.uk/documentation/wiki/SkE/PreparingCorpusOverview}}
 
 \subsubsection{Filtered Intercorp}
-
+\label{corpora:filteredintercorp}
 I was able to extract just the data, that are either direct translations from Russian to Czech or vice versa, thanks to the metadata in the corpus.
 
 To have a separate set, I removed the data already present in the \uv{mixed} Intercorp.
@@ -147,6 +147,7 @@ sorted by the sentenced count. (English transcriptions, English title translatio
 
 %As the reader can probably see, this dataset is markedly different from the first dataset. The data are bigger and are translated directly, on the other hand, the youngest book is from 1967 and the language itself is -- as a prosaic text -- harder to translate in general. Because the two corpora are too different, we did not join the WMT and the Intercorp sets and instead test the systems on each set separately.
 \subsection{Subtitles}
+\label{corpora:subtitles}
 Another set of data that I used were subtitles from OpenSubtitles database.
 \subsubsection{FilmTit}
 
@@ -182,12 +183,13 @@ Due to a technical error\footnote{The raw subtitle file was too big to hold on s
 \label{corpora:umc}
 UMC (ÚFAL Multilingual Corpus) is a Czech-English-Russian corpus (see \cite{umc}\footnote{This paper talks about UMC 0.1. I haven't been able to find any paper about 0.3, but there is some information on the website -- \url{http://ufal.mff.cuni.cz/legacy/umc/cer/}}). The data were given to UMC creators by Project Syndicate, Prague-based non-profit news organization, translating news and opinions from around the world.
 
-UMC has two versions -- UMC 0.3 and UMC 0.1. UMC 0.3 is then strangely divided into \emph{all}, \emph{test} and \emph{devel} -- however, the parts are strangely mixed together.
+UMC has two versions -- UMC 0.3 and UMC 0.1. UMC 0.3 is then strangely divided into \emph{all}, \emph{test} and \emph{devel} -- however, the parts are strangely mixed together and (only in some files) lowercased.
 
-I decided to use UMC 0.1 corpus as \uv{umc-train}, and from 0.3 I use the test part as \uv{umc-test} and the devel part as \uv{umc-devel}.
+I decided to use UMC 0.1 corpus as \uv{umc-train}, and from 0.3 I use the test part as \uv{umc-test} and the devel part as \uv{umc-devel}\footnote{However, the texts in the folders test and devel was actually lowercased, so I had to take the data from the all folder.}.
 
 
 \subsection{Wiki titles}
+\label{corpora:wiki}
 I also extracted all of the titles from the Czech and Russian Wikipedia, that correspond to each other.\footnote{There is a corpus called \emph{Wiki Headlines} on WMT2013 website, for English and Russian. I am not sure how that got created, but it has nothing to do with my corpus.} 
 Wikimedia Foundation (parent organization of Wikipedia) produces complete dumps of Wikipedia in XML; I used one of those dumps and derived pairs of Czech and Russian titles that are translations of each other.\footnote{Unfortunately, at some point in 2013, Wikipedia changed the way interlanguage links work, so my old script no longer works; however, the new way of saving interlanguage links should be even easier to exploit.}
 
@@ -201,7 +203,7 @@ According to \cite{wmt_findings_2009}, WMT workshop has been continously crawlin
 
 The corpus is categorized by year, and I treat each year as its own corpus for the interpolation (as described in \ref{systems:interpol}).%\ref{interpol}).
 \subsection{Common Crawl}
-Common Crawl is publicly available web crawl\footnote{From Wikipedia -- \uv{A Web crawler is an Internet bot that systematically browses the World Wide Web, typically for the purpose of Web indexing. }; web crawl is then a result of such a web crawler} -- \url{http://commoncrawl.org/}.
+Common Crawl is a publicly available web crawl\footnote{From Wikipedia -- \uv{A Web crawler is an Internet bot that systematically browses the World Wide Web, typically for the purpose of Web indexing. }; web crawl is then a result of such a web crawler} -- \url{http://commoncrawl.org/}.
 
 As described in \cite{commoncrawl}, group of researchers tried to extract parallel data from this web crawl. One of the language pairs was English-Russian and the result is publicly available on WMT site. I used the Russian side of the corpus.
 

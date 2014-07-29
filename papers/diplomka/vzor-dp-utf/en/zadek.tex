@@ -14,15 +14,21 @@
 %%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního
 %%% textu práce. Přílohy se číslují.
 
-\setcounter{section}{0}
-\setcounter{chapter}{1}
-\renewcommand{\thechapter}{\Alph{chapter}}
-
 
 \chapwithtoc{Attachments}
+
+%\setcounter{section}{0}
+%\setcounter{chapter}{0}
+
+%this is hack but I don't know how to do it right so it doesn't screw up the PDF contents
+\renewcommand{\thechapter}{A}
+
+
 \include{zadek_pokusy}
 
-\section{Data on the attached disk}
+
+\renewcommand{\thechapter}{B}
+\include{zadek_datadisk}
 
 
 

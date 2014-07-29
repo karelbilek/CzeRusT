@@ -15,7 +15,7 @@ I am testing all the following systems:
 
 I am testing on two separate test sets: WMT 2013 and Filtered Intercorp, as described in the section \ref{corpora:parallel}.
 
-I have randomly selected 10 sentences, 5 from each set, to allow readers to compare the system for themselves; the results are in the section \ref{sampleofresults}.
+I have randomly selected 10 sentences, 5 from each set, to allow readers to compare the system for themselves; the results are in the attachment \ref{sampleofresults}.
 
 Unfortunately, I cannot rule out the possibility that Google, Yandex or Bing Translator already have WMT 2013 sentences, or at least some of them, in their training data, as they have been public for about a year when I run the tests. It's less likely that they trained on Intercorp data -- however, as they are black-box systems, we can never tell for sure.
 
@@ -59,7 +59,7 @@ I compared the systems using several automated metrics, all of them implemented 
 For a comparable BLEU metric, I re-tokenize both reference and the tested system by Moses' built-in tokenizer skript. I also normalize punctuation, using script from WMT pages. 
 I decided to use case-sensitive BLEU -- that means that words \emph{Кристиан} and \emph{кристиан} are two different words.
 
-As a baseline, I use a transliteration GOST 7.79 RUS, mentioned in \ref{sampleofresults}.
+As a baseline, I use a standard transliteration GOST 7.79 RUS (\cite{gost}).
 
 The scores are in tables \ref{tabulka:intermetrics} and \ref{tabulka:wmtmetrics}, sorted by BLEU.
 
@@ -154,7 +154,9 @@ I have originally planned to use human annotators for error classification. Howe
 
 As far as I know, systematic evaluation of machine translation mistakes in this concrete language pair is currently done by my colleague Natalia Klyueva, who is a native Russian speaker and, at the time of writing this thesis, PhD student on ÚFAL.
 
-I have, however, done some unsystematic observations about the various systems and their mistakes. All the examples in this section are from the test set, but most of them are not in the section \ref{sampleofresults}.
+I have, however, done some unsystematic observations about the various systems and their mistakes. All the examples in this section are from the test set, but most of them are not in the attachment \ref{sampleofresults}.
+
+As in the attachment \ref{sampleofresults}, the transliteration is a standard transliteration GOST 7.79 RUS (\cite{gost}).
 \subsubsection{PC Translator}
 PC Translator is, even to a person with only a passive knowledge of the language, 
 obviously the worst of the six systems. 
