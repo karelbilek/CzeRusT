@@ -1,24 +1,30 @@
 \chapter{Data on the attached disk}
 
+I am attaching a hard drive to this thesis.\footnote{Because of technical difficulties, I have only one copy instead of three.} For a better compatibility, the drive is formatted with NTFS.\footnote{For some reason, Ubuntu's Nautilus refuses to display some of the folders, while \texttt{ls} seems to work fine. I do not have resources to investigate this further; it might be connected with the fact some of the folders were created on Mac OS X.}
+
 The disk has several subfolders:
 \begin{itemize}
 \item \texttt{corpora} for the corpora
 \item \texttt{systems}  for the systems and experiments
-\item \texttt{thesis} for \XeLaTeX source code this thesis
+\item \texttt{evaluation}  for the some evaluation scripts (that include the results of the translation)
+\item \texttt{thesis} for \XeLaTeX source code of this thesis plus its PDF version
 \end{itemize}
 
-All the scripts etc. are mostly experimental and, as most of the systems/frameworks themselves (Moses, TectoMT, GNUstep...), they are not easy to run. I have \emph{not} tried to run any of the experiments anywhere else than on the ÚFAL network. 
+All the included scripts are mostly experimental and, as most of used systems and frameworks themselves (Moses, TectoMT, GNUstep...), they are not easy to run. I have \emph{not} tried to run any of the experiments anywhere else than on the ÚFAL network. \footnote{Except for the VMWare/PC Translator setup, that I have run only on my personal computer.}
 
 For reference: ÚFAL network is made of 64-bit Ubuntu 10.04 LTS installations, with perl 5.10 and Sun Grid Engine installed.
 
-Some of the corpora and systems have special licenses that \emph{don't allow them to be shared}; for example, in Intercorp license agreement, I had to sign that \emph{The User agrees not to re-distribute or otherwise make publicly available the SCD, or any derivative work based on it}; I also include a VMWare virtual machine with pre-installed Microsoft Windows (that I don't have legal permission to share) and PC Translator (that I don't have legal permission to share). 
+Some of the corpora and systems have special licenses that \emph{don't allow them to be shared}; for example, in the Intercorp license agreement, I had to sign that:
+\begin{quotee}The User agrees not to re-distribute or otherwise make publicly available the SCD, or any derivative work based on it\end{quotee}
+
+I also include a VMWare virtual machine with pre-installed Microsoft Windows (that I don't have legal permission to share) and PC Translator (that I don't have legal permission to share). 
 
 My understanding of Czech copyright law is that it's legal to share such data in academic, non-commercial purposes, such as attaching them to a thesis on a hard drive.
 
 \section{Corpora}
 The folder \texttt{corpora} has several subfolders:
 \begin{itemize}
-\item \texttt{original\_data} for the raw, original data, as downloaded\footnote{Except for the subtitles, as described in \ref{corpora:subtitles}}
+\item \texttt{original\_data} for the raw, original data, as downloaded
 \item \texttt{scripts} for some of the extraction scripts
 \item \texttt{cleaned\_data} for already filtered corpora
 \item \texttt{unused} for the unused data
@@ -68,6 +74,8 @@ We use only \texttt{commoncrawl.\allowbreak ru-\allowbreak en.\allowbreak ru}
 with the Russian text, but in the file \texttt{commoncrawl.\allowbreak ru-\allowbreak en.\allowbreak annotation}, there are links to sources of all the data.
 \subsubsection{Yandex}
 Yandex data are in the \texttt{yandex} directory, tarred and gzipped in the \texttt{corpus.\allowbreak en\_ru.\allowbreak 1m.\allowbreak tgz} file. The file contains just two text files -- one for English (that we don't use) and one for Russian.
+\subsubsection{Subtitles}
+Subtitles are as given to us, in the folder \texttt{subtitles}.
 
 
 \subsection{Scripts}
@@ -93,28 +101,54 @@ The scripts then do the following:
 \end{itemize}
 
 \subsubsection{Subtitles}
-This script is not that useful, since we need the raw subtitle files that I no longer have (\ref{corpora:subtitles}), but again, I am providing it for completeness.
+%This script is not that useful, since we need the raw subtitle files that I no longer have (\ref{corpora:subtitles}), but again, I am providing it for completeness.
 
-The \uv{script} is actually the whole FilmTit project (\ref{filmtit}) with a lot of unrelated modules, but also with a subtitle alignment module. For running it, we need correctly set-up Maven.\footnote{Scala is probably not needed as Maven installs it correctly based on the pom.xml file.} 
+The \uv{script} is actually the whole FilmTit project (\ref{filmtit}) with a lot of unrelated modules, but also with a subtitle alignment module. For running it, we need correctly set-up Maven.\footnote{Scala is probably not needed as Maven installs it correctly based on the pom.xml file. The project is tested only with Maven 2, see next footnote.} 
 
-\texttt{align\_files.sh} runs the correct module; the input and output directories are defined as variables at the top of the script.
+\texttt{align\_files.sh} runs the correct module; the input and output directories are defined as variables at the top of the script.\footnote{This script
+hasn't been run in two years, so it is highly untested.}
 
 \subsubsection{Wikipedia}
 \texttt{extract.pl} is a perl script, that extracts the title pairs from a Czech wikipedia dump.\footnote{As noted elsewhere, the dump has to be in an old, pre-2013 format, like the file that's on the disk.}
 
 \section{Systems}
 In the folder \texttt{systems}, there are several systems available.
+\subsection{RUSLAN}
+I did not find a working RUSLAN copy, so I am not providing that; I am, however, including a RUSLAN dictionary plus the experiments, described in \ref{experiments:webcoll}.
+
 \subsection{Česílko 1.0}
 Česílko 1.0 is in the folder \texttt{cesilko10}. I haven't done any experiments with the code, as noted in \ref{experiments:cesilko10}.
 
 \subsection{Česílko 2.0}
 My slightly fixed version of Česílko 2.0 is in the folder \texttt{cesilko20}; the difference between the original code and my slightly fixed code is in the file \texttt{code\_diff}.
 
+\subsection{Online systems}
+Scripts for online systems are in the \texttt{online\_systems} directory; the java library for Google Translate, the PHP script for Bing Translator and a simple shell script for Yandex Translate.
 
-\subsection{Česílko 2.0}
+\subsection{PC Translator}
+PC Translator virtual machine and helper script are included in the directory \texttt{pc\_translator}. 
+\begin{itemize}
+\item \texttt{vmware} is the VMWare machine itself, with working Windows XP and PC Translator v14.
+\item \texttt{sharedfolder} is a folder that has to be set up in VMWare Tools on the Windows XP machine correctly as \texttt{sharedfolder}
+\item \texttt{run/do\_csru.pl} is the script, that tries to start to convert STDIN into PC Translator-friendly format, then moves the AutoHotkey script into the shared folder, then starts the machine that -- if set up correctly -- will start PC Translator, translate the file and turn itself off.
+\end{itemize}
+
+I have not tested this script outside of my own computer, so I am not sure how well it works.
+
+\subsection{Moses}
+I am providing a standard \texttt{eman} playground (together with \texttt{eman} version I have been using). The experiments relevant to this thesis are written in the \texttt{relevant\_experiments} file.
+
+\subsection{TectoMT}
+I am also providing the latest TectoMT version, together with the \texttt{share} folder that actually includes my models.
+
+Numbers of revisions in TectoMT SVN, that are my improvements, are written in the \texttt{my\_revisions} file.
 
 
-
-
-
+\section{Evaluation}
+In the folder \texttt{evaluation}, I include
+\begin{itemize}
+\item the actual results of the translation, plus my small perl script for BLEU evaluation (and generating the examples for section A )
+\item the PHP script for human evaluation (plus SQL dump of the server)
+\item slightly modified TrueSkill
+\end{itemize}
 
